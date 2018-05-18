@@ -1,0 +1,66 @@
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <br>
+        <h1><span class="fa fa-sign-in">Create ticket: </span></h1>
+        <br>
+        <form>
+            <div class="form-group">
+                <label>Source type:</label>
+                <select name="source_type" ng-model="ticket.source_type">
+                    <option value="Customer">Customer</option>
+                    <option value="Help Desk">Help Desk</option>
+                    <option value="System">System</option>
+                </select><br>
+            </div>
+            <div class="form-group">
+                <label>Ticket type:</label>
+                <select name="ticket_type" ng-model="ticket.ticket_type">
+                    <option value="Bug">Bug</option>
+                    <option value="Change Request">Change Request</option>
+                    <option value="New implementation">New implementation</option>
+                    <option value="Other">Other</option>
+                </select><br>
+            </div>
+            <div class="form-group">
+                <label>Title: </label>
+                <input type="text" style="font-weight: bold;" class="form-control" name="title" ng-model="ticket.title">
+            </div>
+            <div class="form-group">
+                <label>Description: </label>
+                <textarea name="description" cols="40" rows="5" ng-model="ticket.description"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Attachment: </label>
+                <input type="file"
+                       custom-on-change="selectedFile"
+                       accept="image/*"
+                />
+                <button ng-click="">Upload</button>
+            </div>
+            <div class="form-group">
+                <label>Priority:</label>
+                <select name="priority" ng-model="ticket.priority">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select><br>
+            </div>
+            <div class="form-group">
+                <label>Visibility:</label>
+                <select name="visibility" ng-model="ticket.visibility">
+                    <option value="Private">Private</option>
+                    <option value="Public">Public</option>
+                </select><br>
+            </div>
+            <button ng-click="createTicket()" class="btn btn-warning btn-lg">Create</button>
+        </form>
+
+        <hr>
+        <p>Go back to <a href="#/home">Home</a></p>
+
+    </div>
+
+</div>

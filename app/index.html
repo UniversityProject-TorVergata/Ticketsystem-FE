@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ticketsystem"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ticket System</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/js/bootstrap.min.js">
+    <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-route/angular-route.min.js"></script>
+    <script src="node_modules/moment/moment.js"></script>
+    <script src="node_modules/angular-moment/angular-moment.min.js"></script>
+    <script src="app.js"></script>
+    <script src="app.router.js"></script>
+    <script src="directives/custom-changes.directive.js"></script>
+    <script src="templates/loginUser/loginUser.js"></script>
+    <script src="templates/signupUser/signupUser.js"></script>
+    <script src="templates/loginCompany/loginCompany.js"></script>
+    <script src="templates/signupCompany/signupCompany.js"></script>
+    <script src="templates/createTicket/createTicket.js"></script>
+    <script src="templates/home/home.js"></script>
+
+    <script src="services/rest.service.js"></script>
+    <script src="services/utils.service.js"></script>
+
+</head>
+
+<body>
+
+
+<div ng-view></div>
+
+</body>
+</html>
