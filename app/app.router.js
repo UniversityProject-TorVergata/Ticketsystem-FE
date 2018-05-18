@@ -26,6 +26,12 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/home/home.html',
                 controller:  'HomeCtrl'
             })
+
+            .when('/homeThirdPartyCustomer', {
+                templateUrl: 'templates/homeThirdPartyCustomer/homeThirdPartyCustomer.html',
+                controller:  'homeThirdPartyCustomerController'
+            })
+
             .otherwise({redirectTo: '/home'});
 
         $locationProvider.html5Mode({
