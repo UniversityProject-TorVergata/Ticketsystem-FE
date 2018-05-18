@@ -21,6 +21,9 @@ angular.module('ticketsystem', [
     'ticketsystem.createTicket',
 
     // Home
-    'ticketsystem.home'
+    'ticketsystem.home',
+
+    // ThirdPartyCustomer
+    'ticketsystem.homeThirdPartyCustomer'
 
 ])
