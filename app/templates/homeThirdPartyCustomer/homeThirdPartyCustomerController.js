@@ -2,7 +2,7 @@
 
 angular.module('ticketsystem.homeThirdPartyCustomer', ['ngRoute'])
 
-    .controller('homeThirdPartyCustomerController', function ($scope, restService, httpService,$location) {
+    .controller('homeThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location) {
 
 
 

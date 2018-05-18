@@ -11,11 +11,6 @@ angular.module('ticketsystem', [
 
     // User
     'ticketsystem.loginUser',
-    'ticketsystem.signupUser',
-
-    // Company
-    'ticketsystem.loginCompany',
-    'ticketsystem.signupCompany',
 
     // Ticket
     'ticketsystem.createTicket',
@@ -24,6 +19,11 @@ angular.module('ticketsystem', [
     'ticketsystem.home',
 
     // ThirdPartyCustomer
-    'ticketsystem.homeThirdPartyCustomer'
+    'ticketsystem.homeThirdPartyCustomer',
+
+    //CompanyAdmin
+    'ticketsystem.homeCompanyAdmin',
+    'ticketsystem.createProduct',
+    'ticketsystem.createUser'
 
 ])

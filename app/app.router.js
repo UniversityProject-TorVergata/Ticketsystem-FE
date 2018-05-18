@@ -2,21 +2,13 @@ angular.module('ticketsystem.router', [])
     .config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
 
         $routeProvider
-            .when('/signupUser', {
-                templateUrl: 'templates/signupUser/signupUser.html',
+            .when('/createUser', {
+                templateUrl: 'templates/createUser/createUser.html',
                 controller: 'SignupUserCtrl'
             })
             .when('/loginUser', {
                 templateUrl: 'templates/loginUser/loginUser.html',
                 controller: 'LoginUserCtrl'
-            })
-            .when('/signupCompany', {
-                templateUrl: 'templates/signupCompany/signupCompany.html',
-                controller: 'SignupCompanyCtrl'
-            })
-            .when('/loginCompany', {
-                templateUrl: 'templates/loginCompany/loginCompany.html',
-                controller: 'LoginCompanyCtrl'
             })
             .when('/createTicket', {
                 templateUrl: 'templates/createTicket/createTicket.html',
@@ -29,7 +21,15 @@ angular.module('ticketsystem.router', [])
 
             .when('/homeThirdPartyCustomer', {
                 templateUrl: 'templates/homeThirdPartyCustomer/homeThirdPartyCustomer.html',
-                controller:  'homeThirdPartyCustomerController'
+                controller:  'homeThirdPartyCustomerCtrl'
+            })
+            .when('/createProduct', {
+                templateUrl: 'templates/createProduct/createProduct.html',
+                controller:  'createProductCtrl'
+            })
+            .when('/homeCompanyAdmin', {
+                templateUrl: 'templates/homeCompanyAdmin/homeCompanyAdmin.html',
+                controller:  'homeCompanyAdminCtrl'
             })
 
             .otherwise({redirectTo: '/home'});

@@ -6,7 +6,7 @@ angular.module('ticketsystem.restService', [])
     .service('restService', function (CONNECTION) {
         return {
             //"login": CONNECTION.url + '/loginUser',
-            //"signup": CONNECTION.url + '/signupUser',
+            //"signup": CONNECTION.url + '/createUser',
             "create": CONNECTION.url + '/createTicket'
         }
     })

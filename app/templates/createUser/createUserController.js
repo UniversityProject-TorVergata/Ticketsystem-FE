@@ -9,7 +9,7 @@ angular.module('ticketsystem.signupUser', ['ngRoute'])
         }
         $scope.startSignupUser = function () {
             // console.log(username, email, password);
-            /*httpService.post(restService.signupUser, $scope.user)
+            /*httpService.post(restService.createUser, $scope.user)
                 .then(function (data) {
                     $location.path('/loginUser')
                     console.log(data)
