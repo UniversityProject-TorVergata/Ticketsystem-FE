@@ -20,6 +20,7 @@ angular.module('ticketsystem', [
 
     // ThirdPartyCustomer
     'ticketsystem.homeThirdPartyCustomer',
+    'ticketsystem.accountThirdPartyCustomer',
 
     //CompanyAdmin
     'ticketsystem.homeCompanyAdmin',

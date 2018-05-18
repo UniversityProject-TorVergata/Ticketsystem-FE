@@ -4,7 +4,7 @@ angular.module('ticketsystem.router', [])
         $routeProvider
             .when('/createUser', {
                 templateUrl: 'templates/createUser/createUser.html',
-                controller: 'SignupUserCtrl'
+                controller: 'createUserCtrl'
             })
             .when('/loginUser', {
                 templateUrl: 'templates/loginUser/loginUser.html',
@@ -22,6 +22,10 @@ angular.module('ticketsystem.router', [])
             .when('/homeThirdPartyCustomer', {
                 templateUrl: 'templates/homeThirdPartyCustomer/homeThirdPartyCustomer.html',
                 controller:  'homeThirdPartyCustomerCtrl'
+            })
+            .when('/accountThirdPartyCustomer', {
+                templateUrl: 'templates/accountThirdPartyCustomer/accountThirdPartyCustomer.html',
+                controller:  'accountThirdPartyCustomerCtrl'
             })
             .when('/createProduct', {
                 templateUrl: 'templates/createProduct/createProduct.html',
