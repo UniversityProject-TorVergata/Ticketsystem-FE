@@ -9,9 +9,21 @@ angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
 
         $scope.changeAccountInformation = function() {
 
+            if(angular.isUndefined($scope.user) || (angular.isUndefined($scope.user.fiscal_code) || angular.isUndefined($scope.user.name) ||
+                angular.isUndefined($scope.user.surname) || angular.isUndefined($scope.user.address) ||
+                angular.isUndefined($scope.user.email) || angular.isUndefined($scope.user.username) ||
+                angular.isUndefined($scope.user.password))) {
+
+                window.alert('è necessario riempire tutti i campi!')
+            }
+            else {
+
+                console.log($scope.user);
 
 
 
+
+            }
         };
 
         $scope.deleteAccount = function() {
