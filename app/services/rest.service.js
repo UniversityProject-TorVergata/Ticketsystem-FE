@@ -8,7 +8,7 @@ angular.module('ticketsystem.restService', [])
             //"login": CONNECTION.url + '/loginUser',
             //"signup": CONNECTION.url + '/createUser',
             "createTicket": CONNECTION.url + '/createTicket',
-            "createUser": CONNECTION.url + '/registeredUser'
+            "createUser": CONNECTION.url + '/registered_user'
         }
     })
     .service('httpService', function ($http) {
