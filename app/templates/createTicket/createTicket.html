@@ -6,26 +6,26 @@
         <br>
         <form>
             <div class="form-group">
-                <label for="product">Select Product:</label>
-                <select id="product" name="product"
+                <label for="target">Select Product:</label><br>
+                <select id="target" name="target"
                         ng-options="item as item.name
                         for
-                        item in products track by item.id" ng-model="ticket.product"
-                        ng-init="ticket.product = products[0]"
+                        item in products track by item.id" ng-model="ticket.target"
+                        ng-init="ticket.target = products[0]"
                 >
                 </select><br>
             </div>
             <div class="form-group">
-                <label>Source type:</label>
-                <select name="source_type" ng-model="ticket.source_type">
+                <label>Source type:</label><br>
+                <select name="sourceType" ng-model="ticket.sourceType">
                     <option value="Customer">Customer</option>
                     <option value="Help Desk">Help Desk</option>
                     <option value="System">System</option>
                 </select><br>
             </div>
             <div class="form-group">
-                <label>Ticket type:</label>
-                <select name="ticket_type" ng-model="ticket.ticket_type">
+                <label>Ticket type:</label><br>
+                <select name="presumedType" ng-model="ticket.presumedType">
                     <option value="Bug">Bug</option>
                     <option value="Change Request">Change Request</option>
                     <option value="New implementation">New implementation</option>
@@ -33,15 +33,15 @@
                 </select><br>
             </div>
             <div class="form-group">
-                <label>Title: </label>
+                <label>Title: </label><br>
                 <input type="text" style="font-weight: bold;" class="form-control" name="title" ng-model="ticket.title">
             </div>
             <div class="form-group">
-                <label>Description: </label>
+                <label>Description: </label><br>
                 <textarea name="description" cols="40" rows="5" ng-model="ticket.description"></textarea>
             </div>
             <div class="form-group">
-                <label>Attachment: </label>
+                <label>Attachment: </label><br>
                 <input type="file"
                        custom-on-change="selectedFile"
                        accept="image/*"
@@ -49,8 +49,8 @@
                 <button ng-click="">Upload</button>
             </div>
             <div class="form-group">
-                <label>Priority:</label>
-                <select name="priority" ng-model="ticket.priority">
+                <label>Priority:</label><br>
+                <select name="customerPriority" ng-model="ticket.customerPriority">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -59,8 +59,8 @@
                 </select><br>
             </div>
             <div class="form-group">
-                <label>Visibility:</label>
-                <select name="visibility" ng-model="ticket.visibility">
+                <label>Visibility:</label><br>
+                <select name="visibility" ng-model="visibility">
                     <option value="Private">Private</option>
                     <option value="Public">Public</option>
                 </select><br>
