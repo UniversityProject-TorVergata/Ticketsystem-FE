@@ -1,13 +1,14 @@
 angular.module('ticketsystem.restService', [])
     .constant("CONNECTION", {
-        url: "http://localhost:8200"
+        url: "http://localhost:8200/ticketsystem"
     })
 
     .service('restService', function (CONNECTION) {
         return {
             //"login": CONNECTION.url + '/loginUser',
             //"signup": CONNECTION.url + '/createUser',
-            "create": CONNECTION.url + '/createTicket'
+            "createTicket": CONNECTION.url + '/createTicket',
+            "createUser": CONNECTION.url + '/registeredUser'
         }
     })
     .service('httpService', function ($http) {
