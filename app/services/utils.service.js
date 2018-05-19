@@ -7,7 +7,7 @@ angular.module('ticketsystem.utilService', [])
                         let reader = new FileReader();
                         reader.readAsDataURL(file);
                         reader.onload = function () {
-                            resolve(reader.result)
+                            resolve(reader.result);
                         };
                         reader.onerror = function (error) {
                             console.log('Error: ', error);

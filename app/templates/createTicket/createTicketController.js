@@ -2,7 +2,8 @@
 
 angular.module('ticketsystem.createTicket', ['ngRoute'])
 
-    .controller('CreateTicketCtrl', function ($scope, restService, httpService, util) {
+    .controller('CreateTicketCtrl', function ($scope, restService, httpService, util, products) {
+        $scope.products = products;
         $scope.ticket = {};
 
         $scope.errorMessage = ""

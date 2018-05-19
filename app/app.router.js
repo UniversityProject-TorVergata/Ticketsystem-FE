@@ -12,8 +12,16 @@ angular.module('ticketsystem.router', [])
             })
             .when('/createTicket', {
                 templateUrl: 'templates/createTicket/createTicket.html',
-                controller:  'CreateTicketCtrl'
+                controller:  'CreateTicketCtrl',
+                resolve: {
+                    products: function (model) {
+                        return model.getProducts().then(function (products) {
+                            return products
+                        })
+                    }
+                }
             })
+
             .when('/home', {
                 templateUrl: 'templates/home/home.html',
                 controller:  'HomeCtrl'

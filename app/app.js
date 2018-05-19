@@ -4,9 +4,16 @@ angular.module('ticketsystem', [
 
     'ngRoute',
     'angularMoment',
+
+    //  Services
     'ticketsystem.restService',
     'ticketsystem.utilService',
+    'ticketsystem.modelService',
+
+    //  Routes
     'ticketsystem.router',
+
+    //  Directives
     'ticketsystem.directives',
 
     // User

@@ -6,6 +6,16 @@
         <br>
         <form>
             <div class="form-group">
+                <label for="product">Select Product:</label>
+                <select id="product" name="product"
+                        ng-options="item as item.name
+                        for
+                        item in products track by item.id" ng-model="ticket.product"
+                        ng-init="ticket.product = products[0]"
+                >
+                </select><br>
+            </div>
+            <div class="form-group">
                 <label>Source type:</label>
                 <select name="source_type" ng-model="ticket.source_type">
                     <option value="Customer">Customer</option>
