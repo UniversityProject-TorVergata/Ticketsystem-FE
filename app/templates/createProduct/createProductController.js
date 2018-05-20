@@ -3,7 +3,7 @@
 angular.module('ticketsystem.createProduct', ['ngRoute'])
 
     .controller('createProductCtrl', function ($scope, restService, httpService,$location) {
-        var url = "http://localhost:8200/ticketsystem/product/";
+
 
         $scope.product = {};
         var config = {
@@ -16,16 +16,28 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
         $scope.creationProduct = function(){
 
-            httpService.post(url,$scope.product,config).then(function (response) {
+            httpService.post(restService.createProduct,$scope.product,config).then(function (response) {
                 // turn on flag for post successfully
-                $scope.risposta="Prodotto inserito " + response.data;
+                window.alert("Product submitted with success!");
+
+            }, function error(response) {
+                window.alert("Error while submitting product : "+ response.statusText);
+
+            });
+
+
+        };
+
+
+        $scope.listProduct = function(){
+            httpService.get(restService.createProduct,config).then(function (response) {
+                // turn on flag for post successfully
+                $scope.items = response.data;
 
             }, function error(response) {
                 $scope.risposta = "Error Status: " +  response.statusText;
 
             });
-
-
         };
 
 

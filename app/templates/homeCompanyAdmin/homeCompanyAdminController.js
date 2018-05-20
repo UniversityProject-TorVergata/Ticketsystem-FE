@@ -6,11 +6,15 @@ angular.module('ticketsystem.homeCompanyAdmin', ['ngRoute'])
 
         $scope.insertCustomer = function () {
             $location.url("/createUser");
-        }
+        };
+
 
         $scope.insertProduct = function () {
             $location.url("/createProduct");
-        }
+        };
+        $scope.findProduct = function () {
+            $location.url("/listProduct");
+        };
 
 
 
