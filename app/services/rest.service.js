@@ -35,12 +35,12 @@ angular.module('ticketsystem.restService', [])
                     "data": data
                 });
             },
-            put: function (url, data, header) {
+            put: function (url, id, data, header) {
                 var head = "";
                 if (header) head = header;
                 return $http({
                     "method": "PUT",
-                    "url": url,
+                    "url": url+"/"+id,
                     "headers": head,
                     "data": data
                 });
