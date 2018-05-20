@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket List</title>
+</head>
+<body>
+<div class="container">
+
+
+    <table st-table="rowCollection" class="table table-striped" data-ng-init="readTicket()">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Source type</th>
+            <th>Presumed type</th>
+            <th>State</th>
+            <!-- TODO aggiungere decode dell'immagine-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items track by item.id">
+            <td>{{item.id}}</td>
+            <td>{{item.title}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.sourceType}}</td>
+            <td>{{item.presumedType}}</td>
+            <td>{{item.state}}</td>
+            <td>
+                <button ng-click="modifyTicket(item.id)" class="btn btn-primary">Modify</button>&nbsp;&nbsp;&nbsp;
+                <button ng-click="deleteTicket(item.id)"class="btn btn-danger">Delete</button>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <p>Go back to <a href="#/homeThirdPartyCustomer">Home</a></p>
+
+</div>
+</div>
+
+</body>
+</html>
