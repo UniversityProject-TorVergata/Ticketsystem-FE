@@ -21,6 +21,10 @@ angular.module('ticketsystem.router', [])
                     }
                 }
             })
+            .when('/readTicket', {
+                templateUrl: 'templates/createTicket/readTicket.html',
+                controller:  'CreateTicketCtrl'
+            })
 
             .when('/home', {
                 templateUrl: 'templates/home/home.html',

@@ -1,15 +1,16 @@
 angular.module('ticketsystem.restService', [])
     .constant("CONNECTION", {
-        //url: "http://localhost:8200/ticketsystem"
-        url: "https://stormy-lake-55984.herokuapp.com/ticketsystem"
+        url: "http://localhost:8200/ticketsystem"
+        //url: "https://stormy-lake-55984.herokuapp.com/ticketsystem"
     })
 
     .service('restService', function (CONNECTION) {
         return {
-            "login": CONNECTION.url + '/registered_user/login',
-            //"signup": CONNECTION.url + '/createUser',
+            //"login": CONNECTION.url + '/loginUser',
             "createTicket": CONNECTION.url + '/ticket',
             "createUser": CONNECTION.url + '/registered_user',
+            "getUser": CONNECTION.url + '/registered_user',
+            "deleteUser": CONNECTION.url + '/registered_user',
             "createProduct": CONNECTION.url + '/product'
         }
     })
@@ -33,25 +34,14 @@ angular.module('ticketsystem.restService', [])
                     "data": data
                 });
             },
-            put: function (url, data, header) {
-                var head = "";
-                if (header) head = header;
-                return $http({
-                    "method": "PUT",
-                    "url": url,
-                    "headers": head,
-                    "data": data
-                });
-            },
-            delete: function (url , header) {
+            delete: function (url, data, header) {
                 var head = "";
                 if (header) head = header;
                 return $http({
                     "method": "DELETE",
-                    "url": url,
-                    "headers": head
+                    "url": url+"/"+data,
+                    "headers": header
                 });
             }
-
         }
     })
