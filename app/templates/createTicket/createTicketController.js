@@ -6,21 +6,14 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
 
         //$scope.products = products;
         $scope.ticket = {};
-        $scope.errorMessage = ""
-        /*$scope.startLoginUser = function () {
-            console.log($scope.ticket);
-            httpService.post(restService.createTicket, $scope.ticket)
-                .then(function (data) {
-                        console.log(data)
-                    },
-                    function (err) {
-                        $scope.errorMessage = "error!"
-                    })
-        };*/
+        $scope.items = [];
+        $scope.selected = {};
+        $scope.errorMessage = "";
+
         $scope.createTicket = function () {
             var date = Date.now();
             //TODO convertire bene
-            $scope.ticket.created_at = date;
+            //$scope.ticket.created_at = date;
             $scope.ticket.state = "CREATED";
 
             // TODO correggere 'sta zozzata
@@ -55,7 +48,13 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
         $scope.deleteTicket = function(id){
             httpService.delete(restService.createTicket, id)
                 .then(function (data) {
-                        console.log(data)
+                        console.log(data);
+                        httpService.get(restService.createTicket)
+                            .then(function(response) {
+                                $scope.items = response.data;
+                            }, function error(response) {
+                                $scope.risposta = "Error Status: " +  response.statusText;
+                            });
                     },
                     function(err){
                         $scope.errorMessage = "error!"
@@ -63,6 +62,23 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
         };
 
         $scope.modifyTicket = function(id){
+        };
+
+        $scope.getTemplate = function (row) {
+            /*console.log(row);
+            if (row.id === $scope.selected.id){
+                return 'edit';
+            }
+            else
+                return 'displayRow';*/
+        };
+
+        $scope.editRow= function (row) {
+            $scope.selected = angular.copy(row);
+        };
+
+        $scope.reset = function () {
+            $scope.selected = {};
         };
 
     });
