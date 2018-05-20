@@ -16,21 +16,18 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
         $scope.creationProduct = function(){
 
-            if ($scope.product.version.$valid) {
+
 
                 httpService.post(restService.createProduct, $scope.product, config).then(function (response) {
                     // turn on flag for post successfully
                     window.alert("Product submitted with success!");
+                    $scope.product="";
 
                 }, function error(response) {
                     window.alert("Error while submitting product : " + response.statusText);
 
                 });
-            }
-            else {
-                window.alert("Version is a real number!");
 
-            }
 
 
         };
