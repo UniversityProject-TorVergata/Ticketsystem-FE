@@ -39,6 +39,10 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/createProduct/createProduct.html',
                 controller:  'createProductCtrl'
             })
+            .when('/listProduct', {
+                templateUrl: 'templates/createProduct/listProduct.html',
+                controller:  'createProductCtrl'
+            })
             .when('/homeCompanyAdmin', {
                 templateUrl: 'templates/homeCompanyAdmin/homeCompanyAdmin.html',
                 controller:  'homeCompanyAdminCtrl'

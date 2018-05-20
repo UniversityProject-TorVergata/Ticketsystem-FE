@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+</head>
+<body>
+<div class="container">
+
+
+    <table st-table="rowCollection" class="table table-striped" data-ng-init="listProduct()">
+        <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>Description</th>
+            <th>Version</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{item.name}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.version}}</td>
+            <td><button class="btn btn-primary">Modify</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger">Delete</button></td>
+
+        </tr>
+        </tbody>
+    </table>
+
+
+    <p>Go back to <a href="#/homeCompanyAdmin">Home</a></p>
+
+</div>
+
+
+</div>
+
+</body>
+</html>
