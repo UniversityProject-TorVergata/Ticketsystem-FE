@@ -105,7 +105,13 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                     console.log(succResponse);
                     $scope.items[index] = angular.copy(ticket);
                     $scope.editTicket={};
-                    $scope.edit = resetIndexes();
+                    $scope.edit = resetIndexes($scope.edit);
+                    httpService.get(restService.createTicket)
+                        .then(function (response) {
+                            $scope.items = response.data;
+                        }, function error(response) {
+                            $scope.risposta = "Error Status: " + response.statusText;
+                        });
                 },
                 function(errReponse){
                     console.log(errReponse)
