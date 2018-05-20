@@ -21,7 +21,11 @@
             <td>{{item.name}}</td>
             <td>{{item.description}}</td>
             <td>{{item.version}}</td>
-            <td><button class="btn btn-primary">Modify</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger">Delete</button></td>
+            <td><button class="btn btn-primary">Modify</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" ng-show="!isRetired($index)"
+                                                                                         ng-click="removeProduct($index)">Retire</button>
+                &nbsp;&nbsp;<button class="btn btn-primary" ng-show="isRetired($index)"
+                                    ng-click="reabProduct($index)">Rehabilitate</button>
+            </td>
 
         </tr>
         </tbody>
