@@ -4,11 +4,12 @@ angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
 
     .controller('accountThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location) {
 
+        // Temporanei:
         $scope.user = {
-
-            'username': 'mioUsername_2',
-            'password': 'miaPassword_2',
+            'username': 'mioUsername_4',
+            'password': 'miaPassword_4',
         };
+        $scope.paramsGETString = '/login?username=' + $scope.user.username + '&password=' + $scope.user.password;
 
         $scope.disabledButton = true;
         $scope.disabledReadonly = true;
@@ -17,9 +18,7 @@ angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
             headers : { 'Content-Type': 'application/json', }
         };
 
-        $scope.paramsString = '/login?username=' + $scope.user.username + '&password=' + $scope.user.password;
-
-        httpService.get(restService.getUser + $scope.paramsString, config)
+        httpService.get(restService.getUser + $scope.paramsGETString, config)
             .then(function (response) {
                     $scope.user = response.data;
                     console.log(response.data)
@@ -52,15 +51,15 @@ angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
 
         $scope.deleteAccount = function() {
 
-            httpService.delete(restService.deleteUser, $scope.user)
-                .then(function (data) {
+            httpService.delete(restService.deleteUser, $scope.user.id, config)
+                .then(function (response) {
                         window.alert('Account Cancellato con Successo');
                         $location.path('/home');
-                        console.log(data)
+                        console.log(response)
                     },
 
                     function (err) {
-                        window.alert('Cancellamento Non Riuscito');
+                        window.alert('Cancellazione Non Riuscita');
                         console.log("Error!\n");
                         console.log(err)
                     })
@@ -71,11 +70,5 @@ angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
             $scope.disabledButton = !($scope.disabledButton);
             $scope.disabledReadonly = !($scope.disabledReadonly);
         }
-
-
-
-
-
-
 
     });
