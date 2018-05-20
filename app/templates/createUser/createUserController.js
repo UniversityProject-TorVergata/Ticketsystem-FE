@@ -17,10 +17,25 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
 
                 var date = Date.now();
                 $scope.user.created_at = moment(date).format("DD/MM/YYYY");
-                // $scope.user.@type = "ThirdPartyCustomer";
-                console.log($scope.user);
+                $scope.user.type = "ThirdPartyCustomer";
 
-                httpService.post(restService.createUser, $scope.user)
+                var jsonString =
+
+                    {
+                        "@type": $scope.user.type,
+                        "fiscal_code": $scope.user.fiscal_code,
+                        "name": $scope.user.name,
+                        "surname": $scope.user.surname,
+                        "email": $scope.user.email,
+                        "username": $scope.user.username,
+                        "password": $scope.user.password,
+                        "address": $scope.user.address,
+                        "created_at": $scope.user.created_at
+                    };
+
+                console.log(jsonString);
+
+                httpService.post(restService.createUser, jsonString)
                     .then(function (data) {
                             window.alert('Utente inserito con successo');
                             $location.path('/homeCompanyAdmin');
