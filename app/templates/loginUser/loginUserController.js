@@ -2,31 +2,35 @@
 
 angular.module('ticketsystem.loginUser', ['ngRoute'])
 
-    .controller('LoginUserCtrl', function ($scope, restService, httpService,$location) {
+    .controller('LoginUserCtrl', function ($scope, restService, httpService,$location,loginService) {
 
         $scope.startLoginUser = function () {
 
             if(angular.isUndefined($scope.user) || angular.isUndefined($scope.user.username) ||
-                angular.isUndefined($scope.user.password) || angular.isUndefined($scope.user.type)) {
+                angular.isUndefined($scope.user.password) ) {
 
                 window.alert('è necessario riempire tutti i campi!')
             }
             else {
 
-                console.log($scope.user);
+                httpService.post(restService.login, $scope.user).then(function (response) {
+                    // turn on flag for post successfully
+                    if(response.data["@type"] == "ThirdPartyCustomer") {
+                        $location.url("/homeThirdPartyCustomer");
 
-                /*
-                console.log(restService.login)
-                httpService.post(restService.login, $scope.user)
-                    .then(function (data) {
-                            console.log(data)
-                            storageService.setUser(data.data.message);
-                            storageService.setSocketPort(data.data.message.socketPort);
-                            $location.path('/table')
-                        },
-                        function(err){
-                            $scope.errorMessage = "error!"
-                        })*/
+                    }
+                    else if(response.data["@type"] == "CompanyAdmin") {
+                        $location.url("/homeCompanyAdmin");
+                    }
+                    loginService.set(response.data);
+
+                }, function error(response) {
+
+                    window.alert("Login failed " + response.getStatus());
+
+                });
+
+
             }
-        }
+        };
     });

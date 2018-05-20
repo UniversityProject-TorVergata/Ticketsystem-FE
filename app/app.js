@@ -9,6 +9,7 @@ angular.module('ticketsystem', [
     'ticketsystem.restService',
     'ticketsystem.utilService',
     'ticketsystem.modelService',
+    'ticketsystem.loginService',
 
     //  Routes
     'ticketsystem.router',
@@ -34,4 +35,4 @@ angular.module('ticketsystem', [
     'ticketsystem.createProduct',
     'ticketsystem.createUser'
 
-])
+]);
