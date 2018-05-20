@@ -32,7 +32,15 @@ angular.module('ticketsystem.restService', [])
                     "headers": head,
                     "data": data
                 });
+            },
+            delete: function (url, data, header) {
+                var head = "";
+                if (header) head = header;
+                return $http({
+                    "method": "DELETE",
+                    "url": url+"/"+data,
+                    "headers": header
+                });
             }
-
         }
     })

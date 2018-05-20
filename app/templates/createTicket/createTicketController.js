@@ -52,4 +52,17 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
             });
         };
 
+        $scope.deleteTicket = function(id){
+            httpService.delete(restService.createTicket, id)
+                .then(function (data) {
+                        console.log(data)
+                    },
+                    function(err){
+                        $scope.errorMessage = "error!"
+                    })
+        };
+
+        $scope.modifyTicket = function(id){
+        };
+
     });
