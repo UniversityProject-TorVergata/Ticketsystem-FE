@@ -22,11 +22,11 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
             var date = Date.now();
             //TODO convertire bene
             //TODO Qualsiasi cosa tu debba fare usa moment.js per le date. è già nel package.json e importato in angular
-            $scope.ticket.created_at = date;
-            $scope.ticket.state = "CREATED";
+            //$scope.ticket.created_at = date;
+            //$scope.ticket.state = "CREATED";
 
             // TODO correggere 'sta zozzata
-            $scope.ticket.target = 1
+            //$scope.ticket.target = 1
             console.log($scope.ticket);
             httpService.post(restService.createTicket, $scope.ticket)
                 .then(function (data) {
