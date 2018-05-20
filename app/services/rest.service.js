@@ -1,7 +1,7 @@
 angular.module('ticketsystem.restService', [])
     .constant("CONNECTION", {
-        //url: "http://localhost:8200/ticketsystem"
-        url: "https://stormy-lake-55984.herokuapp.com/ticketsystem"
+        url: "http://localhost:8200/ticketsystem"
+        //url: "https://stormy-lake-55984.herokuapp.com/ticketsystem"
     })
 
     .service('restService', function (CONNECTION) {

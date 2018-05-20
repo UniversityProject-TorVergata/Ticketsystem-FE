@@ -8,6 +8,10 @@ angular.module('ticketsystem.homeThirdPartyCustomer', ['ngRoute'])
             $location.url("/createTicket");
         }
 
+        $scope.readTicket = function () {
+            $location.url("/readTicket");
+        }
+
         $scope.viewAccount = function () {
             $location.url("/accountThirdPartyCustomer");
         }

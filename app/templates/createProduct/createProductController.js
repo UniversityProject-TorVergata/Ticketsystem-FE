@@ -15,29 +15,22 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
         };
 
         $scope.creationProduct = function(){
-
             if(angular.isUndefined($scope.product.name) || angular.isUndefined($scope.product.description) ||
                 angular.isUndefined($scope.product.version)) {
 
                 window.alert('fill in all the fields!');
             }
             else {
-
                 httpService.post(restService.createProduct, $scope.product, config).then(function (response) {
                     // turn on flag for post successfully
                     window.alert("Product submitted with success!");
                     $scope.product = "";
-
                 }, function error(response) {
                     window.alert("Error while submitting product : " + response.statusText);
 
                 });
             }
-
-
-
         };
-
 
         $scope.listProduct = function(){
             httpService.get(restService.createProduct,config).then(function (response) {
@@ -49,10 +42,4 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
             });
         };
-
-
-
-
-
-
     });
