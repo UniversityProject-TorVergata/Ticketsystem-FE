@@ -2,7 +2,8 @@
 
 angular.module('ticketsystem.homeCompanyAdmin', ['ngRoute'])
 
-    .controller('homeCompanyAdminCtrl', function ($scope, restService, httpService,$location) {
+    .controller('homeCompanyAdminCtrl', function ($scope, restService, httpService,$location,loginService) {
+
 
         $scope.insertCustomer = function () {
             $location.url("/createUser");
@@ -16,8 +17,13 @@ angular.module('ticketsystem.homeCompanyAdmin', ['ngRoute'])
             $location.url("/listProduct");
         };
 
+        $scope.viewAccount = function () {
+            $location.url("/accountCompanyAdmin");
+        }
 
-
-
+        $scope.logout = function () {
+            loginService.set(null);
+            $location.url("/home");
+        };
 
     });

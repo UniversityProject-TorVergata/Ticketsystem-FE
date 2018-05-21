@@ -52,6 +52,11 @@ angular.module('ticketsystem.router', [])
                 controller:  'homeCompanyAdminCtrl'
             })
 
+            .when('/accountCompanyAdmin', {
+                templateUrl: 'templates/accountCompanyAdmin/accountCompanyAdmin.html',
+                controller:  'accountCompanyAdminCtrl'
+            })
+
             .otherwise({redirectTo: '/home'});
 
         $locationProvider.html5Mode({

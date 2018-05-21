@@ -33,6 +33,8 @@ angular.module('ticketsystem', [
     //CompanyAdmin
     'ticketsystem.homeCompanyAdmin',
     'ticketsystem.createProduct',
-    'ticketsystem.createUser'
+    'ticketsystem.createUser',
+    'ticketsystem.accountCompanyAdmin'
+
 
 ]);
