@@ -12,6 +12,7 @@ angular.module('ticketsystem.restService', [])
             "createUser": CONNECTION.url + '/registered_user',
             "getUser": CONNECTION.url + '/registered_user',
             "deleteUser": CONNECTION.url + '/registered_user',
+            "updateUser": CONNECTION.url + '/registered_user',
             "createProduct": CONNECTION.url + '/product'
         };
     })

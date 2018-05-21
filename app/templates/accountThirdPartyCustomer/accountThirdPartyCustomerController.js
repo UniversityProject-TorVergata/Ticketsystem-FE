@@ -2,32 +2,16 @@
 
 angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
 
-    .controller('accountThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location) {
+    .controller('accountThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location,loginService) {
 
-        // Temporanei:
-        $scope.user = {
-            'username': 'mioUsername_4',
-            'password': 'miaPassword_4',
-        };
-        $scope.paramsGETString = '/login?username=' + $scope.user.username + '&password=' + $scope.user.password;
-
+        $scope.user = loginService.get();
         $scope.disabledButton = true;
         $scope.disabledReadonly = true;
+
 
         var config = {
             headers : { 'Content-Type': 'application/json', }
         };
-
-        httpService.get(restService.getUser + $scope.paramsGETString, config)
-            .then(function (response) {
-                    $scope.user = response.data;
-                    console.log(response.data)
-                },
-
-                function (err) {
-                    console.log("Error!\n");
-                    console.log(err)
-                });
 
 
         $scope.changeAccountInformation = function() {
@@ -41,11 +25,19 @@ angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
             }
             else {
 
-                console.log($scope.user);
+                httpService.put(restService.updateUser, $scope.user.id, $scope.user, config)
+                    .then(function (response) {
+                            window.alert('Account Aggiornato con successo');
+                            $location.path('/homeThirdPartyCustomer');
+                            loginService.set($scope.user);
+                            console.log(response)
+                        },
 
-
-
-
+                        function (err) {
+                            window.alert('Aggiornamento non riuscito');
+                            console.log("Error!\n");
+                            console.log(err)
+                        })
             }
         };
 
