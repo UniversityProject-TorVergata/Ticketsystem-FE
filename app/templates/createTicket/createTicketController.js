@@ -2,9 +2,9 @@
 
 angular.module('ticketsystem.createTicket', ['ngRoute'])
 
-    .controller('CreateTicketCtrl', function ($scope, restService, httpService, util/*, products*/) {
+    .controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location/*, products*/) {
 
-        //$scope.products = products;
+        //$scope.products = products;  //non immessi per ora
         $scope.ticket = {};
         $scope.items = [];
         $scope.selected = {};
@@ -15,22 +15,23 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
         $scope.createTicket = function () {
             var date = Date.now();
             //TODO convertire bene
-            //$scope.ticket.created_at = date;
+            //$scope.ticket.created_at = moment(date).format("DD/MM/YYYY");
             $scope.ticket.state = "CREATED";
 
-            // TODO correggere 'sta zozzata
-            //$scope.ticket.target = 1
             console.log($scope.ticket);
             httpService.post(restService.createTicket, $scope.ticket)
                 .then(function (data) {
-                        console.log(data)
-                        //$location.path('/table')
+                        window.alert("Ticket created");
+                        console.log(data);
+                        $location.path('/homeThirdPartyCustomer')
                     },
                     function (err) {
+                        window.alert("Error!")
                         $scope.errorMessage = "error!"
                     })
         };
 
+        //Allegato del ticket
         $scope.selectedFile = function (event) {
             util.getBase64(event.target.files[0]).then(result => {
                 console.log(result)
@@ -57,6 +58,7 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                             }, function error(response) {
                                 $scope.risposta = "Error Status: " + response.statusText;
                             });
+                        window.alert("Ticket deleted")
                     },
                     function (err) {
                         $scope.errorMessage = "error!"
@@ -109,6 +111,7 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                     httpService.get(restService.createTicket)
                         .then(function (response) {
                             $scope.items = response.data;
+                            window.alert("Ticket changed")
                         }, function error(response) {
                             $scope.risposta = "Error Status: " + response.statusText;
                         });
