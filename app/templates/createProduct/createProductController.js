@@ -36,7 +36,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
                     $location.url("/homeCompanyAdmin");
 
                 }, function error(response) {
-                    window.alert("Error while submitting product : " + response.statusText);
+                    window.alert("Error while submitting product  ");
 
                 });
             }
@@ -62,7 +62,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
                     $location.url("/listProduct");
 
                 }, function error(response) {
-                    window.alert("Error while modifying product : " + response.statusText);
+                    window.alert("Error while modifying product");
 
                 });
             }
@@ -119,7 +119,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
             }, function error(response) {
 
-                window.alert("Error : " + response.statusText);
+                window.alert("Error ");
 
             });
 
@@ -140,7 +140,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
             }, function error(response) {
 
-                window.alert("Error : " + response.statusText);
+                window.alert("Error");
 
             });
 

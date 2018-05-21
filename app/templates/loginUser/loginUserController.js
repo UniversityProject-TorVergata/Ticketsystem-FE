@@ -31,7 +31,7 @@ angular.module('ticketsystem.loginUser', ['ngRoute'])
 
                 }, function error(response) {
 
-                    window.alert("Login failed " + response.statusText);
+                    window.alert("Login failed ");
 
                 });
 
