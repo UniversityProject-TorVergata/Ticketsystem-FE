@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<div class="container">
+
+    <div class="col-sm-6 col-sm-offset-3">
+        <br>
+        <h1><span class="fa fa-sign-in"></span>Modify Product</h1>
+
+
+        <form ng-submit="putModifiedProduct()" data-ng-init="initProductModify()">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control"  ng-model="modproduct.name"
+                       ng-value="modproduct.name">
+            </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input type="text" class="form-control" ng-model="modproduct.description" ng-value="modproduct.description">
+            </div>
+            <div class="form-group">
+                <label>Version</label>
+                <input type="number" step = "0.1" min="1" class="form-control" ng-model="modproduct.version"
+                ng-value="modproduct.version">
+            </div>
+            <br>
+
+            <button  class="btn btn-primary btn-lg" >Modify</button>
+        </form>
+
+        <hr>
+        <p>Go back to <a href="#/homeCompanyAdmin">Home</a></p>
+
+    </div>
+
+</div>

@@ -56,6 +56,10 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/accountCompanyAdmin/accountCompanyAdmin.html',
                 controller:  'accountCompanyAdminCtrl'
             })
+            .when('/listProduct', {
+                templateUrl: 'templates/createProduct/listProduct.html',
+                controller:  'createProductCtrl'
+            })
 
             .otherwise({redirectTo: '/home'});
 

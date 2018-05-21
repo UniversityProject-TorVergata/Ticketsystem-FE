@@ -10,6 +10,7 @@ angular.module('ticketsystem', [
     'ticketsystem.utilService',
     'ticketsystem.modelService',
     'ticketsystem.loginService',
+    'ticketsystem.productService'
 
     //  Routes
     'ticketsystem.router',

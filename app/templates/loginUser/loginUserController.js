@@ -6,9 +6,14 @@ angular.module('ticketsystem.loginUser', ['ngRoute'])
 
         $scope.startLoginUser = function () {
 
+
+
             if(angular.isUndefined($scope.user) || angular.isUndefined($scope.user.username) ||
                 angular.isUndefined($scope.user.password) ) {
 
+                window.alert('è necessario riempire tutti i campi!')
+            }
+            else if($scope.user.username == "" || $scope.user.password == ""){
                 window.alert('è necessario riempire tutti i campi!')
             }
             else {
@@ -26,7 +31,7 @@ angular.module('ticketsystem.loginUser', ['ngRoute'])
 
                 }, function error(response) {
 
-                    window.alert("Login failed " + response.getStatus());
+                    window.alert("Login failed " + response.statusText);
 
                 });
 

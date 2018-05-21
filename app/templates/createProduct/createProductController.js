@@ -2,8 +2,9 @@
 
 angular.module('ticketsystem.createProduct', ['ngRoute'])
 
-    .controller('createProductCtrl', function ($scope, restService, httpService,$location) {
+    .controller('createProductCtrl', function ($scope, restService, httpService,$location,productService) {
 
+        var modProductId;
 
         $scope.product = {};
         var config = {
@@ -17,7 +18,13 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
         $scope.creationProduct = function(){
 
             if(angular.isUndefined($scope.product.name) || angular.isUndefined($scope.product.description) ||
-                angular.isUndefined($scope.product.version)) {
+                angular.isUndefined($scope.product.version) ) {
+
+                window.alert('è necessario riempire tutti i campi!');
+            }
+
+            else if($scope.product.name == "" || $scope.product.description=="" ||
+                $scope.product.version == "" ) {
 
                 window.alert('fill in all the fields!');
             }
@@ -26,7 +33,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
                 httpService.post(restService.createProduct, $scope.product, config).then(function (response) {
                     // turn on flag for post successfully
                     window.alert("Product submitted with success!");
-                    $scope.product = "";
+                    $location.url("/homeCompanyAdmin");
 
                 }, function error(response) {
                     window.alert("Error while submitting product : " + response.statusText);
@@ -37,6 +44,54 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
 
         };
+
+        $scope.putModifiedProduct = function(){
+
+            if($scope.modproduct.name == "" || $scope.modproduct.description=="" ||
+                $scope.modproduct.version == "" ) {
+
+                window.alert('fill in all the fields!');
+            }
+            else {
+                var url = restService.createProduct;
+                console.log($scope.modproduct);
+                httpService.put(url,productService.get().id, $scope.modproduct, config).then(function (response) {
+                    // turn on flag for post successfully
+                    window.alert("Product modified with success!");
+                    $scope.product = "";
+                    $location.url("/listProduct");
+
+                }, function error(response) {
+                    window.alert("Error while modifying product : " + response.statusText);
+
+                });
+            }
+
+
+
+        };
+        $scope.modproduct = {};
+
+        $scope.modifyProduct = function($index){
+
+
+            productService.set($scope.items[$index]);
+            $location.url("/modifyProduct");
+
+
+        };
+
+        $scope.initProductModify = function(){
+            var product = productService.get();
+            modProductId = product.id;
+            console.log(modProductId);
+            $scope.modproduct.name = product.name;
+            $scope.modproduct.description = product.description;
+            $scope.modproduct.version = product.version;
+            $scope.modproduct.productState = product.productState;
+
+
+        }
 
 
         $scope.listProduct = function(){
@@ -58,7 +113,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
                 "id" : id,
 
             }
-            httpService.put(restService.createProduct+"/retire/"+id,postData).then(function (response) {
+            httpService.put(restService.createProduct+"/retire",id,postData).then(function (response) {
                 // turn on flag for post successfully
                 $scope.items[index].productState = "RETIRED";
 
@@ -79,7 +134,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
                 "id" : id,
 
             }
-            httpService.put(restService.createProduct+"/reab/"+id,postData).then(function (response) {
+            httpService.put(restService.createProduct+"/reab",id,postData).then(function (response) {
                 // turn on flag for post successfully
                 $scope.items[index].productState = "ACTIVE";
 
