@@ -15,6 +15,13 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
             }
         };
 
+        /*
+            Funzione per creare un nuovo prodotto.
+            E' invocata alla pressione del tasto Insert nella view createProduct.html
+            Un JSON con i dati del nuovo prodotto è inviato con metodo POST al Back-End
+            che provvederà a salvarlo nel DB.
+
+         */
         $scope.creationProduct = function(){
 
             if(angular.isUndefined($scope.product.name) || angular.isUndefined($scope.product.description) ||
@@ -31,7 +38,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
             else {
 
                 httpService.post(restService.createProduct, $scope.product, config).then(function (response) {
-                    // turn on flag for post successfully
+
                     window.alert("Product submitted with success!");
                     $location.url("/homeCompanyAdmin");
 
@@ -45,6 +52,14 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
         };
 
+        /*
+
+            Funzione per modificare un prodotto.
+            E' invocata alla pressione del tasto modifica nella view modifyProduct.html
+            Usa il metodo PUT per inviare al Back-End i dati del prodotto modificato.
+            L'id del prodotto da modificare è incatenato all'url.
+
+         */
         $scope.putModifiedProduct = function(){
 
             if($scope.modproduct.name == "" || $scope.modproduct.description=="" ||
@@ -57,7 +72,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
                 console.log($scope.modproduct);
                 var productID = JSON.parse(storageService.get("productData")).id;
                 httpService.put(url,productID, $scope.modproduct, config).then(function (response) {
-                    // turn on flag for post successfully
+
                     window.alert("Product modified with success!");
                     $scope.product = "";
                     $location.url("/listProduct");
@@ -73,8 +88,16 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
         };
         $scope.modproduct = {};
 
+        /*
+            Funzione che apre la view di modifica prodotto modifyProduct.html
+            che viene popolata con i dati del prodotto da modificare per il quale si è premuto
+            il tasto 'Modify' nella view listProduct.html
+
+         */
         $scope.modifyProduct = function($index){
 
+            //Salva i dati del prodotto da modificare in locale che possano essere usati
+            //Per popolare la view modifyProduct.html
             storageService.save("productData",JSON.stringify($scope.items[$index]))
             //productService.set($scope.items[$index]);
             $location.url("/modifyProduct");
@@ -82,6 +105,11 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
         };
 
+        /*
+            Funzione invocata alla creazione della pagina modifyProduct.html
+            e usata per popolare la pagina con i dati del prodotto da modificare
+
+         */
         $scope.initProductModify = function(){
             var product = JSON.parse(storageService.get("productData"));
             modProductId = product.id;
@@ -92,12 +120,16 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
             $scope.modproduct.productState = product.productState;
 
 
-        }
+        };
 
+        /*
+            Funzione usata per inizializzare la lista dei prodotti mostrata
+            nella pagina listProduct.html
 
+         */
         $scope.listProduct = function(){
             httpService.get(restService.createProduct,config).then(function (response) {
-                // turn on flag for post successfully
+
                 $scope.items = response.data;
 
             }, function error(response) {
@@ -106,6 +138,12 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
             });
         };
 
+        /*
+
+            Funzione usata per "Ritirare" un prodotto.
+            Invocata alla pressione del tasto Retire nella view listProduct.html
+            Usa il metodo PUT per modificare il productState del prodotto da "ACTIVE" a "RETIRED"
+         */
         $scope.removeProduct = function (index) {
 
             var removedProduct = $scope.items[index];
@@ -115,7 +153,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
             }
             httpService.put(restService.createProduct+"/retire",id,postData).then(function (response) {
-                // turn on flag for post successfully
+
                 $scope.items[index].productState = "RETIRED";
 
             }, function error(response) {
@@ -127,6 +165,13 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
         };
 
+        /*
+
+           Funzione usata per "Riabilitare" un prodotto.
+           Invocata alla pressione del tasto Rehabilitate nella view listProduct.html
+           Usa il metodo PUT per modificare il productState del prodotto da "RETIRED" a "ACTIVE"
+        */
+
         $scope.reabProduct = function (index) {
 
             var removedProduct = $scope.items[index];
@@ -136,7 +181,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
             }
             httpService.put(restService.createProduct+"/reab",id,postData).then(function (response) {
-                // turn on flag for post successfully
+
                 $scope.items[index].productState = "ACTIVE";
 
             }, function error(response) {
@@ -149,7 +194,11 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
         };
 
 
+        /*
+            Funzione usate per scegliere quale pulsante mostrare tra "RETIRE" o "REHABILITATE"
+            nella view listProduct.html.
 
+         */
         $scope.isRetired = function(index){
             if($scope.items[index].productState == "RETIRED")
                 return true;

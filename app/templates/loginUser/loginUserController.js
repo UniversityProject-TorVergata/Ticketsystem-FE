@@ -4,6 +4,13 @@ angular.module('ticketsystem.loginUser', ['ngRoute'])
 
     .controller('LoginUserCtrl', function ($scope, restService, httpService,$location,loginService,storageService) {
 
+        /*
+            Funzione che esegue il Login.
+            I dati vengono inviati con metodo POST.
+            In caso di autenticazione il Back-End risponde con un JSON
+            che contiene tutte le INFO del utente Loggato.
+
+         */
         $scope.startLoginUser = function () {
 
 
@@ -27,7 +34,7 @@ angular.module('ticketsystem.loginUser', ['ngRoute'])
                     else if(response.data["@type"] == "CompanyAdmin") {
                         $location.url("/homeCompanyAdmin");
                     }
-                    //loginService.set(response.data);
+                    //Salvo nei dati di sessione le info dell'account appena loggato.
                     storageService.save("userData",JSON.stringify(response.data));
 
 
