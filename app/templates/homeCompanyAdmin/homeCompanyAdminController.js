@@ -2,7 +2,7 @@
 
 angular.module('ticketsystem.homeCompanyAdmin', ['ngRoute'])
 
-    .controller('homeCompanyAdminCtrl', function ($scope, restService, httpService,$location,loginService) {
+    .controller('homeCompanyAdminCtrl', function ($scope, restService, httpService,$location,storageService) {
 
 
         $scope.insertCustomer = function () {
@@ -22,7 +22,7 @@ angular.module('ticketsystem.homeCompanyAdmin', ['ngRoute'])
         }
 
         $scope.logout = function () {
-            loginService.set(null);
+            storageService.save("userData",JSON.stringify(null));
             $location.url("/home");
         };
 

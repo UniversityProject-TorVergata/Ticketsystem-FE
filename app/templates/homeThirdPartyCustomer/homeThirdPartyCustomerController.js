@@ -2,7 +2,7 @@
 
 angular.module('ticketsystem.homeThirdPartyCustomer', ['ngRoute'])
 
-    .controller('homeThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location,loginService) {
+    .controller('homeThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location,storageService) {
 
         $scope.creationTicketHome = function () {
             $location.url("/createTicket");
@@ -17,9 +17,8 @@ angular.module('ticketsystem.homeThirdPartyCustomer', ['ngRoute'])
         }
 
         $scope.logout = function () {
-            loginService.set(null);
+            storageService.save("userData",JSON.stringify(null));
             $location.url("/home");
         };
-
 
     });

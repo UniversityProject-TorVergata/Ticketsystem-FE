@@ -2,12 +2,11 @@
 
 angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
 
-    .controller('accountThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location,loginService) {
+    .controller('accountThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location,storageService) {
 
-        $scope.user = loginService.get();
+        $scope.user = JSON.parse(storageService.get("userData"));
         $scope.disabledButton = true;
         $scope.disabledReadonly = true;
-
 
         var config = {
             headers : { 'Content-Type': 'application/json', }
@@ -29,7 +28,7 @@ angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
                     .then(function (response) {
                             window.alert('Account Aggiornato con successo');
                             $location.path('/homeThirdPartyCustomer');
-                            loginService.set($scope.user);
+                            storageService.save("userData",JSON.stringify($scope.user));
                             console.log(response)
                         },
 

@@ -2,9 +2,9 @@
 
 angular.module('ticketsystem.accountCompanyAdmin', ['ngRoute'])
 
-    .controller('accountCompanyAdminCtrl', function ($scope, restService, httpService,$location,loginService) {
+    .controller('accountCompanyAdminCtrl', function ($scope, restService, httpService,$location,storageService) {
 
-        $scope.user = loginService.get();
+        $scope.user = JSON.parse(storageService.get("userData"));
         $scope.disabledButton = true;
         $scope.disabledReadonly = true;
 
@@ -29,7 +29,7 @@ angular.module('ticketsystem.accountCompanyAdmin', ['ngRoute'])
                     .then(function (response) {
                             window.alert('Account Aggiornato con successo');
                             $location.path('/homeCompanyAdmin');
-                            loginService.set($scope.user);
+                            storageService.save("userData",JSON.stringify($scope.user));
                             console.log(response)
                         },
 
