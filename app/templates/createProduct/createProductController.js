@@ -2,7 +2,7 @@
 
 angular.module('ticketsystem.createProduct', ['ngRoute'])
 
-    .controller('createProductCtrl', function ($scope, restService, httpService,$location,productService) {
+    .controller('createProductCtrl', function ($scope, restService, httpService,$location,storageService) {
 
         var modProductId;
 
@@ -55,7 +55,8 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
             else {
                 var url = restService.createProduct;
                 console.log($scope.modproduct);
-                httpService.put(url,productService.get().id, $scope.modproduct, config).then(function (response) {
+                var productID = JSON.parse(storageService.get("productData")).id;
+                httpService.put(url,productID, $scope.modproduct, config).then(function (response) {
                     // turn on flag for post successfully
                     window.alert("Product modified with success!");
                     $scope.product = "";
@@ -74,15 +75,15 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
         $scope.modifyProduct = function($index){
 
-
-            productService.set($scope.items[$index]);
+            storageService.save("productData",JSON.stringify($scope.items[$index]))
+            //productService.set($scope.items[$index]);
             $location.url("/modifyProduct");
 
 
         };
 
         $scope.initProductModify = function(){
-            var product = productService.get();
+            var product = JSON.parse(storageService.get("productData"));
             modProductId = product.id;
             console.log(modProductId);
             $scope.modproduct.name = product.name;

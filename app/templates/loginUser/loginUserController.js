@@ -2,7 +2,7 @@
 
 angular.module('ticketsystem.loginUser', ['ngRoute'])
 
-    .controller('LoginUserCtrl', function ($scope, restService, httpService,$location,loginService) {
+    .controller('LoginUserCtrl', function ($scope, restService, httpService,$location,loginService,storageService) {
 
         $scope.startLoginUser = function () {
 
@@ -27,7 +27,9 @@ angular.module('ticketsystem.loginUser', ['ngRoute'])
                     else if(response.data["@type"] == "CompanyAdmin") {
                         $location.url("/homeCompanyAdmin");
                     }
-                    loginService.set(response.data);
+                    //loginService.set(response.data);
+                    storageService.save("userData",JSON.stringify(response.data));
+
 
                 }, function error(response) {
 

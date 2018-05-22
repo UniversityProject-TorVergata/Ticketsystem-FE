@@ -35,7 +35,10 @@ angular.module('ticketsystem', [
     'ticketsystem.homeCompanyAdmin',
     'ticketsystem.createProduct',
     'ticketsystem.createUser',
-    'ticketsystem.accountCompanyAdmin'
+    'ticketsystem.accountCompanyAdmin',
+
+    //Factories
+    'ticketsystem.storageService'
 
 
 ]);
