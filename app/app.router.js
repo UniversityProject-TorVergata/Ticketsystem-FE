@@ -60,6 +60,10 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/createProduct/listProduct.html',
                 controller:  'createProductCtrl'
             })
+            .when('/modifyProduct', {
+                templateUrl: 'templates/createProduct/modifyProduct.html',
+                controller:  'createProductCtrl'
+            })
 
             .otherwise({redirectTo: '/home'});
 
