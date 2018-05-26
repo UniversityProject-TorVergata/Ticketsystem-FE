@@ -20,7 +20,7 @@
                 <select id="sourceType" name="sourceType"
                         ng-options="item as item.name | formatEnumeration: item.name
                         for
-                        item in sourceTypes track by item.id " ng-model="ticket.sourceType"
+                        item in sourceTypes track by item.id" ng-model="ticket.sourceType"
                         ng-init="ticket.sourceType = sourceTypes[0]"
                 >
                 </select><br>

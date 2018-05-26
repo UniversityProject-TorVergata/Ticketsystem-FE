@@ -21,8 +21,8 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
          */
         $scope.createTicket = function () {
 
-            //  A new ticket has always state 'CREATED'
-            $scope.ticket.state = "CREATED";
+            //  A new ticket has always state 'NEW'
+            $scope.ticket.state = "NEW";
 
             //  HTTP POST
             httpService.post(restService.createTicket, $scope.ticket)
@@ -69,7 +69,7 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
             httpService.delete(restService.createTicket, id)
                 .then(function (data) {
 
-                        /*httpService.get(restService.createTicket)
+                        /*httpService.get(restService.Ticket)
                             .then(function (response) {
                                 $scope.items = response.data;
                             }, function error(response) {

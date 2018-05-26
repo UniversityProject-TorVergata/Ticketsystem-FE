@@ -10,8 +10,8 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/loginUser/loginUser.html',
                 controller: 'LoginUserCtrl'
             })
-            .when('/createTicket', {
-                templateUrl: 'templates/createTicket/createTicket.html',
+            .when('/Ticket', {
+                templateUrl: 'templates/Ticket/createTicket.html',
                 controller:  'CreateTicketCtrl',
                 resolve: {
                     products: function (model) {
@@ -27,7 +27,7 @@ angular.module('ticketsystem.router', [])
                 }
             })
             .when('/readTicket', {
-                templateUrl: 'templates/createTicket/readTicket.html',
+                templateUrl: 'templates/Ticket/readTicket.html',
                 controller:  'CreateTicketCtrl',
                 resolve: {
                     products: function (model) {

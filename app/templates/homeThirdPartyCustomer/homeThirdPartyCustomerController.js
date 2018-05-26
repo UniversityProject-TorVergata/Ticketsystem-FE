@@ -5,7 +5,7 @@ angular.module('ticketsystem.homeThirdPartyCustomer', ['ngRoute'])
     .controller('homeThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location,storageService) {
 
         $scope.creationTicketHome = function () {
-            $location.url("/createTicket");
+            $location.url("/Ticket");
         }
 
         $scope.readTicket = function () {
