@@ -1,17 +1,22 @@
 [
   {
-    "state" : "CREATED"
+    "id": 1,
+    "name" : "NEW"
   },
   {
-    "state" : "ACCEPTED"
+    "id": 2,
+    "name" : "PENDING"
   },
   {
-    "state" : "PENDING"
+    "id": 3,
+    "name" : "READY"
   },
   {
-    "state" : "RELEASED"
+    "id": 4,
+    "name" : "EXECUTION"
   },
   {
-    "state" : "CLOSED"
+    "id": 5,
+    "name" : "TRASHED"
   }
 ]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "name": "BUG"
+  },
+  {
+    "id": 2,
+    "name": "CHANGE_REQUEST"
+  },
+  {
+    "id": 3,
+    "name": "NEW_IMPLEMENTATION"
+  },
+  {
+    "id": 3,
+    "name": "OTHER"
+  }
+]
