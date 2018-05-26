@@ -12,8 +12,18 @@ angular.module('ticketsystem.modelService', [])
                             resolve([])
                         })
                 })
+            },
+            getSourceTypes() {
+                return new Promise(function(resolve, reject){
+                    httpService.get('./mocks/source_types.json').then(
+                        function(sourceTypes) {
+                            resolve(sourceTypes.data);
+                        },
+                        function(error){
+                            console.error("Error loading Source Types")
+                            resolve([])
+                        })
+                })
             }
-
-
         }
     })

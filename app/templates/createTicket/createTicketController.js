@@ -2,23 +2,29 @@
 
 angular.module('ticketsystem.createTicket', ['ngRoute'])
 
-    .controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location/*, products*/) {
+    .controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location,
+                                              products, sourceTypes) {
+        //  Select values
+        $scope.products = products;
+        $scope.sourceTypes = sourceTypes;
 
-        //$scope.products = products;  //non immessi per ora
+        //  Variables
         $scope.ticket = {};
         $scope.items = [];
         $scope.selected = {};
         $scope.errorMessage = "";
         $scope.edit = [];
-        $scope.editTicket = {}
+        $scope.editTicket = {};
 
+        /**
+         *  Function creates a ticket in the database via an HTTP POST.
+         */
         $scope.createTicket = function () {
-            var date = Date.now();
-            //TODO convertire bene
-            //$scope.ticket.created_at = moment(date).format("DD/MM/YYYY");
+
+            //  A new ticket has always state 'CREATED'
             $scope.ticket.state = "CREATED";
 
-            console.log($scope.ticket);
+            //  HTTP POST
             httpService.post(restService.createTicket, $scope.ticket)
                 .then(function (data) {
                         window.alert("Ticket created");
@@ -31,33 +37,45 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                     })
         };
 
-        //Allegato del ticket
+        /**
+         *  Function converts image in base64 string and saves it in the ticket.
+         *  @param event    event containing the file
+         */
         $scope.selectedFile = function (event) {
-            util.getBase64(event.target.files[0]).then(result => {
-                console.log(result)
-                $scope.ticket.attachedFile = result;
-            })
+            util.getBase64(event.target.files[0])
+                .then(result => {
+                    $scope.ticket.attachedFile = result;
+                })
         };
 
+        /**
+         *  Function reads all the tickets in the database via an HTTP GET and shows them in a table.
+         */
         $scope.readTicket = function () {
+            //  HTTP GET
             httpService.get(restService.createTicket)
                 .then(function (response) {
                     $scope.items = response.data;
                 }, function error(response) {
-                    $scope.risposta = "Error Status: " + response.statusText;
+                    $scope.errorResponse = "Error Status: " + response.statusText;
                 });
         };
 
+        /**
+         *  Function deletes a selected ticket via an HTTP DELETE and updates the view of the table.
+         *  @param id   id number of the ticket to be deleted.
+         */
         $scope.deleteTicket = function (id) {
             httpService.delete(restService.createTicket, id)
                 .then(function (data) {
-                        console.log(data);
-                        httpService.get(restService.createTicket)
+
+                        /*httpService.get(restService.createTicket)
                             .then(function (response) {
                                 $scope.items = response.data;
                             }, function error(response) {
-                                $scope.risposta = "Error Status: " + response.statusText;
-                            });
+                                $scope.errorResponse = "Error Status: " + response.statusText;
+                            });*/
+                        $scope.readTicket();
                         window.alert("Ticket deleted")
                     },
                     function (err) {
@@ -65,20 +83,34 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                     })
         };
 
+        /**
+         *  Function used for saving an edited ticket.
+         *  @param item     selected item
+         *  @param index    iterator offset
+         */
         $scope.modifyTicket = function (item, index) {
             $scope.edit = resetIndexes($scope.edit);
             $scope.editTicket = angular.copy(item);
             $scope.edit[index] = true;
-
-
         };
+
+        /**
+         *  Function used for aborting a ticket editing.
+         *  @param index   iterator offset
+         */
         $scope.resetTicket = function (index) {
             $scope.editTicket = {}
             $scope.edit[index] = false;
-
         }
 
+        /**
+         *  Function saves a modified ticket via an HTTP PUT in the database and updates the view of the table.
+         *  @param item     selected item
+         *  @param index    iterator offset
+         */
         $scope.saveTicket = function(ticket,index){
+
+            //  Required ticket fields
             let payload = {
                 id: ticket.id,
                 timestamp: null,
@@ -101,48 +133,43 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                 ticketComments: [],
                 state:ticket.state
             }
-            httpService.put(restService.createTicket,ticket.id, payload).then(
-            //httpService.post(restService.createTicket,payload).then(
-                function(succResponse){
-                    console.log(succResponse);
+
+            //  HTTP PUT
+            httpService.put(restService.createTicket,ticket.id, payload)
+                .then( function(succResponse){
                     $scope.items[index] = angular.copy(ticket);
                     $scope.editTicket={};
                     $scope.edit = resetIndexes($scope.edit);
-                    httpService.get(restService.createTicket)
-                        .then(function (response) {
-                            $scope.items = response.data;
-                            window.alert("Ticket changed")
-                        }, function error(response) {
-                            $scope.risposta = "Error Status: " + response.statusText;
-                        });
+                    $scope.readTicket();
                 },
                 function(errReponse){
                     console.log(errReponse)
                 }
             )
+        };
+
+        /**
+         *  Function used for downloading the saved image os the ticket.
+         *  @param item     selected item
+         *  @param index    iterator offset
+         */
+        $scope.showImage = function (item, index) {
+            util.postBase64(item).then(result => {
+                // Append the <a/> tag and remove it after automatic click for the download
+                document.body.appendChild(result);
+                result.click();
+                document.body.removeChild(result);
+            })
         }
-
-        $scope.getTemplate = function (row) {
-            /*console.log(row);
-            if (row.id === $scope.selected.id){
-                return 'edit';
-            }
-            else
-                return 'displayRow';*/
-        };
-
-        $scope.editRow = function (row) {
-            $scope.selected = angular.copy(row);
-        };
-
-        $scope.reset = function () {
-            $scope.selected = {};
-        };
-
     });
 
+/**
+ *  Function resets the index used for the 'Modify' function.
+ *  @param arrayOfIndexes   items' indexes
+ *  @returns {*}   reset items' indexes
+ */
 function resetIndexes(arrayOfIndexes) {
-    angular.forEach(arrayOfIndexes, function (value,key) {
+    angular.forEach(arrayOfIndexes, function (value, key) {
         arrayOfIndexes[key] = false;
     })
     return arrayOfIndexes;

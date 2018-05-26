@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="ticketsystem"> <!--<![endif]-->
+<html lang="en" ng-app="ticketsystem">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -28,18 +28,20 @@
     <script src="templates/homeThirdPartyCustomer/homeThirdPartyCustomerController.js"></script>
     <script src="templates/accountThirdPartyCustomer/accountThirdPartyCustomerController.js"></script>
     <script src="templates/accountCompanyAdmin/accountCompanyAdminController.js"></script>
+
     <script src="services/rest.service.js"></script>
     <script src="services/utils.service.js"></script>
     <script src="services/model.service.js"></script>
     <script src="services/login.service.js"></script>
     <script src="services/product.service.js"></script>
+    <script src="services/sourceType.service.js"></script>
     <script src="services/storage.service.js"></script>
 
+
+    <script src="filters/string.filter.js"></script>
+
 </head>
-
     <body>
-
-        <div ng-view align="center"></div>
-
+        <div ng-view align="left"></div>
     </body>
 </html>

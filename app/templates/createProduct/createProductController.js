@@ -133,7 +133,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
                 $scope.items = response.data;
 
             }, function error(response) {
-                $scope.risposta = "Error Status: " +  response.statusText;
+                $scope.errorResponse = "Error Status: " +  response.statusText;
 
             });
         };

@@ -5,22 +5,24 @@
         <h1><span class="fa fa-sign-in">Create ticket: </span></h1>
         <br>
         <form>
-            <!-- <div class="form-group">
-                <label for="target">Select Product:</label><br>
+            <div class="form-group">
+                <!--<label for="target">Select Product:</label><br>
                 <select id="target" name="target"
                         ng-options="item as item.name
                         for
                         item in products track by item.id" ng-model="ticket.target"
                         ng-init="ticket.target = products[0]"
                 >
-                </select><br>
-            </div>-->
+                </select><br>-->
+            </div>
             <div class="form-group">
                 <label>Source type:</label><br>
-                <select name="sourceType" ng-model="ticket.sourceType">
-                    <option value="CUSTOMER">Customer</option>
-                    <option value="HELP_DESK_CUSTOMER">Help Desk</option>
-                    <option value="SYSTEM">System</option>
+                <select id="sourceType" name="sourceType"
+                        ng-options="item as item.name | formatEnumeration: item.name
+                        for
+                        item in sourceTypes track by item.id " ng-model="ticket.sourceType"
+                        ng-init="ticket.sourceType = sourceTypes[0]"
+                >
                 </select><br>
             </div>
             <div class="form-group">
@@ -46,7 +48,6 @@
                        custom-on-change="selectedFile"
                        accept="image/*"
                 />
-                <!-- <button ng-click="">Upload</button> -->
             </div>
             <div class="form-group">
                 <label>Priority:</label><br>

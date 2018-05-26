@@ -10,7 +10,13 @@ angular.module('ticketsystem', [
     'ticketsystem.utilService',
     'ticketsystem.modelService',
     'ticketsystem.loginService',
+
+    //  Mocks for select list
     'ticketsystem.productService',
+    'ticketsystem.sourceTypeService',
+
+    //  Filters
+    'ticketsystem.stringFilter',
 
     //  Routes
     'ticketsystem.router',

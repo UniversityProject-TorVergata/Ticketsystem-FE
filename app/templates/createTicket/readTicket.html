@@ -16,21 +16,22 @@
             <th>Source type</th>
             <th>Presumed type</th>
             <th>State</th>
-            <!-- TODO aggiungere decode dell'immagine-->
+            <th>Attachment</th>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="item in items">
-
             <td ng-hide="edit[$index]">{{item.title}}</td>
             <td ng-hide="edit[$index]">{{item.description}}</td>
             <td ng-hide="edit[$index]">{{item.sourceType}}</td>
             <td ng-hide="edit[$index]">{{item.presumedType}}</td>
             <td ng-hide="edit[$index]">{{item.state}}</td>
             <td ng-hide="edit[$index]">
+                <button ng-click="showImage(item)" class="btn btn-primary">Show Image</button>
+            </td>
+            <td ng-hide="edit[$index]">
                 <button ng-click="modifyTicket(item,$index)" class="btn btn-primary">Modify</button>
                 <button ng-click="deleteTicket(item.id)" class="btn btn-danger">Delete</button>
-
             </td>
 
             <td ng-show="edit[$index]"><input type="text" ng-model=editTicket.title class="form-control input-sm"/></td>
@@ -38,36 +39,11 @@
             <td ng-show="edit[$index]"><input type="text" ng-model=editTicket.sourceType class="form-control input-sm"/></td>
             <td ng-show="edit[$index]"><input type="text" ng-model=editTicket.presumedType class="form-control input-sm"/></td>
             <td ng-show="edit[$index]"><input type="text" ng-model=editTicket.state class="form-control input-sm"/></td>
-
+            <td/>
             <td ng-show="edit[$index]">
                 <button ng-click="saveTicket(editTicket,$index)" class="btn btn-primary">Save</button>
                 <button ng-click="resetTicket($index)" class="btn btn-danger">Cancel</button>
             </td>
-
-            <!-- ng-include="getTemplate(item)">
-        <script type="text/ng-template" id="display">
-            <td>{{item.title}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.sourceType}}</td>
-            <td>{{item.presumedType}}</td>
-            <td>{{item.state}}</td>
-            <td>
-                <button ng-click="editRow(item)" class="btn btn-primary">Modify</button>
-                <button ng-click="deleteTicket(item.id)"class="btn btn-danger">Delete</button>
-            </td>
-            </script>
-            <script type="text/ng-template" id="edit">
-                <td><input type="text" ng-model=item.title class="form-control input-sm"/></td>
-                <td><input type="text" ng-model=item.description class="form-control input-sm"/></td>
-                <td><input type="text" ng-model=item.sourceType class="form-control input-sm"/></td>
-                <td><input type="text" ng-model=item.presumedType class="form-control input-sm"/></td>
-                <td><input type="text" ng-model=item.state class="form-control input-sm"/></td>
-
-                <td>
-                    <button ng-click="modifyTicket(item.id)" class="btn btn-primary">Save</button>
-                    <button ng-click="reset()" class="btn btn-danger">Cancel</button>
-                </td>
-            </script>-->
         </tr>
         </tbody>
     </table>

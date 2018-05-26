@@ -1,0 +1,17 @@
+[
+  {
+    "state" : "CREATED"
+  },
+  {
+    "state" : "ACCEPTED"
+  },
+  {
+    "state" : "PENDING"
+  },
+  {
+    "state" : "RELEASED"
+  },
+  {
+    "state" : "CLOSED"
+  }
+]

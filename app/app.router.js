@@ -18,12 +18,29 @@ angular.module('ticketsystem.router', [])
                         return model.getProducts().then(function (products) {
                             return products
                         })
+                    },
+                    sourceTypes: function (model) {
+                        return model.getSourceTypes().then(function (sourceTypes) {
+                            return sourceTypes
+                        })
                     }
                 }
             })
             .when('/readTicket', {
                 templateUrl: 'templates/createTicket/readTicket.html',
-                controller:  'CreateTicketCtrl'
+                controller:  'CreateTicketCtrl',
+                resolve: {
+                    products: function (model) {
+                        return model.getProducts().then(function (products) {
+                            return products
+                        })
+                    },
+                    sourceTypes: function (model) {
+                        return model.getSourceTypes().then(function (sourceTypes) {
+                            return sourceTypes
+                        })
+                    }
+                }
             })
 
             .when('/home', {
