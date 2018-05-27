@@ -47,7 +47,9 @@ angular.module('ticketsystem', [
     'ticketsystem.storageService',
 
     //  Team Coordinator
-    'ticketsystem.assignTeam'
+    'ticketsystem.assignTeam',
+
+    'isteven-multi-select'
 
 
 ]);
