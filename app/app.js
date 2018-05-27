@@ -33,14 +33,14 @@ angular.module('ticketsystem', [
     // Home
     'ticketsystem.home',
 
-    // ThirdPartyCustomer
-    'ticketsystem.homeThirdPartyCustomer',
+    // Customer
+    'ticketsystem.homeCustomer',
+    'ticketsystem.createCustomer',
     'ticketsystem.accountThirdPartyCustomer',
 
     //CompanyAdmin
     'ticketsystem.homeCompanyAdmin',
     'ticketsystem.createProduct',
-    'ticketsystem.createUser',
     'ticketsystem.accountCompanyAdmin',
 
     //Factories

@@ -6,7 +6,7 @@ angular.module('ticketsystem.homeCompanyAdmin', ['ngRoute'])
 
 
         $scope.insertCustomer = function () {
-            $location.url("/createUser");
+            $location.url("/create");
         };
 
 

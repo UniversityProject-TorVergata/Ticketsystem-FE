@@ -27,7 +27,7 @@ angular.module('ticketsystem.accountThirdPartyCustomer', ['ngRoute'])
                 httpService.put(restService.updateUser, $scope.user.id, $scope.user, config)
                     .then(function (response) {
                             window.alert('Account Aggiornato con successo');
-                            $location.path('/homeThirdPartyCustomer');
+                            $location.path('/home');
                             storageService.save("userData",JSON.stringify($scope.user));
                             console.log(response)
                         },

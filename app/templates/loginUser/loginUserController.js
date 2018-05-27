@@ -2,49 +2,47 @@
 
 angular.module('ticketsystem.loginUser', ['ngRoute'])
 
-    .controller('LoginUserCtrl', function ($scope, restService, httpService,$location,loginService,storageService) {
+    .controller('LoginUserCtrl', function ($scope, restService, httpService, loginService, storageService,
+                                           $location) {
 
-        /*
-            Funzione che esegue il Login.
-            I dati vengono inviati con metodo POST.
-            In caso di autenticazione il Back-End risponde con un JSON
-            che contiene tutte le INFO del utente Loggato.
-
+        /**
+         *  Function triggered by the login.
+         *  It sends a login request via HTTP POST.
          */
         $scope.startLoginUser = function () {
 
-
-
-            if(angular.isUndefined($scope.user) || angular.isUndefined($scope.user.username) ||
+            //  Check data for the login
+            if( angular.isUndefined($scope.user) ||
+                angular.isUndefined($scope.user.username) ||
                 angular.isUndefined($scope.user.password) ) {
-
-                window.alert('è necessario riempire tutti i campi!')
+                window.alert('Some fields are missing!');
             }
-            else if($scope.user.username == "" || $scope.user.password == ""){
-                window.alert('è necessario riempire tutti i campi!')
-            }
+            else if($scope.user.username == "" || $scope.user.password == "")
+                window.alert('Some fields are missing!');
             else {
 
-                httpService.post(restService.login, $scope.user).then(function (response) {
-                    // turn on flag for post successfully
-                    if(response.data["@type"] == "ThirdPartyCustomer") {
-                        $location.url("/homeThirdPartyCustomer");
+                // HTTP POST
+                httpService.post(restService.login, $scope.user)
+                    .then(function (response) {
 
-                    }
-                    else if(response.data["@type"] == "CompanyAdmin") {
-                        $location.url("/homeCompanyAdmin");
-                    }
-                    //Salvo nei dati di sessione le info dell'account appena loggato.
-                    storageService.save("userData",JSON.stringify(response.data));
+                        var url = "";
 
+                        switch(response.data["@type"]) {
+                            case "Customer":
+                                url = "/homeCustomer";
+                                break;
+                            case "CompanyAdmin":
+                                url = "/homeCompanyAdmin";
+                                break;
+                        }
 
+                        $location.url(url);
+
+                    //  User data is saved in the sessions after login
+                    storageService.save("userData", JSON.stringify(response.data));
                 }, function error(response) {
-
-                    window.alert("Login failed ");
-
+                    window.alert("Login failed!");
                 });
-
-
             }
         };
     });

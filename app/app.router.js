@@ -2,9 +2,9 @@ angular.module('ticketsystem.router', [])
     .config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
 
         $routeProvider
-            .when('/createUser', {
-                templateUrl: 'templates/createUser/createUser.html',
-                controller: 'createUserCtrl'
+            .when('/createCustomer', {
+                templateUrl: 'templates/Customer/create/createCustomer.html',
+                controller: 'createCustomerCtrl'
             })
             .when('/loginUser', {
                 templateUrl: 'templates/loginUser/loginUser.html',
@@ -53,14 +53,9 @@ angular.module('ticketsystem.router', [])
                 }
             })
 
-            .when('/home', {
-                templateUrl: 'templates/home/home.html',
-                controller:  'HomeCtrl'
-            })
-
-            .when('/homeThirdPartyCustomer', {
-                templateUrl: 'templates/homeThirdPartyCustomer/homeThirdPartyCustomer.html',
-                controller:  'homeThirdPartyCustomerCtrl'
+            .when('/homeCustomer', {
+                templateUrl: 'templates/Customer/home/homeCustomer.html',
+                controller:  'homeCustomerCtrl'
             })
             .when('/accountThirdPartyCustomer', {
                 templateUrl: 'templates/accountThirdPartyCustomer/accountThirdPartyCustomer.html',
@@ -102,9 +97,7 @@ angular.module('ticketsystem.router', [])
                     }
                 }
             })
-
-
-            .otherwise({redirectTo: '/home'});
+            .otherwise({redirectTo: '/loginUser'});
 
         $locationProvider.html5Mode({
             enabled: false,

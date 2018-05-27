@@ -42,7 +42,7 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                     .then(function (data) {
                             window.alert("Ticket created");
                             console.log(data);
-                            $location.path('/homeThirdPartyCustomer')
+                            $location.path('/home')
                         },
                         function (err) {
                             window.alert("Error!")

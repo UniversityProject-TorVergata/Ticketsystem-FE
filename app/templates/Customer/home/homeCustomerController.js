@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ticketsystem.homeThirdPartyCustomer', ['ngRoute'])
+angular.module('ticketsystem.homeCustomer', ['ngRoute'])
 
-    .controller('homeThirdPartyCustomerCtrl', function ($scope, restService, httpService,$location,storageService) {
+    .controller('homeCustomerCtrl', function ($scope, restService, httpService,$location,storageService) {
 
         $scope.creationTicketHome = function () {
             $location.url("/Ticket");

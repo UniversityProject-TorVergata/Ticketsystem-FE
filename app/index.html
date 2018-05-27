@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="app.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="node_modules/bootstrap/dist/js/bootstrap.min.js">
+    <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
+
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-route/angular-route.min.js"></script>
     <script src="node_modules/moment/moment.js"></script>
@@ -20,18 +22,18 @@
     <script src="directives/custom-changes.directive.js"></script>
 
     <script src="templates/loginUser/loginUserController.js"></script>
-    <script src="templates/createUser/createUserController.js"></script>
+    <script src="templates/Customer/create/createCustomerController.js"></script>
     <script src="templates/createProduct/createProductController.js"></script>
     <script src="templates/homeCompanyAdmin/homeCompanyAdminController.js"></script>
     <script src="templates/Ticket/createTicketController.js"></script>
     <script src="templates/home/homeController.js"></script>
-    <script src="templates/homeThirdPartyCustomer/homeThirdPartyCustomerController.js"></script>
+    <script src="templates/Customer/home/homeCustomerController.js"></script>
     <script src="templates/accountThirdPartyCustomer/accountThirdPartyCustomerController.js"></script>
     <script src="templates/accountCompanyAdmin/accountCompanyAdminController.js"></script>
     <script src="templates/TeamCoordinator/teamCoordinatorController.js"></script>
 
-    <link rel="stylesheet" href="templates/multiselect/isteven-multi-select.css">
-    <script src="templates/multiselect/isteven-multi-select.js"></script>
+    <link rel="stylesheet" href="multiselect/isteven-multi-select.css">
+    <script src="multiselect/isteven-multi-select.js"></script>
 
     <script src="services/rest.service.js"></script>
     <script src="services/utils.service.js"></script>
@@ -45,6 +47,14 @@
 
 </head>
     <body>
-        <div ng-view align="left"></div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <i class="fa fa-ticket fa-fw" aria-hidden="true"></i>
+            Ticket System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
+    <div ng-view align="left"></div>
     </body>
 </html>
