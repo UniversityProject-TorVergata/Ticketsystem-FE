@@ -24,6 +24,18 @@ angular.module('ticketsystem.modelService', [])
                             resolve([])
                         })
                 })
+            },
+            getTeams() {
+                return new Promise(function(resolve, reject){
+                    httpService.get('./mocks/teams.json').then(
+                        function(teams) {
+                            resolve(teams.data);
+                        },
+                        function(error){
+                            console.error("Error loading Products")
+                            resolve([])
+                        })
+                })
             }
         }
     })

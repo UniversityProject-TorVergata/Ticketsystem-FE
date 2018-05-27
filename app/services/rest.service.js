@@ -9,6 +9,7 @@ angular.module('ticketsystem.restService', [])
         return {
             "login": CONNECTION.url + '/registered_user/login',
             "createTicket": CONNECTION.url + '/ticket',
+            "unassignedTickets": CONNECTION.url + '/ticket',
             "createUser": CONNECTION.url + '/registered_user',
             "getUser": CONNECTION.url + '/registered_user',
             "deleteUser": CONNECTION.url + '/registered_user',

@@ -68,13 +68,6 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
         $scope.deleteTicket = function (id) {
             httpService.delete(restService.createTicket, id)
                 .then(function (data) {
-
-                        /*httpService.get(restService.Ticket)
-                            .then(function (response) {
-                                $scope.items = response.data;
-                            }, function error(response) {
-                                $scope.errorResponse = "Error Status: " + response.statusText;
-                            });*/
                         $scope.readTicket();
                         window.alert("Ticket deleted")
                     },

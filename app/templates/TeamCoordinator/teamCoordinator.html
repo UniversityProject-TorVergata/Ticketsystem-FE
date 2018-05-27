@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket List</title>
+</head>
+<body>
+<div class="container">
+
+
+    <table st-table="rowCollection" class="table table-striped" data-ng-init="readUnassignedTicket()">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Team</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{item.title}}</td>
+            <td>{{item.description}}</td>
+            <td>
+                <select id="team" name="team"
+                        ng-options="item as item.name
+                        for
+                        item in teams track by item.id" ng-model="team.id"
+                        ng-init="team.id = teams[0]"
+                >
+                </select>
+            </td>
+            <td>
+                <button ng-click="saveTicketWithTeam(item)" class="btn btn-primary">Send</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <p>Go back to <a href="#/homeThirdPartyCustomer">Home</a></p>
+
+</div>
+</div>
+
+</body>
+</html>

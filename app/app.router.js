@@ -81,6 +81,18 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/createProduct/modifyProduct.html',
                 controller:  'createProductCtrl'
             })
+            .when('/assignTicket', {
+                templateUrl: 'templates/TeamCoordinator/teamCoordinator.html',
+                controller:  'AssignTeamCtrl',
+                resolve: {
+                    teams: function (model) {
+                        return model.getTeams().then(function (teams) {
+                            return teams
+                        })
+                    }
+                }
+            })
+
 
             .otherwise({redirectTo: '/home'});
 

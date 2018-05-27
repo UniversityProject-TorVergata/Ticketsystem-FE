@@ -44,7 +44,10 @@ angular.module('ticketsystem', [
     'ticketsystem.accountCompanyAdmin',
 
     //Factories
-    'ticketsystem.storageService'
+    'ticketsystem.storageService',
+
+    //  Team Coordinator
+    'ticketsystem.assignTeam'
 
 
 ]);
