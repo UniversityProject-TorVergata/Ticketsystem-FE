@@ -9,7 +9,14 @@ angular.module('ticketsystem.restService', [])
         return {
             "login": CONNECTION.url + '/registered_user/login',
             "createTicket": CONNECTION.url + '/ticket',
-            "unassignedTickets": CONNECTION.url + '/ticket',
+
+            //  Ticket by state
+            "newTickets": CONNECTION.url + '/ticket/findTicketByState/NEW',
+            "pendingTickets": CONNECTION.url + '/ticket/findTicketByState/PENDING',
+            "readyTickets": CONNECTION.url + '/ticket/findTicketByState/READY',
+            "executionTickets": CONNECTION.url + '/ticket/findTicketByState/EXECUTION',
+            "trashedTickets": CONNECTION.url + '/ticket/findTicketByState/TRASHED',
+
             "createUser": CONNECTION.url + '/registered_user',
             "getUser": CONNECTION.url + '/registered_user',
             "deleteUser": CONNECTION.url + '/registered_user',

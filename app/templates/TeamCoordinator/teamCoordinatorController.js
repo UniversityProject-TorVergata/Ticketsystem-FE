@@ -3,6 +3,7 @@
 angular.module('ticketsystem.assignTeam', ['ngRoute'])
 
     .controller('AssignTeamCtrl', function ($scope, restService, httpService, util, $location, teams) {
+
         //  Select values
         $scope.teams = teams;
 
@@ -10,16 +11,15 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
         $scope.items = [];
 
         /**
-         *  Function reads all the tickets in the database via an HTTP GET and shows them in a table.
+         *  Function reads all the PENDING tickets in the database via an HTTP GET and
+         *  shows them in a table.
          */
         $scope.readUnassignedTicket = function () {
             //  HTTP GET
-            httpService.get(restService.unassignedTickets)
+            httpService.get(restService.pendingTickets)
                 .then(function (response) {
-                    console.log("YEH")
                     $scope.items = response.data;
                 }, function error(response) {
-                    console.log("MEH")
                     $scope.errorResponse = "Error Status: " + response.statusText;
                 });
         };
