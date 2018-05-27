@@ -1,5 +1,5 @@
 'use strict';
-// Declare app level module which depends on views, and components
+// Declare navbar level module which depends on views, and components
 angular.module('ticketsystem', [
 
     'ngRoute',
@@ -44,7 +44,9 @@ angular.module('ticketsystem', [
     'ticketsystem.accountCompanyAdmin',
 
     //Factories
-    'ticketsystem.storageService'
+    'ticketsystem.storageService',
+
+    'isteven-multi-select'
 
 
 ]);

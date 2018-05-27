@@ -24,6 +24,18 @@ angular.module('ticketsystem.modelService', [])
                             resolve([])
                         })
                 })
+            },
+            getTags() {
+                return new Promise(function(resolve, reject) {
+                    httpService.get('./mocks/tags.json').then(
+                        function(tags) {
+                            resolve(tags.data);
+                        },
+                        function(error) {
+                            console.error("Error loading Tags")
+                            resolve([])
+                        })
+                })
             }
         }
     })

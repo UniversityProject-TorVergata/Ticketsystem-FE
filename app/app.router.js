@@ -23,6 +23,11 @@ angular.module('ticketsystem.router', [])
                         return model.getSourceTypes().then(function (sourceTypes) {
                             return sourceTypes
                         })
+                    },
+                    tags: function(model) {
+                        return model.getTags().then(function (tags) {
+                            return tags
+                        })
                     }
                 }
             })
@@ -38,6 +43,11 @@ angular.module('ticketsystem.router', [])
                     sourceTypes: function (model) {
                         return model.getSourceTypes().then(function (sourceTypes) {
                             return sourceTypes
+                        })
+                    },
+                    tags: function(model) {
+                        return model.getTags().then(function (tags) {
+                            return tags
                         })
                     }
                 }

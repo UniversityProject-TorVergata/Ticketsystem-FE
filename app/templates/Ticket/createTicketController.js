@@ -3,10 +3,11 @@
 angular.module('ticketsystem.createTicket', ['ngRoute'])
 
     .controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location,
-                                              products, sourceTypes) {
+                                              products, sourceTypes, tags) {
         //  Select values
         $scope.products = products;
         $scope.sourceTypes = sourceTypes;
+        $scope.tags = tags;
 
         //  Variables
         $scope.ticket = {};
@@ -15,26 +16,39 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
         $scope.errorMessage = "";
         $scope.edit = [];
         $scope.editTicket = {};
+        $scope.selectedTags = [];
+
 
         /**
          *  Function creates a ticket in the database via an HTTP POST.
          */
         $scope.createTicket = function () {
 
-            //  A new ticket has always state 'NEW'
-            $scope.ticket.state = "NEW";
+            if (Object.keys($scope.selectedTags).length < 1) {
+                window.alert("Devi metterne 1 almeno STRONZO");
+            }
 
-            //  HTTP POST
-            httpService.post(restService.createTicket, $scope.ticket)
-                .then(function (data) {
-                        window.alert("Ticket created");
-                        console.log(data);
-                        $location.path('/homeThirdPartyCustomer')
-                    },
-                    function (err) {
-                        window.alert("Error!")
-                        $scope.errorMessage = "error!"
-                    })
+            else if (Object.keys($scope.selectedTags).length > 5) {
+                window.alert("Non piu di 5 BASTARDO");
+            }
+
+            else {
+
+                //  A new ticket has always state 'NEW'
+                $scope.ticket.state = "NEW";
+
+                //  HTTP POST
+                httpService.post(restService.createTicket, $scope.ticket)
+                    .then(function (data) {
+                            window.alert("Ticket created");
+                            console.log(data);
+                            $location.path('/homeThirdPartyCustomer')
+                        },
+                        function (err) {
+                            window.alert("Error!")
+                            $scope.errorMessage = "error!"
+                        })
+            }
         };
 
         /**
