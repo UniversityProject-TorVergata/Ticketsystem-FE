@@ -1,0 +1,57 @@
+<div class="modal-header">
+    <h3>Ticket #{{formItem.id}} details</h3>
+</div>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create three equal columns that floats next to each other */
+        .column {
+            float: right;
+            width: 40%;
+            padding: 10%;
+            height: auto; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+<body>
+<div class="row">
+    <div class="column">
+        <h2>Details</h2>
+        <p><strong>ID:</strong><br>{{formItem.id}}</p>
+        <p><strong>Date:</strong><br>{{formItem.timestamp}}</p>
+        <p><strong>Priority:</strong><br>{{formItem.customerPriority}}</p>
+    </div>
+    <div class="column">
+        <h2>Author</h2>
+        <p><strong>Name:</strong><br>{{formItem.openerUser.name}}</p>
+        <p><strong>Surname:</strong><br>{{formItem.openerUser.surname}}</p>
+        <p><strong>ID:</strong><br>{{formItem.openerUser.id}}</p>
+        <p><strong>Email:</strong><br>{{formItem.openerUser.email}}</p>
+        <p><strong>Username:</strong><br>{{formItem.openerUser.username}}</p>
+    </div>
+</div>
+    <div style="padding-left: 10%">
+    <p><strong>Title:</strong>&nbsp;&nbsp;{{formItem.title}}</p>
+    <p><strong>Description:</strong></p>
+    <p>{{formItem.description}}</p>
+    <p><strong>Tags:</strong>&nbsp;&nbsp;{{formItem.tags}}</p>
+        <script type="text/javascript">
+            var partsOfStr = $scope.formItem.tags.split(',');
+        </script>
+        <p>&nbsp;</p>
+
+</div>
+
+</body>
+</html>

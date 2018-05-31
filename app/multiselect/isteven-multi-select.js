@@ -114,7 +114,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
                 return new Array( num );   
             }
 
-            // Call this function when user type on the filter field
+            // Call this function when ticket type on the filter field
             $scope.searchChanged = function() {                                                
                 if ( $scope.inputLabel.labelFilter.length < vMinSearchLength && $scope.inputLabel.labelFilter.length > 0 ) {
                     return false;
@@ -979,7 +979,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
              *******************************************************/
             
             // watch1, for changes in input model property
-            // updates multi-select when user select/deselect a single checkbox programatically
+            // updates multi-select when ticket select/deselect a single checkbox programatically
             // https://github.com/isteven/angular-multi-select/issues/8            
             $scope.$watch( 'inputModel' , function( newVal ) {                                 
                 if ( newVal ) {                            
@@ -989,7 +989,7 @@ angular.module( 'isteven-multi-select', ['ng'] ).directive( 'istevenMultiSelect'
             }, true );
             
             // watch2 for changes in input model as a whole
-            // this on updates the multi-select when a user load a whole new input-model. We also update the $scope.backUp variable
+            // this on updates the multi-select when a ticket load a whole new input-model. We also update the $scope.backUp variable
             $scope.$watch( 'inputModel' , function( newVal ) {  
                 if ( newVal ) {
                     $scope.backUp = angular.copy( $scope.inputModel );    

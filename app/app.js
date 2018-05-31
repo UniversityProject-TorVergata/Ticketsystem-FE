@@ -1,9 +1,10 @@
 'use strict';
-// Declare app level module which depends on views, and components
+// Declare navbar level module which depends on views, and components
 angular.module('ticketsystem', [
 
     'ngRoute',
     'angularMoment',
+    'ui.bootstrap',
 
     //  Services
     'ticketsystem.restService',
@@ -49,7 +50,7 @@ angular.module('ticketsystem', [
     //  Team Coordinator
     'ticketsystem.assignTeam',
 
-    'isteven-multi-select'
+    'isteven-multi-select',
 
 
 ]);

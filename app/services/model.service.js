@@ -48,6 +48,19 @@ angular.module('ticketsystem.modelService', [])
                             resolve([])
                         })
                 })
+            },
+            getTicketTypes() {
+                return new Promise(function(resolve, reject) {
+                    httpService.get('./mocks/ticket_type.json').then(
+                        function(ticketTypes) {
+                            resolve(ticketTypes.data);
+                        },
+                        function(error) {
+                            console.error("Error loading Ticket Types")
+                            resolve([])
+                        }
+                    )
+                })
             }
         }
     })

@@ -35,11 +35,13 @@
                 </select><br>
             </div>
 
+            <!-- multiselect from https://github.com/isteven/angular-multi-select -->
             <label>Tags:</label>
             <div
                     isteven-multi-select
                     input-model="tags"
                     output-model="selectedTags"
+                    output-properties="name"
                     button-label="name"
                     item-label="name"
                     tick-property="ticked"
@@ -81,7 +83,7 @@
         </form>
 
         <hr>
-        <p>Go back to <a href="#/homeThirdPartyCustomer">Home</a></p>
+        <p>Go back to <a href="#/homeCustomer">Home</a></p>
 
     </div>
 

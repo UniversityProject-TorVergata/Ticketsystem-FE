@@ -4,7 +4,6 @@ angular.module('ticketsystem.stringFilter',[])
     .filter('formatEnumeration',function() {
         //  Format enumeration strings in camel case
         return function (input) {
-            console.log(typeof input);
             var newInput = "";
             if (!!input) {
                 var words = input.split("_");
