@@ -21,6 +21,19 @@
             <textarea type="text" name="description" class="form-control" ng-model="editTicket.description" required></textarea>
         </div>
 
+        <!-- CATEGORY -->
+        <div class="form-group">
+            <label>Category</label>
+            <select name="cat"
+                    ng-options="t
+                                for
+                                t in editTicket.target.categories"
+                    ng-model="editTicket.presumedType"
+                    ng-init="editTicket.presumedType = editTicket.presumedType || editTicket.target.categories[0]">
+            </select>
+
+        </div>
+
         <!-- TAGS -->
         <div class="form-group">
             <label>Tags</label>

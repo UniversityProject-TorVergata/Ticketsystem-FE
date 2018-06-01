@@ -33,6 +33,11 @@ angular.module('ticketsystem.router', [])
                         return model.getTags().then(function (tags) {
                             return tags
                         })
+                    },
+                    categories: function(model) {
+                        return model.getCategories().then(function (categories) {
+                            return categories
+                        })
                     }
                 }
             })
@@ -58,6 +63,11 @@ angular.module('ticketsystem.router', [])
                     tags: function(model) {
                         return model.getTags().then(function (tags) {
                             return tags
+                        })
+                    },
+                    categories: function(model) {
+                        return model.getCategories().then(function (categories) {
+                            return categories
                         })
                     }
                 }

@@ -49,6 +49,20 @@ angular.module('ticketsystem.modelService', [])
                         })
                 })
             },
+            getCategories() {
+                return new Promise(function(resolve, reject) {
+                    httpService.get('./mocks/categories.json').then(
+                        function(categories) {
+                            resolve(categories.data);
+                        },
+                        function(error) {
+                            console.error("Error loading Categories")
+                            resolve([])
+                        }
+                    )
+                })
+
+            },
             getTicketTypes() {
                 return new Promise(function(resolve, reject) {
                     httpService.get('./mocks/ticket_type.json').then(

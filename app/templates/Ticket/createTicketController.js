@@ -1,23 +1,27 @@
 'use strict';
 
 var app = angular.module('ticketsystem.createTicket', ['ngRoute', 'ui.bootstrap']);
-app.controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location, storageService,
-                                                                products, sourceTypes, ticketTypes, tags) {
+app.controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location, storageService, tags) {
         //  Select values
-        $scope.products = products;
-        $scope.sourceTypes = sourceTypes;
-        $scope.ticketTypes = ticketTypes;
+        $scope.sourceTypes;
+        $scope.ticketTypes;
         $scope.tags = tags;
 
         //  Variables
         $scope.ticket = {};
         $scope.items = [];
+        $scope.targetList = [];
+        $scope.categories;
+        $scope.relatedCategories = [];
+        $scope.selectedCategories = [];
+        $scope.showCategoriesOnDisplay = false;
         $scope.selected = {};
         $scope.errorMessage = "";
         $scope.edit = [];
         $scope.editTicket = {};
         $scope.selectedTags = [];
-        $scope.myArray = [];
+        $scope.tempTags = []; //used for temporary store tags data
+        $scope.tempCategories = [];
 
 
 
@@ -27,11 +31,11 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
         $scope.createTicket = function () {
 
             if (Object.keys($scope.selectedTags).length < 1) {
-                window.alert("Devi metterne 1 almeno STRONZO");
+                window.alert("Insert at least 1 tag");
             }
 
             else if (Object.keys($scope.selectedTags).length > 5) {
-                window.alert("Non piu di 5 BASTARDO");
+                window.alert("Insert max 5 tags");
             }
 
             else {
@@ -48,13 +52,22 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
                     This change allows you to send the sourceType as a string to the backend
                     instead of the entire json object
                  */
-                $scope.ticket.sourceType = $scope.ticket.sourceType.name
+                //$scope.ticket.sourceType = $scope.ticket.sourceType.name;
 
                 //  As mentioned above for the sourceType
                 for (let i = 0; i < $scope.selectedTags.length; i++) {
-                    $scope.myArray.push($scope.selectedTags[i].name);
+                    $scope.tempTags.push($scope.selectedTags[i].name);
                 }
-                $scope.ticket.tags = $scope.myArray;
+                $scope.ticket.tags = $scope.tempTags;
+                console.log($scope.selectedTags);
+
+                for (let a = 0; a < Object.keys($scope.selectedCategories).length; a++) {
+                    console.log($scope.selectedCategories[a]['name']);
+                    $scope.tempCategories.push($scope.selectedCategories[a].name);
+                }
+                $scope.ticket.target.categories = $scope.tempCategories;
+                //console.log($scope.selectedCategories);
+                console.log($scope.tempCategories);
 
                 //  Assign the ticket creation date
                 var date = Date.now();
@@ -105,6 +118,29 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
                     $scope.errorResponse = "Error Status: " + response.statusText;
                 });
         };
+
+
+        $scope.findTargets = function () {
+            //  HTTP GET
+            httpService.get(restService.readTargets)
+                .then(function (response) {
+                    $scope.targetList = response.data;
+                }, function error(response) {
+                    $scope.errorResponse = "Error Status: " + response.statusText;
+                });
+        };
+
+        $scope.showCategories = function (i) {
+            if (i == null) {
+                $scope.showCategoriesOnDisplay = false;
+            } else {
+                $scope.showCategoriesOnDisplay = true;
+                $scope.relatedCategories = i['categories'];
+            }
+        };
+
+
+
 
         /**
          *  Function deletes a selected ticket via an HTTP DELETE and updates the view of the table.
@@ -162,7 +198,7 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
                 mediaType: null,
                 resolverUser: null,
                 openerUser: ticket.openerUser,
-                target: null,
+                target: ticket.target,
                 customerPriority: ticket.customerPriority,
                 actualPriority: null,
                 visibility: ticket.visibility,

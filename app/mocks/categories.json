@@ -1,0 +1,13 @@
+[
+  {"id":"0", "type": "Product", "list": [
+    {"id":"1", "name": "Driver"},
+    {"id":"2", "name": "Backup"},
+    {"id":"3", "name":"Security"},
+    {"id":"4", "name": "Migration"},
+    {"id":"5", "name": "Tools"}]},
+
+  {"id":"1", "type": "Service", "list": [
+    {"id":"1", "name": "Pricing"},
+    {"id":"2", "name": "SLA"},
+    {"id":"3", "name":"Remote access"},
+    {"id":"4", "name": "Security"}]}]
