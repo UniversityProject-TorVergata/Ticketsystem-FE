@@ -1,5 +1,5 @@
 angular.module('ticketsystem.modelService', [])
-    .service('model', function (httpService) {
+    .service('model', function (httpService, restService) {
         return {
             getProducts() {
                 return new Promise(function(resolve, reject){
@@ -25,9 +25,21 @@ angular.module('ticketsystem.modelService', [])
                         })
                 })
             },
-            getTeams() {
+            /*getTeams() {
                 return new Promise(function(resolve, reject){
                     httpService.get('./mocks/teams.json').then(
+                        function(teams) {
+                            resolve(teams.data);
+                        },
+                        function(error){
+                            console.error("Error loading Products")
+                            resolve([])
+                        })
+                })
+            },*/
+            getTeams() {
+                return new Promise(function(resolve, reject){
+                    httpService.get(restService.teamLeader).then(
                         function(teams) {
                             resolve(teams.data);
                         },

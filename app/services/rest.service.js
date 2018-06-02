@@ -17,6 +17,8 @@ angular.module('ticketsystem.restService', [])
             "executionTickets": CONNECTION.url + '/ticket/findTicketByState/EXECUTION',
             "trashedTickets": CONNECTION.url + '/ticket/findTicketByState/TRASHED',
 
+            "teamLeader": CONNECTION.url + '/registered_user/team_leader',
+            "assignTicket": CONNECTION.url + '/ticket/assignTicket',
             "createUser": CONNECTION.url + '/registered_user',
             "getUser": CONNECTION.url + '/registered_user',
             "deleteUser": CONNECTION.url + '/registered_user',

@@ -24,46 +24,24 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
                 });
         };
 
-        /**
+        /** TODO cambiare
          *  Function saves a modified ticket via an HTTP PUT in the database and updates the view of the table.
          *  @param item     selected item
          *  @param index    iterator offset
          */
-        $scope.saveTicketWithTeam = function(ticket){
-
-            //  Required ticket fields with 'state' changed
-            let payload = {
-                id: ticket.id,
-                timestamp: null,
-                title: ticket.title,
-                description: ticket.description,
-                sourceType: ticket.sourceType,
-                presumedType: ticket.presumedType,
-                actualType: null,
-                attachedFile: null,
-                mediaType: null,
-                resolverUser: null,
-                openerUser: null,
-                target: null,
-                customerPriority: null,
-                actualPriority: null,
-                visibility: null,
-                relationships: {},
-                difficulty: null,
-                eventRegister: [],
-                ticketComments: [],
-                state: "READY"
-            }
+        $scope.saveTicketWithTeam = function(ticket, team){
 
             //  HTTP PUT
-            httpService.put(restService.createTicket, ticket.id, payload)
+            httpService.put(restService.assignTicket, ticket.id+"/"+team.id)
                 .then(function(succResponse){
                         $scope.readUnassignedTicket();
+                        window.alert("Ticket assigned to " + team.username)
                     },
                     function(errReponse){
                         console.log(errReponse)
                     }
                 )
+
         };
 
     });

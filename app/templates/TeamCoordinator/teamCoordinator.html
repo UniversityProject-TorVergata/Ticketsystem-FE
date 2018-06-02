@@ -25,20 +25,17 @@
                 <select id="team" name="team"
                         ng-options="item as item.name
                         for
-                        item in teams track by item.id" ng-model="team.id"
-                        ng-init="team.id = teams[0]"
+                        item in teams track by item.id" ng-model="team"
+                        ng-init="team = teams[0]"
                 >
                 </select>
             </td>
             <td>
-                <button ng-click="saveTicketWithTeam(item)" class="btn btn-primary">Send</button>
+                <button ng-click="saveTicketWithTeam(item, team)" class="btn btn-primary">Send</button>
             </td>
         </tr>
         </tbody>
     </table>
-
-
-    <p>Go back to <a href="#/homeThirdPartyCustomer">Home</a></p>
 
 </div>
 </div>
