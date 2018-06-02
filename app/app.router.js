@@ -24,9 +24,19 @@ angular.module('ticketsystem.router', [])
                             return sourceTypes
                         })
                     },
+                    ticketTypes: function (model) {
+                      return model.getTicketTypes().then(function (ticketTypes) {
+                          return ticketTypes
+                      })
+                    },
                     tags: function(model) {
                         return model.getTags().then(function (tags) {
                             return tags
+                        })
+                    },
+                    categories: function(model) {
+                        return model.getCategories().then(function (categories) {
+                            return categories
                         })
                     }
                 }
@@ -45,9 +55,19 @@ angular.module('ticketsystem.router', [])
                             return sourceTypes
                         })
                     },
+                    ticketTypes: function (model) {
+                        return model.getTicketTypes().then(function (ticketTypes) {
+                            return ticketTypes
+                        })
+                    },
                     tags: function(model) {
                         return model.getTags().then(function (tags) {
                             return tags
+                        })
+                    },
+                    categories: function(model) {
+                        return model.getCategories().then(function (categories) {
+                            return categories
                         })
                     }
                 }

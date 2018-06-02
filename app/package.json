@@ -40,8 +40,13 @@
     "angular-ui-bootstrap": "^2.5.6",
     "angular-ui-router": "^1.0.18",
     "bootstrap": "^4.1.1",
+    "bootstrap-toggle": "^2.2.2",
     "font-awesome": "^4.7.0",
     "html5-boilerplate": "^5.3.0",
-    "moment": "^2.22.1"
+    "jquery": "^3.3.1",
+    "moment": "^2.22.1",
+    "npm": "^6.1.0",
+    "popper.js": "^1.14.3",
+    "ui-bootstrap": "^0.1.11"
   }
 }

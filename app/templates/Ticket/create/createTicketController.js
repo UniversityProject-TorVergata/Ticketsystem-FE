@@ -1,22 +1,28 @@
 'use strict';
 
-angular.module('ticketsystem.createTicket', ['ngRoute'])
-
-    .controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location,
-                                              products, sourceTypes, tags) {
+var app = angular.module('ticketsystem.createTicket', ['ngRoute', 'ui.bootstrap']);
+app.controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location, storageService, tags) {
         //  Select values
-        $scope.products = products;
-        $scope.sourceTypes = sourceTypes;
+        $scope.sourceTypes;
+        $scope.ticketTypes;
         $scope.tags = tags;
 
         //  Variables
         $scope.ticket = {};
         $scope.items = [];
+        $scope.targetList = [];
+        $scope.categories;
+        $scope.relatedCategories = [];
+        $scope.selectedCategories = [];
+        $scope.showCategoriesOnDisplay = false;
         $scope.selected = {};
         $scope.errorMessage = "";
         $scope.edit = [];
         $scope.editTicket = {};
         $scope.selectedTags = [];
+        $scope.tempTags = []; //used for temporary store tags data
+        $scope.tempCategories = [];
+
 
 
         /**
@@ -25,24 +31,62 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
         $scope.createTicket = function () {
 
             if (Object.keys($scope.selectedTags).length < 1) {
-                window.alert("Devi metterne 1 almeno STRONZO");
+                window.alert("Insert at least 1 tag");
             }
 
             else if (Object.keys($scope.selectedTags).length > 5) {
-                window.alert("Non piu di 5 BASTARDO");
+                window.alert("Insert max 5 tags");
             }
 
             else {
 
-                //  A new ticket has always state 'NEW'
-                $scope.ticket.state = "NEW";
+                /*
+                    A new ticket has always state 'NEW'
+                    but whe set this attribute to 'PENDING' because we have
+                    to see the ticket into the dispatcher window.
+                */
+                //  TODO Implements this mechanism on the backend side
+                $scope.ticket.state = "PENDING";
+
+                /*
+                    This change allows you to send the sourceType as a string to the backend
+                    instead of the entire json object
+                 */
+                //$scope.ticket.sourceType = $scope.ticket.sourceType.name;
+
+                //  As mentioned above for the sourceType
+                for (let i = 0; i < $scope.selectedTags.length; i++) {
+                    $scope.tempTags.push($scope.selectedTags[i].name);
+                }
+                $scope.ticket.tags = $scope.tempTags;
+                console.log($scope.selectedTags);
+
+                for (let a = 0; a < Object.keys($scope.selectedCategories).length; a++) {
+                    console.log($scope.selectedCategories[a]['name']);
+                    $scope.tempCategories.push($scope.selectedCategories[a].name);
+                }
+                $scope.ticket.target.categories = $scope.tempCategories;
+                //console.log($scope.selectedCategories);
+                console.log($scope.tempCategories);
+
+                //  Assign the ticket creation date
+                var date = Date.now();
+                $scope.ticket.timestamp = moment(date).format("DD/MM/YYYY");
+
+                /*
+                    Assign the ticket openerUser.
+                    IMPORTANT:
+                    you have to be logged in through the login window,
+                    otherwise the storageService cannot save user data
+                 */
+                $scope.ticket.openerUser = JSON.parse(storageService.get("userData"));
 
                 //  HTTP POST
                 httpService.post(restService.createTicket, $scope.ticket)
                     .then(function (data) {
                             window.alert("Ticket created");
                             console.log(data);
-                            $location.path('/home')
+                            $location.path('/homeCustomer')
                         },
                         function (err) {
                             window.alert("Error!")
@@ -75,6 +119,29 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                 });
         };
 
+
+        $scope.findTargets = function () {
+            //  HTTP GET
+            httpService.get(restService.readTargets)
+                .then(function (response) {
+                    $scope.targetList = response.data;
+                }, function error(response) {
+                    $scope.errorResponse = "Error Status: " + response.statusText;
+                });
+        };
+
+        $scope.showCategories = function (i) {
+            if (i == null) {
+                $scope.showCategoriesOnDisplay = false;
+            } else {
+                $scope.showCategoriesOnDisplay = true;
+                $scope.relatedCategories = i['categories'];
+            }
+        };
+
+
+
+
         /**
          *  Function deletes a selected ticket via an HTTP DELETE and updates the view of the table.
          *  @param id   id number of the ticket to be deleted.
@@ -99,6 +166,7 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
             $scope.edit = resetIndexes($scope.edit);
             $scope.editTicket = angular.copy(item);
             $scope.edit[index] = true;
+            $scope.index=index;
         };
 
         /**
@@ -120,25 +188,26 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
             //  Required ticket fields
             let payload = {
                 id: ticket.id,
-                timestamp: null,
+                timestamp: ticket.timestamp,
                 title: ticket.title,
                 description: ticket.description,
                 sourceType: ticket.sourceType,
                 presumedType: ticket.presumedType,
                 actualType: null,
-                attachedFile: null,
+                attachedFile: ticket.attachedFile,
                 mediaType: null,
                 resolverUser: null,
-                openerUser: null,
-                target: null,
-                customerPriority: null,
+                openerUser: ticket.openerUser,
+                target: ticket.target,
+                customerPriority: ticket.customerPriority,
                 actualPriority: null,
-                visibility: null,
+                visibility: ticket.visibility,
                 relationships: {},
                 difficulty: null,
                 eventRegister: [],
                 ticketComments: [],
-                state:ticket.state
+                state:ticket.state,
+                tags: ticket.tags
             }
 
             //  HTTP PUT
@@ -167,8 +236,91 @@ angular.module('ticketsystem.createTicket', ['ngRoute'])
                 result.click();
                 document.body.removeChild(result);
             })
+
         }
+
     });
+
+/**
+ *  Controller used for the modal
+ */
+app.controller("modalAccountFormController", ['$scope', '$modal', '$log',
+
+    /**
+     *  Function used to show the modal popup
+     *  @param $scope   general $scope
+     *  @param $modal   general $modal
+     *  @param $log     general $log
+     */
+    function ($scope, $modal, $log) {
+
+        //  showEditForm: modal for editing ticket
+        $scope.showEditForm = function (item) {
+            $scope.message = "Show Form Button Clicked";
+            console.log($scope.message);
+            $scope.formItem=item;   //  save the item to modify it
+
+            var modalInstance = $modal.open({
+                templateUrl: '/templates/Ticket/modal-form.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                resolve: {
+                    userForm: function () {
+                        return $scope.userForm;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+        //  showInfoForm:   modal for see the details about the ticket
+        $scope.showInfoForm = function (item) {
+            $scope.message = "Show Form Button Clicked";
+            console.log($scope.message);
+            $scope.formItem=item;
+            console.log(item);
+
+
+            var modalInstance = $modal.open({
+                templateUrl: '/templates/Ticket/modal-info.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                resolve: {
+                    userForm: function () {
+                        return $scope.userForm;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+    }]);
+
+var ModalInstanceCtrl = function ($scope, $modalInstance, userForm) {
+    $scope.form = {};
+    $scope.submitForm = function () {
+        if ($scope.form.userForm.$valid) {
+            console.log('user form is in scope');
+            $scope.saveTicket($scope.editTicket,$scope.index);
+            $modalInstance.close('closed');
+        } else {
+            console.log('userform is not in scope');
+        }
+    };
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+};
 
 /**
  *  Function resets the index used for the 'Modify' function.
@@ -180,4 +332,4 @@ function resetIndexes(arrayOfIndexes) {
         arrayOfIndexes[key] = false;
     })
     return arrayOfIndexes;
-}
+};

@@ -1,12 +1,12 @@
 # `angular-seed` — the seed for AngularJS apps
 
-This project is an application skeleton for a typical [AngularJS][angularjs] web app. You can use it
+This project is an application skeleton for a typical [AngularJS][angularjs] web navbar. You can use it
 to quickly bootstrap your angular webapp projects and dev environment for these projects.
 
 The seed contains a sample AngularJS application and is preconfigured to install the Angular
 framework and a bunch of development and testing tools for instant web development gratification.
 
-The seed app doesn't do much, just shows how to wire two controllers and views together.
+The seed navbar doesn't do much, just shows how to wire two controllers and views together.
 
 
 ## Getting Started
@@ -58,10 +58,10 @@ Behind the scenes this will also call `bower install`. After that, you should fi
 two new folders in your project.
 
 * `node_modules` - contains the npm packages for the tools we need
-* `app/bower_components` - contains the Angular framework files
+* `navbar/bower_components` - contains the Angular framework files
 
 *Note that the `bower_components` folder would normally be installed in the root folder but
-`angular-seed` changes this location through the `.bowerrc` file. Putting it in the `app` folder
+`angular-seed` changes this location through the `.bowerrc` file. Putting it in the `navbar` folder
 makes it easier to serve the files by a web server.*
 
 ### Run the Application
@@ -73,19 +73,19 @@ this server is:
 npm start
 ```
 
-Now browse to the app at [`localhost:8000/index.html`][local-app-url].
+Now browse to the navbar at [`localhost:8000/index.html`][local-navbar-url].
 
 
 ## Directory Layout
 
 ```
-app/                    --> all of the source files for the application
-  app.css               --> default stylesheet
-  components/           --> all app specific modules
+navbar/                    --> all of the source files for the application
+  navbar.css               --> default stylesheet
+  components/           --> all navbar specific modules
     version/              --> version related components
       version.js                 --> version module declaration and basic "version" value service
       version_test.js            --> "version" value service tests
-      version-directive.js       --> custom directive that returns the current app version
+      version-directive.js       --> custom directive that returns the current navbar version
       version-directive_test.js  --> version directive tests
       interpolate-filter.js      --> custom interpolation filter
       interpolate-filter_test.js --> interpolate filter tests
@@ -97,8 +97,8 @@ app/                    --> all of the source files for the application
     view2.html            --> the partial template
     view2.js              --> the controller logic
     view2_test.js         --> tests of the controller
-  app.js                --> main application module
-  index.html            --> app layout file (the main html template file of the app)
+  navbarbar.js                --> main application module
+  index.html            --> navbar layout file (the main html template file of the navbar)
   index-async.html      --> just like index.html, but loads js files asynchronously
 karma.conf.js         --> config file for running unit tests with Karma
 e2e-tests/            --> end-to-end tests
@@ -113,7 +113,7 @@ There are two kinds of tests in the `angular-seed` application: Unit tests and e
 
 ### Running Unit Tests
 
-The `angular-seed` app comes preconfigured with unit tests. These are written in [Jasmine][jasmine],
+The `angular-seed` navbar comes preconfigured with unit tests. These are written in [Jasmine][jasmine],
 which we run with the [Karma][karma] test runner. We provide a Karma configuration file to run them.
 
 * The configuration is found at `karma.conf.js`.
@@ -144,14 +144,14 @@ npm run test-single-run
 <a name="e2e-testing"></a>
 ### Running End-to-End Tests
 
-The `angular-seed` app comes with end-to-end tests, again written in [Jasmine][jasmine]. These tests
+The `angular-seed` navbar comes with end-to-end tests, again written in [Jasmine][jasmine]. These tests
 are run with the [Protractor][protractor] End-to-End test runner. It uses native events and has
 special features for Angular applications.
 
 * The configuration is found at `e2e-tests/protractor-conf.js`.
 * The end-to-end tests are found in `e2e-tests/scenarios.js`.
 
-Protractor simulates interaction with our web app and verifies that the application responds
+Protractor simulates interaction with our web navbar and verifies that the application responds
 correctly. Therefore, our web server needs to be serving up the application, so that Protractor can
 interact with it.
 
@@ -243,18 +243,18 @@ http-server -a localhost -p 8000
 ```
 
 Alternatively, you can choose to configure your own web server, such as Apache or Nginx. Just
-configure your server to serve the files under the `app/` directory.
+configure your server to serve the files under the `navbar/` directory.
 
 ### Running the App in Production
 
-This really depends on how complex your app is and the overall infrastructure of your system, but
-the general rule is that all you need in production are the files under the `app/` directory.
+This really depends on how complex your navbar is and the overall infrastructure of your system, but
+the general rule is that all you need in production are the files under the `navbar/` directory.
 Everything else should be omitted.
 
 Angular apps are really just a bunch of static HTML, CSS and JavaScript files that need to be hosted
 somewhere they can be accessed by browsers.
 
-If your Angular app is talking to the backend server via XHR or other means, you need to figure out
+If your Angular navbar is talking to the backend server via XHR or other means, you need to figure out
 what is the best way to host the static files to comply with the same origin policy if applicable.
 Usually this is done by hosting the files by the backend server or through reverse-proxying the
 backend server(s) and web server(s).
@@ -265,7 +265,7 @@ backend server(s) and web server(s).
 ### Travis CI
 
 [Travis CI][travis] is a continuous integration service, which can monitor GitHub for new commits to
-your repository and execute scripts such as building the app or running tests. The `angular-seed`
+your repository and execute scripts such as building the navbar or running tests. The `angular-seed`
 project contains a Travis configuration file, `.travis.yml`, which will cause Travis to run your
 tests when you push to GitHub.
 
@@ -286,7 +286,7 @@ For more information on AngularJS please check out [angularjs.org][angularjs].
 [jdk]: https://wikipedia.org/wiki/Java_Development_Kit
 [jdk-download]: http://www.oracle.com/technetwork/java/javase/downloads
 [karma]: https://karma-runner.github.io/
-[local-app-url]: http://localhost:8000/index.html
+[local-navbar-url]: http://localhost:8000/index.html
 [node]: https://nodejs.org/
 [npm]: https://www.npmjs.org/
 [protractor]: http://www.protractortest.org/

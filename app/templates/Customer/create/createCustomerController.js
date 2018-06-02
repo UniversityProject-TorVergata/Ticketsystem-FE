@@ -7,7 +7,7 @@ angular.module('ticketsystem.createCustomer', ['ngRoute'])
     .controller('createCustomerCtrl', function ($scope, restService, httpService, $location) {
 
         /**
-         *  Function creates a user.
+         *  Function creates a ticket.
          */
         $scope.creationUser = function () {
 

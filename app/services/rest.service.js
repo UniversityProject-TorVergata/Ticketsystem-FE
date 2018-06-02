@@ -21,7 +21,8 @@ angular.module('ticketsystem.restService', [])
             "getUser": CONNECTION.url + '/registered_user',
             "deleteUser": CONNECTION.url + '/registered_user',
             "updateUser": CONNECTION.url + '/registered_user',
-            "createProduct": CONNECTION.url + '/product'
+            "createProduct": CONNECTION.url + '/product',
+            "readTargets": CONNECTION.url + '/target'
         };
     })
     .service('httpService', function ($http) {
