@@ -28,7 +28,7 @@ angular.module('ticketsystem.accountCompanyAdmin', ['ngRoute'])
                 httpService.put(restService.updateUser, $scope.user.id, $scope.user, config)
                     .then(function (response) {
                             window.alert('Account Aggiornato con successo');
-                            $location.path('/homeCompanyAdmin');
+                            $location.path('/Admin');
                             storageService.save("userData",JSON.stringify($scope.user));
                             console.log(response)
                         },

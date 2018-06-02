@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ticketsystem.loginUser', ['ngRoute'])
+angular.module('ticketsystem.Login', ['ngRoute'])
 
-    .controller('LoginUserCtrl', function ($scope, restService, httpService, loginService, storageService,
+    .controller('LoginCtrl', function ($scope, restService, httpService, loginService, storageService,
                                            $location) {
 
         /**
@@ -34,8 +34,11 @@ angular.module('ticketsystem.loginUser', ['ngRoute'])
                             case "TeamCoordinator":
                                 url = "/assignTicket";
                                 break;
-                            case "CompanyAdmin":
-                                url = "/homeCompanyAdmin";
+                            case "Admin":
+                                url = "/Admin";
+                                break;
+                            case "TeamLeader":
+                                url = "/assignTicket";
                                 break;
                         }
 

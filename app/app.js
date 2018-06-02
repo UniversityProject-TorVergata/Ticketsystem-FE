@@ -25,8 +25,8 @@ angular.module('ticketsystem', [
     //  Directives
     'ticketsystem.directives',
 
-    // User
-    'ticketsystem.loginUser',
+    //  Starting page
+    'ticketsystem.Login',
 
     // Ticket
     'ticketsystem.createTicket',
@@ -40,7 +40,7 @@ angular.module('ticketsystem', [
     'ticketsystem.accountThirdPartyCustomer',
 
     //CompanyAdmin
-    'ticketsystem.homeCompanyAdmin',
+    'ticketsystem.homeAdmin',
     'ticketsystem.createProduct',
     'ticketsystem.accountCompanyAdmin',
 

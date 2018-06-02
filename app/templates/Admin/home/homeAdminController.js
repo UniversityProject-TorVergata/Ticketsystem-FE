@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ticketsystem.homeCompanyAdmin', ['ngRoute'])
+angular.module('ticketsystem.homeAdmin', ['ngRoute'])
 
-    .controller('homeCompanyAdminCtrl', function ($scope, restService, httpService,$location,storageService) {
+    .controller('homeAdminCtrl', function ($scope, restService, httpService,$location,storageService) {
 
 
         $scope.insertCustomer = function () {
@@ -11,7 +11,7 @@ angular.module('ticketsystem.homeCompanyAdmin', ['ngRoute'])
 
 
         $scope.insertProduct = function () {
-            $location.url("/createProduct");
+            $location.url("/product");
         };
         $scope.findProduct = function () {
             $location.url("/listProduct");

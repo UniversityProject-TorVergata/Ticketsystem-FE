@@ -3,6 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=0">
+
     <title>Ticket System</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,10 +43,10 @@
 
     <script src="directives/custom-changes.directive.js"></script>
 
-    <script src="templates/loginUser/loginUserController.js"></script>
+    <script src="templates/Login/Login.js"></script>
     <script src="templates/Customer/create/createCustomerController.js"></script>
-    <script src="templates/createProduct/createProductController.js"></script>
-    <script src="templates/homeCompanyAdmin/homeCompanyAdminController.js"></script>
+    <script src="templates/Admin/product/createProductController.js"></script>
+    <script src="templates/Admin/home/homeAdminController.js"></script>
     <script src="templates/Ticket/create/createTicketController.js"></script>
     <script src="templates/home/homeController.js"></script>
     <script src="templates/Customer/home/homeCustomerController.js"></script>
@@ -64,9 +66,9 @@
     <script src="services/storage.service.js"></script>
 
     <script src="filters/string.filter.js"></script>
-
 </head>
-    <body>
+
+<body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">
             <i class="fa fa-ticket fa-fw" aria-hidden="true"></i>
@@ -74,20 +76,6 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
-                    <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a href="#">Page 1-1</a></li>
-                    <li><a href="#">Page 1-2</a></li>
-                    <li><a href="#">Page 1-3</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Page 2</a></li>
-            <li><a href="#">Page 3</a></li>
-        </ul>
     </nav>
     <div ng-view align="left"></div>
     </body>

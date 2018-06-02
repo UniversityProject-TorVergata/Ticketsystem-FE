@@ -17,7 +17,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
 
         /*
             Funzione per creare un nuovo prodotto.
-            E' invocata alla pressione del tasto Insert nella view createProduct.html
+            E' invocata alla pressione del tasto Insert nella view product.html
             Un JSON con i dati del nuovo prodotto è inviato con metodo POST al Back-End
             che provvederà a salvarlo nel DB.
 
@@ -40,7 +40,7 @@ angular.module('ticketsystem.createProduct', ['ngRoute'])
                 httpService.post(restService.createProduct, $scope.product, config).then(function (response) {
 
                     window.alert("Product submitted with success!");
-                    $location.url("/homeCompanyAdmin");
+                    $location.url("/Admin");
 
                 }, function error(response) {
                     window.alert("Error while submitting product  ");

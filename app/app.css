@@ -23,3 +23,22 @@
   content: "|";
   padding-right: 0.3em;
 }
+
+* {
+  box-sizing: border-box;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+  float: right;
+  width: 40%;
+  padding: 10%;
+  height: auto; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}

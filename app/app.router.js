@@ -6,17 +6,17 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/Customer/create/createCustomer.html',
                 controller: 'createCustomerCtrl'
             })
-            .when('/loginUser', {
-                templateUrl: 'templates/loginUser/loginUser.html',
-                controller: 'LoginUserCtrl'
+            .when('/Login', {
+                templateUrl: 'templates/Login/Login.html',
+                controller: 'LoginCtrl'
             })
             .when('/Ticket', {
                 templateUrl: 'templates/Ticket/create/createTicket.html',
                 controller:  'CreateTicketCtrl',
                 resolve: {
-                    products: function (model) {
-                        return model.getProducts().then(function (products) {
-                            return products
+                    targets: function (model) {
+                        return model.getTargets().then(function (targets) {
+                            return targets
                         })
                     },
                     sourceTypes: function (model) {
@@ -37,6 +37,16 @@ angular.module('ticketsystem.router', [])
                     categories: function(model) {
                         return model.getCategories().then(function (categories) {
                             return categories
+                        })
+                    },
+                    priorities: function(model) {
+                        return model.getPriority().then(function (priorities) {
+                            return priorities
+                        })
+                    },
+                    visibilities: function(model) {
+                        return model.getVisibilities().then(function (visibilities) {
+                            return visibilities
                         })
                     }
                 }
@@ -81,16 +91,16 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/accountThirdPartyCustomer/accountThirdPartyCustomer.html',
                 controller:  'accountThirdPartyCustomerCtrl'
             })
-            .when('/createProduct', {
-                templateUrl: 'templates/createProduct/createProduct.html',
+            .when('/product', {
+                templateUrl: 'templates/Admin/product/createProduct.html',
                 controller:  'createProductCtrl'
             })
             .when('/listProduct', {
-                templateUrl: 'templates/createProduct/listProduct.html',
+                templateUrl: 'templates/Admin/product/listProduct.html',
                 controller:  'createProductCtrl'
             })
-            .when('/homeCompanyAdmin', {
-                templateUrl: 'templates/homeCompanyAdmin/homeCompanyAdmin.html',
+            .when('/Admin', {
+                templateUrl: 'templates/Admin/home/homeAdmin.html',
                 controller:  'homeCompanyAdminCtrl'
             })
 
@@ -99,11 +109,11 @@ angular.module('ticketsystem.router', [])
                 controller:  'accountCompanyAdminCtrl'
             })
             .when('/listProduct', {
-                templateUrl: 'templates/createProduct/listProduct.html',
+                templateUrl: 'templates/Admin/product/listProduct.html',
                 controller:  'createProductCtrl'
             })
             .when('/modifyProduct', {
-                templateUrl: 'templates/createProduct/modifyProduct.html',
+                templateUrl: 'templates/Admin/product/modifyProduct.html',
                 controller:  'createProductCtrl'
             })
             .when('/assignTicket', {
@@ -117,7 +127,7 @@ angular.module('ticketsystem.router', [])
                     }
                 }
             })
-            .otherwise({redirectTo: '/loginUser'});
+            .otherwise({redirectTo: '/Login'});
 
         $locationProvider.html5Mode({
             enabled: false,
