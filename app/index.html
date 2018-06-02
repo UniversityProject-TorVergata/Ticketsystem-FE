@@ -25,7 +25,7 @@
     <script src="templates/Customer/create/createCustomerController.js"></script>
     <script src="templates/createProduct/createProductController.js"></script>
     <script src="templates/homeCompanyAdmin/homeCompanyAdminController.js"></script>
-    <script src="templates/Ticket/createTicketController.js"></script>
+    <script src="templates/Ticket/create/createTicketController.js"></script>
     <script src="templates/home/homeController.js"></script>
     <script src="templates/Customer/home/homeCustomerController.js"></script>
     <script src="templates/accountThirdPartyCustomer/accountThirdPartyCustomerController.js"></script>
@@ -54,6 +54,20 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1
+                    <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Page 1-1</a></li>
+                    <li><a href="#">Page 1-2</a></li>
+                    <li><a href="#">Page 1-3</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+        </ul>
     </nav>
     <div ng-view align="left"></div>
     </body>
