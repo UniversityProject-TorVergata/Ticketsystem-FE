@@ -14,7 +14,7 @@
             <th>Title</th>
             <th>Description</th>
             <th>Action</th>
-            <th>Team Leader</th>
+            <th>Team Leader - Problem Area</th>
             <th></th>
 
         </tr>
@@ -30,9 +30,9 @@
             </td>
             <td>
                 <select id="team" name="team"
-                        ng-options="item as item.name
+                        ng-options='item as (item.username + " - " + item.team.problemArea)
                         for
-                        item in teams track by item.id" ng-model="team"
+                        item in teams track by item.id' ng-model="team"
                         ng-init="team = teams[0]"
                 >
                 </select>
