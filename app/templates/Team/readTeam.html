@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ticket List</title>
+</head>
+
+<body>
+<div class="container">
+
+    <table st-table="rowCollection" class="table table-striped" data-ng-init="readTeams()">
+
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Problem Area</th>
+            <!-- <th>Team Leader</th>
+            <th>Team Members</th>
+            <th></th>
+            <th></th> -->
+            <th></th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr ng-repeat="item in teamsList">
+            <td data-sortable="true">#{{item.id}}</a></td>
+            <td>{{item.name}}</td>
+            <td>{{item.problemArea}}</td>
+
+            <!-- <td>{{item.teamLeader}}</td>
+            <td>{{item.teamMemberList}}</td> -->
+
+            <td>
+                <button ng-click="infoTeam(item.id)" class="btn btn-info btn-xs">
+                    <i class="fa fa-info"></i>
+                </button>
+
+                <!-- Modify la inseriamo nella modal, dove visualizziamo anche team leader e members
+                <button ng-click="modifyTeam(item,$index)" class="btn btn-xs btn-warning">
+                    <i class="fas fa-pen-square"></i>
+                </button> -->
+
+                <button ng-click="deleteTeam(item.id)" class="btn btn-xs btn-danger">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <p>Go back to <a href="#/homeCustomer">Home</a></p>
+
+</div>
+</div>
+
+</body>
+</html>

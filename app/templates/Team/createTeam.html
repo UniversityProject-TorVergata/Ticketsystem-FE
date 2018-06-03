@@ -1,0 +1,58 @@
+<div class="container">
+
+    <h1><span class="fa fa-users"> Create team: </span></h1>
+
+    <div class="row">
+        <form>
+            <div class="form-group">
+                <label>Team Name: </label><br>
+                <input type="text" style="font-weight: bold;" class="form-control" name="name" ng-model="team.name">
+            </div>
+            <br>
+
+            <div class="form-group">
+                <Label>Problem Area:</Label><br>
+                <select name="name"
+                        ng-options="area as area.name
+                        for
+                        area in problemArea track by area.id"
+                        ng-model="team.problemArea"
+                        ng-init="team.problemArea = problemArea[0].name">
+                </select>
+                </select><br>
+            </div>
+
+            <div class="form-group">
+                <Label>Team Leader:</Label><br>
+                <select id="leader" name="teamLeader" data-ng-init="readTeamLeaders()"
+                        ng-options="l as l.name + ' ' + l.surname
+                        for
+                        l in leadersList track by l.id"
+                        ng-model="team.teamLeader"
+                        ng-init="team.teamLeader = leadersList[0]">
+                </select>
+            </div>
+            <br>
+
+            <div class="form-group">
+                <label>Team Members:</label><br>
+                <select id="member" name="member" data-ng-init="readTeamMembers()"
+                        ng-options="m as m.name + ' ' + m.surname
+                        for
+                        m in membersList track by m.id"
+                        ng-model="member"
+                        ng-init="member = membersList[0]">
+                </select>
+            </div>
+            <br>
+
+            <div>
+                <button ng-click="createTeam(team, member)" class="btn btn-warning btn-lg">Create</button>
+            </div>
+            </form>
+        </div>
+
+    <hr>
+    <p>Go back to <a href="#/homeCustomer">Home</a></p>
+
+</div>
