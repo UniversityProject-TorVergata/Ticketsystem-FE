@@ -42,3 +42,10 @@
   display: table;
   clear: both;
 }
+
+.bigColumn {
+  float: left;
+  width: 80%;
+  padding: 10%;
+  height: auto;
+}

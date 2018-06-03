@@ -5,8 +5,8 @@
     <title>Ticket List</title>
 </head>
 <body>
-<div class="container">
 
+<div class="container">
 
     <table st-table="rowCollection" class="table table-striped" data-ng-init="readTicket()">
         <thead>
@@ -21,8 +21,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in items">
-            <td data-sortable="true">#{{item.id}}</a></td>
+        <tr ng-repeat="item in items"
+            ng-show="item.state !='TRASHED'">
+            <td>#{{item.id}}</a></td>
             <td>{{item.title}}</td>
             <td>{{item.timestamp}}</td>
             <td>{{item.presumedType | formatEnumeration: item.ticketType}}</td>
@@ -43,12 +44,10 @@
                     <i class="fa fa-trash"></i>
                 </button>
             </td>
-
-
-            <td/>
         </tr>
         </tbody>
     </table>
+
 
     <p>Go back to <a href="#/homeCustomer">Home</a></p>
 
