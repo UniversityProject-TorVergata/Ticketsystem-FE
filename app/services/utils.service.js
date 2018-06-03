@@ -1,3 +1,6 @@
+/**
+ *  This module manages utility functions.
+ */
 angular.module('ticketsystem.utilService', [])
     .service('util', function () {
             return {
@@ -24,7 +27,7 @@ angular.module('ticketsystem.utilService', [])
                         //  Event handler executed when the error event is fired
                         reader.onerror = function (error) {
                             console.log('Error: ', error);
-                            reject('rejected',error)
+                            reject('rejected', error)
                         };
                     })
                 },
