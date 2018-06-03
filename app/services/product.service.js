@@ -5,14 +5,14 @@ angular.module('ticketsystem.productService',[])
     .service('productService',[
         function() {
 
-            this.product = null;
+            this.target = null;
 
             this.set= function(obj){
-                this.product = obj;
+                this.target = obj;
             };
 
             this.get = function(){
-                return this.product;
+                return this.target;
             };
 
 

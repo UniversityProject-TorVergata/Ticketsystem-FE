@@ -91,34 +91,30 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/TeamCoordinator/home/homeTeamCoordinator.html',
                 controller:  'homeTeamCoordinatorCtrl'
             })
-            .when('/accountThirdPartyCustomer', {
-                templateUrl: 'templates/accountThirdPartyCustomer/accountThirdPartyCustomer.html',
-                controller:  'accountThirdPartyCustomerCtrl'
+            .when('/accountCustomer', {
+                templateUrl: 'templates/Customer/account/accountCustomer.html',
+                controller:  'accountCustomerCtrl'
             })
-            .when('/product', {
-                templateUrl: 'templates/Admin/product/createProduct.html',
-                controller:  'createProductCtrl'
+            .when('/createTarget', {
+                templateUrl: 'templates/Admin/target/createTarget.html',
+                controller:  'createTargetCtrl'
             })
-            .when('/listProduct', {
-                templateUrl: 'templates/Admin/product/listProduct.html',
-                controller:  'createProductCtrl'
+            .when('/listTarget', {
+                templateUrl: 'templates/Admin/target/listTarget.html',
+                controller:  'createTargetCtrl'
             })
-            .when('/Admin', {
+            .when('/modifyTarget', {
+                templateUrl: 'templates/Admin/target/modifyTarget.html',
+                controller:  'createTargetCtrl'
+            })
+            .when('/homeAdmin', {
                 templateUrl: 'templates/Admin/home/homeAdmin.html',
-                controller:  'homeCompanyAdminCtrl'
+                controller:  'homeAdminCtrl'
             })
 
-            .when('/accountCompanyAdmin', {
-                templateUrl: 'templates/accountCompanyAdmin/accountCompanyAdmin.html',
-                controller:  'accountCompanyAdminCtrl'
-            })
-            .when('/listProduct', {
-                templateUrl: 'templates/Admin/product/listProduct.html',
-                controller:  'createProductCtrl'
-            })
-            .when('/modifyProduct', {
-                templateUrl: 'templates/Admin/product/modifyProduct.html',
-                controller:  'createProductCtrl'
+            .when('/accountAdmin', {
+                templateUrl: 'templates/Admin/account/accountAdmin.html',
+                controller:  'accountAdminCtrl'
             })
             .when('/assignTicket', {
                 templateUrl: 'templates/TeamCoordinator/list/teamCoordinator.html',

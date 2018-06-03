@@ -2,23 +2,17 @@
 
 angular.module('ticketsystem.homeAdmin', ['ngRoute'])
 
-    .controller('homeAdminCtrl', function ($scope, restService, httpService,$location,storageService) {
+    .controller('homeAdminCtrl', function ($scope, restService, httpService, $location, storageService) {
 
-
-        $scope.insertCustomer = function () {
-            $location.url("/create");
+        $scope.insertTarget = function () {
+            $location.url("/createTarget");
         };
-
-
-        $scope.insertProduct = function () {
-            $location.url("/product");
-        };
-        $scope.findProduct = function () {
-            $location.url("/listProduct");
+        $scope.findTarget = function () {
+            $location.url("/listTarget");
         };
 
         $scope.viewAccount = function () {
-            $location.url("/accountCompanyAdmin");
+            $location.url("/accountAdmin");
         }
 
         $scope.logout = function () {

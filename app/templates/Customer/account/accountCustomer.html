@@ -2,7 +2,7 @@
 
     <div class="col-sm-6 col-sm-offset-3">
         <br>
-        <h1><span class="fa fa-sign-in"></span> Informazioni Account</h1>
+        <h1><span class="fa fa-sign-in"></span> Account Information</h1>
 
 
         <form>
@@ -35,15 +35,15 @@
                 <input type="password" class="form-control" name="password" ng-readonly="disabledReadonly" ng-model="user.password">
             </div>
 
-            <button ng-click="changeAccountInformation()" ng-disabled="disabledButton" class="btn btn-primary btn-lg">Modifica</button>
-            <button ng-click="deleteAccount()" class="btn btn-danger btn-lg">Cancella</button>
+            <button ng-click="changeAccountInformation()" ng-disabled="disabledButton" class="btn btn-primary btn-lg">Edit</button>
+            <button ng-click="deleteAccount()" class="btn btn-danger btn-lg">Delete</button>
             <br><br>
-            <label>Abilita Modifica: <input type="checkbox" ng-click="disabledButtonHandler()"></label><br/>
+            <label>Enable Edit: <input type="checkbox" ng-click="disabledButtonHandler()"></label><br/>
 
         </form>
 
         <hr>
-        <p>Go back to <a href="#/homeCompanyAdmin">Home</a></p>
+        <p>Go back to <a href="#/homeCustomer">Home</a></p>
 
     </div>
 

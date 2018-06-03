@@ -13,7 +13,7 @@ angular.module('ticketsystem.homeCustomer', ['ngRoute'])
         }
 
         $scope.viewAccount = function () {
-            $location.url("/accountThirdPartyCustomer");
+            $location.url("/accountCustomer");
         }
 
         $scope.logout = function () {

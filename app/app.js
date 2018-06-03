@@ -37,12 +37,12 @@ angular.module('ticketsystem', [
     // Customer
     'ticketsystem.homeCustomer',
     'ticketsystem.createCustomer',
-    'ticketsystem.accountThirdPartyCustomer',
+    'ticketsystem.accountCustomer',
 
     //CompanyAdmin
     'ticketsystem.homeAdmin',
-    'ticketsystem.createProduct',
-    'ticketsystem.accountCompanyAdmin',
+    'ticketsystem.createTarget',
+    'ticketsystem.accountAdmin',
 
     //Factories
     'ticketsystem.storageService',

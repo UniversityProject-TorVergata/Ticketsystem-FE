@@ -39,7 +39,7 @@ angular.module('ticketsystem.restService', [])
             "updateUser": CONNECTION.url + '/registered_user',
 
             //  TODO cancellabile?
-            "createProduct": CONNECTION.url + '/product',
+            "createTarget": CONNECTION.url + '/target',
 
             //  Target
             "readTargets": CONNECTION.url + '/target'

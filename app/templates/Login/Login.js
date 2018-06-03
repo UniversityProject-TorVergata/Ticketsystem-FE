@@ -35,7 +35,7 @@ angular.module('ticketsystem.Login', ['ngRoute'])
                                 url = "/homeTeamCoordinator";
                                 break;
                             case "Admin":
-                                url = "/Admin";
+                                url = "/homeAdmin";
                                 break;
                             case "TeamLeader":
                                 url = "/assignTicket";

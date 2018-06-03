@@ -18,8 +18,10 @@ angular.module('ticketsystem.createCustomer', ['ngRoute'])
                 angular.isUndefined($scope.user.address) ||
                 angular.isUndefined($scope.user.email) ||
                 angular.isUndefined($scope.user.username) ||
-                angular.isUndefined($scope.user.password))
+                angular.isUndefined($scope.user.password)) {
+
                     window.alert('Some fields are missing!')
+            }
             else {
 
                 var date = Date.now();
