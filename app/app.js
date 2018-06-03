@@ -48,6 +48,7 @@ angular.module('ticketsystem', [
     'ticketsystem.storageService',
 
     //  Team Coordinator
+    'ticketsystem.homeTeamCoordinator',
     'ticketsystem.assignTeam',
 
     'isteven-multi-select',

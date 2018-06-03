@@ -2,13 +2,11 @@
 
 angular.module('ticketsystem.assignTeam', ['ngRoute'])
 
-    .controller('AssignTeamCtrl', function ($scope, restService, httpService, util, $location, teams) {
+    .controller('AssignTeamCtrl', function ($scope, restService, httpService, util, $location, teams, priorities) {
 
         //  Select values
         $scope.teams = teams;
-
-        //  Variables
-        $scope.items = [];
+        $scope.priorities = priorities;
 
         /**
          *  Function reads all the PENDING tickets in the database via an HTTP GET and
@@ -24,24 +22,34 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
                 });
         };
 
-        /** TODO cambiare
-         *  Function saves a modified ticket via an HTTP PUT in the database and updates the view of the table.
+        /**
+         *  Function saves a modified ticket via an HTTP PUT in the database and it
+         *  assigns the ticket to a Team Leader.
          *  @param item     selected item
          *  @param index    iterator offset
          */
-        $scope.saveTicketWithTeam = function(ticket, team){
+        $scope.saveTicketWithTeam = function (ticket, team, actualPriority) {
+            console.log(ticket);
+            ticket.actualPriority = actualPriority.name;
 
             //  HTTP PUT
-            httpService.put(restService.assignTicket, ticket.id+"/"+team.id)
-                .then(function(succResponse){
-                        $scope.readUnassignedTicket();
-                        window.alert("Ticket assigned to " + team.username)
+            httpService.put(restService.createTicket, ticket.id, ticket)
+                .then(function (succResponse) {
+                        //  HTTP PUT
+                        httpService.put(restService.assignTicket, ticket.id+"/"+team.id)
+                            .then(function(succResponse){
+                                    $scope.readUnassignedTicket();
+                                    window.alert("Ticket assigned to " + team.username)
+                                },
+                                function(errReponse){
+                                    console.log(errReponse)
+                                }
+                            )
                     },
-                    function(errReponse){
+                    function (errReponse) {
                         console.log(errReponse)
                     }
                 )
-
         };
 
     });
@@ -63,7 +71,7 @@ app.controller("modalAccountFormController", ['$scope', '$modal', '$log',
         $scope.showEditForm = function (item) {
             $scope.message = "Show Form Button Clicked";
             console.log($scope.message);
-            $scope.formItem=item;   //  save the item to modify it
+            $scope.formItem = item;   //  save the item to modify it
 
             var modalInstance = $modal.open({
                 templateUrl: '/templates/Ticket/modal-form.html',
@@ -86,7 +94,7 @@ app.controller("modalAccountFormController", ['$scope', '$modal', '$log',
         $scope.showInfoForm = function (item) {
             $scope.message = "Show Form Button Clicked";
             console.log($scope.message);
-            $scope.formItem=item;
+            $scope.formItem = item;
             console.log(item);
 
 
@@ -115,7 +123,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, userForm) {
     $scope.submitForm = function () {
         if ($scope.form.userForm.$valid) {
             console.log('user form is in scope');
-            $scope.saveTicket($scope.editTicket,$scope.index);
+            $scope.saveTicket($scope.editTicket, $scope.index);
             $modalInstance.close('closed');
         } else {
             console.log('userform is not in scope');

@@ -87,6 +87,10 @@ angular.module('ticketsystem.router', [])
                 templateUrl: 'templates/Customer/home/homeCustomer.html',
                 controller:  'homeCustomerCtrl'
             })
+            .when('/homeTeamCoordinator', {
+                templateUrl: 'templates/TeamCoordinator/home/homeTeamCoordinator.html',
+                controller:  'homeTeamCoordinatorCtrl'
+            })
             .when('/accountThirdPartyCustomer', {
                 templateUrl: 'templates/accountThirdPartyCustomer/accountThirdPartyCustomer.html',
                 controller:  'accountThirdPartyCustomerCtrl'
@@ -117,14 +121,19 @@ angular.module('ticketsystem.router', [])
                 controller:  'createProductCtrl'
             })
             .when('/assignTicket', {
-                templateUrl: 'templates/TeamCoordinator/teamCoordinator.html',
+                templateUrl: 'templates/TeamCoordinator/list/teamCoordinator.html',
                 controller:  'AssignTeamCtrl',
                 resolve: {
                     teams: function (model) {
                         return model.getTeams().then(function (teams) {
                             return teams
                         })
-                    }
+                    },
+                    priorities: function(model) {
+                        return model.getPriority().then(function (priorities) {
+                            return priorities
+                        })
+                    },
                 }
             })
             .otherwise({redirectTo: '/Login'});
