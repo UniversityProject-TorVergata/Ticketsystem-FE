@@ -1,49 +1,45 @@
 'use strict';
 
 var app = angular.module('ticketsystem.createTicket', ['ngRoute', 'ui.bootstrap']);
-
-app.controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location, storageService,
-                                             categories, priorities, tags, targets, visibilities) {
-    //  TODO cancellare
+app.controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location, storageService, tags) {
+    //  Select values
+    $scope.sourceTypes;
+    $scope.ticketTypes;
     $scope.tags = tags;
-    $scope.priorities = priorities;
-    $scope.targets = targets;
-    $scope.categories = categories;
-    $scope.visibilities = visibilities;
 
     //  Variables
-    let showCategoriesOnDisplay = false;
     $scope.ticket = {};
     $scope.items = [];
     $scope.targetList = [];
-
+    $scope.categories;
     $scope.relatedCategories = [];
     $scope.selectedCategories = [];
-
+    $scope.showCategoriesOnDisplay = false;
     $scope.selected = {};
     $scope.errorMessage = "";
     $scope.edit = [];
     $scope.editTicket = {};
+    $scope.selectedTags = [];
+    $scope.tempTags = []; //used for temporary store tags data
     $scope.tempCategories = [];
+
 
 
     /**
      *  Function creates a ticket in the database via an HTTP POST.
      */
-    $scope.createTicket = function (ticket, selectedTags, selectedCategories, priority, visibility) {
+    $scope.createTicket = function () {
 
-        ticket.customerPriority = priority.name;
-        ticket.visibility = visibility.name;
-
-
-        if (Object.keys(selectedTags).length < 1 &&
-            Object.keys(selectedTags).length > 5) {
-            window.alert("Insert at least 1 tag and max 5 tags");
+        if (Object.keys($scope.selectedTags).length < 1) {
+            window.alert("Insert at least 1 tag");
         }
+
+        else if (Object.keys($scope.selectedTags).length > 5) {
+            window.alert("Insert max 5 tags");
+        }
+
         else {
 
-            let tempTags = [];
-            let tempCategories = [];
             /*
                 A new ticket has always state 'NEW'
                 but whe set this attribute to 'PENDING' because we have
@@ -59,20 +55,23 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
             //$scope.ticket.sourceType = $scope.ticket.sourceType.name;
 
             //  As mentioned above for the sourceType
-            for (let i = 0; i < selectedTags.length; i++)
-                tempTags.push(selectedTags[i].name);
-            ticket.tags = tempTags;
+            for (let i = 0; i < $scope.selectedTags.length; i++) {
+                $scope.tempTags.push($scope.selectedTags[i].name);
+            }
+            $scope.ticket.tags = $scope.tempTags;
+            console.log($scope.selectedTags);
 
-            JSON.stringify(selectedCategories)
-
-            for (let a = 0; a < Object.keys(selectedCategories).length; a++)
-                tempCategories.push(selectedCategories[a].name);
-
-            ticket.target.categories = tempCategories;
+            for (let a = 0; a < Object.keys($scope.selectedCategories).length; a++) {
+                console.log($scope.selectedCategories[a]['name']);
+                $scope.tempCategories.push($scope.selectedCategories[a].name);
+            }
+            $scope.ticket.target.categories = $scope.tempCategories;
+            //console.log($scope.selectedCategories);
+            console.log($scope.tempCategories);
 
             //  Assign the ticket creation date
             var date = Date.now();
-            ticket.timestamp = moment(date).format("DD/MM/YYYY");
+            $scope.ticket.timestamp = moment(date).format("DD/MM/YYYY");
 
             /*
                 Assign the ticket openerUser.
@@ -80,9 +79,7 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
                 you have to be logged in through the login window,
                 otherwise the storageService cannot save user data
              */
-            ticket.openerUser = JSON.parse(storageService.get("userData"));
-
-            console.log(ticket);
+            $scope.ticket.openerUser = JSON.parse(storageService.get("userData"));
 
             //  HTTP POST
             httpService.post(restService.createTicket, $scope.ticket)
@@ -122,14 +119,27 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
             });
     };
 
-    $scope.showCategories = function (target) {
-        if (target == null) {
+
+    $scope.findTargets = function () {
+        //  HTTP GET
+        httpService.get(restService.readTargets)
+            .then(function (response) {
+                $scope.targetList = response.data;
+            }, function error(response) {
+                $scope.errorResponse = "Error Status: " + response.statusText;
+            });
+    };
+
+    $scope.showCategories = function (i) {
+        if (i == null) {
             $scope.showCategoriesOnDisplay = false;
         } else {
             $scope.showCategoriesOnDisplay = true;
-            $scope.relatedCategories = target['categories'];
+            $scope.relatedCategories = i['categories'];
         }
     };
+
+
 
 
     /**
@@ -156,7 +166,7 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
         $scope.edit = resetIndexes($scope.edit);
         $scope.editTicket = angular.copy(item);
         $scope.edit[index] = true;
-        $scope.index = index;
+        $scope.index=index;
     };
 
     /**
@@ -173,7 +183,7 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
      *  @param item     selected item
      *  @param index    iterator offset
      */
-    $scope.saveTicket = function (ticket, index) {
+    $scope.saveTicket = function(ticket,index){
 
         //  Required ticket fields
         let payload = {
@@ -196,19 +206,19 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
             difficulty: null,
             eventRegister: [],
             ticketComments: [],
-            state: ticket.state,
+            state:ticket.state,
             tags: ticket.tags
         }
 
         //  HTTP PUT
-        httpService.put(restService.createTicket, ticket.id, payload)
-            .then(function (succResponse) {
+        httpService.put(restService.createTicket,ticket.id, payload)
+            .then( function(succResponse){
                     $scope.items[index] = angular.copy(ticket);
-                    $scope.editTicket = {};
+                    $scope.editTicket={};
                     $scope.edit = resetIndexes($scope.edit);
                     $scope.readTicket();
                 },
-                function (errReponse) {
+                function(errReponse){
                     console.log(errReponse)
                 }
             )
@@ -248,7 +258,7 @@ app.controller("modalAccountFormController", ['$scope', '$modal', '$log',
         $scope.showEditForm = function (item) {
             $scope.message = "Show Form Button Clicked";
             console.log($scope.message);
-            $scope.formItem = item;   //  save the item to modify it
+            $scope.formItem=item;   //  save the item to modify it
 
             var modalInstance = $modal.open({
                 templateUrl: '/templates/Ticket/modal-form.html',
@@ -271,7 +281,7 @@ app.controller("modalAccountFormController", ['$scope', '$modal', '$log',
         $scope.showInfoForm = function (item) {
             $scope.message = "Show Form Button Clicked";
             console.log($scope.message);
-            $scope.formItem = item;
+            $scope.formItem=item;
             console.log(item);
 
 
@@ -300,7 +310,7 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, userForm) {
     $scope.submitForm = function () {
         if ($scope.form.userForm.$valid) {
             console.log('user form is in scope');
-            $scope.saveTicket($scope.editTicket, $scope.index);
+            $scope.saveTicket($scope.editTicket,$scope.index);
             $modalInstance.close('closed');
         } else {
             console.log('userform is not in scope');

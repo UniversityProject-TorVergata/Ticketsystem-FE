@@ -1,9 +1,146 @@
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create three equal columns that floats next to each other */
+        .column {
+            float: right;
+            width: 40%;
+            padding: 10%;
+            height: auto; /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    </style>
+</head>
+
+
 <div class="container">
 
-    <h1><span class="fa fa-sign-in"> Create ticket: </span></h1>
+    <h1><span class="fa fa-sign-in">Create ticket: </span></h1>
 
     <div class="row">
-        <div class="col-sm-6">
+        <div class="column">
+
+            <form>
+                <div class="form-group">
+                    <!--<label for="target">Select Product:</label><br>
+                    <select id="target" name="target"
+                            ng-options="item as item.name
+                            for
+                            item in products track by item.id" ng-model="ticket.target"
+                            ng-init="ticket.target = products[0]"
+                    >
+                    </select><br>-->
+                </div>
+                <!--
+                <div class="form-group">
+                    <label>Source type:</label><br>
+                    <select id="sourceType" name="sourceType"
+                            ng-options="item as item.name | formatEnumeration: item.name
+                        for
+                        item in sourceTypes track by item.id" ng-model="ticket.sourceType"
+                            ng-init="ticket.sourceType = sourceTypes[0]"
+                    >
+                    </select><br>
+                </div>
+                -->
+
+                <div class="form-group">
+                    <Label>Target:</Label><br>
+                    <select id="targets" name="targets" data-ng-init="findTargets()"
+                            ng-options="t as t.name
+                                        for
+                                        t in targetList track by t.id"
+                            ng-model="ticket.target"
+                            ng-init="ticket.target = targetList[0]"
+                            ng-change="showCategories(ticket.target)">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Category:</label><br>
+                    <select name="presumedType"
+                            ng-options="t
+                                        for
+                                        t in relatedCategories"
+                            ng-model="ticket.presumedType">
+                    </select><br>
+                </div>
+
+                <!--
+                <div class="form-group">
+                    <Label>Categories:</Label>
+                    <select id="cat" name="cat" data-ng-init="relatedCategories"
+                            ng-options="c as c.name for c in relatedCategories"
+                            ng-model="ticket.target['categories']"
+                            ng-show="showCategoriesOnDisplay"
+                            ng-hide="!showCategoriesOnDisplay">
+                    </select>
+                </div>
+                -->
+
+                <!--
+                <label>Categories:</label>
+                <div
+                        isteven-multi-select
+                        input-model="relatedCategories"
+                        output-model="selectedCategories"
+                        output-properties="name"
+                        button-label="name"
+                        item-label="name"
+                        tick-property="ticked"
+                        max-height="200px"
+                >
+                </div>
+                -->
+
+
+                <!-- multiselect from https://github.com/isteven/angular-multi-select -->
+                <label>Tags:</label>
+                <div
+                        isteven-multi-select
+                        input-model="tags"
+                        output-model="selectedTags"
+                        output-properties="name"
+                        button-label="name"
+                        item-label="name"
+                        tick-property="ticked"
+                        max-height="200px"
+                >
+                </div>
+                <div class="form-group">
+                    <label>Priority:</label><br>
+                    <select name="customerPriority" ng-model="ticket.customerPriority">
+                        <option value="LOW">Low</option>
+                        <option value="AVERAGE">Average</option>
+                        <option value="HIGH">High</option>
+                    </select><br>
+                </div>
+                <div class="form-group">
+                    <label>Visibility:</label><br>
+                    <select name="visibility" ng-model="visibility">
+                        <option value="PRIVATE">Private</option>
+                        <option value="PUBLIC">Public</option>
+                    </select><br>
+                </div>
+
+            </form>
+
+
+
+        </div>
+
+
+        <div class="column">
             <div class="form-group">
                 <label>Title: </label><br>
                 <input type="text" style="font-weight: bold;" class="form-control" name="title"
@@ -20,79 +157,10 @@
                        accept="image/*"
                 />
             </div>
-        </div>
-
-        <div class="col-sm-6">
-                <div class="form-group">
-                    <Label>Target:</Label><br>
-                    <select name="target"
-                            ng-options="target as target.name
-                                        for
-                                        target in targets track by target.id"
-                            ng-model="ticket.target"
-                            ng-init="ticket.target = targets[0]; showCategories(ticket.target)">
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label>Category:</label><br>
-                    <select name="presumedType"
-                            ng-options="category
-                                        for
-                                        category in relatedCategories"
-                            ng-model="ticket.presumedType"
-                            ng-init="ticket.presumedType = relatedCategories[0]; selectedCategories = relatedCategories"
-                    >
-                    </select><br>
-                    <!--<label>Category:</label><br>
-                    <select name="presumedType"
-                            ng-options="category as category.name | formatEnumeration: category.name
-                                        for
-                                        category in categories"
-                            ng-model="ticket.presumedType"
-                            ng-init="ticket.presumedType = categories[0]">
-                    </select><br>-->
-
-                </div>
-
-                <!-- multiselect from https://github.com/isteven/angular-multi-select -->
-                <label>Tags:</label>
-                <div
-                        isteven-multi-select
-                        input-model="tags"
-                        output-model="selectedTags"
-                        output-properties="name"
-                        button-label="name"
-                        item-label="name"
-                        tick-property="ticked"
-                        max-height="200px"
-                >
-                </div><br>
-
-                <div class="form-group">
-                    <label>Priority:</label><br>
-                    <select name="customerPriority"
-                            ng-options="priority as priority.name | formatEnumeration: priority.name
-                                        for
-                                        priority in priorities track by priority.id"
-                            ng-model="priority"
-                            ng-init="priority = priorities[0]">
-                    </select><br>
-                </div>
-                <div class="form-group">
-                    <label>Visibility:</label><br>
-                    <select name="visibility"
-                            ng-options="visibility as visibility.name | formatEnumeration: visibility.name
-                                        for
-                                        visibility in visibilities track by visibility.id"
-                            ng-model="visibility"
-                            ng-init="visibility = visibilities[0]">
-                    </select><br>
-                </div>
-
+            <button ng-click="createTicket()" class="btn btn-warning btn-lg">Create</button>
         </div>
     </div>
-    <button ng-click="createTicket(ticket, selectedTags, selectedCategories, priority, visibility)" class="btn btn-warning btn-lg">Create</button>
+
     <hr>
     <p>Go back to <a href="#/homeCustomer">Home</a></p>
 
