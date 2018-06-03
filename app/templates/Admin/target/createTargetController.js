@@ -22,74 +22,34 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
          */
         $scope.creationTarget = function(){
 
-            if(angular.isUndefined($scope.target.name) ||
+            if(angular.isUndefined($scope.target) || (
+                angular.isUndefined($scope.target.name) ||
                 angular.isUndefined($scope.target.description) ||
-                angular.isUndefined($scope.target.version) ) {
+                angular.isUndefined($scope.target.version)) ) {
 
                 window.alert('It is necessary to fill all the fields!');
             }
-
-            else if($scope.target.name == "" || $scope.target.description=="" ||
-                $scope.target.version == "" ) {
-
-                window.alert('Fill in all the fields!');
-            }
             else {
 
-                httpService.post(restService.createTarget, $scope.target, config).then(function (response) {
-
-                    window.alert("Target submitted with success!");
-                    $location.url("/homeAdmin");
-
-                }, function error(response) {
-                    window.alert("Error while submitting Target!");
-
-                });
+                httpService.post(restService.createTarget, $scope.target, config)
+                    .then(function (response) {
+                        window.alert("Target created with success!");
+                        $location.url("/homeAdmin");
+                        console.log(response);
+                    },
+                        function error(response) {
+                        window.alert("Error while creating Target!");
+                        console.log("Error!" + response);
+                    });
             }
         };
-
-        /*
-
-            Funzione per modificare un Target.
-            E' invocata alla pressione del tasto modifica nella view modifyTarget.html
-            Usa il metodo PUT per inviare al Back-End i dati del prodotto modificato.
-            L'id del prodotto da modificare è incatenato all'url.
-
-         */
-        $scope.putModifiedTarget = function(){
-
-            if($scope.modtarget.name == "" || $scope.modtarget.description=="" ||
-                $scope.modtarget.version == "" ) {
-
-                window.alert('fill in all the fields!');
-            }
-            else {
-                var url = restService.createTarget;
-                console.log($scope.modtarget);
-                var productID = JSON.parse(storageService.get("productData")).id;
-                httpService.put(url, productID, $scope.modtarget, config).then(function (response) {
-
-                    window.alert("Target modified with success!");
-                    $scope.target = "";
-                    $location.url("/listTarget");
-
-                }, function error(response) {
-                    window.alert("Error while modifying Target");
-
-                });
-            }
-
-
-
-        };
-        $scope.modtarget = {};
 
         /*
             Funzione che apre la view di modifica prodotto modifyTarget.html
             che viene popolata con i dati del prodotto da modificare per il quale si è premuto
             il tasto 'Modify' nella view listTarget.html
 
-         */
+        */
         $scope.modifyTarget = function($index){
 
             //Salva i dati del prodotto da modificare in locale che possano essere usati
@@ -97,8 +57,6 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             storageService.save("productData",JSON.stringify($scope.items[$index]))
             //productService.set($scope.items[$index]);
             $location.url("/modifyTarget");
-
-
         };
 
         /*
@@ -107,13 +65,52 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
 
          */
         $scope.initTargetModify = function(){
+
+            $scope.modtarget = {};
+
             var target = JSON.parse(storageService.get("productData"));
             modTargetId = target.id;
             console.log(modTargetId);
             $scope.modtarget.name = target.name;
             $scope.modtarget.description = target.description;
             $scope.modtarget.version = target.version;
-            $scope.modtarget.targetState = target.productState;
+            $scope.modtarget.targetState = target.targetState;
+        };
+
+        /*
+
+            Funzione per modificare un Target.
+            E' invocata alla pressione del tasto modifica nella view modifyTarget.html
+            Usa il metodo PUT per inviare al Back-End i dati del Target modificato.
+            L'id del Target da modificare è incatenato all'url.
+
+         */
+        $scope.putModifiedTarget = function(){
+
+            if(angular.isUndefined($scope.modtarget) || (
+                angular.isUndefined($scope.modtarget.name) ||
+                angular.isUndefined($scope.modtarget.description) ||
+                angular.isUndefined($scope.modtarget.version)) ) {
+
+                window.alert('It is necessary to fill all the fields!');
+            }
+            else {
+                var url = restService.createTarget;
+                console.log($scope.modtarget);
+                var targetID = JSON.parse(storageService.get("productData")).id;
+                httpService.put(url, targetID, $scope.modtarget, config)
+                    .then(function (response) {
+
+                        window.alert("Target modified with success!");
+                        $scope.target = "";
+                        $location.url("/listTarget");
+                        console.log(response);
+                    },
+                        function error(response) {
+                        window.alert("Error while modifying Target");
+                        console.log("Error!" + response);
+                    });
+            }
         };
 
         /*
@@ -122,14 +119,13 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
 
          */
         $scope.listTarget = function(){
-            httpService.get(restService.createTarget, config).then(function (response) {
-
-                $scope.items = response.data;
-
-            }, function error(response) {
-                $scope.errorResponse = "Error Status: " +  response.statusText;
-
-            });
+            httpService.get(restService.createTarget, config)
+                .then(function (response) {
+                    $scope.items = response.data;
+                },
+                    function error(response) {
+                        $scope.errorResponse = "Error Status: " +  response.statusText;
+                });
         };
 
         /*
@@ -145,16 +141,16 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             var postData = {
                 "id" : id,
 
-            }
-            httpService.put(restService.createTarget + "/retire",id,postData).then(function (response) {
-
-                $scope.items[index].targetState = "RETIRED";
-
-            }, function error(response) {
-
-                window.alert("Error ");
-
-            });
+            };
+            httpService.put(restService.createTarget + "/retire", id, postData)
+                .then(function (response) {
+                    $scope.items[index].targetState = "RETIRED";
+                    console.log(response);
+                },
+                    function error(response) {
+                        window.alert("Error!");
+                        console.log("Error!" + response);
+                });
         };
 
         /*
@@ -164,7 +160,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
            Usa il metodo PUT per modificare il productState del prodotto da "RETIRED" a "ACTIVE"
         */
 
-        $scope.reabTarget = function (index) {
+        $scope.rehabTarget = function (index) {
 
             var removedTarget = $scope.items[index];
             var id = removedTarget.id;
@@ -172,17 +168,16 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                 "id" : id,
 
             }
-            httpService.put(restService.createTarget + "/reab", id, postData).then(function (response) {
-
-                $scope.items[index].tagerState = "ACTIVE";
-
-            }, function error(response) {
-
-                window.alert("Error");
-
-            });
+            httpService.put(restService.createTarget + "/rehab", id, postData)
+                .then(function (response) {
+                    $scope.items[index].tagerState = "ACTIVE";
+                    console.log(response);
+                },
+                    function error(response) {
+                        window.alert("Error!");
+                        console.log("Error!" + response);
+                });
         };
-
 
         /*
             Funzione usate per scegliere quale pulsante mostrare tra "RETIRE" o "REHABILITATE"
@@ -194,7 +189,6 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                 return true;
             else
                 return false;
-
         };
 
 
