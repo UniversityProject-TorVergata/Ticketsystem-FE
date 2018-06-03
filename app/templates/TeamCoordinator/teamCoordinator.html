@@ -13,14 +13,21 @@
         <tr>
             <th>Title</th>
             <th>Description</th>
-            <th>Team</th>
+            <th>Action</th>
+            <th>Team Leader</th>
             <th></th>
+
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="item in items">
             <td>{{item.title}}</td>
             <td>{{item.description}}</td>
+            <td>
+                <button ng-controller="modalAccountFormController" ng-click="showInfoForm(item)" class="btn btn-xs btn-primary">
+                    <i class="fas fa-info"></i>
+                </button>
+            </td>
             <td>
                 <select id="team" name="team"
                         ng-options="item as item.name
