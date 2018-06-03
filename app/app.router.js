@@ -132,6 +132,28 @@ angular.module('ticketsystem.router', [])
                     },
                 }
             })
+            .when('/createTeam', {
+                templateUrl: 'templates/Team/createTeam.html',
+                controller:  'createTeamCtrl',
+                resolve: {
+                    problemArea: function (model) {
+                        return model.getArea().then(function (problemArea) {
+                            return problemArea
+                        })
+                    }
+                }
+            })
+            .when('/readTeam', {
+                templateUrl: 'templates/Team/readTeam.html',
+                controller:  'createTeamCtrl',
+                resolve: {
+                    problemArea: function (model) {
+                        return model.getArea().then(function (problemArea) {
+                            return problemArea
+                        })
+                    }
+                }
+            })
             .otherwise({redirectTo: '/Login'});
 
         $locationProvider.html5Mode({

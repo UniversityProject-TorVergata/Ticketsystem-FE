@@ -42,7 +42,16 @@ angular.module('ticketsystem.restService', [])
             "createTarget": CONNECTION.url + '/target',
 
             //  Target
-            "readTargets": CONNECTION.url + '/target'
+            "readTargets": CONNECTION.url + '/target',
+
+            //  Team
+            "getTeamMembers": CONNECTION.url + '/registered_user/free_team_member',
+            "getTeamLeaders": CONNECTION.url + '/registered_user/team_leader',
+
+            "createTeam": CONNECTION.url + '/team',
+            "getTeams": CONNECTION.url + '/team',
+            "updateTeamMember": CONNECTION.url + '/team/add_team_member'
+
         };
     })
     .service('httpService', function ($http) {

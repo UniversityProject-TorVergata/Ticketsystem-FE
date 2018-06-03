@@ -50,6 +50,7 @@ angular.module('ticketsystem', [
     //  Team Coordinator
     'ticketsystem.homeTeamCoordinator',
     'ticketsystem.assignTeam',
+    'ticketsystem.createTeam',
 
     'isteven-multi-select',
     'modal'

@@ -155,6 +155,22 @@ angular.module('ticketsystem.modelService', [])
                             }
                         )
                     })
+                },
+
+                getArea() {
+                    return new Promise(function (resolve, reject) {
+                        httpService.get('./mocks/problemArea.json').then(
+                            function (problemArea) {
+                                resolve(problemArea.data);
+                            },
+                            function (error) {
+                                console.error("Error loading Problem Areas")
+                                resolve([])
+                            }
+                        )
+                    })
+
+
                 }
             }
         }
