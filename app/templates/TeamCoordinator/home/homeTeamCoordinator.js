@@ -12,6 +12,10 @@ angular.module('ticketsystem.homeTeamCoordinator', ['ngRoute'])
             $location.url("/createTeam");
         }
 
+        $scope.readTeam = function () {
+            $location.url("/readTeam");
+        }
+
         $scope.logout = function () {
             storageService.save("userData",JSON.stringify(null));
             $location.url("/home");
