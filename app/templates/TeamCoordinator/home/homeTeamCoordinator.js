@@ -8,6 +8,10 @@ angular.module('ticketsystem.homeTeamCoordinator', ['ngRoute'])
             $location.url("/assignTicket");
         }
 
+        $scope.createTeam = function () {
+            $location.url("/createTeam");
+        }
+
         $scope.logout = function () {
             storageService.save("userData",JSON.stringify(null));
             $location.url("/home");
