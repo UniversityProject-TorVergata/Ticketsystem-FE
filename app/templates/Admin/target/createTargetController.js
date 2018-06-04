@@ -147,10 +147,11 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             httpService.put(restService.createTarget + "/retire", id, postData)
                 .then(function (response) {
                     $scope.items[index].targetState = "RETIRED";
+                    window.alert('Target Retired Successfully!');
                     console.log(response);
                 },
                     function error(response) {
-                        window.alert("Error!");
+                        window.alert("Error while Retiring Target!");
                         console.log("Error!" + response);
                 });
         };
@@ -169,14 +170,15 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             var postData = {
                 "id" : id,
 
-            }
+            };
             httpService.put(restService.createTarget + "/rehab", id, postData)
                 .then(function (response) {
                     $scope.items[index].tagerState = "ACTIVE";
+                    window.alert('Target Activated Successfully!');
                     console.log(response);
                 },
                     function error(response) {
-                        window.alert("Error!");
+                        window.alert("Error while Target Activation!");
                         console.log("Error!" + response);
                 });
         };
