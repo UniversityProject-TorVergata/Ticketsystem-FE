@@ -170,6 +170,14 @@ angular.module('ticketsystem.router', [])
                     },
                 }
             })
+            .when('/homeTeamLeader', {
+                templateUrl: 'templates/TeamLeader/home/homeTeamLeader.html',
+                controller:  'homeTeamLeaderCtrl'
+            })
+            .when('/accountTeamLeader', {
+                templateUrl: 'templates/TeamLeader/account/accountTeamLeader.html',
+                controller:  'accountTeamLeaderCtrl'
+            })
             .otherwise({redirectTo: '/Login'});
 
         $locationProvider.html5Mode({
