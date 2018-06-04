@@ -28,6 +28,9 @@
                 <button ng-controller="modalAccountFormController" ng-click="showInfoForm(item)" class="btn btn-xs btn-primary">
                     <i class="fas fa-info"></i>
                 </button>
+                <button ng-if="item.attachedFile" ng-click="showImage(item)" class="btn btn-xs">
+                    <i class="fa fa-image"></i>
+                </button>
             </td>
             <td><select name="actualPriority"
                         ng-options="priority as priority.name | formatEnumeration: priority.name

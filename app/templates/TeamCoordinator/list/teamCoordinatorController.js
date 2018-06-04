@@ -52,4 +52,14 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
                 )
         };
 
+        $scope.showImage = function (item, index) {
+            util.postBase64(item).then(result => {
+                // Append the <a/> tag and remove it after automatic click for the download
+                document.body.appendChild(result);
+                result.click();
+                document.body.removeChild(result);
+            })
+
+        }
+
     });
