@@ -71,19 +71,12 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
                     .then(function(data) {
                         window.alert("Team created!");
                         console.log(data);
-                        $location.path('/homeCustomer') //da modificare: homeTeamCoordinator
+                        $location.path('/homeTeamCoordinator');
                     },
                         function(err){
                             window.alert("Error!")
                             $scope.errorMessage = "error!"
                         })
-
-                httpService.put(restService.updateTeamMember, team.id + "/" + member.id)
-                    .then(function(response) {
-                        //member.team = team.id;
-                        console.log(JSON.stringify(team.id + "/" + member.id));
-                    }
-                )
             };
 
         /**
