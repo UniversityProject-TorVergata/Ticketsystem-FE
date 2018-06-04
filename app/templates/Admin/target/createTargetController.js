@@ -173,7 +173,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             };
             httpService.put(restService.createTarget + "/rehab", id, postData)
                 .then(function (response) {
-                    $scope.items[index].tagerState = "ACTIVE";
+                    $scope.items[index].targetState = "ACTIVE";
                     window.alert('Target Activated Successfully!');
                     console.log(response);
                 },
@@ -189,7 +189,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
 
          */
         $scope.isRetired = function(index){
-            if($scope.items[index].targetState == "RETIRED")
+            if($scope.items[index].targetState === "RETIRED")
                 return true;
             else
                 return false;
