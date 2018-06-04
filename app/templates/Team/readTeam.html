@@ -34,9 +34,12 @@
             <td>{{item.teamMemberList}}</td> -->
 
             <td>
-                <button ng-click="infoTeam(item.id)" class="btn btn-info btn-xs">
+                <!-- Bisogna capire lato BE come ricevere TeamLeader e TeamMebersList
+                
+                <button ng-controller="modalAccountFormController" ng-click="showInfoTeam(item)" class="btn btn-info btn-xs">
                     <i class="fa fa-info"></i>
                 </button>
+                -->
 
                 <!-- Modify la inseriamo nella modal, dove visualizziamo anche team leader e members
                 <button ng-click="modifyTeam(item,$index)" class="btn btn-xs btn-warning">

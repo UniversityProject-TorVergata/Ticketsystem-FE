@@ -154,6 +154,22 @@ angular.module('ticketsystem.router', [])
                     }
                 }
             })
+            .when('/assignedTicket', {
+                templateUrl: 'templates/TeamLeader/teamLeader.html',
+                controller: 'TeamLeaderCtrl',
+                resolve: {
+                    teams: function (model) {
+                        return model.getTeams().then(function (teams) {
+                            return teams
+                        })
+                    },
+                    priorities: function(model) {
+                        return model.getPriority().then(function (priorities) {
+                            return priorities
+                        })
+                    },
+                }
+            })
             .otherwise({redirectTo: '/Login'});
 
         $locationProvider.html5Mode({

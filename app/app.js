@@ -52,6 +52,9 @@ angular.module('ticketsystem', [
     'ticketsystem.assignTeam',
     'ticketsystem.createTeam',
 
+    //  Team Leader
+    'ticketsystem.teamLeader',
+
     'isteven-multi-select',
     'modal'
 

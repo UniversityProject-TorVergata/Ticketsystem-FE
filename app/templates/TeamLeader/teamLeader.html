@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assigned Ticket</title>
+</head>
+<body>
+<div class="container">
+
+
+    <table st-table="rowCollection" class="table table-striped" data-ng-init="readAssignedTicket()">
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Data</th>
+            <th>Customer Priority</th>
+            <th>Internal Priority</th>
+            <th>Action</th>
+            <th></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items">
+            <td>{{item.title}}</td>
+            <td>{{item.timestamp}}</td>
+            <td>{{item.customerPriority}}</td>
+            <td>{{item.actualPriority}}</td>
+            <td>
+                <button ng-controller="modalAccountFormController" ng-click="showInfoForm(item)" class="btn btn-xs btn-primary">
+                    <i class="fas fa-info"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</div>
+
+</body>
+</html>

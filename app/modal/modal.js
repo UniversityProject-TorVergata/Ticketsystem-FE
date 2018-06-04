@@ -62,6 +62,27 @@ app.controller("modalAccountFormController", ['$scope', '$modal', '$log',
             });
         };
 
+        $scope.showInfoTeam = function (item) {
+            $scope.formItem = item;
+
+            var modalInstance = $modal.open({
+                templateUrl: '/modal/modal-info-team.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                resolve: {
+                    userForm: function () {
+                        return $scope.userForm;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
     }]);
 
 var ModalInstanceCtrl = function ($scope, $modalInstance, userForm) {
