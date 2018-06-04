@@ -5,8 +5,9 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
     .controller('createTargetCtrl', function ($scope, restService, httpService, $location, storageService) {
 
         var modTargetId;
-
         $scope.target = {};
+        $scope.target.targetType = "Service";
+
         var config = {
             headers : {
                 'Content-Type': 'application/json',
@@ -75,6 +76,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             $scope.modtarget.description = target.description;
             $scope.modtarget.version = target.version;
             $scope.modtarget.targetState = target.targetState;
+            $scope.modtarget.targetType = target.targetType;
         };
 
         /*

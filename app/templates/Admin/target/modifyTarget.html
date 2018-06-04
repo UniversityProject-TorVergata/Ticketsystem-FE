@@ -7,6 +7,14 @@
 
 
         <form ng-submit="putModifiedTarget()" data-ng-init="initTargetModify()">
+            <br><br>
+            <label>Target Type</label>
+            <select name="targetType" ng-model="modtarget.targetType">
+                <option value="Service">Service</option>
+                <option value="Product">Product</option>
+            </select>
+            <br>
+            <br>
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control"  ng-model="modtarget.name"

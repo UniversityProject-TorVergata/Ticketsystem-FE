@@ -13,6 +13,7 @@
         <tr>
             <th>Target Name</th>
             <th>Description</th>
+            <th>Target Type</th>
             <th>Version</th>
         </tr>
         </thead>
@@ -20,6 +21,7 @@
         <tr ng-repeat="item in items">
             <td>{{item.name}}</td>
             <td>{{item.description}}</td>
+            <td>{{item.targetType}}</td>
             <td>{{item.version}}</td>
             <td><button class="btn btn-primary" ng-click="modifyTarget($index)">Modify</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" ng-show="!isRetired($index)" ng-click="removeTarget($index)">Retire</button>
                 &nbsp;&nbsp;<button class="btn btn-primary" ng-show="isRetired($index)" ng-click="rehabTarget($index)">Rehabilitate</button>

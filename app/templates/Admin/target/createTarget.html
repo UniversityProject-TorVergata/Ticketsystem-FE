@@ -7,10 +7,19 @@
 
 
         <form ng-submit="creationTarget()">
+            <br><br>
+            <label>Target Type</label>
+            <select name="targetType" ng-model="target.targetType">
+                <option value="Service" selected="selected">Service</option>
+                <option value="Product">Product</option>
+            </select>
+            <br>
+            <br>
             <div class="form-group">
                 <label>Name</label>
                 <input type="text" class="form-control"  ng-model="target.name">
             </div>
+
             <div class="form-group">
                 <label>Description</label>
                 <input type="text" class="form-control" ng-model="target.description">
