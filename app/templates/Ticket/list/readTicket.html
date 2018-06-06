@@ -22,12 +22,12 @@
         </thead>
         <tbody>
         <tr ng-repeat="item in items"
-            ng-show="item.state !='TRASHED'">
+            ng-show="item.stateMachine.currentState !='DISCARDED'">
             <td>#{{item.id}}</a></td>
             <td>{{item.title}}</td>
             <td>{{item.timestamp}}</td>
             <td>{{item.presumedType}}</td>
-            <td>{{item.state | formatEnumeration: item.state}}</td>
+            <td>{{item.state}}</td>
             <td>
                 <button ng-if="item.attachedFile" ng-click="showImage(item)" class="btn btn-xs">
                     <i class="fa fa-image"></i>

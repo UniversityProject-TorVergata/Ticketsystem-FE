@@ -7,6 +7,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
         var modTargetId;
         $scope.target = {};
         $scope.target.targetType = "Service";
+        $scope.target.stateMachineName = "Default_StateMachine";
 
         var config = {
             headers : {
@@ -32,6 +33,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             }
             else {
 
+                $scope.target.targetState = "ACTIVE";
                 httpService.post(restService.createTarget, $scope.target, config)
                     .then(function (response) {
                         window.alert("Target created with success!");

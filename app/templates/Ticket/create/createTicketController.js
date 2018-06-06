@@ -46,7 +46,9 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
                 to see the ticket into the dispatcher window.
             */
             //  TODO Implements this mechanism on the backend side
-            $scope.ticket.state = "PENDING";
+
+
+
 
             /*
                 This change allows you to send the sourceType as a string to the backend
@@ -116,6 +118,8 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
                 $scope.items = response.data;
                 for (let i = 0; i < $scope.items.length; i++) {
 
+                    // Stato attuale del Ticket:
+                    $scope.items[i].state = $scope.items[i].stateMachine.currentState;
                 }
             }, function error(response) {
                 $scope.errorResponse = "Error Status: " + response.statusText;
@@ -209,9 +213,9 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
             difficulty: null,
             eventRegister: [],
             ticketComments: [],
-            state:ticket.state,
+            //state:ticket.state,
             tags: ticket.tags
-        }
+        };
 
         //  HTTP PUT
         httpService.put(restService.createTicket,ticket.id, payload)

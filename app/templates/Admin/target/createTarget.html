@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <div class="container">
 
     <div class="col-sm-6 col-sm-offset-3">
@@ -12,6 +11,12 @@
             <select name="targetType" ng-model="target.targetType">
                 <option value="Service" selected="selected">Service</option>
                 <option value="Product">Product</option>
+            </select>
+            <br>
+            <br>
+            <label>Ticket Workflow</label>
+            <select name="stateMachineName" ng-model="target.stateMachineName">
+                <option value="Default_StateMachine" selected="selected">Default_StateMachine</option>
             </select>
             <br>
             <br>
