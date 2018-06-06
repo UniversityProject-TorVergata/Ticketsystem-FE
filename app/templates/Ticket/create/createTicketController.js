@@ -39,24 +39,10 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
         }
 
         else {
-
             /*
-                A new ticket has always state 'NEW'
-                but whe set this attribute to 'PENDING' because we have
-                to see the ticket into the dispatcher window.
-            */
-            //  TODO Implements this mechanism on the backend side
-
-
-
-
-            /*
-                This change allows you to send the sourceType as a string to the backend
+                This change allows you to send the tags as strings to the backend
                 instead of the entire json object
              */
-            //$scope.ticket.sourceType = $scope.ticket.sourceType.name;
-
-            //  As mentioned above for the sourceType
             for (let i = 0; i < $scope.selectedTags.length; i++) {
                 $scope.tempTags.push($scope.selectedTags[i].name);
             }

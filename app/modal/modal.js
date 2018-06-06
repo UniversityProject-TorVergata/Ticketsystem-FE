@@ -3,7 +3,7 @@ var app = angular.module('modal', ['ui.bootstrap']);
 /**
  *  Controller used for the modal
  */
-app.controller("modalAccountFormController", ['$scope', '$modal', '$log',
+app.controller("modalController", ['$scope', '$modal', '$log',
 
     /**
      *  Function used to show the modal popup
@@ -46,6 +46,31 @@ app.controller("modalAccountFormController", ['$scope', '$modal', '$log',
 
             var modalInstance = $modal.open({
                 templateUrl: '/modal/modal-info.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                resolve: {
+                    userForm: function () {
+                        return $scope.userForm;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        $scope.showMessageForm = function (item) {
+            $scope.message = "Show Form Button Clicked";
+            console.log($scope.message);
+            $scope.formItem=item;
+            console.log(item);
+
+
+            var modalInstance = $modal.open({
+                templateUrl: '/modal/modal-message.html',
                 controller: ModalInstanceCtrl,
                 scope: $scope,
                 resolve: {

@@ -155,7 +155,7 @@ angular.module('ticketsystem.router', [])
                 }
             })
             .when('/assignedTicket', {
-                templateUrl: 'templates/TeamLeader/teamLeader.html',
+                templateUrl: 'templates/TeamLeader/list/teamLeader.html',
                 controller: 'TeamLeaderCtrl',
                 resolve: {
                     teams: function (model) {
