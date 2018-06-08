@@ -63,11 +63,12 @@ app.controller("modalController", ['$scope', '$modal', '$log',
         };
 
         $scope.showMessageForm = function (item) {
-            $scope.message = "Show Form Button Clicked";
-            console.log($scope.message);
+            $scope.terminateSending = false;
             $scope.formItem=item;
-            console.log(item);
-
+            $scope.newMessage = {};
+            let date = Date.now();
+            $scope.newMessage.timestamp = moment(date).format("DD/MM/YY, h:mm:ss");
+            //Author is inserted on teamCoordinatorController.sendNewTicketComment
 
             var modalInstance = $modal.open({
                 templateUrl: '/modal/modal-message.html',
@@ -110,7 +111,7 @@ app.controller("modalController", ['$scope', '$modal', '$log',
 
     }]);
 
-var ModalInstanceCtrl = function ($scope, $modalInstance, userForm) {
+var ModalInstanceCtrl = function ($route, $scope, $modalInstance, userForm) {
     $scope.form = {};
     $scope.submitForm = function () {
         if ($scope.form.userForm.$valid) {
@@ -122,7 +123,17 @@ var ModalInstanceCtrl = function ($scope, $modalInstance, userForm) {
         }
     };
 
+    $scope.messageOk = function() {
+        $scope.sendNewTicketComment($scope.formItem.id, $scope.newMessage);
+        $scope.terminateSending = true;
+    };
+
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
+
+    $scope.closeModal = function () {
+        $modalInstance.dismiss("closed");
+        $route.reload();
+    }
 };

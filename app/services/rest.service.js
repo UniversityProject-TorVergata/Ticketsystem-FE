@@ -17,6 +17,7 @@ angular.module('ticketsystem.restService', [])
 
             //  CRUD ticket
             "createTicket": CONNECTION.url + '/ticket',
+            "insertComment": CONNECTION.url + '/ticket/insertComment',
 
             //  Find Ticket by state
             "newTickets": CONNECTION.url + '/ticket/findTicketByState/NEW',
