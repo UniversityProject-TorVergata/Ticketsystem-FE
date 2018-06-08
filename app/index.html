@@ -14,21 +14,31 @@
     <link rel="stylesheet" href="node_modules/font-awesome/css/font-awesome.min.css">
 
     <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
     <script src="node_modules/angular-route/angular-route.min.js"></script>
     <script src="node_modules/moment/moment.js"></script>
     <script src="node_modules/angular-moment/angular-moment.min.js"></script>
 
+    <script src="templates/common/sidebarMenu/sidebarController.js"></script>
+
+
     <!-- FONTAWESOME COMPLETE CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+          integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 
     <!-- REQUIRED JAVASCRIPT AND CSS FILES -->
     <!-- TODO: add these scripts to packaje.json to automatically download dependencies with npm -->
-    <link data-require="ui-grid@3.0.0RC20" data-semver="3.0.0RC20" rel="stylesheet" href="http://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/release/3.0.0-rc.20/ui-grid.css" />
-    <link data-require="bootstrap@*" data-semver="3.3.2" rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" />
-    <script data-require="angular.js@1.3.15" data-semver="1.3.15" src="https://code.angularjs.org/1.3.15/angular-sanitize.js"></script>
-    <script data-require="ui-grid@3.0.0RC20" data-semver="3.0.0RC20" src="http://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/release/3.0.0-rc.20/ui-grid.js"></script>
-    <script data-require="ui-bootstrap@*" data-semver="0.12.1" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
+    <link data-require="ui-grid@3.0.0RC20" data-semver="3.0.0RC20" rel="stylesheet"
+          href="http://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/release/3.0.0-rc.20/ui-grid.css"/>
+    <link data-require="bootstrap@*" data-semver="3.3.2" rel="stylesheet"
+          href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"/>
+    <script data-require="angular.js@1.3.15" data-semver="1.3.15"
+            src="https://code.angularjs.org/1.3.15/angular-sanitize.js"></script>
+    <script data-require="ui-grid@3.0.0RC20" data-semver="3.0.0RC20"
+            src="http://cdn.rawgit.com/angular-ui/ui-grid.info/gh-pages/release/3.0.0-rc.20/ui-grid.js"></script>
+    <script data-require="ui-bootstrap@*" data-semver="0.12.1"
+            src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.js"></script>
     <script data-require="jquery@2.1.3" data-semver="2.1.3" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 
     <script src="https://cdn.rawgit.com/mike-marcacci/objectpath/v1.1.0/lib/ObjectPath.js"></script>
@@ -40,30 +50,33 @@
 
     <script src="app.js"></script>
     <script src="app.router.js"></script>
-
     <script src="directives/custom-changes.directive.js"></script>
 
-    <script src="templates/Login/Login.js"></script>
-    <script src="templates/Customer/create/createCustomerController.js"></script>
+    <!--  Controller  -->
+    <script src="templates/common/Login/Login.js"></script>
+    <script src="templates/common/accountInfo/accountInfo.js"></script>
+    <script src="templates/Admin/createUser/createUserController.js"></script>
     <script src="templates/Admin/target/createTargetController.js"></script>
     <script src="templates/Admin/home/homeAdminController.js"></script>
+    <script src="templates/Customer/create/createCustomerController.js"></script>
     <script src="templates/Ticket/create/createTicketController.js"></script>
     <script src="templates/home/homeController.js"></script>
     <script src="templates/Customer/home/homeCustomerController.js"></script>
     <script src="templates/TeamCoordinator/home/homeTeamCoordinator.js"></script>
-    <script src="templates/Customer/account/accountCustomerController.js"></script>
-    <script src="templates/Admin/account/accountAdminController.js"></script>
     <script src="templates/TeamCoordinator/list/teamCoordinatorController.js"></script>
     <script src="templates/TeamLeader/home/homeTeamLeaderController.js"></script>
-    <script src="templates/TeamLeader/account/accountTeamLeaderController.js"></script>
     <script src="templates/Team/createTeamController.js"></script>
     <script src="templates/TeamLeader/list/teamLeaderController.js"></script>
 
+    <!--  Multiselect and Modal  -->
     <link rel="stylesheet" href="multiselect/isteven-multi-select.css">
     <script src="multiselect/isteven-multi-select.js"></script>
     <script src="modal/modal.js"></script>
 
+
+    <!--  Service  -->
     <script src="services/rest.service.js"></script>
+    <script src="services/menu.service.js"></script>
     <script src="services/utils.service.js"></script>
     <script src="services/model.service.js"></script>
     <script src="services/login.service.js"></script>
@@ -71,18 +84,15 @@
     <script src="services/sourceType.service.js"></script>
     <script src="services/storage.service.js"></script>
 
+
+    <!--  Filter  -->
     <script src="filters/string.filter.js"></script>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">
-            <i class="fa fa-ticket fa-fw" aria-hidden="true"></i>
-            Ticket System</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    </nav>
-    <div ng-view align="left"></div>
-    </body>
+    <!--  Single Page Application  -->
+    <div ui-view="public"></div>
+    <!--  Dynamic Sidebar  -->
+    <div ui-view="sidebarMenu"></div>
+</body>
 </html>

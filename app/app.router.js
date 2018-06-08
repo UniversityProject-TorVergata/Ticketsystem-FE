@@ -1,187 +1,305 @@
-angular.module('ticketsystem.router', [])
-    .config(['$routeProvider','$locationProvider', function ($routeProvider,$locationProvider) {
+angular.module('ticketsystem.router', ['ui.router'])
+    .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
+        function ($stateProvider, $urlRouterProvider, $locationProvider) {
 
-        $routeProvider
-            .when('/createCustomer', {
-                templateUrl: 'templates/Customer/create/createCustomer.html',
-                controller: 'createCustomerCtrl'
-            })
-            .when('/Login', {
-                templateUrl: 'templates/Login/Login.html',
-                controller: 'LoginCtrl'
-            })
-            .when('/Ticket', {
-                templateUrl: 'templates/Ticket/create/createTicket.html',
-                controller:  'CreateTicketCtrl',
-                resolve: {
-                    targets: function (model) {
-                        return model.getTargets().then(function (targets) {
-                            return targets
-                        })
-                    },
-                    sourceTypes: function (model) {
-                        return model.getSourceTypes().then(function (sourceTypes) {
-                            return sourceTypes
-                        })
-                    },
-                    ticketTypes: function (model) {
-                      return model.getTicketTypes().then(function (ticketTypes) {
-                          return ticketTypes
-                      })
-                    },
-                    tags: function(model) {
-                        return model.getTags().then(function (tags) {
-                            return tags
-                        })
-                    },
-                    categories: function(model) {
-                        return model.getCategories().then(function (categories) {
-                            return categories
-                        })
-                    },
-                    priorities: function(model) {
-                        return model.getPriority().then(function (priorities) {
-                            return priorities
-                        })
-                    },
-                    visibilities: function(model) {
-                        return model.getVisibilities().then(function (visibilities) {
-                            return visibilities
-                        })
-                    }
-                }
-            })
-            .when('/readTicket', {
-                templateUrl: 'templates/Ticket/list/readTicket.html',
-                controller:  'CreateTicketCtrl',
-                resolve: {
-                    products: function (model) {
-                        return model.getProducts().then(function (products) {
-                            return products
-                        })
-                    },
-                    sourceTypes: function (model) {
-                        return model.getSourceTypes().then(function (sourceTypes) {
-                            return sourceTypes
-                        })
-                    },
-                    ticketTypes: function (model) {
-                        return model.getTicketTypes().then(function (ticketTypes) {
-                            return ticketTypes
-                        })
-                    },
-                    tags: function(model) {
-                        return model.getTags().then(function (tags) {
-                            return tags
-                        })
-                    },
-                    categories: function(model) {
-                        return model.getCategories().then(function (categories) {
-                            return categories
-                        })
-                    }
-                }
-            })
+            $stateProvider
 
-            .when('/homeCustomer', {
-                templateUrl: 'templates/Customer/home/homeCustomer.html',
-                controller:  'homeCustomerCtrl'
-            })
-            .when('/homeTeamCoordinator', {
-                templateUrl: 'templates/TeamCoordinator/home/homeTeamCoordinator.html',
-                controller:  'homeTeamCoordinatorCtrl'
-            })
-            .when('/accountCustomer', {
-                templateUrl: 'templates/Customer/account/accountCustomer.html',
-                controller:  'accountCustomerCtrl'
-            })
-            .when('/createTarget', {
-                templateUrl: 'templates/Admin/target/createTarget.html',
-                controller:  'createTargetCtrl'
-            })
-            .when('/listTarget', {
-                templateUrl: 'templates/Admin/target/listTarget.html',
-                controller:  'createTargetCtrl'
-            })
-            .when('/modifyTarget', {
-                templateUrl: 'templates/Admin/target/modifyTarget.html',
-                controller:  'createTargetCtrl'
-            })
-            .when('/homeAdmin', {
-                templateUrl: 'templates/Admin/home/homeAdmin.html',
-                controller:  'homeAdminCtrl'
-            })
-
-            .when('/accountAdmin', {
-                templateUrl: 'templates/Admin/account/accountAdmin.html',
-                controller:  'accountAdminCtrl'
-            })
-            .when('/assignTicket', {
-                templateUrl: 'templates/TeamCoordinator/list/teamCoordinator.html',
-                controller:  'AssignTeamCtrl',
-                resolve: {
-                    teams: function (model) {
-                        return model.getTeams().then(function (teams) {
-                            return teams
-                        })
+                .state('Login', {
+                    url: "/Login",
+                    views: {
+                        'public': {
+                            templateUrl: "templates/common/Login/Login.html",
+                            controller: 'LoginCtrl'
+                        }
                     },
-                    priorities: function(model) {
-                        return model.getPriority().then(function (priorities) {
-                            return priorities
-                        })
-                    },
-                }
-            })
-            .when('/createTeam', {
-                templateUrl: 'templates/Team/createTeam.html',
-                controller:  'createTeamCtrl',
-                resolve: {
-                    problemArea: function (model) {
-                        return model.getArea().then(function (problemArea) {
-                            return problemArea
-                        })
+                    data: {
+                        requiredLogin: false,
+                        access: ['']
                     }
-                }
-            })
-            .when('/readTeam', {
-                templateUrl: 'templates/Team/readTeam.html',
-                controller:  'createTeamCtrl',
-                resolve: {
-                    problemArea: function (model) {
-                        return model.getArea().then(function (problemArea) {
-                            return problemArea
-                        })
-                    }
-                }
-            })
-            .when('/assignedTicket', {
-                templateUrl: 'templates/TeamLeader/list/teamLeader.html',
-                controller: 'TeamLeaderCtrl',
-                resolve: {
-                    teams: function (model) {
-                        return model.getTeams().then(function (teams) {
-                            return teams
-                        })
-                    },
-                    priorities: function(model) {
-                        return model.getPriority().then(function (priorities) {
-                            return priorities
-                        })
-                    },
-                }
-            })
-            .when('/homeTeamLeader', {
-                templateUrl: 'templates/TeamLeader/home/homeTeamLeader.html',
-                controller:  'homeTeamLeaderCtrl'
-            })
-            .when('/accountTeamLeader', {
-                templateUrl: 'templates/TeamLeader/account/accountTeamLeader.html',
-                controller:  'accountTeamLeaderCtrl'
-            })
-            .otherwise({redirectTo: '/Login'});
+                })
 
-        $locationProvider.html5Mode({
-            enabled: false,
-            requireBase: false
-        }).hashPrefix('');
-    }])
+                .state('secure', {
+                    url: "/secure",
+                    abstract: true,
+                    views: {
+                        'sidebarMenu': {
+                            templateUrl: "templates/common/sidebarMenu/sidebar.html",
+                            controller: 'SidebarCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true
+                    },
+                    resolve: {
+                        menu: function (menuService) {
+                            let user = JSON.parse(localStorage.getItem('userInformation'))
+                            console.log(user);
+                            let profile = user['@type'];
+                            console.log("User type: " + profile);
+                            return menuService.getMenuByType(profile).then(function (response) {
+                                return response
+                            })
+                        }
+                    }
+
+
+                })
+
+                //  Account Info
+                .state('secure.accountInfo', {
+                    url: "/accountInfo",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/common/accountInfo/accountInfo.html',
+                            controller: 'accountInfoCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['ALL']
+
+                    }
+                })
+                .state('secure.createTarget', {
+                    url: "/createTarget",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Admin/target/createTarget.html',
+                            controller: 'createTargetCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Admin']
+                    }
+                })
+                .state('secure.listTarget', {
+                    url: "/listTarget",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Admin/target/listTarget.html',
+                            controller: 'createTargetCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Admin']
+                    }
+                })
+                .state('secure.modifyTarget', {
+                    url: "/modifyTarget",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Admin/target/modifyTarget.html',
+                            controller: 'createTargetCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Admin']
+                    }
+                })
+                .state('secure.createUser', {
+                    url: "/createUser",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Admin/createUser/createUser.html',
+                            controller: 'createUserCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Admin']
+                    }
+                })
+                .state('secure.assignTicket', {
+                    url: "/assignTicket",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/TeamCoordinator/list/teamCoordinator.html',
+                            controller: 'AssignTeamCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamCoordinator']
+                    },
+                    resolve: {
+                        teams: function (model) {
+                            return model.getTeams().then(function (teams) {
+                                return teams
+                            })
+                        },
+                        priorities: function(model) {
+                            return model.getPriority().then(function (priorities) {
+                                return priorities
+                            })
+                        },
+                    }
+                })
+                .state('secure.assignTeamMember', {
+                    url: "/assignTeamMember",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/TeamLeader/list/teamLeader.html',
+                            controller: 'TeamLeaderCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamLeader']
+                    },
+                    resolve: {
+                        teams: function (model) {
+                            return model.getTeams().then(function (teams) {
+                                return teams
+                            })
+                        },
+                        priorities: function(model) {
+                            return model.getPriority().then(function (priorities) {
+                                return priorities
+                            })
+                        }
+                    }
+                })
+                .state('secure.createTeam', {
+                    url: "/createTeam",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Team/createTeam.html',
+                            controller: 'createTeamCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamCoordinator']
+                    },
+                    resolve: {
+                        problemArea: function (model) {
+                            return model.getArea().then(function (problemArea) {
+                                return problemArea
+                            })
+                        }
+                    }
+                })
+                .state('secure.listTeam', {
+                    url: "/listTeam",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Team/readTeam.html',
+                            controller: 'createTeamCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamCoordinator']
+                    },
+                    resolve: {
+                        problemArea: function (model) {
+                            return model.getArea().then(function (problemArea) {
+                                return problemArea
+                            })
+                        }
+                    }
+                })
+                .state('secure.createTicket', {
+                    url: "/createTicket",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Ticket/create/createTicket.html',
+                            controller: 'CreateTicketCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Customer']
+
+                    },
+                    resolve: {
+                        products: function (model) {
+                            return model.getProducts().then(function (products) {
+                                return products
+                            })
+                        },
+                        sourceTypes: function (model) {
+                            return model.getSourceTypes().then(function (sourceTypes) {
+                                return sourceTypes
+                            })
+                        },
+                        tags: function (model) {
+                            return model.getTags().then(function (tags) {
+                                return tags
+                            })
+                        }
+                    }
+                })
+                .state('secure.ticket', {
+                    url: "/Ticket",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Ticket/create/createTicket.html',
+                            controller: 'CreateTicketCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['ALL']
+
+                    },
+                    resolve: {
+                        products: function (model) {
+                            return model.getProducts().then(function (products) {
+                                return products
+                            })
+                        },
+                        sourceTypes: function (model) {
+                            return model.getSourceTypes().then(function (sourceTypes) {
+                                return sourceTypes
+                            })
+                        },
+                        tags: function (model) {
+                            return model.getTags().then(function (tags) {
+                                return tags
+                            })
+                        }
+                    }
+                })
+                .state('secure.readTicket', {
+                    url: '/readTicket',
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Ticket/list/readTicket.html',
+                            controller: 'CreateTicketCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['ALL']
+
+                    },
+                    resolve: {
+                        products: function (model) {
+                            return model.getProducts().then(function (products) {
+                                return products
+                            })
+                        },
+                        sourceTypes: function (model) {
+                            return model.getSourceTypes().then(function (sourceTypes) {
+                                return sourceTypes
+                            })
+                        },
+                        tags: function (model) {
+                            return model.getTags().then(function (tags) {
+                                return tags
+                            })
+                        }
+                    }
+                })
+
+            $urlRouterProvider.otherwise('/Login');
+
+            $locationProvider.html5Mode({
+                enabled: false,
+                requireBase: false
+            }).hashPrefix('');
+        }])

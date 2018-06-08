@@ -3,8 +3,12 @@
 angular.module('ticketsystem', [
 
     'ngRoute',
-    'angularMoment',
+    'ui.router',
     'ui.bootstrap',
+
+    //  Sidebar
+    'ticketsystem.sidebar',
+    'ticketsystem.menuservice',
 
     //  Services
     'ticketsystem.restService',
@@ -34,15 +38,19 @@ angular.module('ticketsystem', [
     // Home
     'ticketsystem.home',
 
+    //  Account info
+    'ticketsystem.accountInfo',
+
+    //  Admin
+    'ticketsystem.createUser',
+
     // Customer
     'ticketsystem.homeCustomer',
     'ticketsystem.createCustomer',
-    'ticketsystem.accountCustomer',
 
     //CompanyAdmin
     'ticketsystem.homeAdmin',
     'ticketsystem.createTarget',
-    'ticketsystem.accountAdmin',
 
     //Factories
     'ticketsystem.storageService',
@@ -55,10 +63,26 @@ angular.module('ticketsystem', [
     //  Team Leader
     'ticketsystem.teamLeader',
     'ticketsystem.homeTeamLeader',
-    'ticketsystem.accountTeamLeader',
 
     'isteven-multi-select',
     'modal'
 
 
-]);
+])
+
+    .run(function ($rootScope, $transitions, storageService) {
+        $transitions.onStart({}, function (transition) {
+            let profile
+            if (localStorage.getItem('userInformation'))
+                profile = JSON.parse(localStorage.getItem('userInformation'))['@type']
+            if (transition.to().data.requiredLogin && profile && transition.to().data.access.indexOf('ALL') > -1) {
+                return true
+            }
+            if (transition.to().data.requiredLogin && profile && transition.to().data.access.indexOf(profile) === -1) {
+                alert('Not authorized')
+                return false;
+            }
+        })
+    })
+;
+

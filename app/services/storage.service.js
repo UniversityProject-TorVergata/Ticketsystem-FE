@@ -12,12 +12,29 @@
 angular.module('ticketsystem.storageService', [])
     .service('storageService', ['$rootScope',
         function ($rootScope) {
+            let userInformation = {};
+            let logged = false;
             return {
                 get: function (key) {
-                    return sessionStorage.getItem(key);
+                    return localStorage.getItem(key);
                 },
                 save: function (key, data) {
-                    sessionStorage.setItem(key, data);
+                    localStorage.setItem(key, data);
+                },
+                setUser: function (user) {
+                    localStorage.setItem('userInformation',JSON.stringify(user));
+                    localStorage.setItem('logged',true);
+                },
+                getUser: function () {
+                    return JSON.parse(localStorage.getItem('userInformation'));
+                },
+                invalidateUser: function () {
+                    localStorage.removeItem('userInformation')
+                    localStorage.removeItem('logged')
+                },
+                isLogged: function () {
+                    return localStorage.getItem('logged');
                 }
+
             };
         }]);

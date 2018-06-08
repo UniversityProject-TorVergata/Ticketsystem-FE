@@ -1,0 +1,94 @@
+[
+  {
+    "id":1,
+    "label": "Home",
+    "route": "secure.accountInfo",
+    "visibility": [
+      "Admin",
+      "Customer",
+      "TeamCoordinator",
+      "TeamLeader",
+      "TeamMember"
+    ]
+  },
+  {
+    "id":10,
+    "label": "Create a new target",
+    "route": "secure.createTarget",
+    "visibility": [
+      "Admin"
+    ]
+  },
+  {
+    "id":11,
+    "label": "List of Targets",
+    "route": "secure.listTarget",
+    "visibility": [
+      "Admin"
+    ]
+  },
+  {
+    "id":12,
+    "label": "Modify Targets",
+    "route": "secure.modifyTarget",
+    "visibility": [
+      "Admin"
+    ]
+  },
+  {
+    "id":13,
+    "label": "Create User",
+    "route": "secure.createUser",
+    "visibility": [
+      "Admin"
+    ]
+  },
+  {
+    "id":20,
+    "label": "Assign a new Ticket",
+    "route": "secure.assignTicket",
+    "visibility": [
+      "TeamCoordinator"
+    ]
+  },
+  {
+    "id":21,
+    "label": "Create a new Team",
+    "route": "secure.createTeam",
+    "visibility": [
+      "TeamCoordinator"
+    ]
+  },
+  {
+    "id":22,
+    "label": "List of Teams",
+    "route": "secure.listTeam",
+    "visibility": [
+      "TeamCoordinator"
+    ]
+  },
+  {
+    "id":30,
+    "label": "Create Ticket",
+    "route": "secure.createTicket",
+    "visibility": [
+      "Customer"
+    ]
+  },
+  {
+    "id":31,
+    "label": "List Ticket",
+    "route": "secure.readTicket",
+    "visibility": [
+      "Customer"
+    ]
+  },
+  {
+    "id":40,
+    "label": "Assign Ticket",
+    "route": "secure.assignTeamMember",
+    "visibility": [
+      "TeamLeader"
+    ]
+  }
+]
