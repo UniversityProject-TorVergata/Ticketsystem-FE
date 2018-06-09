@@ -14,6 +14,18 @@ angular.module('ticketsystem.modelService', [])
                             })
                     })
                 },
+                getUserType() {
+                    return new Promise(function (resolve, reject) {
+                        httpService.get('./mocks/userType.json').then(
+                            function (userTypes) {
+                                resolve(userTypes.data);
+                            },
+                            function (error) {
+                                console.error("Error loading User Types")
+                                resolve([])
+                            })
+                    })
+                },
 
                 /**
                  *  Function gets the targets from the database.

@@ -1,15 +1,16 @@
 'use strict';
 
-//TODO ridefinire tutto... Abuso di Scope
-//TODO Implementare inserimento di @type
-
 angular.module('ticketsystem.createUser', ['ngRoute'])
 
-    .controller('createUserCtrl', function ($scope, restService, httpService, $location) {
+    .controller('createUserCtrl', function ($scope, restService, httpService, $state, userTypes) {
 
-        //  TODO controlli più sensati
-        $scope.creationUser = function (user) {
+        //  Select values
+        $scope.userTypes = userTypes;
 
+        //  Function creates a new user in the database via an http POST.
+        $scope.creationUser = function (user, atype) {
+
+            //  TODO controlli più sensati
             if( angular.isUndefined(user) ||
                 angular.isUndefined(user.fiscal_code) ||
                 angular.isUndefined(user.name) ||
@@ -23,14 +24,15 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
             }
             else {
 
-                var date = Date.now();
-                user.created_at = moment(date).format("DD/MM/YYYY");
+                user.created_at = moment(Date.now()).format("DD/MM/YYYY");
+                user['@type'] = atype.name;
 
-                // HTTP POST
+                //  HTTP POST
                 httpService.post(restService.createUser, user)
                     .then(function (data) {
                             window.alert('Successful registration!');
-                            $state.go('secure.createUser');
+                            //  Resettare i campi dopo creazione
+                            $state.reload('secure.createUser');
                         },
 
                         function (err) {

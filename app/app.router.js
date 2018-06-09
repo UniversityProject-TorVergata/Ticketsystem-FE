@@ -110,6 +110,13 @@ angular.module('ticketsystem.router', ['ui.router'])
                     data: {
                         requiredLogin: true,
                         access: ['Admin']
+                    },
+                    resolve: {
+                        userTypes: function (model) {
+                            return model.getUserType().then(function (userTypes) {
+                                return userTypes
+                            })
+                        }
                     }
                 })
                 .state('secure.assignTicket', {

@@ -73,7 +73,15 @@
   left: 3%;
 }
 
+/*.bg {
+  background-image: url("https://static1.squarespace.com/static/56047552e4b00047c4e83900/t/5627eadee4b0081ecfe39520/1444003361815/tickets-background.jpg");
 
+  height: 100%;
+
+  background-position: center;
+  background-repeat: repeat-y;
+  background-size: cover;
+}*/
 
 
 /* for font-awesome better animation */
