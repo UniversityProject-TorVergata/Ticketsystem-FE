@@ -17,19 +17,19 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
 
 
         $scope.leader = {};
-        $scope.member = {};
+        $scope.members = [];
         $scope.area = {};
         $scope.team = {};
         $scope.editTeam = {};
 
         $scope.control = function (item) {
             console.log(item.id)
-        }
+        };
 
         /**
          *  Function reads all the team leaders in the database via an HTTP GET
          */
-        $scope.readTeamLeaders = function (member) {
+        $scope.readTeamLeaders = function () {
             //  HTTP GET
             httpService.get(restService.getTeamLeaders)
                 .then(function (response) {
@@ -48,6 +48,7 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
             httpService.get(restService.getTeamMembers)
                 .then(function (response) {
                     $scope.membersList = response.data;
+                    console.log($scope.membersList);
                 }, function error(response) {
                     $scope.errorResponse = "Error Status: " + response.statusText;
                 });
@@ -64,7 +65,9 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
                 console.log(member);
 
                 team.teamMemberList = [];
-                team.teamMemberList.push(member);
+                team.teamMemberList = $scope.members;
+
+                //team.teamMemberList.push(member);
 
                 //  HTTP POST
                 httpService.post(restService.createTeam, team)

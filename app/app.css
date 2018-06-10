@@ -73,6 +73,11 @@
   left: 3%;
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /*.bg {
   background-image: url("https://static1.squarespace.com/static/56047552e4b00047c4e83900/t/5627eadee4b0081ecfe39520/1444003361815/tickets-background.jpg");
 

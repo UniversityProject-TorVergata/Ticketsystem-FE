@@ -36,6 +36,18 @@
 
             <div class="form-group">
                 <label>Team Members:</label><br>
+                <div    data-ng-init="readTeamMembers()"
+                        isteven-multi-select
+                        input-model="membersList"
+                        output-model="members"
+                        button-label="name surname"
+                        item-label="name surname"
+                        tick-property="ticked"
+                        max-height="200px"
+                >
+                </div>
+
+                <!--
                 <select id="member" name="member" data-ng-init="readTeamMembers()"
                         ng-options="m as m.name + ' ' + m.surname
                         for
@@ -43,6 +55,7 @@
                         ng-model="member"
                         ng-init="member = membersList[0]">
                 </select>
+                -->
             </div>
             <br>
 
