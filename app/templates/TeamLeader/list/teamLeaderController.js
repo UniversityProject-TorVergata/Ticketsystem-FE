@@ -12,7 +12,7 @@ angular.module('ticketsystem.teamLeader', ['ngRoute'])
          *  Function reads all the READY tickets in the database via an HTTP GET and
          *  shows them in a table.
          */
-        $scope.readAssignedTicket = function () {
+        $scope.readTicketToWork = function () {
             //  HTTP GET
             httpService.get(restService.readyTickets)
                 .then(function (response) {
