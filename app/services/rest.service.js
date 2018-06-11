@@ -20,11 +20,16 @@ angular.module('ticketsystem.restService', [])
             "insertComment": CONNECTION.url + '/ticket/insertComment',
 
             //  Find Ticket by state
-            "newTickets": CONNECTION.url + '/ticket/findTicketByState/NEW',
+            "validationTickets": CONNECTION.url + '/ticket/findTicketByState/VALIDATION',
             "pendingTickets": CONNECTION.url + '/ticket/findTicketByState/PENDING',
-            "readyTickets": CONNECTION.url + '/ticket/findTicketByState/READY',
+            "editTickets": CONNECTION.url + '/ticket/findTicketByState/EDIT',
             "executionTickets": CONNECTION.url + '/ticket/findTicketByState/EXECUTION',
-            "trashedTickets": CONNECTION.url + '/ticket/findTicketByState/TRASHED',
+            "discardedTickets": CONNECTION.url + '/ticket/findTicketByState/DISCARDED',
+            "resolvedTickets": CONNECTION.url + '/ticket/findTicketByState/RESOLVED',
+            "closedTickets": CONNECTION.url + '/ticket/findTicketByState/CLOSED',
+
+            //  Change ticket state
+            "changeTicketState": CONNECTION.url + '/ticket/changeState',
 
             //  Team Leader
             "teamLeader": CONNECTION.url + '/registered_user/team_leader',

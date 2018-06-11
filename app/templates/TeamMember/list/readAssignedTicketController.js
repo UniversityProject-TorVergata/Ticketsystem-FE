@@ -1,20 +1,18 @@
 'use strict';
 
-angular.module('ticketsystem.teamLeader', ['ngRoute'])
+angular.module('ticketsystem.readAssignedTicket', ['ngRoute'])
 
-    .controller('TeamLeaderCtrl', function ($scope, restService, httpService, util, $location, teams, priorities) {
+    .controller('readAssignedTicketCtrl', function ($scope, restService, httpService, util, $location, priorities) {
 
-        //  Select values
-        $scope.teams = teams;
         $scope.priorities = priorities;
 
         /**
          *  Function reads all the READY tickets in the database via an HTTP GET and
          *  shows them in a table.
          */
-        $scope.readTicketToWork = function () {
+        $scope.readAssignedTicket = function () {
             //  HTTP GET
-            httpService.get(restService.pendingTickets)
+            httpService.get(restService.executionTickets)
                 .then(function (response) {
                     $scope.items = response.data;
                 }, function error(response) {

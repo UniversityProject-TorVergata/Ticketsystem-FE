@@ -1,17 +1,14 @@
 'use strict';
 
 var app = angular.module('ticketsystem.createTicket', ['ngRoute', 'ui.bootstrap']);
-app.controller('CreateTicketCtrl', function ($scope, restService, httpService, util, $location, storageService, tags) {
+app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpService, util, $location, storageService, tags) {
     //  Select values
-    $scope.sourceTypes;
-    $scope.ticketTypes;
     $scope.tags = tags;
 
     //  Variables
     $scope.ticket = {};
     $scope.items = [];
     $scope.targetList = [];
-    $scope.categories;
     $scope.relatedCategories = [];
     $scope.selectedCategories = [];
     $scope.showCategoriesOnDisplay = false;
@@ -20,8 +17,6 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
     $scope.edit = [];
     $scope.editTicket = {};
     $scope.selectedTags = [];
-    $scope.tempTags = []; //used for temporary store tags data
-    $scope.tempCategories = [];
 
 
 
@@ -43,19 +38,21 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
                 This change allows you to send the tags as strings to the backend
                 instead of the entire json object
              */
+            let tempTags = [];
+            let tempCategories = [];
             for (let i = 0; i < $scope.selectedTags.length; i++) {
-                $scope.tempTags.push($scope.selectedTags[i].name);
+                tempTags.push($scope.selectedTags[i].name);
             }
-            $scope.ticket.tags = $scope.tempTags;
+            $scope.ticket.tags = tempTags;
             console.log($scope.selectedTags);
 
             for (let a = 0; a < Object.keys($scope.selectedCategories).length; a++) {
                 console.log($scope.selectedCategories[a]['name']);
-                $scope.tempCategories.push($scope.selectedCategories[a].name);
+                tempCategories.push($scope.selectedCategories[a].name);
             }
-            $scope.ticket.target.categories = $scope.tempCategories;
+            $scope.ticket.target.categories = tempCategories;
             //console.log($scope.selectedCategories);
-            console.log($scope.tempCategories);
+            console.log(tempCategories);
 
             //  Assign the ticket creation date
             var date = Date.now();
@@ -67,14 +64,14 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
                 you have to be logged in through the login window,
                 otherwise the storageService cannot save user data
              */
-            $scope.ticket.openerUser = JSON.parse(storageService.get("userData"));
+            $scope.ticket.openerUser = JSON.parse(localStorage.getItem('userInformation'));
 
             //  HTTP POST
             httpService.post(restService.createTicket, $scope.ticket)
                 .then(function (data) {
                         window.alert("Ticket created");
                         console.log(data);
-                        $location.path('/homeCustomer')
+                        $state.reload();
                     },
                     function (err) {
                         window.alert("Error!")
@@ -139,15 +136,34 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
      *  Function deletes a selected ticket via an HTTP DELETE and updates the view of the table.
      *  @param id   id number of the ticket to be deleted.
      */
-    $scope.deleteTicket = function (id) {
-        httpService.delete(restService.createTicket, id)
+    $scope.deleteTicket = function (ticket) {
+
+        //  Trovo l'azione che corrisponde allo stato TRASHED
+        let action = "";
+        let allStates = ticket.stateMachine.allStates;
+        for (let i = 0; i < Object.keys(allStates).length; i++) {
+            if (allStates[i].currentState === ticket.stateMachine.currentState) {
+                for (let j = 0; j < Object.keys(allStates[i].newTransitionMap).length; j++) {
+                    action = "Action" + (j+1).toString();
+                    if (allStates[i].newTransitionMap[action].nextState == "TRASHED") {
+                        break;
+                    }
+                }
+            }
+        }
+
+        //  imposto come resolverUser lo stesso che ha mandato indietro il ticket, ovvero
+        //  il TeamCoordinato
+        httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + ticket.resolverUser.id)
             .then(function (data) {
-                    $scope.readTicket();
-                    window.alert("Ticket deleted")
+
                 },
                 function (err) {
-                    $scope.errorMessage = "error!"
+
                 })
+
+        //TODO da modificare: impiega troppo tempo per il reload
+        $state.reload();
     };
 
     /**
@@ -188,7 +204,7 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
             presumedType: ticket.presumedType,
             actualType: ticket.actualType,
             attachedFile: ticket.attachedFile,
-            mediaType: null,
+            mediaType: ticket.mediaType,
             resolverUser: ticket.resolverUser,
             openerUser: ticket.openerUser,
             target: ticket.target,
@@ -196,7 +212,7 @@ app.controller('CreateTicketCtrl', function ($scope, restService, httpService, u
             actualPriority: ticket.actualPriority,
             visibility: ticket.visibility,
             relationships: {},
-            difficulty: null,
+            difficulty: ticket.difficulty,
             eventRegister: [],
             ticketComments: ticket.ticketComments,
             //state:ticket.state,

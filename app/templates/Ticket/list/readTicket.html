@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="item in items"
+        <tr ng-repeat="item in items | orderBy:'ID'"
             ng-show="item.stateMachine.currentState !='DISCARDED'">
             <td>#{{item.id}}</a></td>
             <td>{{item.title}}</td>
@@ -37,10 +37,10 @@
                 <button ng-controller="modalController" ng-click="showInfoForm(item)" class="btn btn-xs btn-primary">
                     <i class="fas fa-info"></i>
                 </button>
-                <button ng-controller="modalController" ng-click="modifyTicket(item,$index); showEditForm(editTicket)" class="btn btn-xs btn-warning">
+                <button ng-controller="modalController" ng-if="item.stateMachine.currentState == 'EDIT'" ng-click="modifyTicket(item,$index); showEditForm(editTicket)" class="btn btn-xs btn-warning">
                     <i class="fas fa-pen-square"></i>
                 </button>
-                <button ng-click="deleteTicket(item.id)" class="btn btn-xs btn-danger">
+                <button ng-if="item.stateMachine.currentState == 'EDIT'" ng-click="deleteTicket(item)" class="btn btn-xs btn-danger">
                     <i class="fa fa-trash"></i>
                 </button>
             </td>

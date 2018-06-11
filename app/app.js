@@ -65,7 +65,8 @@ angular.module('ticketsystem', [
     'ticketsystem.homeTeamLeader',
 
     'isteven-multi-select',
-    'modal'
+    'modal',
+    'drag-and-drop'
 
 
 ])

@@ -1,0 +1,35 @@
+<div class="modal-header">
+    <h3>Assignment ticket #{{item.id}}</h3>
+</div>
+
+<div class="modal-body">
+
+    <div class="col-md-6" ng-repeat="state in states">
+        <label>{{state.state.nextState}}</label>
+        <div class="thumbnail" data-drop="true" data-jqyoui-options
+             style='height:50px;'
+             jqyoui-droppable="{onDrop:'dropCallback({element: state})'}" >
+
+            <div
+                    class="btn btn-success" data-drag="true"
+                    data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
+                    jqyoui-draggable='{animate: true}'
+                    ng-if="currentState.state == state.state">{{item.id}}</div>
+
+        </div>
+    </div>
+</div>
+
+<div class=""modal-body ng-show="displayModal">
+    <div class="col-md">
+        Are you sure to change ticket #{{item.id}} state?<br><br>
+        <strong>Current state: </strong>{{item.stateMachine.currentState}}<br>
+        <strong>Next state: </strong>{{currentState.state.nextState}}
+    </div>
+</div>
+
+
+<div class="modal-footer">
+    <button type="submit" class="btn btn-primary" ng-click="assignmentOk()">OK</button>
+    <button class="btn btn-warning" ng-click="closeAssignmentModal()">Cancel</button>
+</div>

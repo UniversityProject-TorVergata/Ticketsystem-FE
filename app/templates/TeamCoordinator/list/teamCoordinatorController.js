@@ -2,15 +2,13 @@
 
 angular.module('ticketsystem.assignTeam', ['ngRoute'])
 
-    .controller('AssignTeamCtrl', function ($scope, $route, restService, storageService, httpService, util, $location, teams, priorities) {
+    .controller('AssignTeamCtrl', function ($scope, $state, restService, storageService, httpService, util, $location, teams, priorities) {
 
         //  Select values
         $scope.teams = teams;
         $scope.priorities = priorities;
-        $scope.newComment = {};
+        //$scope.newComment = {};
         $scope.refresh = false;
-
-
 
         /**
          *  Function reads all the PENDING tickets in the database via an HTTP GET and
@@ -19,38 +17,13 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
         $scope.readUnassignedTicket = function () {
             //  HTTP GET
             //TODO non deve vedere i ticket NEW! Usato solo per test ora
-            httpService.get(restService.newTickets)
+            httpService.get(restService.validationTickets)
                 .then(function (response) {
                     $scope.items = response.data;
                 }, function error(response) {
                     $scope.errorResponse = "Error Status: " + response.statusText;
                 });
         };
-
-        $scope.sendNewTicketComment = function (ticketID, msg) {
-            msg['eventGenerator'] = JSON.parse(storageService.get("userData"));
-            httpService.post(restService.insertComment + '/' + ticketID, msg)
-                .then(function (data) {
-                    //$route.reload();
-                },
-                    function (err) {
-                    window.alert("Error!")
-                    })
-        };
-
-
-        /*
-        httpService.post(restService.createTicket, $scope.ticket)
-                .then(function (data) {
-                        window.alert("Ticket created");
-                        console.log(data);
-                        $location.path('/homeCustomer')
-                    },
-                    function (err) {
-                        window.alert("Error!")
-                        $scope.errorMessage = "error!"
-                    })
-         */
 
 
         /**
@@ -60,28 +33,35 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
          *  @param index    iterator offset
          */
         $scope.saveTicketWithTeam = function (ticket, team, actualPriority) {
-            console.log(ticket);
+            //console.log(ticket);
             ticket.actualPriority = actualPriority.name;
 
-            //  HTTP PUT
-            httpService.put(restService.createTicket, ticket.id, ticket)
-                .then(function (succResponse) {
-                        //  HTTP PUT
-                        httpService.put(restService.assignTicket, ticket.id+"/"+team.id)
-                            .then(function(succResponse){
-                                    $scope.readUnassignedTicket();
-                                    window.alert("Ticket assigned to " + team.username)
-                                },
-                                function(errReponse){
-                                    console.log(errReponse)
-                                }
-                            )
-                    },
-                    function (errReponse) {
-                        console.log(errReponse)
+            //  trovo i possibili futuri stati in cerca di PENDING
+            let action = "";
+            let allStates = ticket.stateMachine.allStates;
+            for (let i = 0; i < Object.keys(allStates).length; i++) {
+                if (allStates[i].currentState === ticket.stateMachine.currentState) {
+                    for (let j = 0; j < Object.keys(allStates[i].newTransitionMap).length; j++) {
+                        action = "Action" + (j+1).toString();
+                        if (allStates[i].newTransitionMap[action].nextState == "PENDING") {
+                            break;
+                        }
                     }
-                )
+                }
+            }
+
+            //  imposto come resolverUser il TeamLeader a cui verrà assegnato il ticket
+            httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + team.id)
+                .then(function (data) {
+
+                    },
+                    function (err) {
+
+                    })
+
+            $state.reload();
         };
+
 
         $scope.showImage = function (item, index) {
             util.postBase64(item).then(result => {
