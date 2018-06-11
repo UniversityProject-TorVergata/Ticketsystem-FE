@@ -107,6 +107,7 @@ app.controller("modalController", ['$scope', '$modal', '$log',
             multiselect e non drag and drop
         */
         $scope.isTeamCoordinator = false;
+        $scope.selectedMember = null;
 
         $scope.showAssignmentModal = function (event, ui, ticket) {
             $scope.item = ticket.ticket;
@@ -150,7 +151,7 @@ app.controller("modalController", ['$scope', '$modal', '$log',
                     }
                 }
             }
-            console.log($scope.states);
+            //console.log($scope.states);
 
             var modalInstance = $modal.open({
                 templateUrl: 'modal/modal-assignment-ticket-teamleader.html',
@@ -237,7 +238,7 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
     };
 
     $scope.assignmentOk = function() {
-        $scope.changeTicketState($scope.item.id, $scope.currentState.name);
+        $scope.changeTicketState($scope.item.id, $scope.currentState.name, $scope.selectedMember);
         $modalInstance.dismiss('closed');
         $state.reload();
     }
@@ -264,8 +265,9 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
 
 
     $scope.changeTicketState = function(ticketID, action, resolverUser) {
+
         let resolv;
-        if ($scope.isTeamCoordinator)
+        if (resolverUser == null)
             resolv = JSON.parse(localStorage.getItem('userInformation'));
         else
             resolv = resolverUser;

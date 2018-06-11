@@ -25,7 +25,8 @@
         <tr ng-repeat="item in items | orderBy:'ID'" ng-controller="modalController">
             <td ng-controller="drag-and-drop-controller" class="btn btn-xs btn-primary"
                 data-drag="true" ng-model="item" data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
-                jqyoui-draggable='{animate: true, onStart:"showAssignmentModal({ticket: item})"}'>{{item.id}}</td>
+                jqyoui-draggable='{animate: true, onStart:"showAssignmentModal({ticket: item})"}'>{{item.id}}
+            </td>
             <td>{{item.openerUser.name + " " + item.openerUser.surname}}</td>
             <td>{{item.title}}</td>
             <td>

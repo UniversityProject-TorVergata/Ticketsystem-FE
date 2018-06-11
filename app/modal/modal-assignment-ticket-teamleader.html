@@ -15,12 +15,24 @@
                     data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
                     jqyoui-draggable='{animate: true}'
                     ng-if="currentState.state == state.state">{{item.id}}</div>
-
         </div>
+    </div>
+
+    <div class="col-md-6" ng-if="currentState.state.nextState == 'EXECUTION'">
+        <hr>
+        <label>Select Team Member</label><br>
+        <select name="memberS" data-ng-init="teamMembersList"
+                ng-options="t as t.name
+                            for
+                            t in teamMembersList track by t.name"
+                ng-model="selectedMember"
+                ng-init="selectedMember = teamMembersList[0]">
+        </select>
+        <br>
     </div>
 </div>
 
-<div class=""modal-body ng-show="displayModal">
+<div class=modal-body">
     <div class="col-md">
         Are you sure to change ticket #{{item.id}} state?<br><br>
         <strong>Current state: </strong>{{item.stateMachine.currentState}}<br>

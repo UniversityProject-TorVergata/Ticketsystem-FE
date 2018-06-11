@@ -28,6 +28,12 @@ angular.module('ticketsystem.restService', [])
             "resolvedTickets": CONNECTION.url + '/ticket/findTicketByState/RESOLVED',
             "closedTickets": CONNECTION.url + '/ticket/findTicketByState/CLOSED',
 
+            //  Ticket by openerUser
+            "readMyTickets": CONNECTION.url + '/ticket/ticketByOpenerUser',
+
+            //  Ticket by resolverUser
+            "readMyAssignedTickets": CONNECTION.url + '/ticket/ticketByResolverUser',
+
             //  Change ticket state
             "changeTicketState": CONNECTION.url + '/ticket/changeState',
 
@@ -53,6 +59,9 @@ angular.module('ticketsystem.restService', [])
             //  Team
             "getTeamMembers": CONNECTION.url + '/registered_user/free_team_member',
             "getTeamLeaders": CONNECTION.url + '/registered_user/team_leader',
+
+            //  TeamMembers by TeamLeader
+            "getTeamMembersByTeamLeader": CONNECTION.url + '/team/team_member/team_leader',
 
             "createTeam": CONNECTION.url + '/team',
             "getTeams": CONNECTION.url + '/team',

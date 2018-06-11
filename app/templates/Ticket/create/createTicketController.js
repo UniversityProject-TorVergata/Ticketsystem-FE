@@ -96,7 +96,7 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
      */
     $scope.readTicket = function () {
         //  HTTP GET
-        httpService.get(restService.createTicket)
+        httpService.get(restService.readMyTickets + '/' + JSON.parse(localStorage.getItem('userInformation')).id)
             .then(function (response) {
                 $scope.items = response.data;
                 for (let i = 0; i < $scope.items.length; i++) {
