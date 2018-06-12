@@ -31,6 +31,7 @@ angular.module('ticketsystem.Login', ['ngRoute'])
                             case "Customer":
                             case "TeamCoordinator":
                             case "Admin":
+                            case "TeamMember":
                             case "TeamLeader":
                                 $state.go('secure.accountInfo');
                                 break;

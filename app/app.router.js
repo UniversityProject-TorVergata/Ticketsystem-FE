@@ -169,6 +169,19 @@ angular.module('ticketsystem.router', ['ui.router'])
                         }
                     }
                 })
+                .state('secure.dashboard', {
+                    url: "/dashboard",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Dashboard/dashboard.html',
+                            controller: 'dashboardController'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamMember']
+                    }
+                })
                 .state('secure.createTeam', {
                     url: "/createTeam",
                     views: {

@@ -66,7 +66,8 @@ angular.module('ticketsystem', [
 
     'isteven-multi-select',
     'modal',
-    'drag-and-drop'
+    'drag-and-drop',
+    'dashboard'
 
 
 ])

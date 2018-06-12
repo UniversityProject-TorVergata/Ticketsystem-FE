@@ -238,7 +238,9 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
     };
 
     $scope.assignmentOk = function() {
-        $scope.changeTicketState($scope.item.id, $scope.currentState.name, $scope.selectedMember);
+        console.log("SELECTED MEMBER");
+        console.log($scope.selectedMember);
+        $scope.changeTicketState($scope.item, $scope.currentState.name);
         $modalInstance.dismiss('closed');
         $state.reload();
     }
@@ -264,15 +266,22 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
     };
 
 
-    $scope.changeTicketState = function(ticketID, action, resolverUser) {
+    $scope.changeTicketState = function(ticket, action) {
 
-        let resolv;
-        if (resolverUser == null)
-            resolv = JSON.parse(localStorage.getItem('userInformation'));
-        else
-            resolv = resolverUser;
+        /*
+            Solo il TeamCoordinato imposta se stesso come resolverUser quando rimanda
+            indietro il ticket al customer per la modifica.
+         */
 
-        httpService.post(restService.changeTicketState + '/' + ticketID + '/' + action + '/' + resolv.id)
+        console.log($scope.currentState);
+
+        if ($scope.currentState.state.nextState == "VALIDATION" && JSON.parse(localStorage.getItem('userInformation'))['@type'] == "TeamLeader") {
+            ticket.resolverUser = $scope.teamCoordinator;
+        }
+
+
+
+        httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + ticket.resolverUser.id)
             .then(function (data) {
 
                 },
@@ -281,5 +290,6 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
                 });
 
         $scope.isTeamCoordinator = false;
+        $state.reload();
     };
 };
