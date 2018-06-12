@@ -2,7 +2,7 @@
 
 angular.module('ticketsystem.createTarget', ['ngRoute'])
 
-    .controller('createTargetCtrl', function ($scope, restService, httpService, $location, storageService) {
+    .controller('createTargetCtrl', function ($scope, restService, httpService, $state, storageService) {
 
         var modTargetId;
         $scope.target = {};
@@ -37,7 +37,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                 httpService.post(restService.createTarget, $scope.target, config)
                     .then(function (response) {
                         window.alert("Target created with success!");
-                        $location.url("/homeAdmin");
+                        $state.reload();
                         console.log(response);
                     },
                         function error(response) {

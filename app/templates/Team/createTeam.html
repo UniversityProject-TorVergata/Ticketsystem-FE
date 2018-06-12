@@ -1,72 +1,63 @@
-<div class="container">
-
-    <h1><span class="fa fa-users"> Create team: </span></h1>
-
-    <div class="row">
-        <form>
-            <div class="form-group">
-                <label>Team Name: </label><br>
-                <input type="text" style="font-weight: bold;" class="form-control" name="name" ng-model="team.name">
-            </div>
-            <br>
-
-            <div class="form-group">
-                <Label>Problem Area:</Label><br>
-                <select name="name"
-                        ng-options="area as area.name
-                        for
-                        area in problemArea track by area.id"
-                        ng-model="team.problemArea"
-                        ng-init="team.problemArea = problemArea[0].name">
-                </select>
-                </select><br>
-            </div>
-
-            <div class="form-group">
-                <Label>Team Leader:</Label><br>
-                <select id="leader" name="teamLeader" data-ng-init="readTeamLeaders()"
-                        ng-options="l as l.name + ' ' + l.surname
-                        for
-                        l in leadersList track by l.id"
-                        ng-model="team.teamLeader"
-                        ng-init="team.teamLeader = leadersList[0]">
-                </select>
-            </div>
-            <br>
-
-            <div class="form-group">
-                <label>Team Members:</label><br>
-                <div    data-ng-init="readTeamMembers()"
-                        isteven-multi-select
-                        input-model="membersList"
-                        output-model="members"
-                        button-label="name surname"
-                        item-label="name surname"
-                        tick-property="ticked"
-                        max-height="200px"
-                >
+<div class="account col-sm-10">
+    <br>
+    <form>
+        <h2 class="text-center">Create Team</h2>
+            <form>
+                <div class="form-group">
+                    <label>Team Name: </label><br>
+                    <input type="text" style="font-weight: bold;" class="form-control" name="name" ng-model="team.name">
                 </div>
 
-                <!--
-                <select id="member" name="member" data-ng-init="readTeamMembers()"
-                        ng-options="m as m.name + ' ' + m.surname
+                <div class="form-group">
+                    <Label>Problem Area:</Label><br>
+                    <select name="name"
+                            ng-options="area as area.name
                         for
-                        m in membersList track by m.id"
-                        ng-model="member"
-                        ng-init="member = membersList[0]">
-                </select>
-                -->
-            </div>
-            <br>
+                        area in problemArea track by area.id"
+                            ng-model="team.problemArea"
+                            ng-init="team.problemArea = problemArea[0].name">
+                    </select><br>
+                </div>
 
-            <div>
-                <button ng-click="createTeam(team, member)" class="btn btn-warning btn-lg">Create</button>
-            </div>
+                <div class="form-group">
+                    <Label>Team Leader:</Label><br>
+                    <select id="leader" name="teamLeader" data-ng-init="readTeamLeaders()"
+                            ng-options="l as l.name + ' ' + l.surname
+                        for
+                        l in leadersList track by l.id"
+                            ng-model="team.teamLeader"
+                            ng-init="team.teamLeader = leadersList[0]">
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Team Members:</label><br>
+                    <div data-ng-init="readTeamMembers()"
+                         class="isteven"
+                         isteven-multi-select
+                         input-model="membersList"
+                         output-model="members"
+                         button-label="name surname"
+                         item-label="name surname"
+                         tick-property="ticked"
+                         max-height="200px"
+                    >
+                    </div>
+
+                    <!--
+                    <select id="member" name="member" data-ng-init="readTeamMembers()"
+                            ng-options="m as m.name + ' ' + m.surname
+                            for
+                            m in membersList track by m.id"
+                            ng-model="member"
+                            ng-init="member = membersList[0]">
+                    </select>
+                    -->
+                </div>
+                <br>
+                <div class="form-group">
+                    <button ng-click="createTeam(team, member)" class="btn btn-primary btn-lg btn-block">Create</button>
+                </div>
             </form>
-        </div>
-
-    <hr>
-
-    <p>Go back to <a href="#/homeTeamCoordinator">Home</a></p>
-
+    </form>
 </div>

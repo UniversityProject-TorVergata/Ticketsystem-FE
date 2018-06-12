@@ -1,46 +1,37 @@
-<div class="container">
-
-    <div class="col-sm-6 col-sm-offset-3">
+<div class="account col-sm-10">
+    <br>
+    <form ng-submit="creationTarget()">
+        <h2 class="text-center">Create Target</h2>
+        <label>Target Type</label><br>
+        <select name="targetType" ng-model="target.targetType">
+            <!-- TODO fare mock-->
+            <option value="Service" selected="selected">Service</option>
+            <option value="Product">Product</option>
+        </select>
         <br>
-        <h1><span class="fa fa-sign-in"></span> Insert Target</h1>
+        <br>
+        <label>Ticket Workflow</label><br>
+        <select name="stateMachineName" ng-model="target.stateMachineName">
+            <!-- TODO fare mock-->
+            <option value="Default_StateMachine" selected="selected">Default_StateMachine</option>
+        </select>
+        <br>
+        <br>
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" ng-model="target.name">
+        </div>
 
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" class="form-control" ng-model="target.description">
+        </div>
+        <div class="form-group">
+            <label>Version</label>
+            <input type="number" step="0.1" min="1" class="form-control" ng-model="target.version">
+        </div>
+        <br>
 
-        <form ng-submit="creationTarget()">
-            <br><br>
-            <label>Target Type</label>
-            <select name="targetType" ng-model="target.targetType">
-                <option value="Service" selected="selected">Service</option>
-                <option value="Product">Product</option>
-            </select>
-            <br>
-            <br>
-            <label>Ticket Workflow</label>
-            <select name="stateMachineName" ng-model="target.stateMachineName">
-                <option value="Default_StateMachine" selected="selected">Default_StateMachine</option>
-            </select>
-            <br>
-            <br>
-            <div class="form-group">
-                <label>Name</label>
-                <input type="text" class="form-control"  ng-model="target.name">
-            </div>
-
-            <div class="form-group">
-                <label>Description</label>
-                <input type="text" class="form-control" ng-model="target.description">
-            </div>
-            <div class="form-group">
-                <label>Version</label>
-                <input type="number" step = "0.1" min="1" class="form-control" ng-model="target.version">
-            </div>
-            <br>
-
-            <button  class="btn btn-primary btn-lg">Insert</button>
-        </form>
-
-        <hr>
-        <p>Go back to <a href="#/homeAdmin">Home</a></p>
-
-    </div>
-
+        <button class="btn btn-primary btn-lg btn-block">Insert</button>
+    </form>
 </div>

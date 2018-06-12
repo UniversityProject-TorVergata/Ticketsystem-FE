@@ -1,34 +1,36 @@
-<div class="container">
+<div class="container col-md-8">
+    <br>
+    <form>
+        <table id="tablelist" st-table="rowCollection" class="table table-striped" data-ng-init="listTarget()">
+            <thead>
+            <tr>
+                <th>Target Name</th>
+                <th>Description</th>
+                <th>Target Type</th>
+                <th>Version</th>
+                <th>State</th>
+                <th>State Machine</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="item in items">
+                <td>{{item.name}}</td>
+                <td>{{item.description}}</td>
+                <td>{{item.targetType}}</td>
+                <td>{{item.version}}</td>
+                <td>{{item.targetState}}</td>
+                <td>{{item.stateMachineName}}</td>
+                <td>
+                    <button class="btn btn-primary" ng-click="modifyTarget($index)">Modify</button>&nbsp;&nbsp;&nbsp;<button
+                        class="btn btn-danger" ng-show="!isRetired($index)" ng-click="removeTarget($index)">Retire
+                </button>
+                    &nbsp;&nbsp;<button class="btn btn-success" ng-show="isRetired($index)"
+                                        ng-click="rehabTarget($index)">Rehabilitate
+                </button>
+                </td>
 
-
-    <table st-table="rowCollection" class="table table-striped" data-ng-init="listTarget()">
-        <thead>
-        <tr>
-            <th>Target Name</th>
-            <th>Description</th>
-            <th>Target Type</th>
-            <th>Version</th>
-            <th>State</th>
-            <th>State Machine</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="item in items">
-            <td>{{item.name}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.targetType}}</td>
-            <td>{{item.version}}</td>
-            <td>{{item.targetState}}</td>
-            <td>{{item.stateMachineName}}</td>
-            <td><button class="btn btn-primary" ng-click="modifyTarget($index)">Modify</button>&nbsp;&nbsp;&nbsp;<button class="btn btn-danger" ng-show="!isRetired($index)" ng-click="removeTarget($index)">Retire</button>
-                &nbsp;&nbsp;<button class="btn btn-success" ng-show="isRetired($index)" ng-click="rehabTarget($index)">Rehabilitate</button>
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-
-
-    <p>Go back to <a href="#/homeAdmin">Home</a></p>
-
+            </tr>
+            </tbody>
+        </table>
+    </form>
 </div>

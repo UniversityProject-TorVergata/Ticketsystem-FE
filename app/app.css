@@ -29,7 +29,7 @@ body {
   margin: 0 0 25px;
 }
 
-.account label{
+.account label, .account textarea, .isteven {
   margin-left: 10px;
 }
 
