@@ -90,5 +90,13 @@
     "visibility": [
       "TeamLeader"
     ]
+  },
+  {
+    "id":50,
+    "label": "Dashboard",
+    "route": "secure.dashboard",
+    "visibility": [
+      "TeamMember"
+    ]
   }
 ]

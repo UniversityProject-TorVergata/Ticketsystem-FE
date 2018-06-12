@@ -25,7 +25,7 @@
                 ng-options="t as t.name
                             for
                             t in teamMembersList track by t.name"
-                ng-model="selectedMember"
+                ng-model="item.resolverUser"
                 ng-init="selectedMember = teamMembersList[0]">
         </select>
         <br>
