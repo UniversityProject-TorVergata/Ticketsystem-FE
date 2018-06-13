@@ -2,8 +2,7 @@
 
 angular.module('ticketsystem.Login', ['ngRoute'])
 
-    .controller('LoginCtrl', function ($scope, restService, httpService, loginService, storageService,
-                                           $location,  $state) {
+    .controller('LoginCtrl', function ($scope, restService, httpService, storageService, $state) {
 
         /**
          *  Function triggered by the login.

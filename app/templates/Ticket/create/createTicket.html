@@ -3,27 +3,6 @@
     <form>
         <h2 class="text-center">Create a new Ticket</h2>
         <div class="form-group">
-            <!--<label for="target">Select Product:</label><br>
-            <select id="target" name="target"
-                    ng-options="item as item.name
-                    for
-                    item in products track by item.id" ng-model="ticket.target"
-                    ng-init="ticket.target = products[0]"
-            >
-            </select><br>-->
-            <!--
-            <div class="form-group">
-                <label>Source type:</label><br>
-                <select id="sourceType" name="sourceType"
-                        ng-options="item as item.name | formatEnumeration: item.name
-                    for
-                    item in sourceTypes track by item.id" ng-model="ticket.sourceType"
-                        ng-init="ticket.sourceType = sourceTypes[0]"
-                >
-                </select><br>
-            </div>
-            -->
-
             <div class="form-group">
                 <Label>Target:</Label><br>
                 <select id="targets" name="targets" data-ng-init="findTargets()"

@@ -58,7 +58,6 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             //Salva i dati del prodotto da modificare in locale che possano essere usati
             //Per popolare la view modifyTarget.html
             storageService.save("productData",JSON.stringify($scope.items[$index]))
-            //productService.set($scope.items[$index]);
             $state.go('secure.modifyTarget');
         };
 
