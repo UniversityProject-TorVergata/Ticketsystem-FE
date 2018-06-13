@@ -7,6 +7,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
         var modTargetId;
         $scope.target = {};
         $scope.target.targetType = "Service";
+        $scope.tags=[];
         $scope.target.stateMachineName = "Default_StateMachine";
 
         var config = {
@@ -31,9 +32,16 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
 
                 window.alert('It is necessary to fill all the fields!');
             }
+
             else {
 
                 $scope.target.targetState = "ACTIVE";
+                $scope.target.categories = [];
+                var i = 0;
+                for(i;i<$scope.tags.length;i++){
+                    $scope.target.categories[i] = $scope.tags[i].text;
+
+                }
                 httpService.post(restService.createTarget, $scope.target, config)
                     .then(function (response) {
                         window.alert("Target created with success!");
@@ -78,6 +86,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             $scope.modtarget.version = target.version;
             $scope.modtarget.targetState = target.targetState;
             $scope.modtarget.targetType = target.targetType;
+            $scope.tags = target.categories;
         };
 
         /*
@@ -98,8 +107,16 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                 window.alert('It is necessary to fill all the fields!');
             }
             else {
+                $scope.modtarget.categories = [];
+
+                var i = 0;
+                for(i;i<$scope.tags.length;i++){
+                    $scope.modtarget.categories[i] = $scope.tags[i].text;
+
+                }
+
                 var url = restService.createTarget;
-                console.log($scope.modtarget);
+
                 var targetID = JSON.parse(storageService.get("productData")).id;
                 httpService.put(url, targetID, $scope.modtarget, config)
                     .then(function (response) {

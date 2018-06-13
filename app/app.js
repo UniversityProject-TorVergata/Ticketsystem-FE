@@ -1,5 +1,5 @@
 'use strict';
-
+// Declare navbar level module which depends on views, and components
 angular.module('ticketsystem', [
 
     'ngRoute',
@@ -9,6 +9,9 @@ angular.module('ticketsystem', [
     //  Sidebar
     'ticketsystem.sidebar',
     'ticketsystem.menuservice',
+
+    //TagsInput
+    'ngTagsInput',
 
     //  Services
     'ticketsystem.restService',
@@ -80,4 +83,11 @@ angular.module('ticketsystem', [
         })
     })
 ;
+
+app.config(function(tagsInputConfigProvider) {
+    tagsInputConfigProvider.setDefaults('tagsInput', {
+        placeholder: 'Add category',
+        //removeTagSymbol: '✖'
+    });
+});
 
