@@ -43,14 +43,12 @@ angular.module('ticketsystem', [
 
     //  Admin
     'ticketsystem.createUser',
+    'ticketsystem.homeAdmin',
+    'ticketsystem.createTarget',
 
     // Customer
     'ticketsystem.homeCustomer',
     'ticketsystem.createCustomer',
-
-    //CompanyAdmin
-    'ticketsystem.homeAdmin',
-    'ticketsystem.createTarget',
 
     //Factories
     'ticketsystem.storageService',

@@ -37,7 +37,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                 httpService.post(restService.createTarget, $scope.target, config)
                     .then(function (response) {
                         window.alert("Target created with success!");
-                        $state.reload();
+                        $state.go('secure.listTarget');
                         console.log(response);
                     },
                         function error(response) {
@@ -59,7 +59,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             //Per popolare la view modifyTarget.html
             storageService.save("productData",JSON.stringify($scope.items[$index]))
             //productService.set($scope.items[$index]);
-            $location.url("/modifyTarget");
+            $state.go('secure.modifyTarget');
         };
 
         /*
@@ -107,7 +107,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
 
                         window.alert("Target modified with success!");
                         $scope.target = "";
-                        $location.url("/listTarget");
+                        $state.go('secure.listTarget');
                         console.log(response);
                     },
                         function error(response) {

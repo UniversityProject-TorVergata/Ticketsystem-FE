@@ -28,14 +28,6 @@
     ]
   },
   {
-    "id":12,
-    "label": "Modify Targets",
-    "route": "secure.modifyTarget",
-    "visibility": [
-      "Admin"
-    ]
-  },
-  {
     "id":13,
     "label": "Create User",
     "route": "secure.createUser",
