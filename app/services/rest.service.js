@@ -59,6 +59,8 @@ angular.module('ticketsystem.restService', [])
             //  Team
             "getTeamMembers": CONNECTION.url + '/registered_user/free_team_member',
             "getTeamLeaders": CONNECTION.url + '/registered_user/team_leader',
+            "getMembersByTeamId": CONNECTION.url + '/team/team_member',
+            "getLeaderByTeamId" : CONNECTION.url + '/team/team_leader',
 
             //  TeamMembers by TeamLeader
             "getTeamMembersByTeamLeader": CONNECTION.url + '/team/team_member/team_leader',
