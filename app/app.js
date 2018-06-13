@@ -67,8 +67,7 @@ angular.module('ticketsystem', [
 
 
 ])
-
-    .run(function ($rootScope, $transitions, storageService) {
+    .run(function ($rootScope, $transitions) {
         $transitions.onStart({}, function (transition) {
             let profile
             if (localStorage.getItem('userInformation'))
