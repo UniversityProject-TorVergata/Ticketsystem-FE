@@ -1,19 +1,14 @@
+//  TODO gestire reject
+/**
+ *  The module manages mocks and select values who needs to be got from database.
+ */
 angular.module('ticketsystem.modelService', [])
     .service('model', function (httpService, restService) {
             return {
-                // TODO Rimuovere?
-                getProducts() {
-                    return new Promise(function (resolve, reject) {
-                        httpService.get('./mocks/products.json').then(
-                            function (products) {
-                                resolve(products.data);
-                            },
-                            function (error) {
-                                console.error("Error loading Products")
-                                resolve([])
-                            })
-                    })
-                },
+                /**
+                 *  Function gets the allowed user types.
+                 *  @returns {Promise}  user types list.
+                 */
                 getUserType() {
                     return new Promise(function (resolve, reject) {
                         httpService.get('./mocks/userType.json').then(
@@ -41,23 +36,6 @@ angular.module('ticketsystem.modelService', [])
                                 console.error("Error loading Targets")
                                 resolve([])
                             });
-                    })
-                },
-
-                /**
-                 *  Function gets the targets from the mock.
-                 *  @returns {Promise} Source Types list
-                 */
-                getSourceTypes() {
-                    return new Promise(function (resolve, reject) {
-                        httpService.get('./mocks/source_types.json').then(
-                            function (sourceTypes) {
-                                resolve(sourceTypes.data);
-                            },
-                            function (error) {
-                                console.error("Error loading Source Types")
-                                resolve([])
-                            })
                     })
                 },
 
@@ -169,6 +147,11 @@ angular.module('ticketsystem.modelService', [])
                     })
                 },
 
+                // TODO problemArea dovrebbero essere aggiunti da FE?
+                /**
+                 *  Function gets the problem areas for a Team.
+                 *  @returns {Promise} Problem areas list
+                 */
                 getArea() {
                     return new Promise(function (resolve, reject) {
                         httpService.get('./mocks/problemArea.json').then(
@@ -181,8 +164,6 @@ angular.module('ticketsystem.modelService', [])
                             }
                         )
                     })
-
-
                 }
             }
         }

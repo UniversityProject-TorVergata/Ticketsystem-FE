@@ -1,5 +1,5 @@
 'use strict';
-// Declare navbar level module which depends on views, and components
+
 angular.module('ticketsystem', [
 
     'ngRoute',
@@ -14,11 +14,6 @@ angular.module('ticketsystem', [
     'ticketsystem.restService',
     'ticketsystem.utilService',
     'ticketsystem.modelService',
-    'ticketsystem.loginService',
-
-    //  Mocks for select list
-    'ticketsystem.productService',
-    'ticketsystem.sourceTypeService',
 
     //  Filters
     'ticketsystem.stringFilter',

@@ -1,6 +1,6 @@
 'use strict';
 /**
- *  This module manages all the HTTP requests.
+ *  The module manages all the HTTP requests.
  */
 angular.module('ticketsystem.restService', [])
 
@@ -9,6 +9,7 @@ angular.module('ticketsystem.restService', [])
         url: "http://localhost:8200/ticketsystem"
     })
 
+    //  Service for HTTP requests with REST URLs
     .service('restService', function (CONNECTION) {
         return {
 

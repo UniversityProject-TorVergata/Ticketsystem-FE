@@ -4,7 +4,6 @@
 angular.module('ticketsystem.utilService', [])
     .service('util', function () {
             return {
-
                 /**
                  *  Function encodes the image file into base64 string.
                  *  @param file image file to encode
