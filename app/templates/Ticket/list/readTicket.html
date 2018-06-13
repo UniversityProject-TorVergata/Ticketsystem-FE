@@ -20,7 +20,7 @@
             <th>Action</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody style="height: 250px;">
         <tr ng-repeat="item in items | orderBy:'ID'"
             ng-show="item.stateMachine.currentState !='DISCARDED'">
             <td>#{{item.id}}</a></td>

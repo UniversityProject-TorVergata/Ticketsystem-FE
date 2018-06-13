@@ -35,6 +35,7 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
         $scope.saveTicketWithTeam = function (ticket, team, actualPriority) {
             //console.log(ticket);
             ticket.actualPriority = actualPriority.name;
+            ticket.resolverUser = team.id;
 
             //  trovo i possibili futuri stati in cerca di PENDING
             let action = "";
@@ -57,7 +58,7 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
                     },
                     function (err) {
 
-                    })
+                    });
 
             $state.reload();
         };

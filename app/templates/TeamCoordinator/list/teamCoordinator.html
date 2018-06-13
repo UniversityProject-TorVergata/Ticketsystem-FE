@@ -21,7 +21,7 @@
 
         </tr>
         </thead>
-        <tbody>
+        <tbody style="height: 250px;">
         <tr ng-repeat="item in items | orderBy:'ID'" ng-controller="modalController">
             <td ng-controller="drag-and-drop-controller" class="btn btn-xs btn-primary"
                 data-drag="true" ng-model="item" data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"

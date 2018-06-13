@@ -5,7 +5,7 @@
     <title>Assigned Ticket</title>
 </head>
 <body>
-<div class="container">
+<div class="row">
 
     <table st-table="rowCollection" class="table table-striped">
         <thead>
@@ -13,14 +13,14 @@
             <th>ID</th>
             <th>Title</th>
             <th>Data</th>
-            <th>Customer Priority</th>
-            <th>Internal Priority</th>
+            <th>C. Priority</th>
+            <th>I. Priority</th>
             <th>Action</th>
             <th></th>
 
         </tr>
         </thead>
-        <tbody>
+        <tbody style="height: 250px;">
         <tr ng-repeat="item in items | orderBy:'ID'" ng-controller="modalController">
             <td ng-controller="drag-and-drop-controller" class="btn btn-xs btn-primary"
                 data-drag="true" ng-model="item" data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"

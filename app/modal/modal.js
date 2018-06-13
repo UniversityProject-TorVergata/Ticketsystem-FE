@@ -279,6 +279,10 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
             ticket.resolverUser = $scope.teamCoordinator;
         }
 
+        if ($scope.currentState.state.nextState == "EDIT" && JSON.parse(localStorage.getItem('userInformation'))['@type'] == "TeamCoordinator") {
+            ticket.resolverUser = JSON.parse(localStorage.getItem('userInformation'));
+        }
+
 
 
         httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + ticket.resolverUser.id)
