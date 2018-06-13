@@ -6,10 +6,19 @@
     <div class="bigColumn">
         <h3><i class="fas fa-envelope">&nbsp;Details</i></h3>
         <p><strong>Team name:</strong><br><u>{{formItem['name']}}</u></p>
-        <p><strong>Problem area:</strong></p>
-        <p>{{formItem.problemArea}}</p>
-        <p><strong>Team Leader:</strong><br> {{formItem.teamLeader}}</p>
-        <p><strong>Team Members:</strong>&nbsp;&nbsp;{{formItem.teamMembersList}}</p>
+        <p><strong>Problem area:</strong><br><u>{{formItem.problemArea}}</u></p>
+
+        <p><strong>Team Leader:</strong>
+        <p data-ng-init="getLeaderById(formItem.id)">
+            <div>{{selectedLeader.name + '' + selectedLeader.surname}}</div>
+        </p><br>
+
+        <p><strong>Team Members:</strong>
+        <p data-ng-init="getMembersById(formItem.id)">
+            <div ng-repeat="item in selectedMembers">
+                <div>{{item.name + ' ' + item.surname}}</div>
+            </div>
+        </p>
 
     </div>
 </div>

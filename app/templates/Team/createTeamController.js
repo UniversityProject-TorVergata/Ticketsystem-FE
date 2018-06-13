@@ -10,13 +10,13 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
         $scope.problemArea = problemArea;
         $scope.selectedMembers = [];
         $scope.tempMembers = [];
-        $scope.selectedLeader = [];
         $scope.tempLeader = [];
         $scope.teamsList = [];
         $scope.edit = [];
 
 
         $scope.leader = {};
+        $scope.selectedLeader = {};
         $scope.members = [];
         $scope.area = {};
         $scope.team = {};
@@ -138,17 +138,32 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
             return arrayOfIndexes;
         };
 
-        //Funzione jQuery per visualizzare oggetto in table
-        /* $(document).ready(function () {
-            var html = "<table border='1|1'>";
-            for (var i = 0; i < rows.length; i++) {
-                html+="<tr>";
-                html+="<td>"+rows[i].name+"</td>";
+        /**
+         *  Function reads the team leader of a team via an HTTP GET
+         */
+        $scope.getLeaderById = function (id) {
+            //  HTTP GET
+            httpService.get(restService.getLeaderByTeamId + '/' + id)
+                .then(function (response) {
+                    $scope.selectedLeader = response.data;
+                    console.log($scope.selectedLeader);
+                }, function error(response) {
+                    $scope.errorResponse = "Error Status: " + response.statusText;
+                });
+        };
 
-                html+="</tr>";
-
-            }
-            html+="</table>";
-            $("div").html(html);
-        }); */
+        /**
+         *  Function reads all the team members of a team via an HTTP GET
+         */
+        $scope.getMembersById = function (id) {
+            //  HTTP GET
+            httpService.get(restService.getMembersByTeamId + '/' + id)
+                .then(function (response) {
+                    $scope.selectedMembers = response.data;
+                    console.log($scope.selectedMembers);
+                }, function error(response) {
+                    $scope.errorResponse = "Error Status: " + response.statusText;
+                });
+            //console.log($scope.membersList[1]);
+        };
     });
