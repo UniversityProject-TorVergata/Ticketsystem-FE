@@ -130,27 +130,25 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
     };
 
 
-
-
-    /**
-     *  Function deletes a selected ticket via an HTTP DELETE and updates the view of the table.
-     *  @param id   id number of the ticket to be deleted.
-     */
-    $scope.deleteTicket = function (ticket) {
-
-        //  Trovo l'azione che corrisponde allo stato TRASHED
+    let findAction = function (string, ticket) {
+        //  Trovo l'azione che corrisponde allo stato DISCARDED
         let action = "";
         let allStates = ticket.stateMachine.allStates;
         for (let i = 0; i < Object.keys(allStates).length; i++) {
             if (allStates[i].currentState === ticket.stateMachine.currentState) {
                 for (let j = 0; j < Object.keys(allStates[i].newTransitionMap).length; j++) {
                     action = "Action" + (j+1).toString();
-                    if (allStates[i].newTransitionMap[action].nextState == "TRASHED") {
+                    if (allStates[i].newTransitionMap[action].nextState == string) {
                         break;
                     }
                 }
             }
         }
+        return action;
+    };
+
+    $scope.closeTicket = function (ticket) {
+        let action = findAction("CLOSED", ticket);
 
         //  imposto come resolverUser lo stesso che ha mandato indietro il ticket, ovvero
         //  il TeamCoordinato
@@ -162,7 +160,28 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
 
                 })
 
-        //TODO da modificare: impiega troppo tempo per il reload
+        $state.reload();
+    };
+
+
+    /**
+     *  Function deletes a selected ticket via an HTTP DELETE and updates the view of the table.
+     *  @param id   id number of the ticket to be deleted.
+     */
+    $scope.deleteTicket = function (ticket) {
+
+        let action = findAction("DISCARDED", ticket);
+
+        //  imposto come resolverUser lo stesso che ha mandato indietro il ticket, ovvero
+        //  il TeamCoordinato
+        httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + ticket.resolverUser.id)
+            .then(function (data) {
+
+                },
+                function (err) {
+
+                })
+
         $state.reload();
     };
 

@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<div class="container">
+<div class="row">
 
     <table st-table="rowCollection" class="table table-striped" data-ng-init="readTicket()">
         <thead>
@@ -42,6 +42,9 @@
                 </button>
                 <button ng-if="item.stateMachine.currentState == 'EDIT'" ng-click="deleteTicket(item)" class="btn btn-xs btn-danger">
                     <i class="fa fa-trash"></i>
+                </button>
+                <button ng-if="item.stateMachine.currentState == 'RESOLVED'" ng-click="closeTicket(item)" class="btn btn-xs btn-success">
+                    <i class="fas fa-check"></i>
                 </button>
             </td>
         </tr>
