@@ -1,6 +1,6 @@
 'use strict';
 // Declare navbar level module which depends on views, and components
-angular.module('ticketsystem', [
+var app = angular.module('ticketsystem', [
 
     'ngRoute',
     'ui.router',
@@ -9,6 +9,9 @@ angular.module('ticketsystem', [
     //  Sidebar
     'ticketsystem.sidebar',
     'ticketsystem.menuservice',
+
+    //TagsInput
+    'ngTagsInput',
 
     //  Services
     'ticketsystem.restService',
@@ -70,7 +73,7 @@ angular.module('ticketsystem', [
 
 ])
 
-    .run(function ($rootScope, $transitions, storageService) {
+    app.run(function ($rootScope, $transitions, storageService) {
         $transitions.onStart({}, function (transition) {
             let profile
             if (localStorage.getItem('userInformation'))
@@ -85,4 +88,11 @@ angular.module('ticketsystem', [
         })
     })
 ;
+
+app.config(function(tagsInputConfigProvider) {
+    tagsInputConfigProvider.setDefaults('tagsInput', {
+        placeholder: 'Add category',
+        //removeTagSymbol: '✖'
+    });
+});
 

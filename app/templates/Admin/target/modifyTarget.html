@@ -19,6 +19,11 @@
                 <label>Description</label>
                 <input type="text" class="form-control" ng-model="modTarget.description" ng-value="modtarget.description">
             </div>
+            <label>Target Ticket Categories</label>
+            <div class="isteven">
+
+                <tags-input ng-model="tags"></tags-input><br>
+            </div>
             <div class="form-group">
                 <label>Version</label>
                 <input type="number" step = "0.1" min="1" class="form-control" ng-model="modtarget.version"
