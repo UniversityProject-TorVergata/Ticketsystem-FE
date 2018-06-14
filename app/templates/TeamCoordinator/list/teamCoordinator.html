@@ -17,6 +17,8 @@
             <th>Action</th>
             <th>C. Priority</th>
             <th>I. Priority</th>
+            <th>C. Type</th>
+            <th>I. Type</th>
             <th>Team Leader - Problem Area</th>
 
         </tr>
@@ -48,6 +50,15 @@
                         ng-model="actualPriority"
                         ng-init="actualPriority = priorities[0]">
                 </select>
+            </td>
+            <td>{{item.presumedType}}</td>
+            <td><select name="actualType"
+                        ng-options="c as c
+                                        for
+                                        c in item.target.categories  "
+                        ng-model="item.actualType"
+                        ng-init="item.actualType = item.presumedType">
+            </select>
             </td>
             <td>
                 <select id="team" name="team"
