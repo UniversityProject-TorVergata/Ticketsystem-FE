@@ -2,10 +2,11 @@
 
 angular.module('ticketsystem.teamLeader', ['ngRoute'])
 
-    .controller('TeamLeaderCtrl', function ($scope, restService, httpService,$location) {
+    .controller('TeamLeaderCtrl', function ($scope, restService, httpService, difficulties) {
 
         $scope.teamMembersList = [];
         $scope.items = [];
+        $scope.difficulties = difficulties;
         $scope.teamCoordinator = {}
 
 

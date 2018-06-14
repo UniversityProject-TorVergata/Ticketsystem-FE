@@ -12,7 +12,8 @@
         <tr>
             <th>ID</th>
             <th>Title</th>
-            <th>Data</th>
+            <th>Date</th>
+            <th>Difficulty</th>
             <th>C. Priority</th>
             <th>I. Priority</th>
             <th>Action</th>
@@ -28,6 +29,12 @@
             </td>
             <td>{{item.title}}</td>
             <td>{{item.timestamp}}</td>
+            <td><select id="difficulty" name="difficulty"
+                        ng-options='difficulty as difficulty.name | formatEnumeration: difficulty.name
+                        for
+                        difficulty in difficulties track by difficulty.id' ng-model="difficulty"
+                        ng-init="difficulty = difficulties[0]">
+            </select></td>
             <td>{{item.customerPriority}}</td>
             <td>{{item.actualPriority}}</td>
             <td>

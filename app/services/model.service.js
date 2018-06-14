@@ -6,6 +6,23 @@ angular.module('ticketsystem.modelService', [])
     .service('model', function (httpService, restService) {
             return {
                 /**
+                 *  Function gets the difficulty values.
+                 *  @returns {Promise}  difficulty types list.
+                 */
+                getDifficulties() {
+                    return new Promise(function (resolve, reject) {
+                        httpService.get('./mocks/difficulty.json').then(
+                            function (difficulties) {
+                                resolve(difficulties.data);
+                            },
+                            function (error) {
+                                console.error("Error loading Difficulty values")
+                                resolve([])
+                            })
+                    })
+                },
+
+                /**
                  *  Function gets the allowed user types.
                  *  @returns {Promise}  user types list.
                  */

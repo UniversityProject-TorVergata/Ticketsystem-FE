@@ -171,6 +171,11 @@ angular.module('ticketsystem.router', ['ui.router'])
                         access: ['TeamLeader']
                     },
                     resolve: {
+                        difficulties: function (model) {
+                            return model.getDifficulties().then(function (difficulties) {
+                                return difficulties
+                            })
+                        },
                         teams: function (model) {
                             return model.getTeams().then(function (teams) {
                                 return teams
