@@ -67,7 +67,7 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
 
                     },
                     function (err) {
-                        
+
                     });
 
             $state.reload();

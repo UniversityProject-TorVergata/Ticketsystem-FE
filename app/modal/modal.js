@@ -1,3 +1,5 @@
+'use strict';
+
 var app = angular.module('modal', ['ui.bootstrap']);
 
 /**
@@ -241,6 +243,7 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
         console.log("SELECTED MEMBER");
         console.log($scope.selectedMember);
         $scope.changeTicketState($scope.item, $scope.currentState.name);
+        $scope.changeDifficulty($scope.item,$scope.item.difficulty);
         $modalInstance.dismiss('closed');
         $state.reload();
     }
@@ -249,6 +252,18 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
         $modalInstance.dismiss('closed');
         $state.reload();
     }
+
+    $scope.changeDifficulty = function(ticket,difficulty){
+        console.log(difficulty.name);
+        httpService.put(restService.createTicket+'/changeDifficulty/'+difficulty,ticket.id)
+            .then(function (data) {
+                //$route.reload();
+            },
+            function (err) {
+                //window.alert("Error!")
+            })
+    };
+
 
 
 

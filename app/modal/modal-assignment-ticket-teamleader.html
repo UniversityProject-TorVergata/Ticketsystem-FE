@@ -29,6 +29,12 @@
                 ng-init="selectedMember = teamMembersList[0]">
         </select>
         <br>
+        <br>
+        <select name="actualDifficulty" ng-model="item.difficulty" ng-init="item.difficulty = 'LOW'">
+            <option value ="LOW" >LOW</option>
+            <option value="MEDIUM">MEDIUM</option>
+            <option value="HIGH">HIGH</option>
+        </select>
     </div>
 </div>
 
