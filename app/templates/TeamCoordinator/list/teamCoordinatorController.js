@@ -8,6 +8,7 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
         $scope.teams = teams;
         $scope.priorities = priorities;
         //$scope.newComment = {};
+        $scope.categories = [];
         $scope.refresh = false;
 
         /**
@@ -17,13 +18,20 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
         $scope.readUnassignedTicket = function () {
             //  HTTP GET
             //TODO non deve vedere i ticket NEW! Usato solo per test ora
+            var categories =[];
+            var tickets = {};
             httpService.get(restService.validationTickets)
                 .then(function (response) {
                     $scope.items = response.data;
+                    tickets = $scope.items;
+
+
                 }, function error(response) {
                     $scope.errorResponse = "Error Status: " + response.statusText;
                 });
-        };
+
+
+            };
 
 
         /**
@@ -36,6 +44,7 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
             //console.log(ticket);
             ticket.actualPriority = actualPriority.name;
             ticket.resolverUser = team.id;
+            console.log(ticket.actualType);
 
             //  trovo i possibili futuri stati in cerca di PENDING
             let action = "";
@@ -52,12 +61,13 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
             }
 
             //  imposto come resolverUser il TeamLeader a cui verrà assegnato il ticket
-            httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + team.id)
+            httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' +
+                team.id+'/'+ticket.actualPriority+'/'+ticket.actualType)
                 .then(function (data) {
 
                     },
                     function (err) {
-
+                        
                     });
 
             $state.reload();
