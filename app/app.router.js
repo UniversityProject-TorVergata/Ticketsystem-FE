@@ -286,6 +286,19 @@ angular.module('ticketsystem.router', ['ui.router'])
                         access: ['Customer']
                     }
                 })
+                .state('secure.homeTeamLeader', {
+                    url: "/homeTeamLeader",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/TeamLeader/home/homeTeamLeader.html',
+                            controller: 'homeTeamLeaderCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamLeader']
+                    }
+                })
                 .state('secure.ticket', {
                     url: "/Ticket",
                     views: {

@@ -9,6 +9,14 @@
   },
   {
     "id":2,
+    "label": "Home",
+    "route": "secure.homeTeamLeader",
+    "visibility": [
+      "TeamLeader"
+    ]
+  },
+  {
+    "id":3,
     "label": "Account Information",
     "route": "secure.accountInfo",
     "visibility": [
