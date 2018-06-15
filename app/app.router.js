@@ -262,6 +262,19 @@ angular.module('ticketsystem.router', ['ui.router'])
                         }
                     }
                 })
+                .state('secure.homeCustomer', {
+                    url: "/homeCustomer",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Customer/home/homeCustomer.html',
+                            controller: 'homeCustomerCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Customer']
+                    }
+                })
                 .state('secure.ticket', {
                     url: "/Ticket",
                     views: {
