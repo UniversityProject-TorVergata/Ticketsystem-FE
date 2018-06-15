@@ -17,6 +17,30 @@
   },
   {
     "id":3,
+    "label": "Home",
+    "route": "secure.homeAdmin",
+    "visibility": [
+      "Admin"
+    ]
+  },
+  {
+    "id":4,
+    "label": "Home",
+    "route": "secure.homeTeamCoordinator",
+    "visibility": [
+      "TeamCoordinator"
+    ]
+  },
+  {
+    "id":5,
+    "label": "Home",
+    "route": "secure.homeTeamMember",
+    "visibility": [
+      "TeamMember"
+    ]
+  },
+  {
+    "id":6,
     "label": "Account Information",
     "route": "secure.accountInfo",
     "visibility": [

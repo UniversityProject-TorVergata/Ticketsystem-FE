@@ -28,11 +28,19 @@ angular.module('ticketsystem.Login', ['ngRoute'])
 
                         switch(response.data["@type"]) {
                             case "Customer":
+                                $state.go('secure.homeCustomer');
+                                break;
                             case "TeamCoordinator":
+                                $state.go('secure.homeTeamCoordinator');
+                                break;
                             case "Admin":
+                                $state.go('secure.homeAdmin');
+                                break;
                             case "TeamMember":
+                                $state.go('secure.homeTeamMember');
+                                break;
                             case "TeamLeader":
-                                $state.go('secure.accountInfo');
+                                $state.go('secure.homeTeamLeader');
                                 break;
                         }
 

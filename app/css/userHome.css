@@ -3,7 +3,8 @@
     background-color: #2e353d;
     margin-left: 20px;
     min-height: 450px;
-    max-width: 950px;
+    max-width: 890px;
+    border-radius: 20px 20px 20px 20px;
 }
 
 #title-div {

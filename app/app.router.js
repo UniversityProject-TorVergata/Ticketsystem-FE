@@ -299,6 +299,45 @@ angular.module('ticketsystem.router', ['ui.router'])
                         access: ['TeamLeader']
                     }
                 })
+                .state('secure.homeAdmin', {
+                    url: "/homeAdmin",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Admin/home/homeAdmin.html',
+                            controller: 'homeAdminCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Admin']
+                    }
+                })
+                .state('secure.homeTeamCoordinator', {
+                    url: "/homeTeamCoordinator",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/TeamCoordinator/home/homeTeamCoordinator.html',
+                            controller: 'homeTeamCoordinatorCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamCoordinator']
+                    }
+                })
+                .state('secure.homeTeamMember', {
+                    url: "/homeTeamMember",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/TeamMember/home/homeTeamMember.html',
+                            controller: 'homeTeamMemberCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamMember']
+                    }
+                })
                 .state('secure.ticket', {
                     url: "/Ticket",
                     views: {
