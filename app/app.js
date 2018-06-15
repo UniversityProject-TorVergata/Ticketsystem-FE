@@ -1,6 +1,6 @@
 'use strict';
 // Declare navbar level module which depends on views, and components
-angular.module('ticketsystem', [
+var app = angular.module('ticketsystem', [
 
     'ngRoute',
     'ui.router',

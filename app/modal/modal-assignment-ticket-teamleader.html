@@ -26,15 +26,17 @@
                             for
                             t in teamMembersList track by t.name"
                 ng-model="item.resolverUser"
-                ng-init="selectedMember = teamMembersList[0]">
+                ng-init="item.resolverUser = teamMembersList[0]">
         </select>
-        <br>
-        <br>
-        <select name="actualDifficulty" ng-model="item.difficulty" ng-init="item.difficulty = 'LOW'">
-            <option value ="LOW" >LOW</option>
-            <option value="MEDIUM">MEDIUM</option>
-            <option value="HIGH">HIGH</option>
+        <hr>
+        <label>Select difficulty</label><br>
+        <select id="difficulty" name="difficulty"
+                ng-options='difficulty as difficulty.name | formatEnumeration: difficulty.name
+                        for
+                        difficulty in difficulties track by difficulty.id' ng-model="item.difficulty"
+                ng-init="difficulty = difficulties[0]">
         </select>
+        <hr>
     </div>
 </div>
 
