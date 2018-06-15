@@ -3,19 +3,24 @@
     <form ng-submit="creationTarget()">
         <h2 class="text-center">Create Target</h2>
         <div class="form-group">
-            <label>Target Type</label>
-            <select name="targetType" ng-model="target.targetType">
-                <!-- TODO fare mock-->
-                <option value="Service" selected="selected">Service</option>
-                <option value="Product">Product</option>
-            </select>
+            <label>Target Type</label><br>
+            <ui-select   ng-model="type.selected" theme="select2" ng-init="type.selected = targetTypes[0]"
+                         style="min-width: 300px;margin-left: 10px" title="Select target type " >
+                <ui-select-match placeholder="Select Target type in the list ">{{type.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="type in targetTypes | propsFilter: {name: $select.search}">
+                    <div ng-bind-html="type.name | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select><br>
         </div>
         <div class="form-group">
-            <label>Ticket Workflow</label>
-            <select name="stateMachineName" ng-model="target.stateMachineName">
-                <!-- TODO fare mock-->
-                <option value="Default_StateMachine" selected="selected">Default_StateMachine</option>
-            </select>
+            <label>Ticket Workflow</label><br>
+            <ui-select   ng-model="stateMachine.selected" theme="select2" ng-init="stateMachine.selected = stateMachines[0]"
+                         style="min-width: 300px;margin-left: 10px" title="Select State Machine " >
+                <ui-select-match placeholder="Select state machine in the list ">{{stateMachine.selected.name}}</ui-select-match>
+                <ui-select-choices repeat="stateMachine in stateMachines | propsFilter: {name: $select.search}">
+                    <div ng-bind-html="stateMachine.name | highlight: $select.search"></div>
+                </ui-select-choices>
+            </ui-select><br>
         </div>
         <div class="form-group">
             <label>Name</label>

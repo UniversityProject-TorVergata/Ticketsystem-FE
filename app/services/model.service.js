@@ -62,7 +62,7 @@ angular.module('ticketsystem.modelService', [])
                  */
                 getTeams() {
                     return new Promise(function (resolve, reject) {
-                        httpService.get(restService.teamLeader).then(
+                        httpService.get(restService.employedTeamLeader).then(
                             function (teams) {
                                 resolve(teams.data);
                             },
@@ -163,6 +163,7 @@ angular.module('ticketsystem.modelService', [])
                         )
                     })
                 },
+
 
                 // TODO problemArea dovrebbero essere aggiunti da FE?
                 /**

@@ -4,11 +4,17 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
 
     .controller('createUserCtrl', function ($scope, restService, httpService, $state, userTypes) {
 
+        $scope.userType = {};
+        $scope.userType.selected;
+
+
         //  Select values
         $scope.userTypes = userTypes;
 
         //  Function creates a new user in the database via an http POST.
         $scope.creationUser = function (user, atype) {
+
+
 
             //  TODO controlli più sensati
             if( angular.isUndefined(user) ||
@@ -23,6 +29,7 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
                     window.alert('Some fields are missing!')
             }
             else {
+
 
                 user.created_at = moment(Date.now()).format("DD/MM/YYYY");
                 user['@type'] = atype.name;

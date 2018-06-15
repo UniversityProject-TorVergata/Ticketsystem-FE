@@ -61,7 +61,7 @@ body {
 }
 
 .account form {
-  color: #7a7a7a;
+    color:cornflowerblue;
   border-radius: 1px;
   margin-bottom: 15px;
   font-size: 13px;
@@ -88,7 +88,7 @@ body {
   padding: 100px 0 30px;
 }
 .login-form form {
-  color: #7a7a7a;
+    color:cornflowerblue;
   border-radius: 2px;
   margin-bottom: 15px;
   font-size: 13px;
@@ -140,7 +140,7 @@ body {
   text-decoration: none;
 }
 .login-form form a {
-  color: #7a7a7a;
+    color:cornflowerblue;
   text-decoration: none;
 }
 .login-form form a:hover {

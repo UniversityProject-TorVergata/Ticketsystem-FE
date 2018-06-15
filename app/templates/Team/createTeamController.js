@@ -31,7 +31,7 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
          */
         $scope.readTeamLeaders = function () {
             //  HTTP GET
-            httpService.get(restService.getTeamLeaders)
+            httpService.get(restService.getFreeTeamLeaders)
                 .then(function (response) {
                     $scope.leadersList = response.data;
                 }, function error(response) {
@@ -59,7 +59,17 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
          *  Function creates a team in the database via an HTTP POST and update internal user's team
          */
         $scope.createTeam = function (team, member) {
+
+            if(angular.isUndefined(team.name) ||
+                angular.isUndefined(team.problemArea) ||
+                $scope.members.length<1){
+
+                window.alert("Fill in all the fields!");
+
+            }
+            else{
                 team.problemArea = team.problemArea.name;
+
                 console.log(team.problemArea);
                 console.log(team.teamLeader);
                 console.log(member);
@@ -71,16 +81,19 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
 
                 //  HTTP POST
                 httpService.post(restService.createTeam, team)
-                    .then(function(data) {
+                    .then(function (data) {
                         window.alert("Team created!");
                         console.log(data);
                         $location.path('/homeTeamCoordinator');
                     },
-                        function(err){
-                            window.alert("Error!")
-                            $scope.errorMessage = "error!"
-                        })
-            };
+                    function (err) {
+                        window.alert("Error!")
+                        $scope.errorMessage = "error!"
+                    });
+            }
+            }
+            ;
+
 
         /**
          *  Function reads all the teams in the database via an HTTP GET

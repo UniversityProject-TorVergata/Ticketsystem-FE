@@ -1,3 +1,4 @@
+'use strict';
 angular.module('ticketsystem.router', ['ui.router'])
     .config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
         function ($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -257,8 +258,18 @@ angular.module('ticketsystem.router', ['ui.router'])
                     resolve: {
                         tags: function (model) {
                             return model.getTags().then(function (tags) {
-                                return tags
-                            })
+                                return tags;
+                            });
+                        },
+                        priorities: function(model) {
+                            return model.getPriority().then(function (priorities) {
+                                return priorities;
+                            });
+                        },
+                        visibilities: function(model) {
+                            return model.getVisibilities().then(function (visibilities) {
+                                return visibilities;
+                            });
                         }
                     }
                 })

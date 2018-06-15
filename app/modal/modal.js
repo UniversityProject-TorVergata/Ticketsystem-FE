@@ -15,6 +15,12 @@ app.controller("modalController", ['$scope', '$modal', '$log',
      */
     function ($scope, $modal, $log) {
 
+        //Ui Select
+        $scope.difficulty = {};
+        $scope.difficulty.selected;
+
+
+
         //  showEditForm: modal for editing ticket
         $scope.showEditForm = function (item) {
             $scope.message = "Show Form Button Clicked";
@@ -243,8 +249,7 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
         console.log("SELECTED MEMBER");
         console.log($scope.selectedMember);
         $scope.changeTicketState($scope.item, $scope.currentState.name);
-        if ($scope.item.difficulty != null)
-            $scope.changeDifficulty($scope.item,$scope.item.difficulty);
+
         $modalInstance.dismiss('closed');
         $state.reload();
     }
@@ -257,7 +262,7 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
     $scope.changeDifficulty = function(ticket,difficulty){
         //console.log("DIFFICOLTA");
         //console.log(difficulty);
-        httpService.put(restService.createTicket+'/changeDifficulty/'+difficulty.name,ticket.id)
+        httpService.put(restService.createTicket+'/changeDifficulty/'+difficulty,ticket.id)
             .then(function (data) {
                 //$route.reload();
             },
@@ -304,7 +309,11 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
 
         httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + ticket.resolverUser.id)
             .then(function (data) {
-
+                    console.log($scope.difficulty.selected)
+                    if ($scope.difficulty.selected != null) {
+                        console.log("CIAO")
+                        $scope.changeDifficulty($scope.item, $scope.difficulty.selected.name);
+                    }
                 },
                 function (err) {
 

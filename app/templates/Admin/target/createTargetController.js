@@ -10,6 +10,18 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
         $scope.tags=[];
         $scope.target.stateMachineName = "Default_StateMachine";
 
+        /* Array per Ui-Select*/
+        $scope.targetTypes = [{"name":"Product"},{"name":"Service"}];
+        $scope.type = {};
+        $scope.type.selected = {} ;
+
+        $scope.stateMachines = [{"name":"Default_StateMachine"}] ;
+        $scope.stateMachine = {};
+        $scope.stateMachine.selected ;
+
+
+
+
         var config = {
             headers : {
                 'Content-Type': 'application/json',
@@ -28,8 +40,8 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             if(angular.isUndefined($scope.target) || (
                 angular.isUndefined($scope.target.name) ||
                 angular.isUndefined($scope.target.description) ||
-                angular.isUndefined($scope.target.version)) ) {
-
+                angular.isUndefined($scope.target.version)) ||
+                    $scope.tags.length==0) {
                 window.alert('It is necessary to fill all the fields!');
             }
 
@@ -37,6 +49,11 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
 
                 $scope.target.targetState = "ACTIVE";
                 $scope.target.categories = [];
+
+
+                $scope.target.targetType = $scope.type.selected.name ;
+
+                console.log($scope.target);
                 var i = 0;
                 for(i;i<$scope.tags.length;i++){
                     $scope.target.categories[i] = $scope.tags[i].text;
@@ -87,6 +104,9 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             $scope.modtarget.targetState = target.targetState;
             $scope.modtarget.targetType = target.targetType;
             $scope.tags = target.categories;
+            $scope.type.selected = {};
+            $scope.type.selected.name = $scope.modtarget.targetType;
+            console.log($scope.type.selected.name);
         };
 
         /*
@@ -102,12 +122,15 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
             if(angular.isUndefined($scope.modtarget) || (
                 angular.isUndefined($scope.modtarget.name) ||
                 angular.isUndefined($scope.modtarget.description) ||
-                angular.isUndefined($scope.modtarget.version)) ) {
+                angular.isUndefined($scope.modtarget.version)) ||
+                $scope.tags.length<1) {
 
                 window.alert('It is necessary to fill all the fields!');
             }
             else {
+                $scope.modtarget.targetType = $scope.type.selected.name ;
                 $scope.modtarget.categories = [];
+                $scope.modtarget.stateMachineName = $scope.stateMachine.selected.name;
 
                 var i = 0;
                 for(i;i<$scope.tags.length;i++){
