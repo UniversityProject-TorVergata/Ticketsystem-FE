@@ -16,15 +16,16 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
 
         $scope.changeAccountInformation = function() {
 
-            if(angular.isUndefined($scope.user) ||
-                angular.isUndefined($scope.user.fiscal_code) ||
-                angular.isUndefined($scope.user.name) ||
-                angular.isUndefined($scope.user.surname) ||
-                angular.isUndefined($scope.user.address) ||
-                angular.isUndefined($scope.user.email) ||
-                angular.isUndefined($scope.user.username) ||
-                angular.isUndefined($scope.user.password)) {
-
+            if( angular.isUndefined($scope.user) ||
+                angular.isUndefined($scope.user.fiscal_code) ||  $scope.user.fiscal_code === "" ||
+                angular.isUndefined($scope.user.name) || $scope.user.name === "" ||
+                angular.isUndefined($scope.user.surname) || $scope.user.surname === "" ||
+                angular.isUndefined($scope.user.address) || $scope.user.address === "" ||
+                angular.isUndefined($scope.user.email) || $scope.user.email === "" ||
+                angular.isUndefined($scope.user.username) || $scope.user.username === "" ||
+                angular.isUndefined($scope.user.password) || $scope.user.password === "" ||
+                angular.isUndefined($scope.user.confirm_password)|| scope.user.confirm_password === "")
+            {
                 window.alert('It is necessary to fill all the fields!')
 
             }
