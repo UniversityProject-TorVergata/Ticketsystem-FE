@@ -24,13 +24,13 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
                 angular.isUndefined($scope.user.email) || $scope.user.email === "" ||
                 angular.isUndefined($scope.user.username) || $scope.user.username === "" ||
                 angular.isUndefined($scope.user.password) || $scope.user.password === "" ||
-                angular.isUndefined($scope.user.confirm_password)|| scope.user.confirm_password === "")
+                angular.isUndefined($scope.user.confirm_password)|| $scope.user.confirm_password === "")
             {
                 window.alert('It is necessary to fill all the fields!')
 
             }
             else if(!angular.equals($scope.user.password, $scope.user.confirm_password)) {
-                window.alert('Password Error')
+                window.alert('Password and confirm password not matching')
             }
             else {
 
