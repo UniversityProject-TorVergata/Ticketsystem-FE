@@ -16,7 +16,7 @@
     border: 10px solid lightskyblue;
     border-radius: 20px 20px 20px 20px;
     -webkit-animation: mymove 5s infinite;
-    animation: mymove 8s infinite;
+    animation: mymove 6s infinite;
 }
 
 #title-div {
@@ -53,13 +53,12 @@
 #footer pre {
     text-align: center;
     font-size: 13px;
-    background-color:#2e353d ;
     border-radius: 10px 10px 10px 10px;
     border: 3px solid lightskyblue;
     -webkit-animation: mymove 5s infinite;
-    animation: mymove 8s infinite;
+    animation: mymove 6s infinite;
     font-style: italic;
-    color: white;
+    color: black;
     line-height: 3px;
 }
 
