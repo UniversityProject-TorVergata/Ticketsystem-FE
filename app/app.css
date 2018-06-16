@@ -2,63 +2,108 @@
   box-sizing: border-box;
 }
 
-html{
-  max-width: 100%;
-  overflow-x: hidden;
+html {
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body {
-  max-width: 100%;
-  overflow-x: hidden;
-  background-image: url("/public/images/ticketsystem_background.jpg")
+    max-width: 100%;
+    overflow-x: hidden;
+    background-image: url("/public/images/ticketsystem_background.jpg")
+}
+
+.trOdd {
+    background-color:#FFFFFF;
+}
+.trEven {
+    background-color:#F0F0F0;
 }
 
 .wrapper {
-  display: flex;
-  align-items: stretch;
+    display: flex;
+    align-items: stretch;
 }
 
-.account{
-  box-shadow: none !important;
-  border-color: #ffffff;
-  margin-left: 10%;
+.container {
+    background: #2e353d;
+    overflow-x: auto;
+    white-space: nowrap;
+    width: 100%;
 }
 
-.account h2 {
-  font-size: 22px;
-  margin: 0 0 25px;
+table, th, td {
+    border: 1px solid black;
 }
 
-.account label, .account textarea, .isteven {
-  margin-left: 10px;
+th, td {
+    padding: .5em 1em;
 }
 
-.account input{
-  margin-left: 10px;
-  margin-right: 10px;
+.account {
+    box-shadow: none !important;
+    border-color: #ffffff;
+    margin-left: 10%;
 }
 
-.account select{
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 30%;
+.account h2, .container h2 {
+    font-size: 20px;
+    margin: 0 0 15px;
 }
 
-.account select{
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 30%;
+.account label, .account textarea, .isteven, .container label {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.account .form-control {
+    min-height: 20px;
+    background: #fff;
+    box-shadow: none !important;
+    border-color: #e3e3e3;
+}
+
+.account input {
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 10px;
+}
+
+.account select {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 30%;
+}
+
+.account select {
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 30%;
 }
 
 .account .btn {
-  font-size: 16px;
-  font-weight: bold;
-  background: #007bff;
-  border: none;
-  margin-bottom: 20px;
-  margin-left: 10px;
-  margin-right: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    background: #007bff;
+    border: none;
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
+
+.account .btn:hover, .account .btn:focus {
+    background: #50b8b3;
+    outline: none !important;
+}
+
+/*.account form, .accounttable form {
+    color: #7a7a7a;
+    border-radius: 1px;
+    margin-bottom: 15px;
+    font-size: 13px;
+    background: #2e353d;
+    padding: 40px;
+    position: relative;*/
 
 .account form {
     color:cornflowerblue;
@@ -70,22 +115,83 @@ body {
   position: relative;
 }
 
+.accounttable form {
+    padding: 40px;
+}
+
+table.steelBlueCols {
+    border: 4px solid #555555;
+    background-color: #555555;
+    width: 400px;
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    vertical-align: middle;
+    border-collapse: collapse;
+}
+table.steelBlueCols td, table.steelBlueCols th {
+    border: 1px solid #555555;
+    padding: 5px 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+table.steelBlueCols tbody td, table.steelBlueCols .btn {
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+}
+
+table.steelBlueCols .btn {
+    margin: auto;
+}
+
+table.steelBlueCols td:nth-child(even) {
+    background: #398AA4;
+}
+table.steelBlueCols thead {
+    background: #3a638f/*#398AA4*/;
+    /*border-bottom: 10px solid /*#398AA4;*/
+}
+table.steelBlueCols thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #FFFFFF;
+    /*border-left: 2px solid #398AA4;*/
+}
+table.steelBlueCols thead th:first-child {
+    border-left: none;
+}
+
+table.steelBlueCols tfoot td {
+    font-size: 13px;
+}
+table.steelBlueCols tfoot .links {
+    text-align: right;
+}
+table.steelBlueCols tfoot .links a{
+    display: inline-block;
+    background: #FFFFFF;
+    color: #398AA4;
+    padding: 2px 8px;
+    border-radius: 5px;
+}
+
 .form-control {
-  min-height: 41px;
-  background: #fff;
-  box-shadow: none !important;
-  border-color: #e3e3e3;
+    min-height: 41px;
+    background: #fff;
+    box-shadow: none !important;
+    border-color: #e3e3e3;
 }
 .form-control:focus {
-  border-color: #007bff;
+    border-color: #007bff;
 }
 .form-control, .btn {
-  border-radius: 2px;
+    border-radius: 2px;
 }
 .login-form {
-  width: 350px;
-  margin: 0 auto;
-  padding: 100px 0 30px;
+    width: 350px;
+    margin: 0 auto;
+    padding: 100px 0 30px;
 }
 .login-form form {
     color:cornflowerblue;
@@ -98,22 +204,22 @@ body {
   position: relative;
 }
 .login-form h2 {
-  font-size: 22px;
-  margin: 35px 0 25px;
+    font-size: 22px;
+    margin: 35px 0 25px;
 }
 .login-form .avatar {
-  position: absolute;
-  margin: 0 auto;
-  left: 0;
-  right: 0;
-  top: -50px;
-  width: 95px;
-  height: 95px;
-  border-radius: 50%;
-  z-index: 9;
-  background: #007bff;
-  padding: 15px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: -50px;
+    width: 95px;
+    height: 95px;
+    border-radius: 50%;
+    z-index: 9;
+    background: #007bff;
+    padding: 15px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 .login-form .avatar img {
   width: 100%;
