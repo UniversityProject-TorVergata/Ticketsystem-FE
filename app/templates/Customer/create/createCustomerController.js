@@ -18,12 +18,16 @@ angular.module('ticketsystem.createCustomer', ['ngRoute'])
                 angular.isUndefined($scope.user.address) ||
                 angular.isUndefined($scope.user.email) ||
                 angular.isUndefined($scope.user.username) ||
-                angular.isUndefined($scope.user.password)) {
+                angular.isUndefined($scope.user.password) ||
+                angular.isUndefined($scope.user.confirm_password))
+            {
 
                     window.alert('Some fields are missing!')
             }
+            else if(!angular.equals($scope.user.password, $scope.user.confirm_password)) {
+                window.alert('Password Error')
+            }
             else {
-
                 var date = Date.now();
                 $scope.user.created_at = moment(date).format("DD/MM/YYYY");
                 $scope.user.type = "Customer";

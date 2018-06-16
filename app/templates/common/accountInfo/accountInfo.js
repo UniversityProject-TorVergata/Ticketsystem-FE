@@ -8,6 +8,7 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
         $scope.user = storageService.getUser()
         $scope.disabledButton = true;
         $scope.disabledReadonly = true;
+        $scope.confirm_pass_value = true;
 
         var config = {
             headers : { 'Content-Type': 'application/json', }
@@ -15,16 +16,20 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
 
         $scope.changeAccountInformation = function() {
 
-            if(angular.isUndefined($scope.user) || (
+            if(angular.isUndefined($scope.user) ||
                 angular.isUndefined($scope.user.fiscal_code) ||
                 angular.isUndefined($scope.user.name) ||
                 angular.isUndefined($scope.user.surname) ||
                 angular.isUndefined($scope.user.address) ||
                 angular.isUndefined($scope.user.email) ||
                 angular.isUndefined($scope.user.username) ||
-                angular.isUndefined($scope.user.password))) {
+                angular.isUndefined($scope.user.password)) {
 
                 window.alert('It is necessary to fill all the fields!')
+
+            }
+            else if(!angular.equals($scope.user.password, $scope.user.confirm_password)) {
+                window.alert('Password Error')
             }
             else {
 
@@ -64,6 +69,7 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
 
             $scope.disabledButton = !($scope.disabledButton);
             $scope.disabledReadonly = !($scope.disabledReadonly);
+            $scope.confirm_pass_value = !($scope.confirm_pass_value);
         }
 
     });
