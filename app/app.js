@@ -64,6 +64,9 @@ var app = angular.module('ticketsystem', [
     'ticketsystem.teamLeader',
     'ticketsystem.homeTeamLeader',
 
+    //Team Member
+    'ticketsystem.homeTeamMember',
+
     'isteven-multi-select',
     'modal',
     'drag-and-drop',
