@@ -1,7 +1,8 @@
 'use strict';
 
 var app = angular.module('ticketsystem.createTicket', ['ngRoute', 'ui.bootstrap']);
-app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpService, util, $location, storageService, tags) {
+app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpService, util,
+                                             $location, storageService, tags,priorities,visibilities) {
     //  Select values
     $scope.tags = tags;
 
@@ -18,6 +19,19 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
     $scope.editTicket = {};
     $scope.selectedTags = [];
 
+    // Ui Select Values
+    $scope.target = {};
+    $scope.target.selected ;
+    $scope.category = {};
+    $scope.category.selected ;
+    $scope.priorities = priorities;
+    $scope.priority = {};
+    $scope.priority.selected ;
+    $scope.visibilities = visibilities;
+    $scope.visibility = {};
+    $scope.visibility.selected ;
+
+
 
 
     /**
@@ -31,6 +45,14 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
 
         else if (Object.keys($scope.selectedTags).length > 5) {
             window.alert("Insert max 5 tags");
+        }
+
+        else if(angular.isUndefined($scope.ticket.title) ||
+            angular.isUndefined($scope.ticket.description) ||
+            angular.isUndefined($scope.target.selected ) ||
+            angular.isUndefined($scope.category.selected)){
+            window.alert("Fill in all the fields!")
+
         }
 
         else {
@@ -50,7 +72,11 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
                 console.log($scope.selectedCategories[a]['name']);
                 tempCategories.push($scope.selectedCategories[a].name);
             }
+            $scope.ticket.target = $scope.target.selected;
+            $scope.ticket.presumedType =  $scope.category.selected;
             $scope.ticket.target.categories = tempCategories;
+            $scope.ticket.customerPriority = $scope.priority.selected.name;
+            $scope.ticket.visibility = $scope.visibility.selected.name;
             //console.log($scope.selectedCategories);
             console.log(tempCategories);
 

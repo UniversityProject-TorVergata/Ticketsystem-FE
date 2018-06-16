@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html {
@@ -89,14 +89,23 @@ th, td {
     outline: none !important;
 }
 
-.account form, .accounttable form {
+/*.account form, .accounttable form {
     color: #7a7a7a;
     border-radius: 1px;
     margin-bottom: 15px;
     font-size: 13px;
     background: #2e353d;
     padding: 40px;
-    position: relative;
+    position: relative;*/
+
+.account form {
+    color:cornflowerblue;
+  border-radius: 1px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  background: #2e353d;
+  padding: 40px;
+  position: relative;
 }
 
 .accounttable form {
@@ -166,37 +175,31 @@ table.steelBlueCols tfoot .links a{
     box-shadow: none !important;
     border-color: #e3e3e3;
 }
-
 .form-control:focus {
     border-color: #007bff;
 }
-
 .form-control, .btn {
     border-radius: 2px;
 }
-
 .login-form {
     width: 350px;
     margin: 0 auto;
     padding: 100px 0 30px;
 }
-
 .login-form form {
-    color: #7a7a7a;
-    border-radius: 2px;
-    margin-bottom: 15px;
-    font-size: 13px;
-    background: #2e353d;
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    padding: 30px;
-    position: relative;
+    color:cornflowerblue;
+  border-radius: 2px;
+  margin-bottom: 15px;
+  font-size: 13px;
+  background: #2e353d;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  padding: 30px;
+  position: relative;
 }
-
 .login-form h2 {
     font-size: 22px;
     margin: 35px 0 25px;
 }
-
 .login-form .avatar {
     position: absolute;
     margin: 0 auto;
@@ -211,252 +214,225 @@ table.steelBlueCols tfoot .links a{
     padding: 15px;
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
-
 .login-form .avatar img {
-    width: 100%;
+  width: 100%;
 }
-
 .login-form input[type="checkbox"] {
-    margin-top: 2px;
+  margin-top: 2px;
 }
-
 .login-form .btn {
-    font-size: 16px;
-    font-weight: bold;
-    background: #007bff;
-    border: none;
-    margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  background: #007bff;
+  border: none;
+  margin-bottom: 20px;
 }
-
 .login-form .btn:hover, .login-form .btn:focus {
-    background: #50b8b3;
-    outline: none !important;
+  background: #50b8b3;
+  outline: none !important;
 }
-
 .login-form a {
-    color: #fff;
-    text-decoration: underline;
+  color: #fff;
+  text-decoration: underline;
 }
-
 .login-form a:hover {
-    text-decoration: none;
+  text-decoration: none;
 }
-
 .login-form form a {
-    color: #7a7a7a;
-    text-decoration: none;
+    color:cornflowerblue;
+  text-decoration: none;
 }
-
 .login-form form a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /*  Sidebar */
 .nav-side-menu {
-    overflow: auto;
-    font-family: verdana;
-    font-size: 12px;
-    font-weight: 200;
-    background-color: #2e353d;
-    position: fixed;
-    top: 0px;
-    width: 300px;
-    height: 100%;
-    color: #e1ffff;
+  overflow: auto;
+  font-family: verdana;
+  font-size: 12px;
+  font-weight: 200;
+  background-color: #2e353d;
+  position: fixed;
+  top: 0px;
+  width: 300px;
+  height: 100%;
+  color: #e1ffff;
 }
-
 .nav-side-menu .brand {
-    background-color: #23282e;
-    line-height: 50px;
-    display: block;
-    text-align: center;
-    font-size: 14px;
+  background-color: #23282e;
+  line-height: 50px;
+  display: block;
+  text-align: center;
+  font-size: 14px;
 }
-
 .nav-side-menu .toggle-btn {
-    display: none;
+  display: none;
 }
-
 .nav-side-menu ul,
 .nav-side-menu li {
-    list-style: none;
-    padding: 0px;
-    margin: 0px;
-    line-height: 35px;
-    cursor: pointer;
-    /*
-      .collapsed{
-         .arrow:before{
-                   font-family: FontAwesome;
-                   content: "\f053";
-                   display: inline-block;
-                   padding-left:10px;
-                   padding-right: 10px;
-                   vertical-align: middle;
-                   float:right;
-              }
-       }
-  */
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+  line-height: 35px;
+  cursor: pointer;
+  /*
+    .collapsed{
+       .arrow:before{
+                 font-family: FontAwesome;
+                 content: "\f053";
+                 display: inline-block;
+                 padding-left:10px;
+                 padding-right: 10px;
+                 vertical-align: middle;
+                 float:right;
+            }
+     }
+*/
 }
-
 .nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {
-    font-family: FontAwesome;
-    content: "\f078";
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    vertical-align: middle;
-    float: right;
+  font-family: FontAwesome;
+  content: "\f078";
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
+  float: right;
 }
-
 .nav-side-menu ul .active,
 .nav-side-menu li .active {
-    border-left: 3px solid #d19b3d;
-    background-color: #4f5b69;
+  border-left: 3px solid #d19b3d;
+  background-color: #4f5b69;
 }
-
 .nav-side-menu ul .sub-menu li.active,
 .nav-side-menu li .sub-menu li.active {
-    color: #d19b3d;
+  color: #d19b3d;
 }
-
 .nav-side-menu ul .sub-menu li.active a,
 .nav-side-menu li .sub-menu li.active a {
-    color: #d19b3d;
+  color: #d19b3d;
 }
-
 .nav-side-menu ul .sub-menu li,
 .nav-side-menu li .sub-menu li {
-    background-color: #181c20;
-    border: none;
-    line-height: 28px;
-    border-bottom: 1px solid #23282e;
-    margin-left: 0px;
+  background-color: #181c20;
+  border: none;
+  line-height: 28px;
+  border-bottom: 1px solid #23282e;
+  margin-left: 0px;
 }
-
 .nav-side-menu ul .sub-menu li:hover,
 .nav-side-menu li .sub-menu li:hover {
-    background-color: #020203;
+  background-color: #020203;
 }
-
 .nav-side-menu ul .sub-menu li:before,
 .nav-side-menu li .sub-menu li:before {
-    font-family: FontAwesome;
-    content: "\f105";
-    display: inline-block;
-    padding-left: 10px;
-    padding-right: 10px;
-    vertical-align: middle;
+  font-family: FontAwesome;
+  content: "\f105";
+  display: inline-block;
+  padding-left: 10px;
+  padding-right: 10px;
+  vertical-align: middle;
 }
-
 .nav-side-menu li {
-    padding-left: 0px;
-    border-left: 3px solid #2e353d;
-    border-bottom: 1px solid #23282e;
+  padding-left: 0px;
+  border-left: 3px solid #2e353d;
+  border-bottom: 1px solid #23282e;
 }
-
 .nav-side-menu li a {
-    text-decoration: none;
-    color: #e1ffff;
+  text-decoration: none;
+  color: #e1ffff;
 }
-
 .nav-side-menu li a i {
-    padding-left: 10px;
-    width: 20px;
-    padding-right: 20px;
+  padding-left: 10px;
+  width: 20px;
+  padding-right: 20px;
 }
-
 .nav-side-menu li:hover {
-    border-left: 3px solid #d19b3d;
-    background-color: #4f5b69;
-    -webkit-transition: all 1s ease;
-    -moz-transition: all 1s ease;
-    -o-transition: all 1s ease;
-    -ms-transition: all 1s ease;
-    transition: all 1s ease;
+  border-left: 3px solid #d19b3d;
+  background-color: #4f5b69;
+  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  transition: all 1s ease;
 }
-
 @media (max-width: 767px) {
-    .nav-side-menu {
-        position: relative;
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .nav-side-menu .toggle-btn {
-        display: block;
-        cursor: pointer;
-        position: absolute;
-        right: 10px;
-        top: 10px;
-        z-index: 10 !important;
-        padding: 3px;
-        background-color: #ffffff;
-        color: #000;
-        width: 40px;
-        text-align: center;
-    }
-
-    .brand {
-        text-align: left !important;
-        font-size: 22px;
-        padding-left: 20px;
-        line-height: 50px !important;
-    }
+  .nav-side-menu {
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .nav-side-menu .toggle-btn {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    z-index: 10 !important;
+    padding: 3px;
+    background-color: #ffffff;
+    color: #000;
+    width: 40px;
+    text-align: center;
+  }
+  .brand {
+    text-align: left !important;
+    font-size: 22px;
+    padding-left: 20px;
+    line-height: 50px !important;
+  }
 }
-
 @media (min-width: 767px) {
-    .nav-side-menu .menu-list .menu-content {
-        display: block;
-    }
+  .nav-side-menu .menu-list .menu-content {
+    display: block;
+  }
 }
 
 /**
   Modal css style
  */
 .column {
-    float: right;
-    width: 40%;
-    padding: 10%;
-    height: auto;
+  float: right;
+  width: 40%;
+  padding: 10%;
+  height: auto;
 }
 
 .row:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .bigColumn {
-    float: left;
-    width: 80%;
-    padding: 10%;
-    height: auto;
+  float: left;
+  width: 80%;
+  padding: 10%;
+  height: auto;
 }
 
 .allModal {
-    width: auto;
-    height: auto;
+  width: auto;
+  height: auto;
 }
 
 /* Scrolling bar in message-modal */
 .panel-body {
-    max-height: 300px;
-    overflow: scroll;
+  max-height:300px;
+  overflow:scroll;
 }
-
 /* used for every message on message-modal */
 .msg {
-    border-width: 1px;
-    border-style: solid;
-    border-color: #c1c1c1;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #c1c1c1;
 }
 
 .full-width-div {
-    position: absolute;
-    width: 100%;
-    left: 3%;
+  position: absolute;
+  width: 100%;
+  left: 3%;
 }
 
 /*
@@ -465,6 +441,7 @@ table.steelBlueCols tfoot .links a{
   background-repeat: repeat-y;
   background-size: cover;
 }*/
+
 
 /* for font-awesome better animation */
 /*!
@@ -478,375 +455,6 @@ table.steelBlueCols tfoot .links a{
 .faa-shake.animated,
 .faa-shake.animated-hover:hover,
 .faa-parent.animated-hover:hover > .faa-shake {
-    -webkit-animation: wrench 2.5s ease infinite;
-    animation: wrench 2.5s ease infinite;
+  -webkit-animation: wrench 2.5s ease infinite;
+  animation: wrench 2.5s ease infinite;
 }
-
-/*!
- * ui-select
- * http://github.com/angular-ui/ui-select
- * Version: 0.19.8 - 2017-04-18T05:43:43.881Z
- * License: MIT
- */
-
-/* Style when highlighting a search. */
-.ui-select-highlight {
-    font-weight: bold;
-}
-
-.ui-select-offscreen {
-    clip: rect(0 0 0 0) !important;
-    width: 1px !important;
-    height: 1px !important;
-    border: 0 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-    position: absolute !important;
-    outline: 0 !important;
-    left: 0px !important;
-    top: 0px !important;
-}
-
-.ui-select-choices-row:hover {
-    background-color: #f5f5f5;
-}
-
-/* Select2 theme */
-
-/* Mark invalid Select2 */
-.ng-dirty.ng-invalid > a.select2-choice {
-    border-color: #D44950;
-}
-
-.select2-result-single {
-    padding-left: 0;
-}
-
-.select2-locked > .select2-search-choice-close {
-    display: none;
-}
-
-.select-locked > .ui-select-match-close {
-    display: none;
-}
-
-body > .select2-container.open {
-    z-index: 9999; /* The z-index Select2 applies to the select2-drop */
-}
-
-/* Handle up direction Select2 */
-.ui-select-container[theme="select2"].direction-up .ui-select-match,
-.ui-select-container.select2.direction-up .ui-select-match {
-    border-radius: 4px; /* FIXME hardcoded value :-/ */
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
-
-.ui-select-container[theme="select2"].direction-up .ui-select-dropdown,
-.ui-select-container.select2.direction-up .ui-select-dropdown {
-    border-radius: 4px; /* FIXME hardcoded value :-/ */
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-
-    border-top-width: 1px; /* FIXME hardcoded value :-/ */
-    border-top-style: solid;
-
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
-
-    margin-top: -4px; /* FIXME hardcoded value :-/ */
-}
-
-.ui-select-container[theme="select2"].direction-up .ui-select-dropdown .select2-search,
-.ui-select-container.select2.direction-up .ui-select-dropdown .select2-search {
-    margin-top: 4px; /* FIXME hardcoded value :-/ */
-}
-
-.ui-select-container[theme="select2"].direction-up.select2-dropdown-open .ui-select-match,
-.ui-select-container.select2.direction-up.select2-dropdown-open .ui-select-match {
-    border-bottom-color: #5897fb;
-}
-
-.ui-select-container[theme="select2"] .ui-select-dropdown .ui-select-search-hidden,
-.ui-select-container[theme="select2"] .ui-select-dropdown .ui-select-search-hidden input {
-    opacity: 0;
-    height: 0;
-    min-height: 0;
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
-/* Selectize theme */
-
-/* Helper class to show styles when focus */
-.selectize-input.selectize-focus {
-    border-color: #007FBB !important;
-}
-
-/* Fix input width for Selectize theme */
-.selectize-control.single > .selectize-input > input {
-    width: 100%;
-}
-
-/* Fix line break when there's at least one item selected with the Selectize theme */
-.selectize-control.multi > .selectize-input > input {
-    margin: 0 !important;
-}
-
-/* Fix dropdown width for Selectize theme */
-.selectize-control > .selectize-dropdown {
-    width: 100%;
-}
-
-/* Mark invalid Selectize */
-.ng-dirty.ng-invalid > div.selectize-input {
-    border-color: #D44950;
-}
-
-/* Handle up direction Selectize */
-.ui-select-container[theme="selectize"].direction-up .ui-select-dropdown {
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
-    margin-top: -2px; /* FIXME hardcoded value :-/ */
-}
-
-.ui-select-container[theme="selectize"] input.ui-select-search-hidden {
-    opacity: 0;
-    height: 0;
-    min-height: 0;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    width: 0;
-}
-
-/* Bootstrap theme */
-
-/* Helper class to show styles when focus */
-.btn-default-focus {
-    color: #333;
-    background-color: #EBEBEB;
-    border-color: #ADADAD;
-    text-decoration: none;
-    outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
-}
-
-.ui-select-bootstrap .ui-select-toggle {
-    position: relative;
-}
-
-.ui-select-bootstrap .ui-select-toggle > .caret {
-    position: absolute;
-    height: 10px;
-    top: 50%;
-    right: 10px;
-    margin-top: -2px;
-}
-
-/* Fix Bootstrap dropdown position when inside a input-group */
-.input-group > .ui-select-bootstrap.dropdown {
-    /* Instead of relative */
-    position: static;
-}
-
-.input-group > .ui-select-bootstrap > input.ui-select-search.form-control {
-    border-radius: 4px; /* FIXME hardcoded value :-/ */
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-
-.input-group > .ui-select-bootstrap > input.ui-select-search.form-control.direction-up {
-    border-radius: 4px !important; /* FIXME hardcoded value :-/ */
-    border-top-right-radius: 0 !important;
-    border-bottom-right-radius: 0 !important;
-}
-
-.ui-select-bootstrap .ui-select-search-hidden {
-    opacity: 0;
-    height: 0;
-    min-height: 0;
-    padding: 0;
-    margin: 0;
-    border: 0;
-}
-
-.ui-select-bootstrap > .ui-select-match > .btn {
-    /* Instead of center because of .btn */
-    text-align: left !important;
-}
-
-.ui-select-bootstrap > .ui-select-match > .caret {
-    position: absolute;
-    top: 45%;
-    right: 15px;
-}
-
-/* See Scrollable Menu with Bootstrap 3 http://stackoverflow.com/questions/19227496 */
-.ui-select-bootstrap > .ui-select-choices, .ui-select-bootstrap > .ui-select-no-choice {
-    width: 100%;
-    height: auto;
-    max-height: 200px;
-    overflow-x: hidden;
-    margin-top: -1px;
-}
-
-body > .ui-select-bootstrap.open {
-    z-index: 1000; /* Standard Bootstrap dropdown z-index */
-}
-
-.ui-select-multiple.ui-select-bootstrap {
-    height: auto;
-    padding: 3px 3px 0 3px;
-}
-
-.ui-select-multiple.ui-select-bootstrap input.ui-select-search {
-    background-color: transparent !important; /* To prevent double background when disabled */
-    border: none;
-    outline: none;
-    height: 1.666666em;
-    margin-bottom: 3px;
-}
-
-.ui-select-multiple.ui-select-bootstrap .ui-select-match .close {
-    font-size: 1.6em;
-    line-height: 0.75;
-}
-
-.ui-select-multiple.ui-select-bootstrap .ui-select-match-item {
-    outline: 0;
-    margin: 0 3px 3px 0;
-}
-
-.ui-select-multiple .ui-select-match-item {
-    position: relative;
-}
-
-.ui-select-multiple .ui-select-match-item.dropping .ui-select-match-close {
-    pointer-events: none;
-}
-
-.ui-select-multiple:hover .ui-select-match-item.dropping-before:before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 100%;
-    height: 100%;
-    margin-right: 2px;
-    border-left: 1px solid #428bca;
-}
-
-.ui-select-multiple:hover .ui-select-match-item.dropping-after:after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 100%;
-    height: 100%;
-    margin-left: 2px;
-    border-right: 1px solid #428bca;
-}
-
-.ui-select-bootstrap .ui-select-choices-row > span {
-    cursor: pointer;
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    font-weight: 400;
-    line-height: 1.42857143;
-    color: #333;
-    white-space: nowrap;
-}
-
-.ui-select-bootstrap .ui-select-choices-row > span:hover, .ui-select-bootstrap .ui-select-choices-row > span:focus {
-    text-decoration: none;
-    color: #262626;
-    background-color: #f5f5f5;
-}
-
-.ui-select-bootstrap .ui-select-choices-row.active > span {
-    color: #fff;
-    text-decoration: none;
-    outline: 0;
-    background-color: #428bca;
-}
-
-.ui-select-bootstrap .ui-select-choices-row.disabled > span,
-.ui-select-bootstrap .ui-select-choices-row.active.disabled > span {
-    color: #777;
-    cursor: not-allowed;
-    background-color: #fff;
-}
-
-/* fix hide/show angular animation */
-.ui-select-match.ng-hide-add,
-.ui-select-search.ng-hide-add {
-    display: none !important;
-}
-
-/* Mark invalid Bootstrap */
-.ui-select-bootstrap.ng-dirty.ng-invalid > button.btn.ui-select-match {
-    border-color: #D44950;
-}
-
-/* Handle up direction Bootstrap */
-.ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
-}
-
-.ui-select-bootstrap .ui-select-match-text {
-    width: 100%;
-    padding-right: 1em;
-}
-
-.ui-select-bootstrap .ui-select-match-text span {
-    display: inline-block;
-    width: 100%;
-    overflow: hidden;
-}
-
-.ui-select-bootstrap .ui-select-toggle > a.btn {
-    position: absolute;
-    height: 10px;
-    right: 10px;
-    margin-top: -2px;
-}
-
-/* Spinner */
-.ui-select-refreshing.glyphicon {
-    position: absolute;
-    right: 0;
-    padding: 8px 27px;
-}
-
-@-webkit-keyframes ui-select-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
-}
-
-@keyframes ui-select-spin {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
-}
-
-.ui-select-spin {
-    -webkit-animation: ui-select-spin 2s infinite linear;
-    animation: ui-select-spin 2s infinite linear;
-}
-
-.ui-select-refreshing.ng-animate {
-    -webkit-animation: none 0s;
-}
-

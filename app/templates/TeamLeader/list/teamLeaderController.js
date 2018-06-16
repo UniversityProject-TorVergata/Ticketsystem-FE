@@ -10,6 +10,8 @@ angular.module('ticketsystem.teamLeader', ['ngRoute'])
         $scope.teamCoordinator = {}
 
 
+
+
         var prepareData = function () {
                 //  HTTP GET
             httpService.get(restService.getTeamMembersByTeamLeader + '/' + JSON.parse(localStorage.getItem('userInformation')).id)

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dashboard', [])
-    .controller('dashboardController', function($scope, $state, restService, storageService, httpService, util) {
+    .controller('dashboardController', function($scope, $window, $state, restService, storageService, httpService, util) {
 
         //TODO stati hardcoded, modificare in seguito
         //modificare per rendere tutto dinamico
@@ -50,24 +50,26 @@ angular.module('dashboard', [])
 
         $scope.changeStateToResolved = function() {
 
-            let confirmation;
-            if (confirm("Are you sure to change the ticket state to RESOLVED?")) {
-                confirmation = true;
+            if ($scope.toChange.difficulty == "LOW") {
+                $window.alert("The ticket is not allowed to enter in 'RESOLVED' state")
             } else {
-                confirmation = false;
-                $state.reload();
+
+                let confirmation;
+                if (confirm("Are you sure to change the ticket state to RESOLVED?")) {
+                    confirmation = true;
+                } else {
+                    confirmation = false;
+                }
+
+                if (confirmation) {
+                    httpService.post(restService.changeTicketState + '/' + $scope.toChange.id + '/Action3/' + JSON.parse(localStorage.getItem('userInformation')).id)
+                        .then(function (data) {
+                            },
+                            function (err) {
+                            });
+                }
             }
-
-            if (confirmation) {
-                httpService.post(restService.changeTicketState + '/' + $scope.toChange.id + '/Action3/' + JSON.parse(localStorage.getItem('userInformation')).id)
-                    .then(function (data) {
-                        },
-                        function (err) {
-                        });
-
-                $state.reload();
-
-            }
+            $state.reload();
         };
 
         $scope.changeStateToPending = function(ticket) {
@@ -87,33 +89,33 @@ angular.module('dashboard', [])
                         },
                         function (err) {
                         });
-
                 $state.reload();
-
             }
         };
 
 
         $scope.changeStateToClosed = function() {
 
-            let confirmation;
-            if (confirm("Are you sure to change the ticket state to CLOSED?")) {
-                confirmation = true;
+            if ($scope.toChange.difficulty != "LOW") {
+                $window.alert("The ticket is not allowed to enter in 'CLOSED' state")
             } else {
-                confirmation = false;
-                $state.reload();
+
+                let confirmation;
+                if (confirm("Are you sure to change the ticket state to CLOSED?")) {
+                    confirmation = true;
+                } else {
+                    confirmation = false;
+                }
+
+                if (confirmation) {
+                    httpService.post(restService.changeTicketState + '/' + $scope.toChange.id + '/Action2/' + JSON.parse(localStorage.getItem('userInformation')).id)
+                        .then(function (data) {
+                            },
+                            function (err) {
+                            });
+                }
             }
-
-            if (confirmation) {
-                httpService.post(restService.changeTicketState + '/' + $scope.toChange.id + '/Action2/' + JSON.parse(localStorage.getItem('userInformation')).id)
-                    .then(function (data) {
-                        },
-                        function (err) {
-                        });
-
-                $state.reload();
-
-            }
+            $state.reload();
         };
 
         $scope.showImage = function (item, index) {

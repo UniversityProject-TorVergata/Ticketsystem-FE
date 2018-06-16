@@ -40,6 +40,7 @@ angular.module('ticketsystem.restService', [])
 
             //  Team Leader
             "teamLeader": CONNECTION.url + '/registered_user/team_leader',
+            "employedTeamLeader" : CONNECTION.url + '/registered_user/employed_team_leader',
 
             //  Team Coordinator
             "assignTicket": CONNECTION.url + '/ticket/assignTicket',
@@ -60,6 +61,7 @@ angular.module('ticketsystem.restService', [])
             //  Team
             "getTeamMembers": CONNECTION.url + '/registered_user/free_team_member',
             "getTeamLeaders": CONNECTION.url + '/registered_user/team_leader',
+            "getFreeTeamLeaders" : CONNECTION.url + '/registered_user/free_team_leader',
             "getMembersByTeamId": CONNECTION.url + '/team/team_member',
             "getLeaderByTeamId" : CONNECTION.url + '/team/team_leader',
 

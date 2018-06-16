@@ -11,6 +11,17 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
         $scope.categories = [];
         $scope.refresh = false;
 
+        // Ui select values
+
+        $scope.priorities = priorities;
+        $scope.priority = [];
+
+        $scope.team = {};
+        $scope.team.selected ;
+
+
+
+
         /**
          *  Function reads all the PENDING tickets in the database via an HTTP GET and
          *  shows them in a table.
@@ -43,7 +54,7 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
         $scope.saveTicketWithTeam = function (ticket, team, actualPriority) {
             //console.log(ticket);
             ticket.actualPriority = actualPriority.name;
-            ticket.resolverUser = team.id;
+            ticket.resolverUser = $scope.team.id;
             console.log(ticket.actualType);
 
             //  trovo i possibili futuri stati in cerca di PENDING

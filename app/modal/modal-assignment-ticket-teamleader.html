@@ -21,20 +21,37 @@
     <div class="col-md-6" ng-if="currentState.state.nextState == 'EXECUTION'">
         <hr>
         <label>Select Team Member</label><br>
-        <select name="memberS" data-ng-init="teamMembersList"
+        <!--<select name="memberS" data-ng-init="teamMembersList"
                 ng-options="t as t.name
                             for
                             t in teamMembersList track by t.name"
                 ng-model="item.resolverUser"
-                ng-init="selectedMember = teamMembersList[0]">
-        </select>
-        <br>
-        <br>
-        <select name="actualDifficulty" ng-model="item.difficulty" ng-init="item.difficulty = 'LOW'">
-            <option value ="LOW" >LOW</option>
-            <option value="MEDIUM">MEDIUM</option>
-            <option value="HIGH">HIGH</option>
-        </select>
+                ng-init="item.resolverUser = teamMembersList[0]">
+        </select>-->
+        <ui-select   ng-model="item.resolverUser" theme="select2"
+                     style="min-width: 150px" title="Select Team member "
+                     ng-init="item.resolverUser = teamMembersList[0]" >
+            <ui-select-match placeholder="Select Team Member ">{{item.resolverUser.name + ' '+ item.resolverUser.surname}}</ui-select-match>
+            <ui-select-choices repeat="member in teamMembersList | propsFilter: {name: $select.search, surname: $select.search}">
+                <div ng-bind-html="member.name + ' ' +member.surname | highlight: $select.search"></div>
+            </ui-select-choices>
+        </ui-select><br>
+        <hr>
+        <label>Select difficulty</label><br>
+        <!--<select id="difficulty" name="difficulty"
+                ng-options='difficulty as difficulty.name | formatEnumeration: difficulty.name
+                        for
+                        difficulty in difficulties track by difficulty.id' ng-model="item.difficulty"
+                ng-init="difficulty = difficulties[0]">
+        </select>-->
+        <ui-select   ng-model="difficulty.selected" theme="select2" ng-init="difficulty.selected = difficulties[0]"
+                     style="min-width: 150px" title="Select Difficulty " >
+            <ui-select-match placeholder="Select Difficulty in the list ">{{difficulty.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="difficulty in difficulties | propsFilter: {name: $select.search}">
+                <div ng-bind-html="difficulty.name | highlight: $select.search"></div>
+            </ui-select-choices>
+        </ui-select><br>
+        <hr>
     </div>
 </div>
 

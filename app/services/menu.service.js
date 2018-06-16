@@ -15,8 +15,8 @@ angular.module('ticketsystem.menuservice', [])
                 return new Promise(function (resolve, reject) {
                     $http.get('../mocks/menuMock.json').then(
                         function (menuList) {
-                            console.log("List of tabs: ");
-                            console.log(menuList.data)
+                            //console.log("List of tabs: ");
+                            //console.log(menuList.data)
                             let menu = createMenu(menuList.data, type);
                             resolve(menu);
                         }
@@ -37,7 +37,7 @@ function createMenu(menuList, type) {
 
     let menuFiltered = [];
     angular.forEach(menuList, function (value) {
-        console.log(value)
+        //console.log(value)
         if (value.visibility.indexOf(type) > -1 || value.visibility.indexOf('ALL') > -1) {
             menuFiltered.push(value)
         }
