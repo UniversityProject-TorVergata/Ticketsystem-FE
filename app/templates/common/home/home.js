@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('ticketsystem.homeTeamCoordinator', ['ngRoute'])
+angular.module('ticketsystem.home', ['ngRoute'])
 
-    .controller('homeTeamCoordinatorCtrl', function ($scope, $modal, $log) {
+    .controller('homeCtrl', function ($scope, $modal, $log) {
 
         var modalInstance;
 

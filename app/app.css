@@ -405,16 +405,12 @@ ui-select {
     .view--container {
         padding-left: 320px;
         padding-right: 20px;
-        text-align: center;
-        vertical-align: middle;
     }
 }
 @media (max-width: 767px) {
     .view--container {
         padding-left: 20px;
         padding-right: 20px;
-        text-align: center;
-        vertical-align: middle;
     }
 }
 

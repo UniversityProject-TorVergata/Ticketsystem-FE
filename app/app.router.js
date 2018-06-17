@@ -59,7 +59,79 @@ angular.module('ticketsystem.router', ['ui.router'])
 
 
                 })
+                //  Home
+                .state('secure.homeCustomer', {
+                    url: "/home",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/common/home/homeCustomer.html',
+                            controller: 'homeCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Customer']
 
+                    }
+                })
+                //  Home
+                .state('secure.homeAdmin', {
+                    url: "/home",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/common/home/homeAdmin.html',
+                            controller: 'homeCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Admin']
+
+                    }
+                })
+                //  Home
+                .state('secure.homeTeamCoordinator', {
+                    url: "/home",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/common/home/homeTeamCoordinator.html',
+                            controller: 'homeCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamCoordinator']
+
+                    }
+                })
+                //  Home
+                .state('secure.homeTeamLeader', {
+                    url: "/home",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/common/home/homeTeamLeader.html',
+                            controller: 'homeCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamLeader']
+
+                    }
+                })
+                .state('secure.homeTeamMember', {
+                    url: "/home",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/TeamMember/home/homeTeamMember.html',
+                            controller: 'homeCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamMember']
+                    }
+                })
                 //  Account Info
                 .state('secure.accountInfo', {
                     url: "/accountInfo",
@@ -273,6 +345,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                         }
                     }
                 })
+                /*
                 .state('secure.homeCustomer', {
                     url: "/homeCustomer",
                     views: {
@@ -337,7 +410,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                         requiredLogin: true,
                         access: ['TeamMember']
                     }
-                })
+                })*/
                 .state('secure.ticket', {
                     url: "/Ticket",
                     views: {

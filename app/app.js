@@ -40,29 +40,26 @@ var app = angular.module('ticketsystem', [
     //  Account info
     'ticketsystem.accountInfo',
 
+    //  Home
+    'ticketsystem.home',
+
     //  Admin
     'ticketsystem.createUser',
-    'ticketsystem.homeAdmin',
     'ticketsystem.createTarget',
 
     // Customer
-    'ticketsystem.homeCustomer',
     'ticketsystem.createCustomer',
 
     //Factories
     'ticketsystem.storageService',
 
     //  Team Coordinator
-    'ticketsystem.homeTeamCoordinator',
     'ticketsystem.assignTeam',
     'ticketsystem.createTeam',
 
     //  Team Leader
     'ticketsystem.teamLeader',
-    'ticketsystem.homeTeamLeader',
 
-    //Team Member
-    'ticketsystem.homeTeamMember',
 
     'isteven-multi-select',
     'modal',
