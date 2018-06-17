@@ -33,6 +33,7 @@ div.form.row {
 .table > tbody > tr[scope=row] > td,
 .table > tbody > tr[scope=row] > .btn{
     vertical-align: middle;
+    text-align: left;
     margin: auto;
 }
 
