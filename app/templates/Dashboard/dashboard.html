@@ -36,15 +36,23 @@
             <div class="col col-sm-4" data-drop="true" data-jqyoui-options ng-model="toChange"
                  jqyoui-droppable="{onDrop:'changeStateToResolved()'}">
                 <h3>Resolved</h3>
-                <div class="panel panel-warning" ng-repeat="t in resolvedTickets">
-                    <div class="panel-heading">Ticket #{{t.id}}</div>
+                <div class="panel panel-warning" ng-repeat="t in resolvedTickets" ng-controller="modalController">
+                    <div class="panel-heading">Ticket #{{t.id}}
+                        <button ng-click="showInfoForm(t)" class="btn btn-xs btn-default"style="float: right;">
+                            <i class="fas fa-info-circle icon-small"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="col col-sm-4" data-drop="true" data-jqyoui-options ng-model="toChange"
                  jqyoui-droppable="{onDrop:'changeStateToClosed()'}">
                 <h3>Closed</h3>
-                <div class="panel panel-success" ng-repeat="t in closedTickets">
-                    <div class="panel-heading">Ticket #{{t.id}}</div>
+                <div class="panel panel-success" ng-repeat="t in closedTickets" ng-controller="modalController">
+                    <div class="panel-heading">Ticket #{{t.id}}
+                        <button ng-click="showInfoForm(t)" class="btn btn-xs btn-default"style="float: right;">
+                            <i class="fas fa-info-circle icon-small"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
