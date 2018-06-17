@@ -123,7 +123,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     url: "/home",
                     views: {
                         'content': {
-                            templateUrl: 'templates/TeamMember/home/homeTeamMember.html',
+                            templateUrl: 'templates/common/home/homeTeamMember.html',
                             controller: 'homeCtrl'
                         }
                     },
