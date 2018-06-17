@@ -1,14 +1,16 @@
-<div class="account col-sm-10">
-    <br>
-    <form>
-        <h2 class="text-center">Create Team</h2>
-        <table st-table="rowCollection" class="table table-striped" data-ng-init="readTeams()">
-
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Problem Area</th>
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <form>
+            <h2 class="text-center">List of Teams</h2>
+            <!-- table st-table="rowCollection" class="table table-striped" data-ng-init="readUnassignedTicket()" -->
+            <div class="table-responsive">
+                <table class="table table-light min-length" data-ng-init="readTeams()">
+                    <!-- TODO I. sta per? -->
+                    <thead class="thead-light">
+                    <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Problem Area</th>
                 <!-- <th>Team Leader</th>
                 <th>Team Members</th>
                 <th></th>
@@ -19,7 +21,7 @@
             </thead>
 
             <tbody>
-            <tr ng-repeat="item in teamsList">
+            <tr scope="" ng-repeat="item in teamsList">
                 <td data-sortable="true">#{{item.id}}</a></td>
                 <td>{{item.name}}</td>
                 <td>{{item.problemArea}}</td>
@@ -45,6 +47,7 @@
             </tr>
             </tbody>
         </table>
+            </div>
     </form>
 </div>
-</html>
+</div>

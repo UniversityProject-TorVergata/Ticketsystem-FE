@@ -1,51 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Assigned Ticket</title>
-</head>
-<body>
 <div class="row">
+    <div class="col-md-12 col-sm-12">
+        <form>
+            <h2 class="text-center">Assigned Tickets</h2>
+            <div class="table-responsive">
+                <table class="table table-light min-length">
+                    <thead class="thead-light">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Customer<br>Priority</th>
+                        <th scope="col">I.<br> Priority</th>
+                        <th scope="col">Action</th>
+                        <th></th>
 
-    <table st-table="rowCollection" class="table table-striped">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Title</th>
-            <th>Date</th>
-            <th>C. Priority</th>
-            <th>I. Priority</th>
-            <th>Action</th>
-            <th></th>
-
-        </tr>
-        </thead>
-        <tbody style="height: 250px;">
-        <tr ng-repeat="item in items | orderBy:'ID'" ng-controller="modalController">
-            <td ng-controller="drag-and-drop-controller" class="btn btn-xs btn-primary"
-                data-drag="true" ng-model="item" data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
-                jqyoui-draggable='{animate: true, onStart:"showAssignmentModal({ticket: item})"}'>{{item.id}}
-            </td>
-            <td>{{item.title}}</td>
-            <td>{{item.timestamp}}</td>
-            <td>{{item.customerPriority}}</td>
-            <td>{{item.actualPriority}}</td>
-            <td>
-                <button ng-controller="modalController" ng-click="showInfoForm(item)" class="btn btn-xs btn-primary">
-                    <i class="fas fa-info"></i>
-                </button>
-                <button ng-if="item.attachedFile" ng-click="showImage(item)" class="btn btn-xs">
-                    <i class="fa fa-image"></i>
-                </button>
-                <button ng-click="showMessageForm(item)" class="btn btn-xs btn-info">
-                    <i class="far fa-comments"></i>
-                </button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr  scope="row" ng-repeat="item in items | orderBy:'ID'" ng-controller="modalController">
+                        <td ng-controller="drag-and-drop-controller" class="btn btn-xs btn-primary"
+                            data-drag="true" ng-model="item"
+                            data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
+                            jqyoui-draggable='{animate: true, onStart:"showAssignmentModal({ticket: item})"}'>
+                            {{item.id}}
+                        </td>
+                        <td>{{item.title}}</td>
+                        <td>{{item.timestamp}}</td>
+                        <td>{{item.customerPriority}}</td>
+                        <td>{{item.actualPriority}}</td>
+                        <td>
+                            <button ng-controller="modalController" ng-click="showInfoForm(item)"
+                                    class="btn btn-xs btn-primary">
+                                <i class="fas fa-info"></i>
+                            </button>
+                            <button ng-if="item.attachedFile" ng-click="showImage(item)" class="btn btn-xs">
+                                <i class="fa fa-image"></i>
+                            </button>
+                            <button ng-click="showMessageForm(item)" class="btn btn-xs btn-info">
+                                <i class="far fa-comments"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </form>
+    </div>
 </div>
-</div>
-
-</body>
-</html>

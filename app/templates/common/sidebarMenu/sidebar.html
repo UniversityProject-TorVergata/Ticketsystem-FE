@@ -1,16 +1,20 @@
-<div class="row">
-    <div class="col-sm-3">
-        <div class="nav-side-menu">
-            <div class="brand"><i class="fa fa-ticket fa-fw" aria-hidden="true"></i>Ticket System</div>
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical"
-                 ng-repeat="element in menu">
-                <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" ui-sref="{{element.route}}" role="tab"
-                   aria-controls="v-pills-home" ui-sref-active="active">{{element.label}}</a>
-            </div>
-            <button class="btn btn-danger" ng-click="logout()" style="min-width: 300px; font-size: 12px; margin-top: 10px; text-align: left">Logout</button>
-        </div>
+<div class="nav-side-menu">
+    <div class="brand"><i class="fa fa-ticket fa-fw" aria-hidden="true"></i>Ticket System</div>
+    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical"
+         ng-repeat="element in menu">
+        <a class="nav-link" id="v-pills-home-tab" data-toggle="pill" ui-sref="{{element.route}}" role="tab"
+           aria-controls="v-pills-home" ui-sref-active="active">{{element.label}}</a>
     </div>
-    <div class="col-sm-9 col-sm-offset-3">
-        <div ui-view="content"></div>
+
+    <button class="btn btn-danger" ng-click="logout()"
+            style="width: 100%; font-size: 12px; margin-top: 10px; text-align: left">Logout
+    </button>
+</div>
+<div class="view--container">
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div ui-view="content"></div>
+        </div>
     </div>
 </div>

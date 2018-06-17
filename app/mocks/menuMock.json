@@ -117,7 +117,7 @@
   },
   {
     "id":40,
-    "label": "Assign Ticket",
+    "label": "Assigned Ticket",
     "route": "secure.assignTeamMember",
     "visibility": [
       "TeamLeader"
