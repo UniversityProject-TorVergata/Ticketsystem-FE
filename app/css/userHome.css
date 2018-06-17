@@ -6,23 +6,26 @@
     50% {border-color: lightslategray;}
 }
 
+#global-div {
+    margin-top: 20px;
+}
+
 /* Parte Centrale */
 
 #main-div {
     background-color: #2e353d;
     min-height: 420px;
     max-width: 890px;
-    margin-top:30px;
     margin:auto;
     border: 10px solid lightskyblue;
     border-radius: 20px 20px 20px 20px;
     -webkit-animation: mymove 5s infinite;
     animation: mymove 6s infinite;
-    padding: 40px;
+    padding-left: 40px;
+    padding-right: 40px;
 }
 
 #title-div {
-    margin-top: 10px;
 }
 
 #title-h1 {
@@ -66,7 +69,6 @@
 
 #menu_basso {
     list-style: none;
-    margin-left: 200px;
 }
 
 .li_menu_basso {
