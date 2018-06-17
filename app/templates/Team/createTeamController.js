@@ -2,7 +2,7 @@
 
 angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
 
-    .controller('createTeamCtrl', function ($scope, restService, httpService, $location, problemArea) {
+    .controller('createTeamCtrl', function ($scope, restService, httpService, $state, problemArea) {
 
         // Variables
         $scope.membersList = [];
@@ -84,7 +84,7 @@ angular.module('ticketsystem.createTeam', ['ngRoute','ui.bootstrap'])
                     .then(function (data) {
                         window.alert("Team created!");
                         console.log(data);
-                        $location.path('/homeTeamCoordinator');
+                        $state.reload();
                     },
                     function (err) {
                         window.alert("Error!")

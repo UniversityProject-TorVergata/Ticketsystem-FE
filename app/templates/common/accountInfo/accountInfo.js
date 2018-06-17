@@ -3,7 +3,7 @@
 angular.module('ticketsystem.accountInfo', ['ngRoute'])
 
     // TODO rifare che è stutto sbagliato (abuso di scope)
-    .controller('accountInfoCtrl', function ($scope, restService, httpService,$location,storageService) {
+    .controller('accountInfoCtrl', function ($scope, restService, httpService, $state,storageService) {
 
         $scope.user = storageService.getUser()
         $scope.disabledButton = true;
@@ -37,7 +37,7 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
                 httpService.put(restService.updateUser, $scope.user.id, $scope.user, config)
                     .then(function (response) {
                             window.alert('Account Successfully Updated!');
-                            $location.path('/homeAdmin');
+                            $state.reload();
                             storageService.save("userData",JSON.stringify($scope.user));
                             console.log(response)
                         },
@@ -55,7 +55,7 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
             httpService.delete(restService.deleteUser, $scope.user.id, config)
                 .then(function (response) {
                         window.alert('Account Successfully Deleted!');
-                        $location.path('/home');
+                        $state.reload();
                         console.log(response)
                     },
 

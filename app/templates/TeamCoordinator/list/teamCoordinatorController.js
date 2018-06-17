@@ -2,7 +2,7 @@
 
 angular.module('ticketsystem.assignTeam', ['ngRoute'])
 
-    .controller('AssignTeamCtrl', function ($scope, $state, restService, storageService, httpService, util, $location, teams, priorities) {
+    .controller('AssignTeamCtrl', function ($scope, $state, restService, storageService, httpService, util, teams, priorities) {
 
         //  Select values
         $scope.teams = teams;
