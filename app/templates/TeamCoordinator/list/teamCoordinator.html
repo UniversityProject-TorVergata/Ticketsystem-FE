@@ -29,7 +29,9 @@
                             jqyoui-draggable='{animate: true, onStart:"showAssignmentModal({ticket: item})"}'>
                             {{item.id}}
                         </td>
-                        <td>{{item.openerUser.name + " " + item.openerUser.surname}}</td>
+                        <!-- TODO Ha senso lo username, non nome e cognome-->
+                        <!-- td>{{item.openerUser.name + " " + item.openerUser.surname}}</td-->
+                        <td>{{item.openerUser.username}}</td>
                         <td>{{item.title}}</td>
                         <td>
                             <button ng-click="showInfoForm(item)" class="btn btn-xs btn-primary">
