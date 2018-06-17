@@ -2,23 +2,33 @@
 
 angular.module('ticketsystem.homeTeamCoordinator', ['ngRoute'])
 
-    .controller('homeTeamCoordinatorCtrl', function ($scope, restService, httpService,$location,storageService) {
+    .controller('homeTeamCoordinatorCtrl', function ($scope, $modal, $log) {
 
-        $scope.assignTickets = function () {
-            $location.url("/assignTicket");
-        };
+        var modalInstance;
 
-        $scope.createTeam = function () {
-            $location.url("/createTeam");
-        };
+        $scope.whoAreWe = function () {
 
-        $scope.readTeam = function () {
-            $location.url("/readTeam");
-        };
+            modalInstance = $modal.open({
+                templateUrl: '/modal/modal-who-are-we.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                backdrop: 'static',
+            });
 
-        $scope.logout = function () {
-            storageService.save("userData",JSON.stringify(null));
-            $location.url("/home");
-        };
+            modalInstance.result.then(function () {
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        }
 
     });
+
+
+var ModalInstanceCtrl = function ($scope, $modalInstance) {
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+};

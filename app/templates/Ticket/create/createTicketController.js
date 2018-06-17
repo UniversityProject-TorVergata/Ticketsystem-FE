@@ -189,6 +189,29 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
         $state.reload();
     };
 
+    $scope.rejectResolvedTicket = function (ticket) {
+      let action = findAction("PENDING", ticket);
+
+      httpService.get(restService.getTeamLeaderByTeamID + '/' + ticket.resolverUser.team.id)
+          .then(function (data) {
+              console.log(data);
+              httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + data.data.id)
+                  .then(function (secondData) {
+
+                      },
+                      function (err) {
+
+                      });
+
+          },
+              function (err) {
+
+          });
+
+      $state.reload();
+
+    };
+
 
     /**
      *  Function deletes a selected ticket via an HTTP DELETE and updates the view of the table.
