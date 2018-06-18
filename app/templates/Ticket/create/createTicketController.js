@@ -138,7 +138,7 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
 
     $scope.findTargets = function () {
         //  HTTP GET
-        httpService.get(restService.readTargets)
+        httpService.get(restService.readActiveTargets)
             .then(function (response) {
                 $scope.targetList = response.data;
             }, function error(response) {
@@ -152,6 +152,7 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
         } else {
             $scope.showCategoriesOnDisplay = true;
             $scope.relatedCategories = i['categories'];
+            $scope.category.selected = null;
         }
     };
 

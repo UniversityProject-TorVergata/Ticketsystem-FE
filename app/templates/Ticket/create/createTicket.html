@@ -16,7 +16,7 @@
                 <ui-select   ng-model="target.selected" theme="select2" ng-init="findTargets();target.selected = targetList[0]"
                              style="min-width: 300px;margin-left: 10px" title="Select Target "
                         ng-change="showCategories(target.selected)">
-                    <ui-select-match placeholder="Select Taget in the list ">{{target.selected.name}}</ui-select-match>
+                    <ui-select-match placeholder="Select Target in the list ">{{target.selected.name}}</ui-select-match>
                     <ui-select-choices repeat="target in targetList | propsFilter: {name: $select.search, version: $select.search}">
                         <div ng-bind-html="target.name | highlight: $select.search"></div>
                         <small>
@@ -127,14 +127,13 @@
             </div>
             <div class="form-group">
                 <label>Description: </label><br>
-                <textarea name="description" cols="40" rows="5" ng-model="ticket.description"></textarea>
+                <textarea name="description" style="color:black;" cols="40" rows="5" ng-model="ticket.description"></textarea>
             </div>
             <div class="form-group">
                 <label>Attachment: </label><br>
                 <input type="file"
                        custom-on-change="selectedFile"
-                       accept="image/*"
-                />
+                       accept="image/*"/>
             </div>
             <div class="form-group">
                 <button ng-click="createTicket()" class="btn btn-primary btn-lg btn-block">Create</button>

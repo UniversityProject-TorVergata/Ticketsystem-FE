@@ -80,7 +80,7 @@ table.tr.td.btn {
 .account input {
     margin-left: 10px;
     margin-right: 10px;
-    height: 10px;
+    /*height: 10px;*/
 }
 
 .account select {
