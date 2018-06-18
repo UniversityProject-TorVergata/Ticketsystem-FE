@@ -98,6 +98,7 @@
                                 <ui-select-choices repeat="team in teams | propsFilter: {surname: $select.search}">
                                     <div ng-bind-html="team.name + ' ' + team.surname | highlight: $select.search"></div>
                                     <small>
+                                        Team : {{team.team.name}}
                                         Area : {{team.team.problemArea}}
                                     </small>
                                 </ui-select-choices>
