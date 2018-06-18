@@ -1,18 +1,18 @@
 [
   {
     "id": 1,
-    "name": "Target - Payment"
+    "name": "Service_Payment"
   },
   {
     "id": 2,
-    "name": "Target - Technical"
+    "name": "Service_Technical"
   },
   {
     "id": 3,
-    "name": "Product - Payment"
+    "name": "Product_Payment"
   },
   {
     "id": 3,
-    "name": "Product - Technical"
+    "name": "Product_Technical"
   }
 ]
