@@ -8,25 +8,21 @@ angular.module('ticketsystem.Login', ['ngRoute'])
          *  Function triggered by the login.
          *  It sends a login request via HTTP POST.
          */
-        $scope.startLoginUser = function () {
+        $scope.startLoginUser = function (user) {
 
-            //  Check data for the login
-            if( angular.isUndefined($scope.user) ||
-                angular.isUndefined($scope.user.username) ||
-                angular.isUndefined($scope.user.password) ) {
-                window.alert('Some fields are missing!');
-            }
-            else if($scope.user.username == "" || $scope.user.password == "")
+            //  Check fields
+            if (user.username == "" || user.password == "")
                 window.alert('Some fields are missing!');
             else {
 
                 // HTTP POST
-                httpService.post(restService.login, $scope.user)
+                httpService.post(restService.login, user)
                     .then(function (response) {
 
+                        //  Save user info
                         storageService.setUser(response.data);
 
-                        switch(response.data["@type"]) {
+                        switch (response.data["@type"]) {
                             case "Customer":
                                 $state.go('secure.homeCustomer');
                                 break;
@@ -44,13 +40,9 @@ angular.module('ticketsystem.Login', ['ngRoute'])
                                 break;
                         }
 
-                        //$location.url(url);
-
-                    //  User data is saved in the sessions after login
-                    //storageService.save("userData", JSON.stringify(response.data));
-                }, function error(response) {
-                    window.alert("Login failed!");
-                });
+                    }, function error(response) {
+                        window.alert("Login failed! Try again.");
+                    });
             }
         };
     });
