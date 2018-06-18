@@ -1,5 +1,6 @@
 'use strict';
 
+//  TODO fuori standard - Perchè ha due controller?
 angular.module('ticketsystem.home', ['ngRoute'])
 
     .controller('homeCtrl', function ($scope, $modal, $log) {
