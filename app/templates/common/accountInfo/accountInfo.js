@@ -1,72 +1,72 @@
 'use strict';
-
+/**
+ *  This module allows to modify user data.
+ */
 angular.module('ticketsystem.accountInfo', ['ngRoute'])
 
-    // TODO rifare che è stutto sbagliato (abuso di scope)
-    .controller('accountInfoCtrl', function ($scope, restService, httpService, $state,storageService) {
+    .controller('accountInfoCtrl', function ($scope, restService, httpService, $state, storageService) {
 
-        $scope.user = storageService.getUser()
+        //  TODO prenderlo direttamente nell'html?
+        $scope.user = storageService.getUser();
         $scope.disabledButton = true;
         $scope.disabledReadonly = true;
         $scope.confirm_pass_value = true;
 
-        var config = {
-            headers : { 'Content-Type': 'application/json', }
-        };
+        /**
+         *  This function allows to change user data.
+         *  @param user updated user data
+         */
+        $scope.changeAccountInformation = function (user) {
 
-        $scope.changeAccountInformation = function() {
-
-            if( angular.isUndefined($scope.user) ||
-                angular.isUndefined($scope.user.fiscal_code) ||  $scope.user.fiscal_code === "" ||
-                angular.isUndefined($scope.user.name) || $scope.user.name === "" ||
-                angular.isUndefined($scope.user.surname) || $scope.user.surname === "" ||
-                angular.isUndefined($scope.user.address) || $scope.user.address === "" ||
-                angular.isUndefined($scope.user.email) || $scope.user.email === "" ||
-                angular.isUndefined($scope.user.username) || $scope.user.username === "" ||
-                angular.isUndefined($scope.user.password) || $scope.user.password === "" ||
-                angular.isUndefined($scope.user.confirm_password)|| $scope.user.confirm_password === "")
-            {
-                window.alert('It is necessary to fill all the fields!')
-
+            // TODO fare controlli migliori?
+            if (user.fiscal_code === "" || user.name === "" || user.surname === "" ||
+                user.address === "" || user.email === "" || user.username === "" ||
+                user.password === "" || user.confirm_password === "") {
+                window.alert('You need to fill all the fields!')
             }
-            else if(!angular.equals($scope.user.password, $scope.user.confirm_password)) {
+
+            if (!angular.equals(user.password, user.confirm_password)) {
                 window.alert('Password and confirm password not matching')
             }
             else {
 
-                httpService.put(restService.updateUser, $scope.user.id, $scope.user, config)
+                // HTTP PUT
+                httpService.put(restService.updateUser, user.id, user)
                     .then(function (response) {
-                            window.alert('Account Successfully Updated!');
-                            $state.reload();
-                            storageService.save("userData",JSON.stringify($scope.user));
                             console.log(response)
+                            window.alert('Account updated!');
+                            storageService.setUser(response.data)
+                            $state.reload();
                         },
 
                         function (err) {
                             window.alert('Update Failed!');
-                            console.log("Error!\n");
                             console.log(err)
                         })
             }
         };
 
-        $scope.deleteAccount = function() {
+        /**
+         *  This function deletes the user data from the session and the database.
+         *  @param user User to delete
+         */
+        $scope.deleteAccount = function (user) {
 
-            httpService.delete(restService.deleteUser, $scope.user.id, config)
+            //  HTTP DELETE
+            httpService.delete(restService.deleteUser, user.id)
                 .then(function (response) {
                         window.alert('Account Successfully Deleted!');
+                        storageService.invalidateUser();
                         $state.reload();
-                        console.log(response)
                     },
 
                     function (err) {
                         window.alert('Deletion Failed!');
-                        console.log("Error!\n");
                         console.log(err)
                     })
         };
 
-        $scope.disabledButtonHandler = function() {
+        $scope.disabledButtonHandler = function () {
 
             $scope.disabledButton = !($scope.disabledButton);
             $scope.disabledReadonly = !($scope.disabledReadonly);
