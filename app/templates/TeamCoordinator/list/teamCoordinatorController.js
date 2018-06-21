@@ -19,6 +19,9 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
       $scope.team = {};
       $scope.team.selected;
 
+      // itemsBackup
+      $scope.itemBackup = {};
+
 
       /**
        *  Function reads all the PENDING tickets in the database via an HTTP GET and
@@ -30,7 +33,7 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
         httpService.get(restService.validationTickets)
             .then(function (response) {
               $scope.items = response.data;
-
+              angular.copy($scope.item, $scope.itemBackup)
 
             }, function error(response) {
               $scope.errorResponse = "Error Status: " + response.statusText;
