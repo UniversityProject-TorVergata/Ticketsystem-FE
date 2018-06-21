@@ -439,3 +439,15 @@ table.responsive-table thead {
     display: table;
 }
 */
+/*@keyframes visibleAnim {*/
+    /*0%   {display: none;}*/
+    /*50% {display: block;!important;}*/
+/*}*/
+
+/*.animationDisplay{*/
+    /*display:none;*/
+    /*animation-name: visibleAnim;*/
+    /*animation-duration: 1s;*/
+    /*-webkit-animation-timing-function: linear;*/
+    /*animation-timing-function:linear;*/
+/*}*/
