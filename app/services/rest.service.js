@@ -6,7 +6,8 @@ angular.module('ticketsystem.restService', [])
 
     //  Backend URL
     .constant("CONNECTION", {
-        url: "http://localhost:8200/ticketsystem"
+        // url: "http://localhost:8200/ticketsystem"
+        url: "https://vast-bastion-57010.herokuapp.com/ticketsystem"
     })
 
     //  Service for HTTP requests with REST URLs
