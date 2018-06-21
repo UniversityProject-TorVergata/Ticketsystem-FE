@@ -1,40 +1,38 @@
-<div class="modal-header" >
-    <h3><i class="fas fa-ticket-alt"></i>&nbsp;&nbsp;&nbsp;Ticket #{{formItem.id}} details</h3>
+<div class="modal-header">
+    <h2><i class="fas fa-ticket-alt"></i> Ticket #{{formItem.id}} - Details</h2>
 </div>
-
-<body>
-<div class="row">
-    <div class="column">
-        <h3><i class="fas fa-info-circle"></i>&nbsp;Info</h3>
-        <p><strong>ID:</strong><br>{{formItem.id}}</p>
-        <p><strong>Date:</strong><br>{{formItem.timestamp}}</p>
-        <p><strong>Priority:</strong><br>{{formItem.customerPriority}}</p>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-sm-6">
+            <h4><i class="fas fa-info-circle"></i>&nbsp;Info</h4>
+            <p><strong>ID: </strong>{{formItem.id}}</p>
+            <p><strong>Date: </strong>{{formItem.timestamp}}</p>
+            <p><strong>Priority: </strong>{{formItem.customerPriority}}</p>
+        </div>
+        <div class="col-sm-6">
+            <h4><i class="fas fa-user-circle"></i><span>&nbsp;Author</span></h4>
+            <p><strong>Name: </strong>{{formItem.openerUser.name}}</p>
+            <p><strong>Surname: </strong>{{formItem.openerUser.surname}}</p>
+            <p><strong>ID: </strong>{{formItem.openerUser.id}}</p>
+            <p><strong>Email: </strong>{{formItem.openerUser.email}}</p>
+            <p><strong>Username: </strong>{{formItem.openerUser.username}}</p>
+        </div>
     </div>
-    <div class="column">
-        <h3><i class="fas fa-user-circle"></i><span>&nbsp;Author</span></h3>
-        <p><strong>Name:</strong><br>{{formItem.openerUser.name}}</p>
-        <p><strong>Surname:</strong><br>{{formItem.openerUser.surname}}</p>
-        <p><strong>ID:</strong><br>{{formItem.openerUser.id}}</p>
-        <p><strong>Email:</strong><br>{{formItem.openerUser.email}}</p>
-        <p><strong>Username:</strong><br>{{formItem.openerUser.username}}</p>
+
+    <div class="row">
+        <div class="col-sm-12">
+            <h4><i class="fas fa-envelope"></i> &nbsp;Details</h4>
+            <p><strong>Title: </strong><u>{{formItem.title}}</u></p>
+            <p><strong>Description: </strong></p>
+            <p>{{formItem.description}}</p>
+            <p><strong>Target: </strong>&nbsp;<br>({{formItem.target['targetType']}})&nbsp;{{formItem.target['name']}}
+            </p>
+            <p><strong>Categories: </strong>&nbsp;&nbsp;{{formItem.presumedType}}</p>
+            <p><strong>Tags: </strong>&nbsp;&nbsp;{{formItem.tags}}</p>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="cancel()">Ok</button>
     </div>
 </div>
-<div class="row">
-<div class="bigColumn">
-    <h3><i class="fas fa-envelope">&nbsp;Details</i></h3>
-    <p><strong>Title:</strong><br><u>{{formItem.title}}</u></p>
-    <p><strong>Description:</strong></p>
-    <p>{{formItem.description}}</p>
-    <p><strong>Target:</strong>&nbsp;<br>({{formItem.target['targetType']}})&nbsp;{{formItem.target['name']}}</p>
-    <p><strong>Categories:</strong>&nbsp;&nbsp;{{formItem.presumedType}}</p>
-    <p><strong>Tags:</strong>&nbsp;&nbsp;{{formItem.tags}}</p>
-
-</div>
-</div>
-
-<div class="modal-footer">
-    <button class="btn btn-warning" ng-click="cancel()">Ok</button>
-</div>
-
-
-</body>

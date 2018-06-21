@@ -42,6 +42,7 @@ div.form.row {
     align-items: stretch;
 }
 
+
 .container {
     background: #2e353d;
     overflow-x: auto;
@@ -49,10 +50,22 @@ div.form.row {
     width: 100%;
 }
 
+.modal-header>h2 {
+    padding-left: 50px;
+}
+
+.modal-body>.row {
+    padding-left: 50px;
+    font-size: 12px;
+}
 /*
 table.tr.td.btn {
     margin: auto;
 }*/
+
+.modal-header h2 {
+    text-align: center;
+}
 
 .account {
     box-shadow: none !important;
