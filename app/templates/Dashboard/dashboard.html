@@ -1,62 +1,85 @@
 <div class="row" style="height: 900px">
     <!-- spazio riservato ai ticket (panels) -->
-    <div class="col col-md-12" >
-        <form>
-        <div class="row">
-            <div class="col col-sm-4"
-                 data-drop="true" data-jqyoui-options>
-                <h3>In Execution</h3>
-                <div class="panel panel-primary" ng-repeat="t in executionTickets" ng-controller="modalController"
-                     data-drag="true" ng-model="t" data-jqyoui-options="{revert: 'invalid'}"
-                     jqyoui-draggable='{animate: true}'>
-                    <div class="panel-heading" style="font-size: small;">
-                        Ticket #{{t.id}}
-                        <button ng-click="showInfoForm(t)" class="btn btn-xs btn-default"style="float: right;">
-                            <i class="fas fa-info-circle icon-small"></i>
-                        </button>
-                        <button ng-if="t.attachedFile" ng-click="showImage(t)" class="btn btn-xs btn-default"style="float: right;">
-                            <i class="fa fa-image"></i>
-                        </button>
-                        <button ng-click="showMessageForm(t)" class="btn btn-xs btn-default"style="float: right;">
-                            <i class="far fa-comments"></i>
-                        </button>
-                        <button ng-click="changeStateToPending(t)" class="btn btn-xs btn-default"style="float: right;">
-                            <i class="far fa-caret-square-left"></i>
-                        </button>
+    <div class="col col-md-12">
+        <form style="min-height: 60%">
+            <div class="row">
+                <div class="col col-sm-4"
+                     data-drop="true" data-jqyoui-options>
+                    <h3>In Execution</h3>
+                    <div class="panel panel-primary" ng-repeat="t in executionTickets" ng-controller="modalController"
+                         data-drag="true" ng-model="t" data-jqyoui-options="{revert: 'invalid'}"
+                         jqyoui-draggable='{animate: true}'>
+                        <div class="panel-heading" style="font-size: small;"
+                             ng-click="execution[$index]=!execution[$index]">
+                            Ticket #{{t.id}}
+                            <button ng-click="showInfoForm(t)" class="btn btn-xs btn-default" style="float: right;">
+                                <i class="fas fa-info-circle icon-small"></i>
+                            </button>
+                            <button ng-if="t.attachedFile" ng-click="showImage(t)" class="btn btn-xs btn-default"
+                                    style="float: right;">
+                                <i class="fa fa-image"></i>
+                            </button>
+                            <button ng-click="showMessageForm(t)" class="btn btn-xs btn-default"
+                                    style="float: right;">
+                                <i class="far fa-comments"></i>
+                            </button>
+                            <button ng-click="changeStateToPending(t)" class="btn btn-xs btn-default"
+                                    style="float: right;">
+                                <i class="far fa-caret-square-left"></i>
+                            </button>
+                        </div>
+                        <div class="panel-body" style="font-size: 11px;" ng-show="execution[$index]">
+                            <!--ng-class="{'animationDisplay':visible[$index]}"-->
+                            Title: {{t.title}}<br>
+                            Date: {{t.timestamp}}<br>
+                            Priority: {{t.actualPriority}}<br>
+                            Category: {{t.actualType}}<br>
+                            Difficulty: {{t.difficulty}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col col-sm-4" data-drop="true" data-jqyoui-options ng-model="toChange"
+                     jqyoui-droppable="{onDrop:'changeStateToResolved()'}">
+                    <h3>Resolved</h3>
+                    <div class="panel panel-warning" ng-repeat="t in resolvedTickets" ng-controller="modalController">
+                        <div class="panel-heading" ng-click="resolved[$index]=!resolved[$index]">Ticket #{{t.id}}
 
-                    </div>
-                    <div class="panel-body" style="font-size: 11px;">
-                        Title: {{t.title}}<br>
-                        Date: {{t.timestamp}}<br>
-                        Priority: {{t.actualPriority}}<br>
-                        Category: {{t.actualType}}<br>
-                        Difficulty: {{t.difficulty}}
-                    </div>
-                </div>
-            </div>
-            <div class="col col-sm-4" data-drop="true" data-jqyoui-options ng-model="toChange"
-                 jqyoui-droppable="{onDrop:'changeStateToResolved()'}">
-                <h3>Resolved</h3>
-                <div class="panel panel-warning" ng-repeat="t in resolvedTickets" ng-controller="modalController">
-                    <div class="panel-heading">Ticket #{{t.id}}
-                        <button ng-click="showInfoForm(t)" class="btn btn-xs btn-default"style="float: right;">
-                            <i class="fas fa-info-circle icon-small"></i>
-                        </button>
+                            <button ng-click="showInfoForm(t)" class="btn btn-xs btn-default" style="float: right;">
+                                <i class="fas fa-info-circle icon-small"></i>
+                            </button>
+                        </div>
+
+                        <div class="panel-body" style="font-size: 11px;" ng-show="resolved[$index]">
+                            <!--ng-class="{'animationDisplay':visible[$index]}"-->
+                            Title: {{t.title}}<br>
+                            Date: {{t.timestamp}}<br>
+                            Priority: {{t.actualPriority}}<br>
+                            Category: {{t.actualType}}<br>
+                            Difficulty: {{t.difficulty}}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col col-sm-4" data-drop="true" data-jqyoui-options ng-model="toChange"
-                 jqyoui-droppable="{onDrop:'changeStateToClosed()'}">
-                <h3>Closed</h3>
-                <div class="panel panel-success" ng-repeat="t in closedTickets" ng-controller="modalController">
-                    <div class="panel-heading">Ticket #{{t.id}}
-                        <button ng-click="showInfoForm(t)" class="btn btn-xs btn-default"style="float: right;">
-                            <i class="fas fa-info-circle icon-small"></i>
-                        </button>
+                <div class="col col-sm-4" data-drop="true" data-jqyoui-options ng-model="toChange"
+                     jqyoui-droppable="{onDrop:'changeStateToClosed()'}">
+                    <h3>Closed</h3>
+                    <div class="panel panel-success" ng-repeat="t in closedTickets" ng-controller="modalController">
+                        <div class="panel-heading" ng-click="closed[$index]=!closed[$index]">Ticket #{{t.id}}
+                            <button ng-click="showInfoForm(t)" class="btn btn-xs btn-default" style="float: right;">
+                                <i class="fas fa-info-circle icon-small"></i>
+                            </button>
+                        </div>
+                        <div class="panel-body" style="font-size: 11px;" ng-show="closed[$index]">
+                            <!--ng-class="{'animationDisplay':visible[$index]}"-->
+                            Title: {{t.title}}<br>
+                            Date: {{t.timestamp}}<br>
+                            Priority: {{t.actualPriority}}<br>
+                            Category: {{t.actualType}}<br>
+                            Difficulty: {{t.difficulty}}
+                        </div>
                     </div>
+
                 </div>
             </div>
-        </div>
         </form>
     </div>
 </div>
