@@ -1,7 +1,7 @@
 logs/*
 !.gitkeep
-navbar/node_modules/
-navbar/package-lock.json
+app/node_modules/
+app/package-lock.json
 bower_components/
 tmp
 .DS_Store
