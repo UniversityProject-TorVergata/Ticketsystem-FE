@@ -50,14 +50,22 @@ div.form.row {
     width: 100%;
 }
 
-.modal-header>h2 {
+.modal-header>h2,
+.panel-body>.row>div>.allModal,
+.panel-body-comments>.row {
     padding-left: 50px;
+    padding-right: 50px;
 }
 
 .modal-body>.row {
     padding-left: 50px;
     font-size: 12px;
 }
+
+.modal-body>form {
+    font-size: 12px;
+}
+
 /*
 table.tr.td.btn {
     margin: auto;
