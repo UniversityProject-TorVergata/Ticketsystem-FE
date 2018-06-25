@@ -13,14 +13,6 @@ body {
     background-image: url("/public/images/ticketsystem_background.jpg")
 }
 
-.trOdd {
-    background-color:#FFFFFF;
-}
-
-.trEven {
-    background-color:#F0F0F0;
-}
-
 div.form.row {
     color: #7a7a7a;
     border-radius: 1px;
@@ -37,19 +29,9 @@ div.form.row {
     margin: auto;
 }
 
-.wrapper {
-    display: flex;
-    align-items: stretch;
-}
-
-
-.container {
-    background: #2e353d;
-    overflow-x: auto;
-    white-space: nowrap;
-    width: 100%;
-}
-
+/**
+    Modal Css
+ */
 .modal-header>h2,
 .panel-body>.row>div>.allModal,
 .panel-body-comments>.row {
@@ -65,11 +47,6 @@ div.form.row {
 .modal-body>form {
     font-size: 12px;
 }
-
-/*
-table.tr.td.btn {
-    margin: auto;
-}*/
 
 .modal-header h2 {
     text-align: center;
@@ -101,13 +78,13 @@ table.tr.td.btn {
 .account input {
     margin-left: 10px;
     margin-right: 10px;
-    /*height: 10px;*/
 }
 
 .account select {
     margin-left: 10px;
     margin-right: 10px;
     width: 30%;
+    height: 30px;
 }
 
 ui-select {
