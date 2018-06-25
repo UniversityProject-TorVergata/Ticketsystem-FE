@@ -5,120 +5,65 @@
         <div class="form-group">
             <div class="form-group">
                 <Label>Target:</Label><br>
-                <!--<select id="targets" name="targets" data-ng-init="findTargets()"
+                <select id="targets"
+                        name="targets"
                         ng-options="t as t.name
                                         for
-                                        t in targetList track by t.id"
+                                        t in targets track by t.id"
                         ng-model="ticket.target"
-                        ng-init="ticket.target = targetList[0]"
-                        ng-change="showCategories(ticket.target)">
-                </select>-->
-                <ui-select   ng-model="target.selected" theme="select2" ng-init="findTargets();target.selected = targetList[0]"
-                             style="min-width: 300px;margin-left: 10px" title="Select Target "
-                        ng-change="showCategories(target.selected)">
-                    <ui-select-match placeholder="Select Target in the list ">{{target.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="target in targetList | propsFilter: {name: $select.search, version: $select.search}">
-                        <div ng-bind-html="target.name | highlight: $select.search"></div>
-                        <small>
-                            Type : {{target.targetType}}
-                            Version : {{target.version}}
-                        </small>
-                    </ui-select-choices>
-                </ui-select><br>
-
+                        ng-init="ticket.target = targets[0]; showCategories(ticket.target)"
+                        ng-change="showCategories(ticket.target); ticket.presumedType = relatedCategories[0];">
+                </select>
+                <br>
             </div>
 
             <div class="form-group">
                 <label>Category:</label><br>
-                <!--<select name="presumedType"
+                <select name="presumedType"
                         ng-options="t
-                                        for
-                                        t in relatedCategories"
-                        ng-model="ticket.presumedType">
-                </select><br>-->
-                <ui-select   ng-model="category.selected" theme="select2"
-                             style="min-width: 300px;margin-left: 10px" title="Select Category "
-                            >
-                    <ui-select-match placeholder="Select Category in the list ">{{category.selected}}</ui-select-match>
-                    <ui-select-choices repeat="category in relatedCategories ">
-                        <div ng-bind-html="category"></div>
-                    </ui-select-choices>
-                </ui-select><br>
-            </div>
-
-            <!--
-            <div class="form-group">
-                <Label>Categories:</Label>
-                <select id="cat" name="cat" data-ng-init="relatedCategories"
-                        ng-options="c as c.name for c in relatedCategories"
-                        ng-model="ticket.target['categories']"
-                        ng-show="showCategoriesOnDisplay"
-                        ng-hide="!showCategoriesOnDisplay">
+                                    for
+                                    t in relatedCategories"
+                        ng-model="ticket.presumedType"
+                        ng-init="ticket.presumedType = relatedCategories[0];">
                 </select>
+                <br>
             </div>
-            -->
-
-            <!--
-            <label>Categories:</label>
-            <div
-                    isteven-multi-select
-                    input-model="relatedCategories"
-                    output-model="selectedCategories"
-                    output-properties="name"
-                    button-label="name"
-                    item-label="name"
-                    tick-property="ticked"
-                    max-height="200px"
-            >
-            </div>
-            -->
-
 
             <!-- multiselect from https://github.com/isteven/angular-multi-select -->
             <label>Tags:</label>
-            <div
-                    class="isteven"
-                    isteven-multi-select
-                    input-model="tags"
-                    output-model="selectedTags"
-                    output-properties="name"
-                    button-label="name"
-                    item-label="name"
-                    tick-property="ticked"
-                    max-height="200px"
-
-            >
+            <div class="isteven"
+                 isteven-multi-select
+                 input-model="tags"
+                 output-model="selectedTags"
+                 output-properties="name"
+                 button-label="name"
+                 item-label="name"
+                 tick-property="ticked"
+                 max-height="200px">
             </div>
             <br>
 
             <div class="form-group">
                 <label>Priority:</label><br>
-                <!--<select name="customerPriority" ng-model="ticket.customerPriority">
-                    <option value="LOW">Low</option>
-                    <option value="AVERAGE">Average</option>
-                    <option value="HIGH">High</option>
-                </select><br>-->
-                <ui-select   ng-model="priority.selected" theme="select2" ng-init="priority.selected = priorities[0]"
-                             style="min-width: 300px;margin-left: 10px" title="Select Priority " >
-                    <ui-select-match placeholder="Select Priority in the list ">{{priority.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="priority in priorities | propsFilter: {name: $select.search}">
-                        <div ng-bind-html="priority.name | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select><br>
+                <select name="customerPriority"
+                        ng-options="    priority as priority.name | formatEnumeration: priority.name
+                                        for
+                                        priority in priorities track by priority.id"
+                        ng-model="customerPriority"
+                        ng-init="customerPriority = priorities[0]">
+                </select>
+                <br>
             </div>
             <div class="form-group">
                 <label>Visibility:</label><br>
-                <!--<select name="visibility" ng-model="visibility">
-                    <option value="PRIVATE">Private</option>
-                    <option value="PUBLIC">Public</option>
-                </select><br>-->
-                <ui-select ng-model="visibility.selected" theme="select2" ng-init="visibility.selected = visibilities[0]"
-                             style="min-width: 300px;margin-left: 10px" title="Select Visibility" >
-                    <ui-select-match placeholder="Select Visibility in the list ">{{visibility.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="visibility in visibilities | propsFilter: {name: $select.search}">
-                        <div ng-bind-html="visibility.name | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select><br>
+                <select name="visibility"
+                        ng-options="visibility as visibility.name | formatEnumeration: visibility.name
+                                        for
+                                        visibility in visibilities track by visibility.id"
+                        ng-model="visibility"
+                        ng-init="visibility = visibilities[0]">
+                </select>
+                <br>
             </div>
             <div class="form-group">
                 <label>Title: </label><br>
@@ -127,7 +72,8 @@
             </div>
             <div class="form-group">
                 <label>Description: </label><br>
-                <textarea name="description" style="color:black;" cols="40" rows="5" ng-model="ticket.description"></textarea>
+                <textarea name="description" style="color:black;" cols="40" rows="5"
+                          ng-model="ticket.description"></textarea>
             </div>
             <div class="form-group">
                 <label>Attachment: </label><br>
@@ -136,7 +82,8 @@
                        accept="image/*"/>
             </div>
             <div class="form-group">
-                <button ng-click="createTicket()" class="btn btn-primary btn-lg btn-block">Create</button>
+                <button ng-click="createTicket(ticket, selectedTags, customerPriority, visibility)" class="btn btn-primary btn-lg btn-block">Create
+                </button>
             </div>
         </div>
     </form>
