@@ -55,6 +55,22 @@ angular.module('ticketsystem.modelService', [])
                             });
                     })
                 },
+                /**
+                 *  Function gets the targets that are active from the database.
+                 *  @returns {Promise}  targets list
+                 */
+                getActiveTargets() {
+                    return new Promise(function (resolve, reject) {
+                        //  HTTP GET
+                        httpService.get(restService.readActiveTargets)
+                            .then(function (response) {
+                                resolve(response.data);
+                            }, function error(response) {
+                                console.error("Error loading Active Targets")
+                                resolve([])
+                            });
+                    })
+                },
 
                 /**
                  *  Function gets the TeamLeaders from the database.
