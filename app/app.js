@@ -36,6 +36,7 @@ var app = angular.module('ticketsystem', [
 
     // Ticket
     'ticketsystem.createTicket',
+    'ticketsystem.readTicket',
 
     //  Account info
     'ticketsystem.accountInfo',

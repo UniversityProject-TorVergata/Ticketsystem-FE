@@ -224,7 +224,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                                 return teams
                             })
                         },
-                        priorities: function(model) {
+                        priorities: function (model) {
                             return model.getPriority().then(function (priorities) {
                                 return priorities
                             })
@@ -254,7 +254,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                                 return teams
                             })
                         },
-                        priorities: function(model) {
+                        priorities: function (model) {
                             return model.getPriority().then(function (priorities) {
                                 return priorities
                             })
@@ -328,89 +328,28 @@ angular.module('ticketsystem.router', ['ui.router'])
 
                     },
                     resolve: {
+                        priorities: function (model) {
+                            return model.getPriority().then(function (priorities) {
+                                return priorities;
+                            });
+                        },
                         tags: function (model) {
                             return model.getTags().then(function (tags) {
                                 return tags;
                             });
                         },
-                        priorities: function(model) {
-                            return model.getPriority().then(function (priorities) {
-                                return priorities;
+                        activeTargets: function (model) {
+                            return model.getActiveTargets().then(function (activeTargets) {
+                                return activeTargets;
                             });
                         },
-                        visibilities: function(model) {
+                        visibilities: function (model) {
                             return model.getVisibilities().then(function (visibilities) {
                                 return visibilities;
                             });
                         }
                     }
                 })
-                /*
-                .state('secure.homeCustomer', {
-                    url: "/homeCustomer",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/Customer/home/homeCustomer.html',
-                            controller: 'homeCustomerCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['Customer']
-                    }
-                })
-                .state('secure.homeTeamLeader', {
-                    url: "/homeTeamLeader",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/TeamLeader/home/homeTeamLeader.html',
-                            controller: 'homeTeamLeaderCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['TeamLeader']
-                    }
-                })
-                .state('secure.homeAdmin', {
-                    url: "/homeAdmin",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/Admin/home/homeAdmin.html',
-                            controller: 'homeAdminCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['Admin']
-                    }
-                })
-                .state('secure.homeTeamCoordinator', {
-                    url: "/homeTeamCoordinator",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/TeamCoordinator/home/homeTeamCoordinator.html',
-                            controller: 'homeTeamCoordinatorCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['TeamCoordinator']
-                    }
-                })
-                .state('secure.homeTeamMember', {
-                    url: "/homeTeamMember",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/TeamMember/home/homeTeamMember.html',
-                            controller: 'homeTeamMemberCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['TeamMember']
-                    }
-                })*/
                 .state('secure.ticket', {
                     url: "/Ticket",
                     views: {
@@ -437,7 +376,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     views: {
                         'content': {
                             templateUrl: 'templates/Ticket/list/readTicket.html',
-                            controller: 'CreateTicketCtrl'
+                            controller: 'ReadTicketCtrl'
                         }
                     },
                     data: {
@@ -446,17 +385,22 @@ angular.module('ticketsystem.router', ['ui.router'])
 
                     },
                     resolve: {
+                        activeTargets: function (model) {
+                            return model.getActiveTargets().then(function (activeTargets) {
+                                return activeTargets;
+                            })
+                        },
                         tags: function (model) {
                             return model.getTags().then(function (tags) {
                                 return tags;
                             });
                         },
-                        priorities: function(model) {
+                        priorities: function (model) {
                             return model.getPriority().then(function (priorities) {
                                 return priorities;
                             });
                         },
-                        visibilities: function(model) {
+                        visibilities: function (model) {
                             return model.getVisibilities().then(function (visibilities) {
                                 return visibilities;
                             });
