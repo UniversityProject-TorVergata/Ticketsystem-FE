@@ -10,8 +10,6 @@
     margin-top: 20px;
 }
 
-/* Parte Centrale */
-
 #main-div {
     background-color: #2e353d;
     min-height: 420px;
@@ -37,7 +35,7 @@
 
 #body-div {
     color: white;
-    font-size: x-large;
+    font-size: large;
     margin-left: 30px;
 }
 
@@ -62,7 +60,6 @@
     border: 3px solid lightskyblue;
     -webkit-animation: mymove 5s infinite;
     animation: mymove 6s infinite;
-    font-style: italic;
     color: black;
     line-height: 3px;
 }
@@ -74,14 +71,9 @@
 .li_menu_basso {
     display: inline;
     color: white;
-    font-variant:small-caps;
     font-style: italic;
     font-size: 15px;
     margin-bottom: 10px;
-}
-
-.li_menu_basso:hover {
     text-decoration: underline;
-    font-size: 17px;
     cursor: pointer;
 }
