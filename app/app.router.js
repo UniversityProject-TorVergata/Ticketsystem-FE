@@ -158,14 +158,27 @@ angular.module('ticketsystem.router', ['ui.router'])
                     data: {
                         requiredLogin: true,
                         access: ['Admin']
+                    },
+                    resolve: {
+                        stateMachines: function (model) {
+                            return model.getStateMachines().then(function (stateMachines) {
+                                return stateMachines
+                            })
+                        },
+                        targetTypes: function (model) {
+                            return model.getTargetTypes().then(function (targetTypes) {
+                                return targetTypes
+                            })
+                        }
                     }
+
                 })
                 .state('secure.listTarget', {
                     url: "/listTarget",
                     views: {
                         'content': {
                             templateUrl: 'templates/Admin/target/listTarget.html',
-                            controller: 'createTargetCtrl'
+                            controller: 'listTargetCtrl'
                         }
                     },
                     data: {
@@ -178,12 +191,24 @@ angular.module('ticketsystem.router', ['ui.router'])
                     views: {
                         'content': {
                             templateUrl: 'templates/Admin/target/modifyTarget.html',
-                            controller: 'createTargetCtrl'
+                            controller: 'modifyTargetCtrl'
                         }
                     },
                     data: {
                         requiredLogin: true,
                         access: ['Admin']
+                    },
+                    resolve: {
+                        stateMachines: function (model) {
+                            return model.getStateMachines().then(function (stateMachines) {
+                                return stateMachines
+                            })
+                        },
+                        targetTypes: function (model) {
+                            return model.getTargetTypes().then(function (targetTypes) {
+                                return targetTypes
+                            })
+                        }
                     }
                 })
                 .state('secure.createUser', {

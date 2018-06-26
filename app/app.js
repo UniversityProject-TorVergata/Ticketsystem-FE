@@ -47,6 +47,9 @@ var app = angular.module('ticketsystem', [
     //  Admin
     'ticketsystem.createUser',
     'ticketsystem.createTarget',
+    'ticketsystem.listTarget',
+    'ticketsystem.modifyTarget',
+
 
     // Customer
     'ticketsystem.createCustomer',
