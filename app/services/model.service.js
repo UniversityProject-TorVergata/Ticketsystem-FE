@@ -6,6 +6,22 @@ angular.module('ticketsystem.modelService', [])
     .service('model', function (httpService, restService) {
             return {
                 /**
+                 *  Function gets the finite state machines.
+                 *  @returns {Promise}  finite state machines list.
+                 */
+                getStateMachines() {
+                    return new Promise(function (resolve, reject) {
+                        httpService.get(restService.getStateMachines).then(
+                            function (stateMachines) {
+                                resolve(stateMachines.data);
+                            },
+                            function (error) {
+                                console.error("Error loading finite state machines")
+                                resolve([])
+                            })
+                    })
+                },
+                /**
                  *  Function gets the difficulty values.
                  *  @returns {Promise}  difficulty types list.
                  */
