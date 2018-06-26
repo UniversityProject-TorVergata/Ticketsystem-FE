@@ -5,13 +5,14 @@
 
         <div class="form-group">
             <label>User Type:</label><br>
-            <ui-select ng-model="userType.selected" theme="select2" ng-init="userType.selected = userTypes[0]"
-                                                     style="min-width: 300px;margin-left: 10px" title="Select User Type " >
-            <ui-select-match placeholder="Select User type in the list ">{{userType.selected.name}}</ui-select-match>
-            <ui-select-choices repeat="userType in userTypes | propsFilter: {name: $select.search}">
-                <div ng-bind-html="userType.name | highlight: $select.search"></div>
-            </ui-select-choices>
-        </ui-select><br>
+            <select name="@type"
+                    ng-model="type"
+                    ng-options="userType as userType.name
+                                for
+                                userType in userTypes
+                                track by userType.id"
+                    ng-init="type = userTypes[0]">
+            </select>
         </div>
         <div class="form-group">
             <label>Fiscal Code</label>
