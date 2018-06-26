@@ -1,30 +1,32 @@
 <div class="account col-sm-10">
     <br>
-    <form ng-submit="creationTarget()">
+    <form>
         <h2 class="text-center">Create Target</h2>
         <div class="form-group">
             <label>Target Type</label><br>
-            <ui-select   ng-model="type.selected" theme="select2" ng-init="type.selected = targetTypes[0]"
-                         style="min-width: 300px;margin-left: 10px" title="Select target type " >
-                <ui-select-match placeholder="Select Target type in the list ">{{type.selected.name}}</ui-select-match>
-                <ui-select-choices repeat="type in targetTypes | propsFilter: {name: $select.search}">
-                    <div ng-bind-html="type.name | highlight: $select.search"></div>
-                </ui-select-choices>
-            </ui-select><br>
+            <select name="targetType"
+                    ng-model="targetType"
+                    ng-options="targetType as targetType.name | formatEnumeration: targetType.name
+                                for
+                                targetType in targetTypes
+                                track by targetType.id"
+                    ng-init="targetType = targetTypes[0]">
+            </select>
         </div>
 
-        <div class="form-group" data-ng-init="stateMachineList()">
-            <label>Ticket Workflow</label>
-            <br>
-            <ui-select   ng-model="stateMachine.selected" theme="select2" ng-init="stateMachine.selected = stateMachines[0]"
-                         style="min-width: 300px; margin-left: 10px; float: left">
-                <ui-select-match placeholder="Select a State Machine in The List">{{stateMachine.selected.name}}</ui-select-match>
-                <ui-select-choices repeat="stateMachine in stateMachines | propsFilter: {name: $select.search}">
-                    <div ng-bind-html="stateMachine.name | highlight: $select.search"></div>
-                </ui-select-choices>
-            </ui-select>
-
-            <button class="btn btn-info" type="button" ng-click="viewStateMachines()" style="position: relative">View</button>
+        <div class="form-group">
+            <label>Ticket Workflow</label><br>
+            <select name="stateMachine"
+                    ng-model="stateMachine"
+                    ng-options="stateMachine as stateMachine.name
+                    for
+                    stateMachine in stateMachines
+                    track by stateMachine.id"
+                    ng-init="stateMachine = stateMachines[0]">
+            </select>
+            <button ng-click="viewStateMachines()" class="btn_state btn-xs">
+                <i class="fa fa-info"></i> View
+            </button>
         </div>
 
         <div class="form-group">
@@ -45,6 +47,6 @@
             <input type="number" step="0.1" min="1" class="form-control" ng-model="target.version">
         </div>
         <br>
-        <button class="btn btn-primary btn-lg btn-block">Insert</button>
+        <button ng-click="creationTarget(target, tags, targetType, stateMachine)" class="btn btn-primary btn-lg btn-block">Insert</button>
     </form>
 </div>

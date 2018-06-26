@@ -24,12 +24,9 @@
                 <td>{{item.targetState}}</td>
                 <td>{{item.stateMachineName}}</td>
                 <td>
-                    <button class="btn1 btn-primary" ng-click="modifyTarget($index)">Modify</button>&nbsp;&nbsp;&nbsp;<button
-                        class="btn1 btn-danger" ng-show="!isRetired($index)" ng-click="removeTarget($index)">Retire
-                </button>
-                    &nbsp;&nbsp;<button class="btn1 btn-success" ng-show="isRetired($index)"
-                                        ng-click="rehabTarget($index)">Rehabilitate
-                </button>
+                    <button class="btn1 btn-primary" ng-click="modifyTarget($index)">Modify</button>
+                    <button class="btn1 btn-danger" ng-show="!isRetired($index)" ng-click="removeTarget($index)">Retire</button>
+                    <button class="btn1 btn-success" ng-show="isRetired($index)" ng-click="rehabTarget($index)">Active</button>
                 </td>
 
             </tr>

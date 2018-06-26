@@ -1,54 +1,53 @@
 <div class="account col-sm-10">
         <br>
-        <form ng-submit="putModifiedTarget()" data-ng-init="initTargetModify()">
+        <form data-ng-init="initTargetModify()">
             <h2 class="text-center">Modify a Target</h2>
-            <div class ="form-group" >
+            <div class="form-group">
                 <label>Target Type</label><br>
-                <ui-select   ng-model="type.selected" theme="select2"
-                         style="min-width: 300px;margin-left: 10px" title="Select target type " >
-                    <ui-select-match placeholder="Select Target type in the list ">{{type.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="type in targetTypes | propsFilter: {name: $select.search}">
-                        <div ng-bind-html="type.name | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select><br>
+                <select name="modtargetType"
+                        ng-model="modtargetType"
+                        ng-options="modtargetType as modtargetType.name | formatEnumeration: modtargetType.name
+                                for
+                                modtargetType in modtargetTypes
+                                track by modtargetType.id"
+                        ng-init="modtargetType = modtargetTypes[getIndexFromValue(modtargetTypes, modtarget.targetType)]">
+                </select>
             </div>
 
-            <div class="form-group" data-ng-init="stateMachineList()">
-                <label>Ticket Workflow</label>
-                <br>
-                <ui-select   ng-model="stateMachine.selected" theme="select2" ng-init="stateMachine.selected = stateMachines[0]"
-                             style="min-width: 300px;margin-left: 10px; float: left" title="Select State Machine " >
-                    <ui-select-match placeholder="Select State Machine in The List">{{stateMachine.selected.name}}</ui-select-match>
-                    <ui-select-choices repeat="stateMachine in stateMachines | propsFilter: {name: $select.search}">
-                        <div ng-bind-html="stateMachine.name | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select>
-
-                <button class="btn btn-info" type="button" ng-click="viewStateMachines()" style="position: relative">View</button>
+            <div class="form-group">
+                <label>Ticket Workflow</label><br>
+                <select name="modstateMachine"
+                        ng-model="modstateMachine"
+                        ng-options="modstateMachine as modstateMachine.name
+                    for
+                    modstateMachine in modstateMachines
+                    track by modstateMachine.id"
+                    ng-init="modstateMachine = modstateMachines[getIndexFromValue(modstateMachines, modtarget.stateMachineName)]">
+                </select>
+                <button ng-click="viewStateMachines()" class="btn_state btn-xs">
+                    <i class="fa fa-info"></i> View
+                </button>
             </div>
 
             <div class="form-group">
                 <label>Name</label>
-                <input type="text" class="form-control"  ng-model="modtarget.name"
-                       ng-value="modtarget.name">
+                <input type="text" class="form-control" ng-model="modtarget.name">
             </div>
             <div class="form-group">
                 <label>Description</label>
-                <input type="text" class="form-control" ng-model="modTarget.description" ng-value="modtarget.description">
+                <input type="text" class="form-control" ng-model="modtarget.description">
             </div>
 
             <div class="form-group">
                 <label>Target Ticket Categories</label>
-                <tags-input ng-model="tags" style="margin-left: 10px;min-width: 727px;min-height: 41px"></tags-input>
+                <tags-input  ng-model="modtags" style="margin-left: 10px;min-width: 727px;min-height: 41px"></tags-input>
             </div>
             <div class="form-group">
                 <label>Version</label>
-                <input type="number" step = "0.1" min="1" class="form-control" ng-model="modtarget.version"
-                ng-value="modtarget.version">
+                <input type="number" step="0.1" min="1" class="form-control" ng-model="modtarget.version">
             </div>
             <br>
-
-            <button class="btn btn-primary btn-lg btn-block">Edit</button>
+            <button ng-click="putModifiedTarget(modtarget, modtargetType, modtags, modstateMachine)" class="btn btn-primary btn-lg btn-block">Edit</button>
         </form>
     </div>
 
