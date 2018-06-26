@@ -21,7 +21,22 @@ angular.module('ticketsystem.modelService', [])
                             })
                     })
                 },
-
+                /**
+                 *  Function gets the target type values.
+                 *  @returns {Promise}  target type values list.
+                 */
+                getTargetTypes() {
+                    return new Promise(function (resolve, reject) {
+                        httpService.get('./mocks/TargetTypes.json').then(
+                            function (targetTypes) {
+                                resolve(targetTypes.data);
+                            },
+                            function (error) {
+                                console.error("Error loading target type values")
+                                resolve([])
+                            })
+                    })
+                },
                 /**
                  *  Function gets the allowed user types.
                  *  @returns {Promise}  user types list.
