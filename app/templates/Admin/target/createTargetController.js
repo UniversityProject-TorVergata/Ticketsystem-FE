@@ -2,25 +2,20 @@
 
 angular.module('ticketsystem.createTarget', ['ngRoute'])
 
-    .controller('createTargetCtrl', function ($scope, restService, httpService, $state, storageService) {
+    .controller('createTargetCtrl', function ($scope, restService, httpService, $state, storageService, $modal, $log) {
 
         var modTargetId;
         $scope.target = {};
         $scope.target.targetType = "Service";
         $scope.tags=[];
-        $scope.target.stateMachineName = "Default_StateMachine";
 
         /* Array per Ui-Select*/
         $scope.targetTypes = [{"name":"Product"},{"name":"Service"}];
         $scope.type = {};
         $scope.type.selected = {} ;
 
-        $scope.stateMachines = [{"name":"Default_StateMachine"}] ;
         $scope.stateMachine = {};
         $scope.stateMachine.selected ;
-
-
-
 
         var config = {
             headers : {
@@ -37,11 +32,12 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
          */
         $scope.creationTarget = function(){
 
-            if(angular.isUndefined($scope.target) || (
-                angular.isUndefined($scope.target.name) ||
-                angular.isUndefined($scope.target.description) ||
-                angular.isUndefined($scope.target.version)) ||
-                    $scope.tags.length==0) {
+            if(angular.isUndefined($scope.target) ||
+                $scope.target.name === ""  ||
+                $scope.target.description === "" ||
+                $scope.target.version === "" ||
+                $scope.tags.length==0) {
+
                 window.alert('It is necessary to fill all the fields!');
             }
 
@@ -50,7 +46,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                 $scope.target.targetState = "ACTIVE";
                 $scope.target.categories = [];
 
-
+                $scope.target.stateMachineName = $scope.stateMachine.selected.name;
                 $scope.target.targetType = $scope.type.selected.name ;
 
                 console.log($scope.target);
@@ -119,13 +115,13 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
          */
         $scope.putModifiedTarget = function(){
 
-            if(angular.isUndefined($scope.modtarget) || (
-                angular.isUndefined($scope.modtarget.name) ||
-                angular.isUndefined($scope.modtarget.description) ||
-                angular.isUndefined($scope.modtarget.version)) ||
-                $scope.tags.length<1) {
+            if(angular.isUndefined($scope.modtarget) ||
+                $scope.modtarget.name === "" ||
+                $scope.modtarget.description === "" ||
+                $scope.modtarget.version === "" ||
+                $scope.tags.length < 1) {
 
-                window.alert('It is necessary to fill all the fields!');
+                    window.alert('It is necessary to fill all the fields!');
             }
             else {
                 $scope.modtarget.targetType = $scope.type.selected.name ;
@@ -138,10 +134,8 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
 
                 }
 
-                var url = restService.createTarget;
-
                 var targetID = JSON.parse(storageService.get("productData")).id;
-                httpService.put(url, targetID, $scope.modtarget, config)
+                httpService.put(restService.createTarget, targetID, $scope.modtarget, config)
                     .then(function (response) {
 
                         window.alert("Target modified with success!");
@@ -236,5 +230,42 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                 return false;
         };
 
+        $scope.stateMachineList = function(){
+
+            httpService.get(restService.getStateMachines)
+                .then(function (response) {
+                        $scope.stateMachines = response.data;
+                    },
+                    function error(response) {
+                        $scope.errorResponse = "Error Status: " +  response.statusText;
+                    });
+        };
+
+        $scope.viewStateMachines = function () {
+
+            var modalInstance;
+
+            modalInstance = $modal.open({
+                templateUrl: '/modal/modal-view-state-machine.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                backdrop: 'static',
+            });
+
+            modalInstance.result.then(function () {
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
     });
+
+
+var ModalInstanceCtrl = function ($scope, $modalInstance) {
+
+    $scope.cancel = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+};
