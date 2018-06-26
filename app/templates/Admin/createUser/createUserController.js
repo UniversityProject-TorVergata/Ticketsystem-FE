@@ -1,20 +1,21 @@
 'use strict';
-
+//  TODO Restituire l'errore se è già registrato.
+//  TODO clear field che è l ostesso per tutti i createUser
+/**
+ *  This module mannages the creation of a new user.
+ */
 angular.module('ticketsystem.createUser', ['ngRoute'])
-
     .controller('createUserCtrl', function ($scope, restService, httpService, $state, userTypes) {
-
-        $scope.userType = {};
-        $scope.userType.selected;
-
 
         //  Select values
         $scope.userTypes = userTypes;
 
-        //  Function creates a new user in the database via an http POST.
+        /**
+         *  Function creates a new user in the database via an HTTP POST.
+         *  @param user     user to create
+         *  @param atype    type of the user
+         */
         $scope.creationUser = function (user, atype) {
-
-
 
             //  TODO controlli più sensati
             if( angular.isUndefined(user) ||
@@ -25,12 +26,11 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
                 angular.isUndefined(user.email) ||
                 angular.isUndefined(user.username) ||
                 angular.isUndefined(user.password)) {
-
                     window.alert('Some fields are missing!')
             }
             else {
 
-
+                //  Set creation date and user type
                 user.created_at = moment(Date.now()).format("DD/MM/YYYY");
                 user['@type'] = atype.name;
 
@@ -38,7 +38,7 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
                 httpService.post(restService.createUser, user)
                     .then(function (data) {
                             window.alert('Successful registration!');
-                            //  Resettare i campi dopo creazione
+                            //TODO resetfield senza reload
                             $state.reload('secure.createUser');
                         },
 
