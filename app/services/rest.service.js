@@ -59,6 +59,9 @@ angular.module('ticketsystem.restService', [])
             "readTargets": CONNECTION.url + '/target',
             "readActiveTargets" : CONNECTION.url + '/target/active',
 
+            // State Machine
+            "getStateMachines" : CONNECTION.url + '/state_machine',
+
             //  Team
             "getTeamMembers": CONNECTION.url + '/registered_user/free_team_member',
             "getTeamLeaders": CONNECTION.url + '/registered_user/team_leader',

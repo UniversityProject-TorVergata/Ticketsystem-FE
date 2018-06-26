@@ -12,16 +12,21 @@
                 </ui-select-choices>
             </ui-select><br>
         </div>
-        <div class="form-group">
-            <label>Ticket Workflow</label><br>
+
+        <div class="form-group" data-ng-init="stateMachineList()">
+            <label>Ticket Workflow</label>
+            <br>
             <ui-select   ng-model="stateMachine.selected" theme="select2" ng-init="stateMachine.selected = stateMachines[0]"
-                         style="min-width: 300px;margin-left: 10px" title="Select State Machine " >
-                <ui-select-match placeholder="Select state machine in the list ">{{stateMachine.selected.name}}</ui-select-match>
+                         style="min-width: 300px; margin-left: 10px; float: left">
+                <ui-select-match placeholder="Select a State Machine in The List">{{stateMachine.selected.name}}</ui-select-match>
                 <ui-select-choices repeat="stateMachine in stateMachines | propsFilter: {name: $select.search}">
                     <div ng-bind-html="stateMachine.name | highlight: $select.search"></div>
                 </ui-select-choices>
-            </ui-select><br>
+            </ui-select>
+
+            <button class="btn btn-info" type="button" ng-click="viewStateMachines()" style="position: relative">View</button>
         </div>
+
         <div class="form-group">
             <label>Name</label>
             <input type="text" class="form-control" ng-model="target.name">
@@ -39,6 +44,7 @@
             <label>Version</label>
             <input type="number" step="0.1" min="1" class="form-control" ng-model="target.version">
         </div>
+        <br>
         <button class="btn btn-primary btn-lg btn-block">Insert</button>
     </form>
 </div>
