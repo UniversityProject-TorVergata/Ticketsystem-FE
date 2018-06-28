@@ -55,6 +55,7 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
             //  HTTP DELETE
             httpService.delete(restService.deleteUser, user.id)
                 .then(function (response) {
+                        // TODO alert con si e no?
                         window.alert('Account Successfully Deleted!');
                         storageService.invalidateUser();
                         $state.reload();
@@ -67,7 +68,6 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
         };
 
         $scope.disabledButtonHandler = function () {
-
             $scope.disabledButton = !($scope.disabledButton);
             $scope.disabledReadonly = !($scope.disabledReadonly);
             $scope.confirm_pass_value = !($scope.confirm_pass_value);
