@@ -2,40 +2,19 @@
 
 angular.module('ticketsystem.assignTeam', ['ngRoute'])
 
-    .controller('AssignTeamCtrl', function ($scope, $state, restService, storageService, httpService, util, teams, priorities) {
+    .controller('AssignTeamCtrl', function ($scope, $state, $modal, restService, storageService, httpService, util) {
 
-        //  Select values
-        $scope.teams = teams;
-        $scope.priorities = priorities;
-        //$scope.newComment = {};
-        $scope.categories = [];
-        $scope.refresh = false;
-
-        // Ui select values
-
-        $scope.priorities = priorities;
-        $scope.priority = [];
-
-        $scope.team = {};
-        $scope.team.selected ;
-
-
-
+        $scope.items = [];
 
         /**
          *  Function reads all the PENDING tickets in the database via an HTTP GET and
          *  shows them in a table.
          */
-        $scope.readUnassignedTicket = function () {
+        $scope.readReopenedTicket = function () {
             //  HTTP GET
-            //TODO non deve vedere i ticket NEW! Usato solo per test ora
-            var categories =[];
-            var tickets = {};
-            httpService.get(restService.validationTickets)
+            httpService.get(restService.findTicketByState + '/' + 'REOPENED')
                 .then(function (response) {
                     $scope.items = response.data;
-                    tickets = $scope.items;
-
 
                 }, function error(response) {
                     $scope.errorResponse = "Error Status: " + response.statusText;
@@ -44,45 +23,7 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
 
             };
 
-
-        /**
-         *  Function saves a modified ticket via an HTTP PUT in the database and it
-         *  assigns the ticket to a Team Leader.
-         *  @param item     selected item
-         *  @param index    iterator offset
-         */
-        $scope.saveTicketWithTeam = function (ticket, team, actualPriority) {
-            //console.log(ticket);
-            ticket.actualPriority = actualPriority.name;
-            ticket.resolverUser = $scope.team.id;
-            console.log(ticket.actualType);
-
-            //  trovo i possibili futuri stati in cerca di PENDING
-            let action = "";
-            let allStates = ticket.stateMachine.allStates;
-            for (let i = 0; i < Object.keys(allStates).length; i++) {
-                if (allStates[i].currentState === ticket.stateMachine.currentState) {
-                    for (let j = 0; j < Object.keys(allStates[i].newTransitionMap).length; j++) {
-                        action = "Action" + (j+1).toString();
-                        if (allStates[i].newTransitionMap[action].nextState == "PENDING") {
-                            break;
-                        }
-                    }
-                }
-            }
-
-            //  imposto come resolverUser il TeamLeader a cui verrà assegnato il ticket
-            httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' +
-                team.id+'/'+ticket.actualPriority+'/'+ticket.actualType)
-                .then(function (data) {
-
-                    },
-                    function (err) {
-
-                    });
-
-            $state.reload();
-        };
+        $scope.readReopenedTicket();
 
 
         $scope.showImage = function (item, index) {
@@ -95,4 +36,100 @@ angular.module('ticketsystem.assignTeam', ['ngRoute'])
 
         }
 
+        $scope.reassignTicket = function(item) {
+            $scope.showReassignmentModal(item.stateInformation[2][0], item.stateInformation[0][0], item.stateInformation[1][0], item);
+        };
+
+        $scope.showReassignmentModal = function (nextStateName, stateAction, stateRole, ticket) {
+
+
+
+            var modalInstance;
+
+            modalInstance = $modal.open({
+                templateUrl: '/modal/modal-change-state.html',
+                controller: ReassignmentModalCtrl,
+                scope: $scope,
+                backdrop: 'static',
+                resolve: {
+                    getState: function() {
+                        return nextStateName;
+                    },
+                    getAction: function() {
+                        return stateAction;
+                    },
+                    getRole: function() {
+                        return stateRole;
+                    },
+                    getTicket: function() {
+                        return ticket;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (response) {
+                $state.reload()
+
+            }, function (response) {
+                $state.reload();
+
+            });
+        };
     });
+
+var ReassignmentModalCtrl = function ($scope, $modalInstance, getState, getAction, getRole, getTicket, restService, httpService) {
+
+    //TODO recuperarli dai mock
+    $scope.membersList = [];
+    $scope.priorityList = [{"id": "1", "name":"LOW"},{"id": "2", "name":"AVERAGE"},{"id": "3", "name":"HIGH"}];
+    $scope.difficultyList = [{"id": "1", "name":"LOW"},{"id": "2", "name":"MEDIUM"},{"id": "3", "name":"HIGH"}];
+
+    $scope.cancelAssignment = function () {
+        $modalInstance.dismiss('cancel');
+    };
+
+    $scope.continueAssignment = function () {
+        //TODO da implementare tutti e due
+        //if ($scope.difficultyList.selected != undefined)
+        //    changeTicketDifficulty($scope.difficultyList.selected, getTicket);
+        //if ($scope.priorityList.selected != undefined)
+        //    setInternalPriority();
+
+        //se il ticket viene rimandato al customer, metto a null il resolverUser
+        let resolverID = "0";
+        if ($scope.membersList.length > 0) {
+            resolverID = $scope.membersList.selected.id;
+        }
+
+        httpService.post(restService.changeTicketState + '/' + getTicket.id + '/' + getAction + '/' + resolverID)
+            .then(function () {
+                $modalInstance.close('assigned');
+            }, function err() {
+            });
+
+
+    };
+
+    /**
+     * This function finds all the internal Users to which the ticket can be assigned
+     * @param role              the name of the role (i.e. 'TeamMember')
+     * @returns {Array}         all members found
+     */
+    $scope.searchResolverUsers = function() {
+
+        if (getRole != "Customer") {
+            httpService.get(restService.getUserByRole + '/' + getRole)
+                .then(function (response) {
+                    console.log("sto in searcResolverUsers");
+                    console.log(response.data);
+                    $scope.membersList = response.data;
+                }, function err(response) {
+
+                });
+        } else {
+            return [];
+        }
+    };
+
+    $scope.searchResolverUsers();
+};

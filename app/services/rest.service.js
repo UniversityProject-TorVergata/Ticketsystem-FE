@@ -20,7 +20,9 @@ angular.module('ticketsystem.restService', [])
             "createTicket": CONNECTION.url + '/ticket',
             "insertComment": CONNECTION.url + '/ticket/insertComment',
 
+            //  TODO dopo la rivisitazione delle SM, vanno tolti...?
             //  Find Ticket by state
+            "findTicketByState": CONNECTION.url + '/ticket/findTicketByState',
             "validationTickets": CONNECTION.url + '/ticket/findTicketByState/VALIDATION',
             "pendingTickets": CONNECTION.url + '/ticket/findTicketByState/PENDING',
             "editTickets": CONNECTION.url + '/ticket/findTicketByState/EDIT',
@@ -80,7 +82,16 @@ angular.module('ticketsystem.restService', [])
 
             "createTeam": CONNECTION.url + '/team',
             "getTeams": CONNECTION.url + '/team',
-            "updateTeamMember": CONNECTION.url + '/team/add_team_member'
+            "updateTeamMember": CONNECTION.url + '/team/add_team_member',
+
+            //  Info about current state and future states of a ticket
+            "getStateInformation": CONNECTION.url + '/ticket/getStateInformation',
+
+            //  Get user by role
+            "getUserByRole": CONNECTION.url + '/registered_user/getUserByRole',
+
+            //  change ticket difficulty
+            "changeTicketDifficulty": CONNECTION.url + '/ticket/changeDifficulty'
 
         };
     })

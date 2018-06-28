@@ -76,14 +76,6 @@
     ]
   },
   {
-    "id":20,
-    "label": "Assign a new Ticket",
-    "route": "secure.assignTicket",
-    "visibility": [
-      "TeamCoordinator"
-    ]
-  },
-  {
     "id":21,
     "label": "Create a new Team",
     "route": "secure.createTeam",
@@ -95,6 +87,14 @@
     "id":22,
     "label": "List of Teams",
     "route": "secure.listTeam",
+    "visibility": [
+      "TeamCoordinator"
+    ]
+  },
+  {
+    "id":23,
+    "label": "Reopened Tickets",
+    "route": "secure.reopenedTickets",
     "visibility": [
       "TeamCoordinator"
     ]
@@ -116,19 +116,13 @@
     ]
   },
   {
-    "id":40,
-    "label": "Assigned Ticket",
-    "route": "secure.assignTeamMember",
-    "visibility": [
-      "TeamLeader"
-    ]
-  },
-  {
     "id":50,
     "label": "Dashboard",
     "route": "secure.dashboard",
     "visibility": [
-      "TeamMember"
+      "TeamMember",
+      "TeamLeader",
+      "TeamCoordinator"
     ]
   }
 ]

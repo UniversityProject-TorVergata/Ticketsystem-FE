@@ -1,0 +1,57 @@
+<div class="modal-header">
+    Ticket #{{toChange.id}}
+</div>
+
+<!--
+    La distinzione sugli stati vinene fatta in questo modo in quanto l'unico vincolo
+    sulla creazione di nuove macchine a stati è che rispettino il nome degli stati.
+    Un ticket in uno stato X sarà gestito dal personale interno col ruolo Y.
+-->
+
+<div class="modal-body" ng-if="membersList.length > 0">
+    Select resolver team/user:<br>
+    <select id="resolvers"
+            name="resolvers"
+            ng-options="t as (t.name + ' ' + t.surname)
+                        for
+                        t in membersList track by t.id"
+            ng-model="membersList.selected">
+    </select>
+</div>
+
+<div class="modal-body" ng-if="nextState == 'PENDING'">
+    <!-- fare scegliere la internalType e internalPriority -->
+    Priority:<br>
+    <select id="priorities"
+            name="priorities"
+            ng-options="p as p.name
+                        for
+                        p in priorityList"
+            ng-model="priorityList.selected">
+    </select>
+</div>
+
+<div class="modal-body" ng-if="nextState == 'EXECUTION'">
+    <!-- si sceglie la difficulty -->
+    Difficulty:<br>
+    <select id="difficulty"
+            name="difficulty"
+            ng-options="d as d.name
+                        for
+                        d in difficultyList"
+            ng-model="difficultyList.selected">
+    </select>
+</div>
+
+<div class=modal-body">
+    <div class="col-md">
+        Are you sure to change ticket #{{toChange.id}} state?<br><br>
+        <strong>Current state: </strong>{{toChange.currentState}}<br>
+        <strong>Next state: </strong>{{nextState}}
+    </div>
+</div>
+
+<div class="modal-footer" ng-controller="dashboardController">
+    <button class="btn btn-warning" ng-click="cancelAssignment()">Return</button>
+    <button class="btn btn-primary" ng-click="continueAssignment()">OK</button>
+</div>

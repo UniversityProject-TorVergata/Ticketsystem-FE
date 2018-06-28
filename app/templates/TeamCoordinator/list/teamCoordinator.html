@@ -4,7 +4,7 @@
             <h2 class="text-center">Assign Ticket</h2>
             <!-- table st-table="rowCollection" class="table table-striped" data-ng-init="readUnassignedTicket()" -->
             <div class="table-responsive">
-                <table class="table table-light min-length" data-ng-init="readUnassignedTicket()">
+                <table class="table table-light min-length" data-ng-init="readReopenedTickets()">
                     <!-- TODO I. sta per? -->
                     <thead class="thead-light">
                     <tr>
@@ -12,21 +12,15 @@
                         <th scope="col">By</th>
                         <th scope="col">Title</th>
                         <th scope="col">Action</th>
-                        <th scope="col">Customer<br> Priority</th>
-                        <th scope="col">I.<br> Priority</th>
-                        <th scope="col">Customer<br> Type</th>
-                        <th scope="col">I.<br> Type</th>
-                        <th scope="col">Team Leader -<br>Problem Area</th>
+                        <th scope="col">C. Priority</th>
+                        <th scope="col">C. Type</th>
                         <th scope="col"></th>
 
                     </tr>
                     </thead>
                     <tbody>
-                    <tr scope="row" ng-repeat="item in items | orderBy:'ID'" ng-controller="modalController">
-                        <td ng-controller="drag-and-drop-controller" class="btn btn-xs btn-primary"
-                            data-drag="true" ng-model="item"
-                            data-jqyoui-options="{revert: 'invalid', refreshPosition: 'true'}"
-                            jqyoui-draggable='{animate: true, onStart:"showAssignmentModal({ticket: item})"}'>
+                    <tr scope="row" ng-repeat="item in items" ng-controller="modalController">
+                        <td>
                             {{item.id}}
                         </td>
                         <!-- TODO Ha senso lo username, non nome e cognome-->
@@ -45,68 +39,10 @@
                             </button>
                         </td>
                         <td>{{item.customerPriority}}</td>
-                        <td><!--<select name="actualPriority"
-                        ng-options="priority as priority.name | formatEnumeration: priority.name
-                                        for
-                                        priority in priorities track by priority.id"
-                        ng-model="actualPriority"
-                        ng-init="actualPriority = priorities[0]">
-                </select>-->
-                            <ui-select ng-model="priority[$index].selected" theme="select2"
-                                       ng-init="priority[$index].selected = priorities[0]"
-                                       style="min-width: 90px;margin-left: 10px" title="Select Priority ">
-                                <ui-select-match placeholder="Select Priority in the list ">
-                                    {{priority[$index].selected.name}}
-                                </ui-select-match>
-                                <ui-select-choices
-                                        repeat="priority in priorities | propsFilter: {name: $select.search}">
-                                    <div ng-bind-html="priority.name | highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </td>
                         <td>{{item.presumedType}}</td>
-                        <td><!--<select name="actualType"
-                        ng-options="c as c
-                                        for
-                                        c in item.target.categories  "
-                        ng-model="item.actualType"
-                        ng-init="item.actualType = item.presumedType">
-            </select>-->
-                            <ui-select ng-model="item.actualType" theme="select2"
-                                       ng-init="item.actualType = item.presumedType"
-                                       style="min-width: 90px;margin-left: 10px;max-width: 120px"
-                                       title="Select Category ">
-                                <ui-select-match placeholder="Category">{{item.actualType}}</ui-select-match>
-                                <ui-select-choices repeat="category in item.target.categories ">
-                                    <div ng-bind-html="category | highlight: $select.search"></div>
-                                </ui-select-choices>
-                            </ui-select>
-                        </td>
                         <td>
-                            <!--<select id="team" name="team"
-                                    ng-options='item as (item.name + " " + item.surname + " - " + item.team.problemArea)
-                                    for
-                                    item in teams track by item.id' ng-model="team"
-                                    ng-init="team = teams[0]">
-                            </select>-->
-                            <ui-select ng-model="team.selected" theme="select2" ng-init="team.selected = teams[0]"
-                                       style="min-width: 150px;margin-left: 10px;" title="Select Team ">
-                                <ui-select-match placeholder="Team">{{team.selected.surname +
-                                    "-"
-                                    +team.selected.team.problemArea }}
-                                </ui-select-match>
-                                <ui-select-choices repeat="team in teams | propsFilter: {surname: $select.search}">
-                                    <div ng-bind-html="team.name + ' ' + team.surname | highlight: $select.search"></div>
-                                    <small>
-                                        Team : {{team.team.name}}
-                                        Area : {{team.team.problemArea}}
-                                    </small>
-                                </ui-select-choices>
-                            </ui-select>
-                        </td>
-                        <td>
-                            <button ng-click="saveTicketWithTeam(item, team.selected, priority[$index].selected)"
-                                    class="btn btn-xs btn-primary">Send
+                            <button ng-click="reassignTicket(item)"
+                                    class="btn btn-xs btn-primary">Reassign
                             </button>
                         </td>
                     </tr>

@@ -15,39 +15,87 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
         httpService.get(restService.readMyTickets + '/' + JSON.parse(localStorage.getItem('userInformation')).id)
             .then(function (response) {
                 $scope.items = response.data;
-                for (let i = 0; i < $scope.items.length; i++) {
-
-                        // Actual state in the FSM
-                    $scope.items[i].state = $scope.items[i].stateMachine.currentState;
-                }
             }, function error(response) {
                 $scope.errorResponse = "Error Status: " + response.statusText;
             });
     };
 
-    let findAction = function (string, ticket) {
-        //  Trovo l'azione che corrisponde allo stato DISCARDED
-        let action = "";
-        let allStates = ticket.stateMachine.allStates;
-        for (let i = 0; i < Object.keys(allStates).length; i++) {
-            if (allStates[i].currentState === ticket.stateMachine.currentState) {
-                for (let j = 0; j < Object.keys(allStates[i].newTransitionMap).length; j++) {
-                    action = "Action" + (j+1).toString();
-                    if (allStates[i].newTransitionMap[action].nextState == string) {
-                        break;
-                    }
-                }
+    var findAction = function(stateName, ticket) {
+        for (let i = 0; i < ticket.stateInformation[2].length; i++) {
+            if (ticket.stateInformation[2][i] == stateName) {
+                return ticket.stateInformation[0][i];
             }
         }
-        return action;
+
+        return response;
+    };
+
+    /**
+     *  Function saves a modified ticket via an HTTP PUT in the database and updates the view of the table.
+     *  @param item     selected item
+     *  @param index    iterator offset
+     */
+    $scope.saveTicket = function(ticket,index){
+
+        console.log("STO DENTRO SAVE TICKET");
+
+        httpService.get(restService.getTeamCoordinator)
+            .then(function(response) {
+                console.log("il team coordinator è " + response.data.name);
+
+                //  Required ticket fields
+                let payload = {
+                    id: ticket.id,
+                    timestamp: ticket.timestamp,
+                    title: ticket.title,
+                    description: ticket.description,
+                    sourceType: ticket.sourceType,
+                    presumedType: ticket.presumedType,
+                    actualType: ticket.actualType,
+                    attachedFile: ticket.attachedFile,
+                    mediaType: ticket.mediaType,
+                    openerUser: ticket.openerUser,
+                    target: ticket.target,
+                    customerPriority: ticket.customerPriority,
+                    actualPriority: ticket.actualPriority,
+                    visibility: ticket.visibility,
+                    difficulty: ticket.difficulty,
+                    ticketComments: ticket.ticketComments,
+                    //state:ticket.state,
+                    tags: ticket.tags
+                };
+
+                //  HTTP PUT
+                httpService.put(restService.createTicket,ticket.id, payload)
+                    .then( function(succResponse){
+                            console.log("STO DENTRO ALLA PUT");
+                            httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + findAction("VALIDATION", ticket) + '/' + response.data.id)
+                                .then(function(response) {
+                                    console.log("Modify SUCCESS");
+                                    $scope.items[index] = angular.copy(ticket);
+                                    $scope.editTicket={};
+                                    $scope.edit = resetIndexes($scope.edit);
+                                    $scope.readTicket();
+                                }, function err(response){});
+
+                        },
+                        function(errReponse){
+                            console.log(errReponse)
+                        }
+                    );
+
+
+            }, function err(response) {});
+
+
+
     };
 
     $scope.closeTicket = function (ticket) {
         let action = findAction("CLOSED", ticket);
 
-        //  imposto come resolverUser lo stesso che ha mandato indietro il ticket, ovvero
-        //  il TeamCoordinato
-        httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + ticket.resolverUser.id)
+        var temp = "0";
+        httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + temp)
             .then(function (data) {
                 //TODO Reset
                     $state.reload();
@@ -58,9 +106,11 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
     };
 
     $scope.rejectResolvedTicket = function (ticket) {
-      let action = findAction("PENDING", ticket);
+      let action = findAction("REOPENED", ticket);
 
-      httpService.get(restService.getTeamLeaderByTeamID + '/' + ticket.resolverUser.team.id)
+      //LO DO AL TEAMCOORDINATOR
+
+      httpService.get(restService.getTeamCoordinator)
           .then(function (data) {
               console.log(data);
               httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + data.data.id)
@@ -76,26 +126,6 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
               function (err) {
 
           });
-    };
-
-    /**
-     *  Function deletes a selected ticket via an HTTP DELETE and updates the view of the table.
-     *  @param id   id number of the ticket to be deleted.
-     */
-    $scope.deleteTicket = function (ticket) {
-
-        let action = findAction("DISCARDED", ticket);
-
-        //  imposto come resolverUser lo stesso che ha mandato indietro il ticket, ovvero
-        //  il TeamCoordinato
-        httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + ticket.resolverUser.id)
-            .then(function (data) {
-                    //TODO Reset
-                    $state.reload();
-                },
-                function (err) {
-
-                })
     };
 
     /**

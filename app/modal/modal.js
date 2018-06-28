@@ -15,12 +15,6 @@ app.controller("modalController", ['$scope', '$modal', '$log',
      */
     function ($scope, $modal, $log) {
 
-        //Ui Select
-        $scope.difficulty = {};
-        $scope.difficulty.selected;
-
-
-
         //  showEditForm: modal for editing ticket
         $scope.showEditForm = function (item) {
             $scope.message = "Show Form Button Clicked";
@@ -98,96 +92,6 @@ app.controller("modalController", ['$scope', '$modal', '$log',
         };
 
 
-        /**
-            Queste due variabili sono usate per debug.
-            Quando un utente esegue DnD su uno stato, può ripensarci
-            e spostare il ticket in un altro stato prima di dare la conferma.
-            Queste variabili tengono traccia dello stato precedentemente
-            selezionato, e lo stato corrente selezionato.
-         */
-        $scope.currentState = null;
-        $scope.previousState = null;
-
-        /**
-            Usata per differenziare TeamCoordinator da altri ruoli.
-            Per il TeamCoordinator si deve lasciare intatto il
-            meccanismo di invio del ticket ad un team mediante
-            multiselect e non drag and drop
-        */
-        $scope.isTeamCoordinator = false;
-        $scope.selectedMember = null;
-
-        $scope.showAssignmentModal = function (event, ui, ticket) {
-            $scope.item = ticket.ticket;
-
-            //possinibili stati in cui può andare il ticket
-            $scope.states = [];
-            //variabile temporanea usata come alias (per scrivere meno -_-)
-            let allStates = $scope.item.stateMachine.allStates;
-
-            /**
-                Cerco i prossimi stati in cui il ticket può andare e li inserisco in states.
-                Ogni stato è un JSON OBJ composto da un campo "name" che identifica
-                l'action da usare nell'url per contattare il backend (es: Action1),
-                e un campo "state" dove risiede lo stato come definito nella SM.
-             */
-            for (let i = 0; i < Object.keys(allStates).length; i++) {
-                if (allStates[i].currentState === $scope.item.stateMachine.currentState) {
-                    for (let j = 0; j < Object.keys(allStates[i].newTransitionMap).length; j++) {
-                        let temp = "Action" + (j+1).toString();
-                        let t = {};
-                        t.name = temp;
-                        t.state = allStates[i].newTransitionMap[temp];
-
-
-                        //  controllo se è il TeamLeader che sta eseguendo questa operazione
-                        if (JSON.parse(localStorage.getItem('userInformation'))['@type'] == "TeamCoordinator") {
-                            $scope.isTeamCoordinator = true;
-                        }
-
-                        /*
-                            elimino la possibilità di mandare un ticket ad un team (quindi in stato di PENDING) tramite drag and drop,
-                            in quanto era stato già implementato tramite select. Questo vale solo se è il TeamLeader a eseguire l'operazione.
-                         */
-                        //TODO trovare una implementazione migliore
-                        if (t.state.nextState == "PENDING" && JSON.parse(localStorage.getItem('userInformation'))['@type'] == "TeamCoordinator") {
-                            //  eventuali controlli (per ora non ce n'è bisogno)
-                        }
-                        else {
-                            $scope.states.push(t);
-                        }
-                    }
-                }
-            }
-            //console.log($scope.states);
-
-            var modalInstance = $modal.open({
-                templateUrl: 'modal/modal-assignment-ticket-teamleader.html',
-                controller: ModalInstanceCtrl,
-                scope: $scope,
-                backdrop: 'static',
-                resolve: {
-                    userForm: function () {
-                        return $scope.userForm;
-                    }
-                }
-            });
-
-            modalInstance.result.then(function () {
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
-
-
-        //  Callback chiamata dopo il drop dell'elemento
-        $scope.dropCallback = function(event, ui, element) {
-            $scope.previousState = $scope.currentState;
-            $scope.currentState = element.element;
-            console.log($scope.currentState);
-        };
-
-
         $scope.showInfoTeam = function (item) {
             $scope.formItem = item;
 
@@ -245,37 +149,6 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
 
     };
 
-    $scope.assignmentOk = function() {
-        console.log("SELECTED MEMBER");
-        console.log($scope.selectedMember);
-        $scope.changeTicketState($scope.item, $scope.currentState.name);
-
-        $modalInstance.dismiss('closed');
-        $state.reload();
-    }
-
-    $scope.closeAssignmentModal = function() {
-        $modalInstance.dismiss('closed');
-        $state.reload();
-    }
-
-    $scope.changeDifficulty = function(ticket,difficulty){
-        //console.log("DIFFICOLTA");
-        //console.log(difficulty);
-        httpService.put(restService.createTicket+'/changeDifficulty/'+difficulty,ticket.id)
-            .then(function (data) {
-                //$route.reload();
-            },
-            function (err) {
-                //window.alert("Error!")
-            })
-    };
-
-
-
-
-    //  FUNZIONI COMUNI A PIU USER INSERITE DIRETTAMENTE NEL CONTROLLER MODAL
-    //  PER EVITARE DI RISCRIVERLE
     $scope.sendNewTicketComment = function (ticketID, msg) {
         msg['eventGenerator'] = JSON.parse(localStorage.getItem('userInformation'));
         httpService.post(restService.insertComment + '/' + ticketID, msg)
@@ -287,39 +160,4 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
                 })
     };
 
-
-    $scope.changeTicketState = function(ticket, action) {
-
-        /*
-            Solo il TeamCoordinato imposta se stesso come resolverUser quando rimanda
-            indietro il ticket al customer per la modifica.
-         */
-
-        console.log($scope.currentState);
-
-        if ($scope.currentState.state.nextState == "VALIDATION" && JSON.parse(localStorage.getItem('userInformation'))['@type'] == "TeamLeader") {
-            ticket.resolverUser = $scope.teamCoordinator;
-        }
-
-        if ($scope.currentState.state.nextState == "EDIT" && JSON.parse(localStorage.getItem('userInformation'))['@type'] == "TeamCoordinator") {
-            ticket.resolverUser = JSON.parse(localStorage.getItem('userInformation'));
-        }
-
-
-
-        httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + ticket.resolverUser.id)
-            .then(function (data) {
-                    console.log($scope.difficulty.selected)
-                    if ($scope.difficulty.selected != null) {
-                        console.log("CIAO")
-                        $scope.changeDifficulty($scope.item, $scope.difficulty.selected.name);
-                    }
-                },
-                function (err) {
-
-                });
-
-        $scope.isTeamCoordinator = false;
-        //$state.reload();
-    };
 };

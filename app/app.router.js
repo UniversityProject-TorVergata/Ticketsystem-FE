@@ -231,42 +231,17 @@ angular.module('ticketsystem.router', ['ui.router'])
                         }
                     }
                 })
-                .state('secure.assignTicket', {
-                    url: "/assignTicket",
+                .state('secure.dashboard', {
+                    url: "/dashboard",
                     views: {
                         'content': {
-                            templateUrl: 'templates/TeamCoordinator/list/teamCoordinator.html',
-                            controller: 'AssignTeamCtrl'
+                            templateUrl: 'templates/Dashboard/dashboard.html',
+                            controller: 'dashboardController'
                         }
                     },
                     data: {
                         requiredLogin: true,
-                        access: ['TeamCoordinator']
-                    },
-                    resolve: {
-                        teams: function (model) {
-                            return model.getTeams().then(function (teams) {
-                                return teams
-                            })
-                        },
-                        priorities: function (model) {
-                            return model.getPriority().then(function (priorities) {
-                                return priorities
-                            })
-                        },
-                    }
-                })
-                .state('secure.assignTeamMember', {
-                    url: "/assignTeamMember",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/TeamLeader/list/teamLeader.html',
-                            controller: 'TeamLeaderCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['TeamLeader']
+                        access: ['TeamMember', 'TeamCoordinator', 'TeamLeader']
                     },
                     resolve: {
                         difficulties: function (model) {
@@ -284,19 +259,6 @@ angular.module('ticketsystem.router', ['ui.router'])
                                 return priorities
                             })
                         }
-                    }
-                })
-                .state('secure.dashboard', {
-                    url: "/dashboard",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/Dashboard/dashboard.html',
-                            controller: 'dashboardController'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['TeamMember']
                     }
                 })
                 .state('secure.createTeam', {
@@ -325,6 +287,26 @@ angular.module('ticketsystem.router', ['ui.router'])
                         'content': {
                             templateUrl: 'templates/Team/readTeam.html',
                             controller: 'createTeamCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['TeamCoordinator']
+                    },
+                    resolve: {
+                        problemArea: function (model) {
+                            return model.getArea().then(function (problemArea) {
+                                return problemArea
+                            })
+                        }
+                    }
+                })
+                .state('secure.reopenedTickets', {
+                    url: "/reopenedTickets",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/TeamCoordinator/list/teamCoordinator.html',
+                            controller: 'AssignTeamCtrl'
                         }
                     },
                     data: {
