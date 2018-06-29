@@ -10,44 +10,29 @@
 
             <div class="form-group">
                 <Label>Problem Area:</Label><br>
-                <!--<select name="name"
+                <select name="name"
                         ng-options="area as area.name
                     for
                     area in problemArea track by area.id"
                         ng-model="team.problemArea"
-                        ng-init="team.problemArea = problemArea[0].name">
-                </select><br>-->
-                <ui-select   ng-model="team.problemArea" theme="select2" ng-init="team.problemArea = problemArea[0]"
-                             style="min-width: 300px;margin-left: 10px" title="Select Priority " >
-                    <ui-select-match placeholder="Select Area in the list ">{{team.problemArea.name}}</ui-select-match>
-                    <ui-select-choices repeat="area in problemArea | propsFilter: {name: $select.search}">
-                        <div ng-bind-html="area.name | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select><br>
+                        ng-init="team.problemArea = problemArea[0]">
+                </select><br>
             </div>
 
-            <div class="form-group" data-ng-init="readTeamLeaders();team.teamLeader = leadersList[0]">
+            <div class="form-group">
                 <Label>Team Leader:</Label><br>
-                <!--<select id="leader" name="teamLeader" data-ng-init="readTeamLeaders()"
+                <select id="leader" name="team.teamLeader"
                         ng-options="l as l.name + ' ' + l.surname
-                    for
-                    l in leadersList track by l.id"
+                          for
+                        l in leadersList track by l.id"
                         ng-model="team.teamLeader"
                         ng-init="team.teamLeader = leadersList[0]">
-                </select>-->
-                <ui-select   ng-model="team.teamLeader" theme="select2"
-                             style="min-width: 300px;margin-left: 10px" title="Select Team Leader " >
-                    <ui-select-match placeholder="Select Team Leader in the list ">{{team.teamLeader.name + ' '+ team.teamLeader.surname}}</ui-select-match>
-                    <ui-select-choices repeat="leader in leadersList | propsFilter: {name: $select.search, surname: $select.search}">
-                        <div ng-bind-html="leader.name + ' ' +leader.surname | highlight: $select.search"></div>
-                    </ui-select-choices>
-                </ui-select><br>
-
+                </select>
             </div>
 
             <div class="form-group">
                 <label>Team Members:</label><br>
-                <div data-ng-init="readTeamMembers()"
+                <div
                      class="isteven"
                      isteven-multi-select
                      input-model="membersList"
@@ -58,20 +43,10 @@
                      max-height="200px"
                 >
                 </div>
-
-                <!--
-                <select id="member" name="member" data-ng-init="readTeamMembers()"
-                        ng-options="m as m.name + ' ' + m.surname
-                        for
-                        m in membersList track by m.id"
-                        ng-model="member"
-                        ng-init="member = membersList[0]">
-                </select>
-                -->
             </div>
             <br>
             <div class="form-group">
-                <button ng-click="createTeam(team, member)" class="btn btn-primary btn-lg btn-block">Create</button>
+                <button ng-click="createTeam(team, members)" class="btn btn-primary btn-lg btn-block">Create</button>
             </div>
         </form>
     </form>
