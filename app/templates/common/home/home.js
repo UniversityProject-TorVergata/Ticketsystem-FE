@@ -1,6 +1,5 @@
 'use strict';
 
-//  TODO fuori standard - Perchè ha due controller?
 angular.module('ticketsystem.home', ['ngRoute'])
 
     .controller('homeCtrl', function ($scope, $modal, $log) {
@@ -24,12 +23,3 @@ angular.module('ticketsystem.home', ['ngRoute'])
         }
 
     });
-
-
-var ModalInstanceCtrl = function ($scope, $modalInstance) {
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-
-};
