@@ -5,6 +5,39 @@
 angular.module('ticketsystem.modelService', [])
     .service('model', function (httpService, restService) {
             return {
+
+                /**
+                 *  Function gets the free team leaders.
+                 *  @returns {Promise}  free team leaders
+                 */
+                getFreeTeamLeaders() {
+                    return new Promise(function (resolve, reject) {
+                        httpService.get(restService.getFreeTeamLeaders).then(
+                            function (leaders) {
+                                resolve(leaders.data);
+                            },
+                            function (error) {
+                                console.error("Error loading free team leaders")
+                                resolve([])
+                            })
+                    })
+                },
+                /**
+                 *  Function gets the free team members.
+                 *  @returns {Promise}  free team members
+                 */
+                getFreeTeamMembers() {
+                    return new Promise(function (resolve, reject) {
+                        httpService.get(restService.getTeamMembers).then(
+                            function (members) {
+                                resolve(members.data);
+                            },
+                            function (error) {
+                                console.error("Error loading free team members")
+                                resolve([])
+                            })
+                    })
+                },
                 /**
                  *  Function gets the finite state machines.
                  *  @returns {Promise}  finite state machines list.
@@ -20,7 +53,8 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                },
+                }
+                ,
                 /**
                  *  Function gets the difficulty values.
                  *  @returns {Promise}  difficulty types list.
@@ -36,7 +70,8 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                },
+                }
+                ,
                 /**
                  *  Function gets the target type values.
                  *  @returns {Promise}  target type values list.
@@ -52,7 +87,8 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                },
+                }
+                ,
                 /**
                  *  Function gets the allowed user types.
                  *  @returns {Promise}  user types list.
@@ -68,7 +104,8 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                },
+                }
+                ,
 
                 /**
                  *  Function gets the targets from the database.
@@ -85,7 +122,8 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             });
                     })
-                },
+                }
+                ,
                 /**
                  *  Function gets the targets that are active from the database.
                  *  @returns {Promise}  targets list
@@ -101,7 +139,8 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             });
                     })
-                },
+                }
+                ,
 
                 /**
                  *  Function gets the TeamLeaders from the database.
@@ -118,7 +157,8 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                },
+                }
+                ,
 
                 /**
                  *  Function gets the tags from the mock.
@@ -135,7 +175,8 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                },
+                }
+                ,
 
                 /**
                  *  Function gets the categories from the mock.
@@ -154,7 +195,8 @@ angular.module('ticketsystem.modelService', [])
                         )
                     })
 
-                },
+                }
+                ,
 
                 /**
                  *  Function gets the visibility values from the mock.
@@ -173,7 +215,8 @@ angular.module('ticketsystem.modelService', [])
                         )
                     })
 
-                },
+                }
+                ,
 
                 /**
                  *  Function gets the ticket types from the mock.
@@ -191,7 +234,8 @@ angular.module('ticketsystem.modelService', [])
                             }
                         )
                     })
-                },
+                }
+                ,
 
                 /**
                  *  Function gets the priority values from the mock.
@@ -209,7 +253,8 @@ angular.module('ticketsystem.modelService', [])
                             }
                         )
                     })
-                },
+                }
+                ,
 
 
                 // TODO problemArea dovrebbero essere aggiunti da FE?

@@ -308,6 +308,11 @@ angular.module('ticketsystem.router', ['ui.router'])
                             return model.getArea().then(function (problemArea) {
                                 return problemArea
                             })
+                        },
+                        teams: function (model) {
+                            return model.getTeams().then(function (teams) {
+                                return teams
+                            })
                         }
                     }
                 })
