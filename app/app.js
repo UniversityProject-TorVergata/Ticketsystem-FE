@@ -60,6 +60,7 @@ var app = angular.module('ticketsystem', [
     //  Team Coordinator
     'ticketsystem.assignTeam',
     'ticketsystem.createTeam',
+    'ticketsystem.readTeam',
 
     //  Team Leader
     'ticketsystem.teamLeader',
