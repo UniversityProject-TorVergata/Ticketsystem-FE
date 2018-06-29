@@ -278,6 +278,16 @@ angular.module('ticketsystem.router', ['ui.router'])
                             return model.getArea().then(function (problemArea) {
                                 return problemArea
                             })
+                        },
+                        teamleaders: function (model) {
+                            return model.getFreeTeamLeaders().then(function (teamleaders) {
+                                return teamleaders
+                            })
+                        },
+                        teammembers: function (model) {
+                            return model.getFreeTeamMembers().then(function (teammembers) {
+                                return teammembers
+                            })
                         }
                     }
                 })
@@ -286,7 +296,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     views: {
                         'content': {
                             templateUrl: 'templates/Team/readTeam.html',
-                            controller: 'createTeamCtrl'
+                            controller: 'readTeamCtrl'
                         }
                     },
                     data: {
