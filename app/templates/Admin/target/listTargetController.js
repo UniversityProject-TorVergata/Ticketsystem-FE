@@ -6,10 +6,6 @@ angular.module('ticketsystem.listTarget', ['ngRoute'])
 
         var modTargetId;
 
-        // Select values
-        $scope.modtargetTypes = targetTypes;
-        $scope.modstateMachines = stateMachines;
-
         /**
          *  Function modifies the Target via a new view.
          *  @param $index
