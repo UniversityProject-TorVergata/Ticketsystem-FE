@@ -4,7 +4,6 @@
             <h2 class="text-center">List of Teams</h2>
             <div class="table-responsive">
                 <table class="table table-light min-length" data-ng-init="readTeams()">
-                    <!-- TODO I. sta per? -->
                     <thead class="thead-light">
                     <tr>
                 <th scope="col">ID</th>
@@ -16,7 +15,7 @@
             </thead>
 
             <tbody>
-            <tr scope="" ng-repeat="item in teamsList">
+            <tr scope="row" ng-repeat="item in teamsList">
                 <td data-sortable="true">#{{item.id}}</a></td>
                 <td>{{item.name}}</td>
                 <td>{{item.problemArea}}</td>
