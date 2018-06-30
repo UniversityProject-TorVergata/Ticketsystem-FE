@@ -41,7 +41,7 @@ angular.module('ticketsystem.home', ['ngRoute'])
         $scope.privacyRegulations = function () {
 
             modalInstance = $modal.open({
-                templateUrl: '/modal/modal-privacy-regulations.html',
+                templateUrl: '/modal/modal-privacy-policy.html',
                 controller: ModalInstanceCtrl,
                 scope: $scope,
                 backdrop: 'static',
