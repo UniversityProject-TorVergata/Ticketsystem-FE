@@ -12,14 +12,14 @@
     Select resolver team/user:<br>
     <select id="resolvers"
             name="resolvers"
-            ng-options="t as (t.name + ' ' + t.surname)
+            ng-options="t as ( t['@type'] + ' ' + t.surname + ' ' + t.team.problemArea)
                         for
                         t in membersList track by t.id"
             ng-model="membersList.selected">
     </select>
 </div>
 
-<div class="modal-body" ng-if="nextState == 'PENDING'">
+<div class="modal-body" ng-if="currentState == 'VALIDATION' || currentState == 'DISPATCHING'|| currentState == 'REOPENED' ">
     <!-- fare scegliere la internalType e internalPriority -->
     Priority:<br>
     <select id="priorities"
@@ -28,6 +28,18 @@
                         for
                         p in priorityList"
             ng-model="priorityList.selected">
+    </select><br>
+</div>
+
+<div class="modal-body" ng-if="currentState == 'VALIDATION' || currentState == 'DISPATCHING'|| currentState == 'REOPENED'">
+    <!-- fare scegliere la internalType e internalPriority -->
+    Actual Category:<br>
+    <select id="categories"
+            name="categories"
+            ng-options="c as c
+                        for
+                        c in categoryList"
+            ng-model="categoryList.selected">
     </select>
 </div>
 

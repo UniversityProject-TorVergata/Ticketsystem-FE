@@ -90,6 +90,47 @@ app.controller("modalController", ['$scope', '$modal', '$log',
                 $log.info('Modal dismissed at: ' + new Date());
             });
         };
+        /**
+         * Show to modal with the infos about a Ticket TTL and the relative Timeout
+         *
+         * @param item a Ticket
+         */
+        $scope.showTTLForm = function (item) {
+            $scope.formItem = angular.copy(item);
+            var date = new Date(item.stateCounter);
+
+
+            $scope.formItem.startDate = date.toLocaleString();
+            var time = new Date().getTime();
+            var today = new Date(time);
+            var hours = Math.abs(today-date) / 36e5
+            var ttlHours = item.ttl*24;
+            var threshold = 12;
+            if(hours>ttlHours)
+                $scope.formItem.stateTTL = "EXPIRED";
+            if(hours>ttlHours+threshold)
+                $scope.formItem.stateTTL = "EXPIRING";
+            else $scope.formItem.stateTTL = "IN TIME";
+
+
+            var modalInstance = $modal.open({
+                templateUrl: '/modal/modal-ttl.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                resolve: {
+                    userForm: function () {
+                        return $scope.userForm;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
 
 
         $scope.showInfoTeam = function (item) {

@@ -23,28 +23,28 @@
                         <td>{{item.presumedType}}</td>
                         <td>{{item.currentState}}</td>
                         <td>
-                            <button ng-if="item.attachedFile" ng-click="showImage(item)" class="btn btn-xs">
+                            <button title="See Ticket attachment" ng-if="item.attachedFile" ng-click="showImage(item)" class="btn btn-xs">
                                 <i class="fa fa-image"></i>
                             </button>
                         </td>
                         <td>
-                            <button ng-controller="modalController" ng-click="showInfoForm(item)"
+                            <button title = "Ticket information" ng-controller="modalController" ng-click="showInfoForm(item)"
                                     class="btn btn-xs btn-primary">
                                 <i class="fas fa-info"></i>
                             </button>
-                            <button ng-controller="modalController" ng-if="item.currentState == 'EDIT'"
+                            <button title = "Modify Ticket" ng-controller="modalController" ng-if="item.currentState == 'EDIT'"
                                     ng-click="modifyTicket(item,$index); showEditForm(editTicket)"
                                     class="btn btn-xs btn-warning">
                                 <i class="fas fa-pen-square"></i>
                             </button>
-                            <button ng-if="item.currentState == 'ACCEPTANCE' || item.currentState == 'EDIT'" ng-click="closeTicket(item)"
+                            <button title = "Close Ticket" ng-if="item.currentState == 'ACCEPTANCE' || item.currentState == 'EDIT'" ng-click="closeTicket(item)"
                                     class="btn btn-xs btn-success">
                                 <i class="fas fa-check"></i>
                             </button>
-                            <button ng-controller="modalController" ng-if="item.currentState == 'EDIT'" ng-click="showMessageForm(item)" class="btn btn-xs btn-info">
+                            <button title = "Read Ticket comments" ng-controller="modalController" ng-if="item.currentState == 'EDIT'" ng-click="showMessageForm(item)" class="btn btn-xs btn-info">
                                 <i class="far fa-comments"></i>
                             </button>
-                            <button ng-controller="modalController" ng-if="item.currentState == 'ACCEPTANCE'" ng-click="rejectResolvedTicket(item)" class="btn btn-xs btn-danger">
+                            <button title = "Reject Ticket resolution" ng-controller="modalController" ng-if="item.currentState == 'ACCEPTANCE'" ng-click="rejectResolvedTicket(item)" class="btn btn-xs btn-danger">
                                 <i class="fas fa-minus-circle"></i>
                             </button>
                         </td>
