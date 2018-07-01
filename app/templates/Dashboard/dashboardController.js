@@ -71,6 +71,10 @@ angular.module('dashboard', [])
               }, function error(response){});
       };
 
+        ///////////////////////////
+        // Inizializzo la dashboard
+        getAllTargets();
+
 
       //Aggiorno la dashboard quando viene selezionato un nuovo stato corrente aggiungendo stati,transizioni e destinatari successivi.
         //Infine aggiorno la dashboard
@@ -104,10 +108,7 @@ angular.module('dashboard', [])
                       }, function error(response){});
 
               }, function error(response){});
-
-
-
-      }
+      };
 
 
       var prepare = $scope.prepareDashboard = function () {
@@ -197,10 +198,16 @@ angular.module('dashboard', [])
           result.click();
           document.body.removeChild(result);
         })
-      }
+      };
 
-
-
+        /**
+         * Modal per l'assegnamento del Ticket.
+         *
+         * @param nextStateName
+         * @param stateAction
+         * @param stateRole
+         * @param ticket
+         */
       $scope.viewChangeStateModal = function (nextStateName, stateAction, stateRole, ticket) {
 
             var modalInstance;
@@ -243,29 +250,6 @@ angular.module('dashboard', [])
             });
         };
 
-
-        ///////////////////////////
-        //Inizializzo la dashboard
-        getAllTargets();
-
-        //Questa funzione verifica se è scaduto il timeout per un ticket e restituisce un colore adeguato
-        //che sarà adottato dal Panel-Heading del ticket in questione.
-        $scope.ttlColor = function(ticket){
-
-            var date = new Date(ticket.stateCounter);
-            var time = new Date().getTime();
-            var today = new Date(time);
-            var distanceTodayDate = Math.abs(today-date) / 36e5;
-            var ttlHours = ticket.ttl*24;
-            var threshold = 12;
-            if(distanceTodayDate>ttlHours)
-               return    "red";
-            else if(distanceTodayDate>ttlHours+threshold)
-               return "orange";
-            else  return  "green";
-
-        }
-
         /**
          * Verifico se nell Array array ho già un elemento con l'id id
          *
@@ -278,15 +262,72 @@ angular.module('dashboard', [])
             for(let i =0;i<array.length;i++){
                 var elem = array[i];
                 if(elem.id == id) {
-                    console.log("Ritorno vero")
+                    console.log("Ritorno vero");
                     return true;
                 }
             }
-            console.log("Ritorno falso")
+            console.log("Ritorno falso");
             return false;
 
-        }
+        };
 
+        //Questa funzione verifica se è scaduto il timeout per un ticket e restituisce un colore adeguato
+        //che sarà adottato dal Panel-Heading del ticket in questione.
+        $scope.ttlColor = function(ticket){
+
+            var date = new Date(ticket.stateCounter);
+            var time = new Date().getTime();
+            var today = new Date(time);
+            var distanceTodayDate = Math.abs(today-date) / 36e5;
+            var ttlHours = ticket.ttl*24;
+            var threshold = 12;
+            if(distanceTodayDate>ttlHours)
+                return    "red";
+            else if(distanceTodayDate>ttlHours+threshold)
+                return "orange";
+            else  return  "green";
+        };
+
+        /**
+         * Show to modal with the infos about a Ticket TTL and the relative Timeout
+         *
+         * @param item a Ticket
+         */
+        $scope.showTTLForm = function (item) {
+            $scope.formItem = angular.copy(item);
+            var date = new Date(item.stateCounter);
+
+
+            $scope.formItem.startDate = date.toLocaleString();
+            var time = new Date().getTime();
+            var today = new Date(time);
+            var hours = Math.abs(today-date) / 36e5;
+            var ttlHours = item.ttl*24;
+            var threshold = 12;
+            if(hours>ttlHours)
+                $scope.formItem.stateTTL = "EXPIRED";
+            if(hours>ttlHours+threshold)
+                $scope.formItem.stateTTL = "EXPIRING";
+            else $scope.formItem.stateTTL = "IN TIME";
+
+
+            var modalInstance = $modal.open({
+                templateUrl: '/modal/modal-ttl.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                resolve: {
+                    userForm: function () {
+                        return $scope.userForm;
+                    }
+                }
+            });
+
+            modalInstance.result.then(function (selectedItem) {
+                $scope.selected = selectedItem;
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
 
 
     });
@@ -312,8 +353,7 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
             }, function err() {
                 $modalInstance.close('error')
             });
-
-    }
+    };
 
     //Cambia la Priorità e la categoria interna di un ticket.
     var setInternalPriorityAndType = function(priority,ticket,type){
@@ -323,13 +363,10 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
             }, function err() {
                 $modalInstance.close('error')
             });
-
-    }
+    };
 
     //Assegno il ticket a un InternalUser e se selezionate ne modifico Difficoltà/Priorità&Categoria
     $scope.continueAssignment = function () {
-
-
 
         //se il ticket viene rimandato al customer, metto a 0 il resolverUser
         let resolverID = "0";
@@ -348,9 +385,6 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
             }, function err() {
                 $modalInstance.close('error')
             });
-
-
-
     };
 
     /**

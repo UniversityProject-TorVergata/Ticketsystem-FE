@@ -60,22 +60,6 @@
                         </div>
                     </div>
                 </div>
-                <script>
-                    (function () {
-                        console.log("CIAO")
-                        var date = new Date(ticket.stateCounter);
-                        var time = new Date().getTime();
-                        var today = new Date(time);
-                        var hours = Math.abs(today-date) / 36e5
-                        var ttlHours = t.ttl*24;
-                        var threshold = 12;
-                        if(hours>ttlHours)
-                            document.getElementById("panelHead").style.backgroundColor = "red";
-                        if(hours>ttlHours+threshold)
-                            document.getElementById("panelHead").style.backgroundColor = "yellow";
-                        else document.getElementById("panelHead").style.backgroundColor = "green";
-                    })();
-                </script>
 
                 <div class="col col-sm-4" ng-repeat="state in states[2]"
                      data-drop="true" data-jqyoui-options jqyoui-droppable="{onDrop:'changeTicketState({nextState: state})'}"
