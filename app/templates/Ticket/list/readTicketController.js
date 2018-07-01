@@ -35,7 +35,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
             }
         }
 
-        return response;
+        return null;
     };
 
     /**
@@ -48,7 +48,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
      */
     $scope.saveTicket = function(ticket,index){
 
-        console.log("STO DENTRO SAVE TICKET");
+        //console.log("STO DENTRO SAVE TICKET");
 
         httpService.get(restService.getTeamCoordinator)
             .then(function(response) {
@@ -81,6 +81,9 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                     .then( function(succResponse){
                             //console.log("STO DENTRO ALLA PUT");
                             let action = findAction("VALIDATION", ticket);
+                            if(action == null){
+                                action = findAction("DISPATCHING", ticket);
+                            }
 
                             httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + response.data.id)
                                 .then(function(response) {
@@ -89,8 +92,10 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                                     $scope.editTicket={};
                                     $scope.edit = resetIndexes($scope.edit);
                                     $scope.readTicket();
-                                }, function err(response){});
-
+                                },
+                                    function err(response){
+                                        console.log(response)
+                                });
                         },
                         function(errReponse){
                             console.log(errReponse)
