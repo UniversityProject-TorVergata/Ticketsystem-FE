@@ -61,9 +61,6 @@ var app = angular.module('ticketsystem', [
     'ticketsystem.createTeam',
     'ticketsystem.readTeam',
 
-    //  Team Leader
-    'ticketsystem.teamLeader',
-
 
     'isteven-multi-select',
     'modal',

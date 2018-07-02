@@ -11,7 +11,7 @@ angular.module('ticketsystem.Login', ['ngRoute'])
         $scope.startLoginUser = function (user) {
 
             //  Check fields
-            if (user.username == "" || user.password == "")
+            if (angular.isUndefined(user) || user.username === "" || user.password === "")
                 window.alert('Some fields are missing!');
             else {
 
@@ -42,6 +42,7 @@ angular.module('ticketsystem.Login', ['ngRoute'])
 
                     }, function error(response) {
                         window.alert("Login failed! Try again.");
+                        console.log(response);
                     });
             }
         };
