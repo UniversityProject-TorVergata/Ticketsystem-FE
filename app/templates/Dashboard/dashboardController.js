@@ -35,7 +35,7 @@ angular.module('dashboard', [])
           var temp = $scope.states[2];
 
             for (let i = 0; i < temp.length; i++) {
-                if (temp[i] == nextState) {
+                if (temp[i] === nextState) {
                     state.push($scope.states[0][i]);
                     state.push($scope.states[1][i]);
                     break;
@@ -154,13 +154,13 @@ angular.module('dashboard', [])
                         Quindi al fine di selezionare solo i ticket che voglio vedere, eseguo il controllo,
                         perchè stats[2] sarà undefined solo se ho ticket assegnati a me di un target non selezionato al momento.*/
 
-                  if ($scope.states[2] != undefined) {
+                  if ($scope.states[2] !== undefined) {
                       for (let i = 0; i < $scope.states[2].length; i++) {
 
                           httpService.get(restService.findTicketByState + '/' + $scope.states[2][i])
                               .then(function (data) {
                                   for (let j = 0; j < data.data.length; j++) {
-                                      if (data.data[j].target.name == $scope.selectedTarget.name) {
+                                      if (data.data[j].target.name === $scope.selectedTarget.name) {
                                           //Controllo se ho ricevuto dal BE dei ticket che erano già presenti tra quelli ottenuti in precedenza
                                           if(!searchDuplicate($scope.myTickets,data.data[j].id)) {
                                               console.log("Inserisco",data.data[j])
@@ -261,7 +261,7 @@ angular.module('dashboard', [])
             console.log("Verifico se ",array," contiene ",id);
             for(let i =0;i<array.length;i++){
                 var elem = array[i];
-                if(elem.id == id) {
+                if(elem.id === id) {
                     console.log("Ritorno vero");
                     return true;
                 }
@@ -394,7 +394,7 @@ var AssignmentModalCtrl = function ($scope, $modalInstance, getState, getAction,
      */
     $scope.searchResolverUsers = function() {
 
-        if (getRole != "Customer") {
+        if (getRole !== "Customer") {
             httpService.get(restService.getEmployedUserByRole + '/' + getRole)
                 .then(function (response) {
                     $scope.membersList = response.data;

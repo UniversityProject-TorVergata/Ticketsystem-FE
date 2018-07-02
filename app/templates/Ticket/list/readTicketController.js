@@ -30,7 +30,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
      */
     var findAction = function(stateName, ticket) {
         for (let i = 0; i < ticket.stateInformation[2].length; i++) {
-            if (ticket.stateInformation[2][i] == stateName) {
+            if (ticket.stateInformation[2][i] === stateName) {
                 return ticket.stateInformation[0][i];
             }
         }
@@ -41,7 +41,8 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
     /**
      *  Function saves a modified ticket via an HTTP PUT in the database and updates the view of the table.
      *
-     *  Il Ticket viene mandato dallo stato di "EDIT" a "VALIDATION".
+     *  Il Ticket viene mandato dallo stato di "EDIT" a "VALIDATION",
+     *  oppure, da "EDIT" a "DISPATCHING".
      *
      *  @param item     selected item
      *  @param index    iterator offset
@@ -123,7 +124,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                     $state.reload();
                 },
                 function (err) {
-
+                    console.log(err);
                 })
     };
 
@@ -147,9 +148,8 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                           $state.reload();
                       },
                       function (err) {
-
+                          console.log(err);
                       });
-
           },
               function (err) {
 
@@ -158,6 +158,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
 
     /**
      *  Function used for saving an edited ticket.
+     *
      *  @param item     selected item
      *  @param index    iterator offset
      */
@@ -170,15 +171,17 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
 
     /**
      *  Function used for aborting a ticket editing.
+     *
      *  @param index   iterator offset
      */
     $scope.resetTicket = function (index) {
-        $scope.editTicket = {}
+        $scope.editTicket = {};
         $scope.edit[index] = false;
-    }
+    };
 
     /**
      *  Function used for downloading the saved image os the ticket.
+     *
      *  @param item     selected item
      *  @param index    iterator offset
      */
@@ -189,19 +192,20 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
             result.click();
             document.body.removeChild(result);
         })
-
     }
-
 });
 
 /**
  *  Function resets the index used for the 'Modify' function.
+ *
  *  @param arrayOfIndexes   items' indexes
  *  @returns {*}   reset items' indexes
  */
 function resetIndexes(arrayOfIndexes) {
+
     angular.forEach(arrayOfIndexes, function (value, key) {
         arrayOfIndexes[key] = false;
-    })
+    });
+
     return arrayOfIndexes;
-};
+}

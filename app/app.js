@@ -58,7 +58,6 @@ var app = angular.module('ticketsystem', [
     'ticketsystem.storageService',
 
     //  Team Coordinator
-    'ticketsystem.assignTeam',
     'ticketsystem.createTeam',
     'ticketsystem.readTeam',
 
