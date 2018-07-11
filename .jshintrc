@@ -1,4 +1,9 @@
 {
+  "browser":true,
+  "devel":true,
+  "esnext":true,
+  "asi":true,
+
   "strict": "global",
   "globals": {
     // Angular
@@ -18,6 +23,7 @@
 
     // Protractor
     "browser": false,
+
     "element": false,
     "by": false
   }

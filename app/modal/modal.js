@@ -91,7 +91,6 @@ app.controller("modalController", ['$scope', '$modal', '$log',
             });
         };
 
-
         $scope.showInfoTeam = function (item) {
             $scope.formItem = item;
 

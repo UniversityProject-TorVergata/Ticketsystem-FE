@@ -92,14 +92,6 @@
     ]
   },
   {
-    "id":23,
-    "label": "Reopened Tickets",
-    "route": "secure.reopenedTickets",
-    "visibility": [
-      "TeamCoordinator"
-    ]
-  },
-  {
     "id":30,
     "label": "Create Ticket",
     "route": "secure.createTicket",

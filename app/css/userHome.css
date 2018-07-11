@@ -77,3 +77,15 @@
     text-decoration: underline;
     cursor: pointer;
 }
+
+.li_menu_basso_2 {
+    display: inline;
+    color: white;
+    font-style: italic;
+    font-size: 15px;
+    margin-bottom: 10px;
+    text-decoration: underline;
+    cursor: pointer;
+
+    border-left: 2px solid white;
+}

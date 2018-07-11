@@ -316,26 +316,6 @@ angular.module('ticketsystem.router', ['ui.router'])
                         }
                     }
                 })
-                .state('secure.reopenedTickets', {
-                    url: "/reopenedTickets",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/TeamCoordinator/list/teamCoordinator.html',
-                            controller: 'AssignTeamCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['TeamCoordinator']
-                    },
-                    resolve: {
-                        problemArea: function (model) {
-                            return model.getArea().then(function (problemArea) {
-                                return problemArea
-                            })
-                        }
-                    }
-                })
                 .state('secure.createTicket', {
                     url: "/createTicket",
                     views: {
@@ -428,7 +408,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                             });
                         }
                     }
-                })
+                });
 
             $urlRouterProvider.otherwise('/Login');
 
@@ -436,4 +416,4 @@ angular.module('ticketsystem.router', ['ui.router'])
                 enabled: false,
                 requireBase: false
             }).hashPrefix('');
-        }])
+        }]);

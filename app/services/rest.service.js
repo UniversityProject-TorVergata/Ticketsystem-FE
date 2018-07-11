@@ -89,6 +89,7 @@ angular.module('ticketsystem.restService', [])
 
             //  Get user by role
             "getUserByRole": CONNECTION.url + '/registered_user/getUserByRole',
+            "getEmployedUserByRole": CONNECTION.url + '/registered_user/getEmployedUserByRole',
 
             //  change ticket difficulty
             "changeTicketDifficulty": CONNECTION.url + '/ticket/changeDifficulty'

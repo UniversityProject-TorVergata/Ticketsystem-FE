@@ -20,24 +20,36 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
             });
     };
 
+
+    /**
+     * Funzione per trovare l'azione necessaria per mandare il Ticket nello stato specificato.
+     *
+     * @param stateName: Stato relativo all'azione da trovare.
+     * @param ticket
+     * @returns {*}
+     */
     var findAction = function(stateName, ticket) {
         for (let i = 0; i < ticket.stateInformation[2].length; i++) {
-            if (ticket.stateInformation[2][i] == stateName) {
+            if (ticket.stateInformation[2][i] === stateName) {
                 return ticket.stateInformation[0][i];
             }
         }
 
-        return response;
+        return null;
     };
 
     /**
      *  Function saves a modified ticket via an HTTP PUT in the database and updates the view of the table.
+     *
+     *  Il Ticket viene mandato dallo stato di "EDIT" a "VALIDATION",
+     *  oppure, da "EDIT" a "DISPATCHING".
+     *
      *  @param item     selected item
      *  @param index    iterator offset
      */
     $scope.saveTicket = function(ticket,index){
 
-        console.log("STO DENTRO SAVE TICKET");
+        //console.log("STO DENTRO SAVE TICKET");
 
         httpService.get(restService.getTeamCoordinator)
             .then(function(response) {
@@ -68,30 +80,41 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                 //  HTTP PUT
                 httpService.put(restService.createTicket,ticket.id, payload)
                     .then( function(succResponse){
-                            console.log("STO DENTRO ALLA PUT");
-                            httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + findAction("VALIDATION", ticket) + '/' + response.data.id)
+                            //console.log("STO DENTRO ALLA PUT");
+                            let action = findAction("VALIDATION", ticket);
+                            if(action == null){
+                                action = findAction("DISPATCHING", ticket);
+                            }
+
+                            httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + response.data.id)
                                 .then(function(response) {
-                                    console.log("Modify SUCCESS");
+                                    //console.log("Modify SUCCESS");
                                     $scope.items[index] = angular.copy(ticket);
                                     $scope.editTicket={};
                                     $scope.edit = resetIndexes($scope.edit);
                                     $scope.readTicket();
-                                }, function err(response){});
-
+                                },
+                                    function err(response){
+                                        console.log(response)
+                                });
                         },
                         function(errReponse){
                             console.log(errReponse)
                         }
                     );
 
-
             }, function err(response) {});
-
-
-
     };
 
+    /**
+     * Funzione per mandare il Ticket da "ACCEPTANCE" a "CLOSED".
+     *
+     * oppure, per mandarlo da "EDIT" a "CLOSED".
+     *
+     * @param ticket
+     */
     $scope.closeTicket = function (ticket) {
+
         let action = findAction("CLOSED", ticket);
 
         var temp = "0";
@@ -101,11 +124,17 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                     $state.reload();
                 },
                 function (err) {
-
+                    console.log(err);
                 })
     };
 
+    /**
+     * Funzione per mandare il Ticket da "ACCEPTANCE" a "REOPENED".
+     *
+     * @param ticket
+     */
     $scope.rejectResolvedTicket = function (ticket) {
+
       let action = findAction("REOPENED", ticket);
 
       //LO DO AL TEAMCOORDINATOR
@@ -119,9 +148,8 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                           $state.reload();
                       },
                       function (err) {
-
+                          console.log(err);
                       });
-
           },
               function (err) {
 
@@ -130,6 +158,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
 
     /**
      *  Function used for saving an edited ticket.
+     *
      *  @param item     selected item
      *  @param index    iterator offset
      */
@@ -142,15 +171,17 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
 
     /**
      *  Function used for aborting a ticket editing.
+     *
      *  @param index   iterator offset
      */
     $scope.resetTicket = function (index) {
-        $scope.editTicket = {}
+        $scope.editTicket = {};
         $scope.edit[index] = false;
-    }
+    };
 
     /**
      *  Function used for downloading the saved image os the ticket.
+     *
      *  @param item     selected item
      *  @param index    iterator offset
      */
@@ -161,19 +192,20 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
             result.click();
             document.body.removeChild(result);
         })
-
     }
-
 });
 
 /**
  *  Function resets the index used for the 'Modify' function.
+ *
  *  @param arrayOfIndexes   items' indexes
  *  @returns {*}   reset items' indexes
  */
 function resetIndexes(arrayOfIndexes) {
+
     angular.forEach(arrayOfIndexes, function (value, key) {
         arrayOfIndexes[key] = false;
-    })
+    });
+
     return arrayOfIndexes;
-};
+}

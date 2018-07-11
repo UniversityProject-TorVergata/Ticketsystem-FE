@@ -37,17 +37,21 @@
                    ng-model="user.password">
         </div>
         <div class="form-group">
-            <label>Confirm Password</label>
+            <label ng-hide="confirm_pass_value">Confirm Password</label>
             <input type="password" class="form-control" name="confirm_password" ng-hide="confirm_pass_value"
                    ng-model="user.confirm_password">
         </div>
+
+        <br>
+
         <div class="form-group">
             <button ng-click="changeAccountInformation(user)" ng-disabled="disabledButton"
                     class="btn btn-primary btn-lg btn-block">Edit
             </button>
             <button ng-click="deleteAccount(user)" class="btn btn-danger btn-lg btn-block">Delete</button>
         </div>
-        <label>Enable Edit: <input type="checkbox" ng-click="disabledButtonHandler()"></label><br/>
+        <label>Enable Edit: <input type="checkbox" ng-click="disabledButtonHandler()"></label>
+        <br/>
 
     </form>
 </div>

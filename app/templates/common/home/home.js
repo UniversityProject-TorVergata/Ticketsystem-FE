@@ -1,6 +1,5 @@
 'use strict';
 
-//  TODO fuori standard - Perchè ha due controller?
 angular.module('ticketsystem.home', ['ngRoute'])
 
     .controller('homeCtrl', function ($scope, $modal, $log) {
@@ -21,15 +20,54 @@ angular.module('ticketsystem.home', ['ngRoute'])
             }, function () {
                 $log.info('Modal dismissed at: ' + new Date());
             });
+        };
+
+        $scope.termsOfUse = function () {
+
+            modalInstance = $modal.open({
+                templateUrl: '/modal/modal-terms-of-use.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                backdrop: 'static',
+            });
+
+            modalInstance.result.then(function () {
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        $scope.privacyRegulations = function () {
+
+            modalInstance = $modal.open({
+                templateUrl: '/modal/modal-privacy-policy.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                backdrop: 'static',
+            });
+
+            modalInstance.result.then(function () {
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
+        };
+
+        $scope.faq = function () {
+
+            modalInstance = $modal.open({
+                templateUrl: '/modal/modal-faq.html',
+                controller: ModalInstanceCtrl,
+                scope: $scope,
+                backdrop: 'static',
+            });
+
+            modalInstance.result.then(function () {
+
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
         }
 
     });
-
-
-var ModalInstanceCtrl = function ($scope, $modalInstance) {
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-
-};
