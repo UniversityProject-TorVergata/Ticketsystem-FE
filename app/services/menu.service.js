@@ -1,12 +1,15 @@
+//  menu.service.js
 /**
- *  The module manages the sidebar menu.
+ *  @name        menuservice
+ *  @description The module manages the sidebar menu.
  */
 angular.module('ticketsystem.menuservice', [])
     .service('menuService', ['$rootScope', '$http', function ($rootScope, $http) {
         return {
 
             /**
-             *  Function returns the list of tabs of the menu.
+             *  @name getMenuByType
+             *  @description Function returns the list of tabs of the menu.
              *  @param type         Logged user type
              *  @returns {Promise}  List of tabs
              */
@@ -15,8 +18,6 @@ angular.module('ticketsystem.menuservice', [])
                 return new Promise(function (resolve, reject) {
                     $http.get('../mocks/menuMock.json').then(
                         function (menuList) {
-                            //console.log("List of tabs: ");
-                            //console.log(menuList.data)
                             let menu = createMenu(menuList.data, type);
                             resolve(menu);
                         }
