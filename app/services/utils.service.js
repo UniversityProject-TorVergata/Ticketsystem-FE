@@ -1,11 +1,22 @@
 /**
- *  This module manages utility functions.
+ *  @ngdoc module
+ *  @name  ticketsystem.utilService
+ *  @description This module manages utility functions.
  */
 angular.module('ticketsystem.utilService', [])
+
+/**
+ *  @ngdoc  service
+ *  @module  ticketsystem.utilService
+ *  @name   util
+ *  @description   Service returns all the utility functions.
+ */
     .service('util', function () {
             return {
                 /**
-                 *  Function encodes the image file into base64 string.
+                 *  @ngdoc function
+                 *  @name getBase64
+                 *  @description Function encodes the image file into base64 string.
                  *  @param file image file to encode
                  *  @returns {Promise<any>} base64 image string in case of success, error otherwise
                  */
@@ -32,7 +43,9 @@ angular.module('ticketsystem.utilService', [])
                 },
 
                 /**
-                 *  Function decodes the base64 image into a file with the correct format.
+                 *  @ngdoc function
+                 *  @name getBase64
+                 *  @description Function decodes the base64 image into a file with the correct format.
                  *  @param item ticket
                  *  @returns {Promise<any>} image file in case of success, error otherwise
                  */
