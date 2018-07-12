@@ -289,9 +289,10 @@ angular.module('dashboard', [])
         };
 
         /**
-         * Show to modal with the infos about a Ticket TTL and the relative Timeout
+         *  @name showTTLForm
+         *  @description Show to modal with the infos about a Ticket TTL and the relative Timeout
          *
-         * @param item a Ticket
+         *  @param item a Ticket
          */
         $scope.showTTLForm = function (item) {
             $scope.formItem = angular.copy(item);
