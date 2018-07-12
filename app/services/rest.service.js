@@ -1,27 +1,34 @@
 'use strict';
 /**
- *  The module manages all the HTTP requests.
+ *  @ngdoc module
+ *  @name  ticketsystem.restService
+ *  @description The module manages all the HTTP requests.
  */
 angular.module('ticketsystem.restService', [])
 
-    //  Backend URL
+//  Backend URL
     .constant("CONNECTION", {
         url: "http://localhost:8200/ticketsystem"
     })
 
-    //  Service for HTTP requests with REST URLs
+    /**
+     *  @ngdoc  service
+     *  @module  ticketsystem.restService
+     *  @name   restService
+     *  @description   Service manages the endpoints for REST API call.
+     */
     .service('restService', function (CONNECTION) {
         return {
 
             //  Login
             "login": CONNECTION.url + '/registered_user/login',
 
-            //  CRUD ticket
+            //  CRUD Ticket
             "createTicket": CONNECTION.url + '/ticket',
             "insertComment": CONNECTION.url + '/ticket/insertComment',
 
             //  TODO dopo la rivisitazione delle SM, vanno tolti...?
-            //  Find Ticket by state
+            //  SM
             "findTicketByState": CONNECTION.url + '/ticket/findTicketByState',
             "validationTickets": CONNECTION.url + '/ticket/findTicketByState/VALIDATION',
             "pendingTickets": CONNECTION.url + '/ticket/findTicketByState/PENDING',
@@ -42,7 +49,7 @@ angular.module('ticketsystem.restService', [])
 
             //  Team Leader
             "teamLeader": CONNECTION.url + '/registered_user/team_leader',
-            "employedTeamLeader" : CONNECTION.url + '/registered_user/employed_team_leader',
+            "employedTeamLeader": CONNECTION.url + '/registered_user/employed_team_leader',
 
             //  Team Coordinator
             "assignTicket": CONNECTION.url + '/ticket/assignTicket',
@@ -59,17 +66,17 @@ angular.module('ticketsystem.restService', [])
 
             //  Target
             "readTargets": CONNECTION.url + '/target',
-            "readActiveTargets" : CONNECTION.url + '/target/active',
+            "readActiveTargets": CONNECTION.url + '/target/active',
 
             // State Machine
-            "getStateMachines" : CONNECTION.url + '/state_machine',
+            "getStateMachines": CONNECTION.url + '/state_machine',
 
             //  Team
             "getTeamMembers": CONNECTION.url + '/registered_user/free_team_member',
             "getTeamLeaders": CONNECTION.url + '/registered_user/team_leader',
-            "getFreeTeamLeaders" : CONNECTION.url + '/registered_user/free_team_leader',
+            "getFreeTeamLeaders": CONNECTION.url + '/registered_user/free_team_leader',
             "getMembersByTeamId": CONNECTION.url + '/team/team_member',
-            "getLeaderByTeamId" : CONNECTION.url + '/team/team_leader',
+            "getLeaderByTeamId": CONNECTION.url + '/team/team_leader',
 
             //  TeamMembers by TeamLeader
             "getTeamMembersByTeamLeader": CONNECTION.url + '/team/team_member/team_leader',
@@ -96,11 +103,21 @@ angular.module('ticketsystem.restService', [])
 
         };
     })
+
+    /**
+     *  @ngdoc  service
+     *  @module  ticketsystem.restService
+     *  @name   httpService
+     *  @description    Service manages HTTP requests.
+     */
     .service('httpService', function ($http) {
         return {
 
             /**
-             *  HTTP GET function.
+             *  @ngdoc function
+             *  @module ticketsystem.restService
+             *  @name get
+             *  @description HTTP GET function.
              *  @param url      Service URL
              *  @param header   Data Header
              *  @returns {*}    HTTP Response
@@ -114,7 +131,10 @@ angular.module('ticketsystem.restService', [])
             },
 
             /**
-             *  HTTP POST function.
+             *  @ngdoc function
+             *  @module ticketsystem.restService
+             *  @name get
+             *  @description HTTP POST function.
              *  @param url      Service URL
              *  @param data     Request body
              *  @param header   Data Header
@@ -132,7 +152,10 @@ angular.module('ticketsystem.restService', [])
             },
 
             /**
-             *  HTTP PUT function.
+             *  @ngdoc function
+             *  @module ticketsystem.restService
+             *  @name get
+             *  @description HTTP PUT function.
              *  @param url      Service URL
              *  @param id       ID to find the requested object
              *  @param data     Request body
@@ -144,14 +167,17 @@ angular.module('ticketsystem.restService', [])
                 if (header) head = header;
                 return $http({
                     "method": "PUT",
-                    "url": url+"/"+id,
+                    "url": url + "/" + id,
                     "headers": head,
                     "data": data
                 });
             },
 
             /**
-             *  HTTP DELETE function.
+             *  @ngdoc function
+             *  @module ticketsystem.restService
+             *  @name get
+             *  @description HTTP DELETE function.
              *  @param url      Service URL
              *  @param id       ID to find the requested object
              *  @param header   Data Header
@@ -162,7 +188,7 @@ angular.module('ticketsystem.restService', [])
                 if (header) head = header;
                 return $http({
                     "method": "DELETE",
-                    "url": url+"/"+id,
+                    "url": url + "/" + id,
                     "headers": header
                 });
             }

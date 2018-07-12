@@ -1,8 +1,14 @@
 'use strict';
-angular.module('ticketsystem.stringFilter',[])
 
+//  string.filter.js
+/**
+ *  @ngdoc module
+ *  @name  stringFilter
+ *  @description The module manages the select's text format.
+ */
+angular.module('ticketsystem.stringFilter',[])
     .filter('formatEnumeration',function() {
-        //  Format enumeration strings in camel case
+
         return function (input) {
             var newInput = "";
             if (!!input) {

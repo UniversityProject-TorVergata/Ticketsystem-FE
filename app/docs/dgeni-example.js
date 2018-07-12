@@ -24,13 +24,19 @@ module.exports = new Package('dgeni-example', [
         readFilesProcessor.sourceFiles = [
             {
                 // Process all js files in `src` and its subfolders ...
-                include: 'app/**/*.js',
+                include: './services/*.js',
                 // ... except for this one!
-                exclude: 'app/do-not-read.js',
+                exclude: './node_modules/**',
                 // When calculating the relative path to these files use this as the base path.
                 // So `src/foo/bar.js` will have relative path of `foo/bar.js`
-                basePath: 'app'
-            }
+                basePath: './'
+            }, // All of our application files
+
+            // Our static Markdown documents
+            // We are specifying the path and telling Dgeni to use the ngdocFileReader
+            // to parse the Markdown files to HTMLs
+            { include: 'docs/content/**/*.md', basePath: 'docs/content', fileReader: 'ngdocFileReader' }
+
         ];
 
         // Add a folder to search for our own templates to use when rendering docs
@@ -41,5 +47,5 @@ module.exports = new Package('dgeni-example', [
         templateFinder.templatePatterns.unshift('common.template.html');
 
         // Specify where the writeFilesProcessor will write our generated doc files
-        writeFilesProcessor.outputFolder  = 'build';
+        writeFilesProcessor.outputFolder  = './docs/build';
     });

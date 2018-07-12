@@ -1,153 +1,218 @@
 'use strict';
 
+/**
+ *  @ngdoc module
+ *  @name  modal
+ *  @description The module manages tthe modal mechanism.
+ */
 var app = angular.module('modal', ['ui.bootstrap']);
 
 /**
- *  Controller used for the modal
+ *  @ngdoc controller
+ *  @module modal
+ *  @name  modalController
+ *  @description The controller is used to show the modal popup.
  */
-app.controller("modalController", ['$scope', '$modal', '$log',
+app.controller("modalController", ['$scope', '$modal', '$log', function ($scope, $modal, $log) {
 
     /**
-     *  Function used to show the modal popup
-     *  @param $scope   general $scope
-     *  @param $modal   general $modal
-     *  @param $log     general $log
+     *  @ngdoc function
+     *  @module modal
+     *  @name showEditForm
+     *  @description Modal for editing ticket
+     *  @param item
      */
-    function ($scope, $modal, $log) {
+    $scope.showEditForm = function (item) {
+        $scope.message = "Show Form Button Clicked";
+        console.log($scope.message);
 
-        //  showEditForm: modal for editing ticket
-        $scope.showEditForm = function (item) {
-            $scope.message = "Show Form Button Clicked";
-            console.log($scope.message);
-            $scope.formItem=item;   //  save the item to modify it
+        //  Save the item to modify it later
+        $scope.formItem = item;
 
-            var modalInstance = $modal.open({
-                templateUrl: '/modal/modal-form.html',
-                controller: ModalInstanceCtrl,
-                scope: $scope,
-                resolve: {
-                    userForm: function () {
-                        return $scope.userForm;
-                    }
+        var modalInstance = $modal.open({
+            templateUrl: '/modal/modal-form.html',
+            controller: ModalInstanceCtrl,
+            scope: $scope,
+            resolve: {
+                userForm: function () {
+                    return $scope.userForm;
                 }
-            });
+            }
+        });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
-        //  showInfoForm:   modal for see the details about the ticket
-        $scope.showInfoForm = function (item) {
-            $scope.message = "Show Form Button Clicked";
-            console.log($scope.message);
-            $scope.formItem=item;
-            console.log(item);
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
+    /**
+     *  @ngdoc function
+     *  @module modal
+     *  @name showInfoForm
+     *  @description Modal to see the details about the ticket
+     *  @param item
+     */
+    $scope.showInfoForm = function (item) {
+        $scope.message = "Show Form Button Clicked";
+        console.log($scope.message);
+        $scope.formItem = item;
+        console.log(item);
 
 
-            var modalInstance = $modal.open({
-                templateUrl: '/modal/modal-info.html',
-                controller: ModalInstanceCtrl,
-                scope: $scope,
-                resolve: {
-                    userForm: function () {
-                        return $scope.userForm;
-                    }
+        var modalInstance = $modal.open({
+            templateUrl: '/modal/modal-info.html',
+            controller: ModalInstanceCtrl,
+            scope: $scope,
+            resolve: {
+                userForm: function () {
+                    return $scope.userForm;
                 }
-            });
+            }
+        });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
 
-        $scope.showMessageForm = function (item) {
-            $scope.terminateSending = false;
-            $scope.formItem=item;
-            $scope.newMessage = {};
-            let date = Date.now();
-            $scope.newMessage.timestamp = moment(date).format("DD/MM/YY, h:mm:ss");
-            //Author is inserted on teamCoordinatorController.sendNewTicketComment
+    /**
+     *  @ngdoc function
+     *  @module modal
+     *  @name showMessageForm
+     *  @description Modal to show Ticket's comments.
+     *  @param item
+     */
+    $scope.showMessageForm = function (item) {
+        $scope.terminateSending = false;
+        $scope.formItem = item;
+        $scope.newMessage = {};
+        let date = Date.now();
+        $scope.newMessage.timestamp = moment(date).format("DD/MM/YY, h:mm:ss");
 
-            var modalInstance = $modal.open({
-                templateUrl: '/modal/modal-message.html',
-                controller: ModalInstanceCtrl,
-                scope: $scope,
-                backdrop: 'static',
-                resolve: {
-                    userForm: function () {
-                        return $scope.userForm;
-                    }
+        //  Author is inserted in teamCoordinatorController.sendNewTicketComment
+        var modalInstance = $modal.open({
+            templateUrl: '/modal/modal-message.html',
+            controller: ModalInstanceCtrl,
+            scope: $scope,
+            backdrop: 'static',
+            resolve: {
+                userForm: function () {
+                    return $scope.userForm;
                 }
-            });
+            }
+        });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
 
-        $scope.showInfoTeam = function (item) {
-            $scope.formItem = item;
+    /**
+     *  @ngdoc function
+     *  @module modal
+     *  @name showInfoTeam
+     *  @description Modal to show info of the Team.
+     *  @param item
+     */
+    $scope.showInfoTeam = function (item) {
+        $scope.formItem = item;
 
-            var modalInstance = $modal.open({
-                templateUrl: '/modal/modal-info-team.html',
-                controller: ModalInstanceCtrl,
-                scope: $scope,
-                resolve: {
-                    userForm: function () {
-                        return $scope.userForm;
-                    }
+        var modalInstance = $modal.open({
+            templateUrl: '/modal/modal-info-team.html',
+            controller: ModalInstanceCtrl,
+            scope: $scope,
+            resolve: {
+                userForm: function () {
+                    return $scope.userForm;
                 }
-            });
+            }
+        });
 
-            modalInstance.result.then(function (selectedItem) {
-                $scope.selected = selectedItem;
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
 
-    }]);
+}]);
 
+/**
+ *
+ *  @description    controller of the modal
+ *  @param $state           page state
+ *  @param $scope           controller scope
+ *  @param $modalInstance   instance of the modal
+ *  @param httpService      HTTP service
+ *  @param restService      Rest API service
+ *  @constructor
+ */
 var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, restService) {
     $scope.form = {};
 
+    /**
+     *  @ngdoc function
+     *  @name submitForm
+     *  @description Modal to show info of the Team.
+     */
     $scope.submitForm = function () {
         if ($scope.form.userForm.$valid) {
             console.log('user form is in scope');
-            $scope.saveTicket($scope.editTicket,$scope.index);
+            $scope.saveTicket($scope.editTicket, $scope.index);
             $modalInstance.close('closed');
         } else {
             console.log('userform is not in scope');
         }
     };
 
-    $scope.messageOk = function() {
+    /**
+     *  @ngdoc function
+     *  @name submitForm
+     *  @description Modal is shown when "ok" button is clicked.
+     */
+    $scope.messageOk = function () {
         $scope.sendNewTicketComment($scope.formItem.id, $scope.newMessage);
         $scope.terminateSending = true;
     };
 
+    /**
+     *  @ngdoc function
+     *  @name cancel
+     *  @description Modal is dismissed with reason 'cancel'.
+     */
     $scope.cancel = function () {
         $modalInstance.dismiss('cancel');
     };
 
+    /**
+     *  @ngdoc function
+     *  @name closeMessageModal
+     *  @description Modal is dismissed with reason 'closed'.
+     */
     $scope.closeMessageModal = function () {
         $modalInstance.dismiss("closed");
 
         //riduco i reload della pagina: reload solo quando
         //inserisco un commento o la textarea non è vuota
         //TODO implementare meccanismo migliore
-        if($scope.newMessage.description) {
+        if ($scope.newMessage.description) {
             $state.reload();
         }
 
     };
 
+    /**
+     *  @ngdoc function
+     *  @name sendNewTicketComment
+     *  @description Modal to post new comment of the Ticket.
+     */
+    // TODO tutto commentato?
     $scope.sendNewTicketComment = function (ticketID, msg) {
         msg['eventGenerator'] = JSON.parse(localStorage.getItem('userInformation'));
         httpService.post(restService.insertComment + '/' + ticketID, msg)

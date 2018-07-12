@@ -1,13 +1,24 @@
 //  TODO gestire reject
 /**
- *  The module manages mocks and select values who needs to be got from database.
+ *  @ngdoc module
+ *  @name  ticketsystem.modelService
+ *  @description The module manages mocks and select values who needs to be got from database.
  */
 angular.module('ticketsystem.modelService', [])
+
+    /**
+     *  @ngdoc  service
+     *  @module  ticketsystem.modelService
+     *  @name   model
+     *  @description   Service returns all the data that needs to be shown in select and table.
+     */
     .service('model', function (httpService, restService) {
             return {
 
                 /**
-                 *  Function gets the free team leaders.
+                 *  @ngdoc  function
+                 *  @name getFreeTeamLeaders
+                 *  @description Function gets the free team leaders.
                  *  @returns {Promise}  free team leaders
                  */
                 getFreeTeamLeaders() {
@@ -23,7 +34,9 @@ angular.module('ticketsystem.modelService', [])
                     })
                 },
                 /**
-                 *  Function gets the free team members.
+                 *  @ngdoc  function
+                 *  @name getFreeTeamMembers
+                 *  @description Function gets the free team members.
                  *  @returns {Promise}  free team members
                  */
                 getFreeTeamMembers() {
@@ -39,7 +52,9 @@ angular.module('ticketsystem.modelService', [])
                     })
                 },
                 /**
-                 *  Function gets the finite state machines.
+                 *  @ngdoc  function
+                 *  @name getStateMachines
+                 *  @description Function gets the finite state machines.
                  *  @returns {Promise}  finite state machines list.
                  */
                 getStateMachines() {
@@ -56,8 +71,10 @@ angular.module('ticketsystem.modelService', [])
                 }
                 ,
                 /**
-                 *  Function gets the difficulty values.
-                 *  @returns {Promise}  difficulty types list.
+                 *  @ngdoc  function
+                 *  @name getDifficulties
+                 *  @description Function gets the difficulty values.
+                 *  @returns {Promise}  difficulty values
                  */
                 getDifficulties() {
                     return new Promise(function (resolve, reject) {
@@ -70,11 +87,12 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                }
-                ,
+                },
                 /**
-                 *  Function gets the target type values.
-                 *  @returns {Promise}  target type values list.
+                 *  @ngdoc  function
+                 *  @name getTargetTypes
+                 *  @description Function gets the target type values.
+                 *  @returns {Promise}  target type values list
                  */
                 getTargetTypes() {
                     return new Promise(function (resolve, reject) {
@@ -87,11 +105,12 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                }
-                ,
+                },
                 /**
-                 *  Function gets the allowed user types.
-                 *  @returns {Promise}  user types list.
+                 *  @ngdoc  function
+                 *  @name getUserType
+                 *  @description Function gets the allowed user types.
+                 *  @returns {Promise}  user types list
                  */
                 getUserType() {
                     return new Promise(function (resolve, reject) {
@@ -104,11 +123,11 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                }
-                ,
-
+                },
                 /**
-                 *  Function gets the targets from the database.
+                 *  @ngdoc  function
+                 *  @name getTargets
+                 *  @description Function gets the targets from the database
                  *  @returns {Promise}  targets list
                  */
                 getTargets() {
@@ -122,10 +141,11 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             });
                     })
-                }
-                ,
+                },
                 /**
-                 *  Function gets the targets that are active from the database.
+                 *  @ngdoc  function
+                 *  @name getActiveTargets
+                 *  @description Function gets the targets that are active from the database.
                  *  @returns {Promise}  targets list
                  */
                 getActiveTargets() {
@@ -139,12 +159,12 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             });
                     })
-                }
-                ,
-
+                },
                 /**
-                 *  Function gets the TeamLeaders from the database.
-                 *  @returns {Promise} Team Leaders list
+                 *  @ngdoc  function
+                 *  @name getTeams
+                 *  @description Function gets the TeamLeaders from the database.
+                 *  @returns {Promise}  Team Leaders list
                  */
                 getTeams() {
                     return new Promise(function (resolve, reject) {
@@ -157,12 +177,12 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                }
-                ,
-
+                },
                 /**
-                 *  Function gets the tags from the mock.
-                 *  @returns {Promise} Tags list
+                 *  @ngdoc  function
+                 *  @name getTags
+                 *  @description Function gets the tags from the mock..
+                 *  @returns {Promise}  Tags list
                  */
                 getTags() {
                     return new Promise(function (resolve, reject) {
@@ -175,12 +195,12 @@ angular.module('ticketsystem.modelService', [])
                                 resolve([])
                             })
                     })
-                }
-                ,
-
+                },
                 /**
-                 *  Function gets the categories from the mock.
-                 *  @returns {Promise} Categories list
+                 *  @ngdoc  function
+                 *  @name getCategories
+                 *  @description Function gets the categories from the mock.
+                 *  @returns {Promise}  Categories list
                  */
                 getCategories() {
                     return new Promise(function (resolve, reject) {
@@ -195,12 +215,12 @@ angular.module('ticketsystem.modelService', [])
                         )
                     })
 
-                }
-                ,
-
+                },
                 /**
-                 *  Function gets the visibility values from the mock.
-                 *  @returns {Promise} Visibility values list
+                 *  @ngdoc  function
+                 *  @name getVisibilities
+                 *  @description Function gets the visibility values from the mock.
+                 *  @returns {Promise}  Visibility values list
                  */
                 getVisibilities() {
                     return new Promise(function (resolve, reject) {
@@ -215,12 +235,12 @@ angular.module('ticketsystem.modelService', [])
                         )
                     })
 
-                }
-                ,
-
+                },
                 /**
-                 *  Function gets the ticket types from the mock.
-                 *  @returns {Promise} Ticket types list
+                 *  @ngdoc  function
+                 *  @name getTicketTypes
+                 *  @description Function gets ticket types from the mock.
+                 *  @returns {Promise}  Ticket typeslist
                  */
                 getTicketTypes() {
                     return new Promise(function (resolve, reject) {
@@ -234,12 +254,12 @@ angular.module('ticketsystem.modelService', [])
                             }
                         )
                     })
-                }
-                ,
-
+                },
                 /**
-                 *  Function gets the priority values from the mock.
-                 *  @returns {Promise} Priority values list
+                 *  @ngdoc  function
+                 *  @name getPriority
+                 *  @description Function gets the priority values from the mock.
+                 *  @returns {Promise}  Priority values list
                  */
                 getPriority() {
                     return new Promise(function (resolve, reject) {
@@ -253,13 +273,12 @@ angular.module('ticketsystem.modelService', [])
                             }
                         )
                     })
-                }
-                ,
-
-
+                },
                 // TODO problemArea dovrebbero essere aggiunti da FE?
                 /**
-                 *  Function gets the problem areas for a Team.
+                 *  @ngdoc  function
+                 *  @name getArea
+                 *  @description Function gets the problem areas for a Team.
                  *  @returns {Promise} Problem areas list
                  */
                 getArea() {
