@@ -42,6 +42,7 @@ Now, browse to the navbar of your favorite browser at [`localhost:8000`][local-n
 ## Directory Layout
 
 ```
+//TODO DA CAMBAIRE QUANDO è FINITO
 .
 ├── LICENSE
 ├── README.md

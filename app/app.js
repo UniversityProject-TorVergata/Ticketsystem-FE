@@ -1,13 +1,14 @@
 'use strict';
-// Declare navbar level module which depends on views, and components
+/**
+ *  @ngdoc module
+ *  @name  ticketsystem.ticketsystem
+ *  @description Declare navbar level module which depends on views, and components
+ */
 var app = angular.module('ticketsystem', [
 
     'ngRoute',
     'ui.router',
     'ui.bootstrap',
-
-    //ui - select
-    'ui.select',
     'ngSanitize',
 
     //  Sidebar
@@ -69,7 +70,9 @@ var app = angular.module('ticketsystem', [
     'dashboard'
 
 
-])
+]);
+
+//  Control if a user is allowed to navigate to a certain HTML page.
 app.run(function ($rootScope, $transitions) {
         $transitions.onStart({}, function (transition) {
             let profile
@@ -85,7 +88,7 @@ app.run(function ($rootScope, $transitions) {
         })
     })
 ;
-
+// TODO
 app.config(function(tagsInputConfigProvider) {
     tagsInputConfigProvider.setDefaults('tagsInput', {
         placeholder: 'Add category',
@@ -93,6 +96,7 @@ app.config(function(tagsInputConfigProvider) {
     });
 });
 
+// TODO
 app.filter('propsFilter', function() {
     return function(items, props) {
         var out = [];

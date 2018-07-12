@@ -10,6 +10,7 @@
     "canonical-path": "0.0.2",
     "dgeni": "^0.4.9",
     "dgeni-packages": "^0.26.2",
+    "gulp": "^3.9.1",
     "http-server": "^0.9.0",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
