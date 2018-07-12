@@ -78,7 +78,7 @@ angular.module('ticketsystem.modelService', [])
                  */
                 getTargetTypes() {
                     return new Promise(function (resolve, reject) {
-                        httpService.get('./mocks/TargetTypes.json').then(
+                        httpService.get('./mocks/targetTypes.json').then(
                             function (targetTypes) {
                                 resolve(targetTypes.data);
                             },

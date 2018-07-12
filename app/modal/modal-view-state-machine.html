@@ -1,12 +1,18 @@
 
-<div class="modal-content" style="align-self: center; min-width: 910px; min-height: 1010px">
+<div class="modal-header">State Machine Diagram</div>
+<div class="modal-body" >
 
-    <div>
-        <img src="/public/images/state_machine/State_Machines.jpg">
+    <div class="row">
+        <div class="col-sm-12" >
+        <img data-ng-src = "{{stateMachineIMG}}" data-err-src="./app/public/images/state_machine.jpg"
+             style="width: 100%;height: 100%">
+        </div>
     </div>
 
-    <div style="margin-bottom: 20px; border-top: 2px solid black" align="center">
-        <button class="btn btn-primary" ng-click="cancel()" style="min-width: 50px; margin-top: 20px; font-size: 20px">OK</button>
-    </div>
 
+
+</div>
+
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="cancel()" >OK</button>
 </div>

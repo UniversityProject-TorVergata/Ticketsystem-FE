@@ -3,11 +3,22 @@
 angular.module('ticketsystem.createTarget', ['ngRoute'])
 
     .controller('createTargetCtrl', function ($scope, restService, httpService, $state, storageService, $modal, $log,
-                                              stateMachines, targetTypes) {
+                                              stateMachines, targetTypes,util) {
 
         // Select values
+        $scope.stateMachineIMG = '';
         $scope.targetTypes = targetTypes;
         $scope.stateMachines = stateMachines;
+
+        /**
+         * When changing the selected state machine change also the related modal image.
+         *
+         * @param stateMachine new selected state machine
+         */
+        $scope.changeStateMachine = function(stateMachine){
+
+            $scope.stateMachineIMG = stateMachine.base64Diagram;
+        }
 
         /**
          *  Function creates a new Target.
@@ -52,6 +63,8 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                     });
             }
         };
+
+
 
         /**
          *  Function show the available FSM.

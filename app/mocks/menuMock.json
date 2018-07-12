@@ -116,5 +116,13 @@
       "TeamLeader",
       "TeamCoordinator"
     ]
+  },
+  {
+    "id":51,
+    "label": "Upload State Machine",
+    "route": "secure.createStateMachine",
+    "visibility": [
+      "Admin"
+    ]
   }
 ]

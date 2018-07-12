@@ -231,6 +231,26 @@ angular.module('ticketsystem.router', ['ui.router'])
                         }
                     }
                 })
+                .state('secure.createStateMachine', {
+                    url: "/createStateMachine",
+                    views: {
+                        'content': {
+                            templateUrl: 'templates/Admin/createStateMachine/stateMachine.html',
+                            controller: 'createStateMachineCtrl'
+                        }
+                    },
+                    data: {
+                        requiredLogin: true,
+                        access: ['Admin']
+                    },
+                    resolve: {
+                        userTypes: function (model) {
+                            return model.getUserType().then(function (userTypes) {
+                                return userTypes
+                            })
+                        }
+                    }
+                })
                 .state('secure.dashboard', {
                     url: "/dashboard",
                     views: {

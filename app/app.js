@@ -49,6 +49,7 @@ var app = angular.module('ticketsystem', [
     'ticketsystem.createTarget',
     'ticketsystem.listTarget',
     'ticketsystem.modifyTarget',
+    'ticketsystem.createStateMachine',
 
 
     // Customer

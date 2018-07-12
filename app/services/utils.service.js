@@ -40,7 +40,7 @@ angular.module('ticketsystem.utilService', [])
                     return new Promise((resolve, reject) => {
 
                         //  Variables
-                        var dataURI, byteString, typeFile, link;
+                        var dataURI, byteString, typeFile,link;
 
                         //  Base64 string
                         dataURI = item.attachedFile;
