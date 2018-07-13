@@ -5,8 +5,10 @@ angular.module('ticketsystem.Login', ['ngRoute'])
     .controller('LoginCtrl', function ($scope, restService, httpService, storageService, $state) {
 
         /**
-         *  Function triggered by the login.
-         *  It sends a login request via HTTP POST.
+         * @ngdoc           function
+         * @name            startLoginUser
+         * @description     Function triggered by the login.
+         *                  It sends a login request via HTTP POST.
          */
         $scope.startLoginUser = function (user) {
 
@@ -14,11 +16,9 @@ angular.module('ticketsystem.Login', ['ngRoute'])
             if (angular.isUndefined(user) || user.username === "" || user.password === "")
                 window.alert('Some fields are missing!');
             else {
-
                 // HTTP POST
                 httpService.post(restService.login, user)
                     .then(function (response) {
-
                         //  Save user info
                         storageService.setUser(response.data);
 

@@ -7,18 +7,20 @@
 angular.module('ticketsystem.createUser', ['ngRoute'])
     .controller('createUserCtrl', function ($scope, restService, httpService, $state, userTypes) {
 
-        //  Select values
+        // Select values
         $scope.userTypes = userTypes;
 
         /**
-         *  Function creates a new user in the database via an HTTP POST.
-         *  @param user     user to create
-         *  @param atype    type of the user
+         * @ngdoc           function
+         * @name            creationUser
+         * @description     Function creates a new user in the database via an HTTP POST.
+         *
+         * @param user      user to create
+         * @param atype     type of the user
          */
         $scope.creationUser = function (user, atype) {
 
-            //  TODO controlli più sensati
-            if( angular.isUndefined(user) ||
+            if (angular.isUndefined(user) ||
                 angular.isUndefined(user.fiscal_code) ||
                 angular.isUndefined(user.name) ||
                 angular.isUndefined(user.surname) ||
@@ -26,19 +28,17 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
                 angular.isUndefined(user.email) ||
                 angular.isUndefined(user.username) ||
                 angular.isUndefined(user.password)) {
-                    window.alert('Some fields are missing!')
+                window.alert('Some fields are missing!')
             }
             else {
-
-                //  Set creation date and user type
+                // Set date and user type
                 user.created_at = moment(Date.now()).format("DD/MM/YYYY");
                 user['@type'] = atype.name;
 
-                //  HTTP POST
+                //HTTP POST
                 httpService.post(restService.createUser, user)
                     .then(function (data) {
                             window.alert('Successful registration!');
-                            //TODO resetfield senza reload
                             $state.reload('secure.createUser');
                         },
 

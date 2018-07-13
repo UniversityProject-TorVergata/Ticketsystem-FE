@@ -6,19 +6,21 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
 
     .controller('accountInfoCtrl', function ($scope, restService, httpService, $state, storageService) {
 
-        //  TODO prenderlo direttamente nell'html?
+
         $scope.user = storageService.getUser();
         $scope.disabledButton = true;
         $scope.disabledReadonly = true;
         $scope.confirm_pass_value = true;
 
         /**
-         *  This function allows to change user data.
-         *  @param user updated user data
+         * @ngdoc               function
+         * @name                changeAccountInformation
+         * @description         This function allows to change user data.
+         *
+         * @param user          updated user data
          */
         $scope.changeAccountInformation = function (user) {
 
-            // TODO fare controlli migliori?
             if (user.fiscal_code === "" || user.name === "" || user.surname === "" ||
                 user.address === "" || user.email === "" || user.username === "" ||
                 user.password === "" || user.confirm_password === "") {
@@ -47,8 +49,11 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
         };
 
         /**
-         *  This function deletes the user data from the session and the database.
-         *  @param user User to delete
+         * @ngdoc               function
+         * @name                deleteAccount
+         * @description         This function deletes the user data from the session and the database.
+         *
+         * @param user User to delete
          */
         $scope.deleteAccount = function (user) {
 

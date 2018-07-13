@@ -14,13 +14,15 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
         $scope.selectedMembers = [];
         $scope.selectedLeader = {};
 
-        // TODO serve?
+        // TODO serve ancora? ._.
         $scope.control = function (item) {
             console.log(item.id)
         };
 
         /**
-         *  Function reads all the teams in the database via an HTTP GET
+         * @ngdoc           funcxtion
+         * @name            reatTeams
+         * @description     Function reads all the teams in the database via an HTTP GET
          */
         $scope.readTeams = function () {
             //  HTTP GET
@@ -34,8 +36,11 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
         };
 
         /**
-         *  Function deletes a selected team via an HTTP DELETE and updates the view of the table.
-         *  @param id   id number of the ticket to be deleted.
+         * @ngdoc           function
+         * @name            deleteteam
+         * @description     Function deletes a selected team via an HTTP DELETE and updates the view of the table.
+         *
+         * @param id        id number of the ticket to be deleted.
          */
         $scope.deleteTeam = function (id) {
             httpService.delete(restService.createTeam, id)
@@ -49,7 +54,9 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
         };
 
         /**
-         *  Function reads the team leader of a team via an HTTP GET
+         * @ngdoc           function
+         * @name            getLeaderById
+         * @description     Function reads the team leader of a team via an HTTP GET
          */
         $scope.getLeaderById = function (id) {
             //  HTTP GET
@@ -62,7 +69,9 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
         };
 
         /**
-         *  Function reads all the team members of a team via an HTTP GET
+         * @ngdoc           function
+         * @name            getMembersById
+         * @description     Function reads all the team members of a team via an HTTP GET
          */
         $scope.getMembersById = function (id) {
             //  HTTP GET

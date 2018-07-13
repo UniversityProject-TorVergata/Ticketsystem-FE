@@ -7,24 +7,24 @@ angular.module('ticketsystem.createCustomer', ['ngRoute'])
     .controller('createCustomerCtrl', function ($scope, restService, httpService, $location) {
 
         /**
-         *  Function creates a ticket.
+         * @ngdoc           function
+         * @name            creationUser
+         * @description     Function creates an user.
          */
         $scope.creationUser = function () {
 
-            if( angular.isUndefined($scope.user) ||
-                angular.isUndefined($scope.user.fiscal_code) ||  $scope.user.fiscal_code === "" ||
+            if (angular.isUndefined($scope.user) ||
+                angular.isUndefined($scope.user.fiscal_code) || $scope.user.fiscal_code === "" ||
                 angular.isUndefined($scope.user.name) || $scope.user.name === "" ||
                 angular.isUndefined($scope.user.surname) || $scope.user.surname === "" ||
                 angular.isUndefined($scope.user.address) || $scope.user.address === "" ||
                 angular.isUndefined($scope.user.email) || $scope.user.email === "" ||
                 angular.isUndefined($scope.user.username) || $scope.user.username === "" ||
                 angular.isUndefined($scope.user.password) || $scope.user.password === "" ||
-                angular.isUndefined($scope.user.confirm_password)|| $scope.user.confirm_password === "")
-            {
-
-                    window.alert('Some fields are missing!')
+                angular.isUndefined($scope.user.confirm_password) || $scope.user.confirm_password === "") {
+                window.alert('Some fields are missing!')
             }
-            else if(!angular.equals($scope.user.password, $scope.user.confirm_password)) {
+            else if (!angular.equals($scope.user.password, $scope.user.confirm_password)) {
                 window.alert('Password and confirm password not matching')
             }
             else {

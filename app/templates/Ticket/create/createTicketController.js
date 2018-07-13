@@ -15,11 +15,12 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
     $scope.showCategoriesOnDisplay = false;
 
     /**
-     *  Function creates a ticket in the database via an HTTP POST.
+     * @ngdoc           function
+     * @name            createTicket
+     * @description     Function creates a ticket in the database via an HTTP POST.
      */
     $scope.createTicket = function (ticket, selectedTags, customerPriority, visibility) {
 
-        // TODO Sistemare i controlli
         if (Object.keys(selectedTags).length < 1) {
             window.alert("Insert at least 1 tag");
         }
@@ -28,10 +29,10 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
             window.alert("Insert max 5 tags");
         }
 
-        else if(angular.isUndefined(ticket.title) ||
+        else if (angular.isUndefined(ticket.title) ||
             angular.isUndefined(ticket.description) ||
             angular.isUndefined(ticket.target) ||
-            angular.isUndefined(ticket.presumedType)){
+            angular.isUndefined(ticket.presumedType)) {
             window.alert("Fill in all the fields!")
         }
 
@@ -63,8 +64,11 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
     };
 
     /**
-     *  Function converts image in base64 string and saves it in the ticket.
-     *  @param event    event containing the file
+     * @ngdoc           function
+     * @name            selectedFile
+     * @description     Function converts image in base64 string and saves it in the ticket.
+     *
+     * @param event    event containing the file
      */
     $scope.selectedFile = function (event) {
         util.getBase64(event.target.files[0])
@@ -74,8 +78,11 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
     };
 
     /**
-     *  Function gets and shows the categories of the selected target.
-     *  @param i
+     * @ngdoc           function
+     * @name            showCategories
+     * @description     Function gets and shows the categories of the selected target.
+     *
+     * @param target    the target of which to show the categories
      */
     $scope.showCategories = function (target) {
         if (target == null) {
@@ -88,8 +95,14 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
 });
 
 /**
- *  Function for setting a field with an array.
+ * @ngdoc               function
+ * @name                setArrayField
+ * @description         Function for setting a field with an array
+ *
+ * @param arrayToLoop
+ * @returns {Array}
  */
+
 function setArrayField(arrayToLoop) {
     let arrayLooped = [];
     for (let i = 0; i < Object.keys(arrayToLoop).length; i++) {
@@ -99,13 +112,16 @@ function setArrayField(arrayToLoop) {
 }
 
 /**
- *  Function resets the index used for the 'Modify' function.
- *  @param arrayOfIndexes   items' indexes
- *  @returns {*}   reset items' indexes
+ * @ngdoc                   function
+ * @name                    resetindexes
+ * @description             Function resets the index used for the 'Modify' function.
+ *
+ * @param arrayOfIndexes    items' indexes
+ * @returns {*}             reset items' indexes
  */
 function resetIndexes(arrayOfIndexes) {
     angular.forEach(arrayOfIndexes, function (value, key) {
         arrayOfIndexes[key] = false;
-    })
+    });
     return arrayOfIndexes;
 };

@@ -6,10 +6,14 @@ angular.module('ticketsystem.home', ['ngRoute'])
 
         var modalInstance;
 
-        $scope.whoAreWe = function () {
-
+        /**
+         * @mgdoc           function
+         * @name            aboutUs
+         * @description     This function sets a modal to show developer team information
+         */
+        $scope.aboutUs = function () {
             modalInstance = $modal.open({
-                templateUrl: '/modal/modal-who-are-we.html',
+                templateUrl: '/modal/modal-about-us.html',
                 controller: ModalInstanceCtrl,
                 scope: $scope,
                 backdrop: 'static',
@@ -22,8 +26,12 @@ angular.module('ticketsystem.home', ['ngRoute'])
             });
         };
 
+        /**
+         * @mgdoc           function
+         * @name            termsOfUse
+         * @description     This function sets a modal to show the terms of use
+         */
         $scope.termsOfUse = function () {
-
             modalInstance = $modal.open({
                 templateUrl: '/modal/modal-terms-of-use.html',
                 controller: ModalInstanceCtrl,
@@ -38,8 +46,12 @@ angular.module('ticketsystem.home', ['ngRoute'])
             });
         };
 
-        $scope.privacyRegulations = function () {
-
+        /**
+         * @mgdoc           function
+         * @name            termsOfUse
+         * @description     This function sets a modal to show the privacy policy
+         */
+        $scope.privacyPolicy = function () {
             modalInstance = $modal.open({
                 templateUrl: '/modal/modal-privacy-policy.html',
                 controller: ModalInstanceCtrl,
@@ -54,8 +66,12 @@ angular.module('ticketsystem.home', ['ngRoute'])
             });
         };
 
+        /**
+         * @mgdoc           function
+         * @name            termsOfUse
+         * @description     This function sets a modal to show the FAQs
+         */
         $scope.faq = function () {
-
             modalInstance = $modal.open({
                 templateUrl: '/modal/modal-faq.html',
                 controller: ModalInstanceCtrl,

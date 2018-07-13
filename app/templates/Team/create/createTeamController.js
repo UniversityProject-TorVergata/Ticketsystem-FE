@@ -11,11 +11,12 @@ angular.module('ticketsystem.createTeam', ['ngRoute', 'ui.bootstrap'])
         $scope.leadersList = teamleaders;
 
         /**
-         *  Function creates a team in the database via an HTTP POST and update internal user's team
+         * @ngdoc           function
+         * @name            createTeam
+         * @description     Function creates a team in the database via an HTTP POST and update internal user's team
          */
         $scope.createTeam = function (team, members) {
 
-            // TODO controlli sensati
             if (angular.isUndefined(team.name) ||
                 angular.isUndefined(team.problemArea) ||
                 members.length < 1) {

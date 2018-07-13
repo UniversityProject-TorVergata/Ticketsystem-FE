@@ -27,7 +27,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc               function
          * @name                findActionAndResolverUser
-         * @module              dashboard
          * @description         This function finds the "action" and the "resolverUser" in "states" array
          *                      using the name of the next state.
          * @param nextState:    string to identify the next state
@@ -54,7 +53,6 @@ angular.module('dashboard', [])
          *
          * @ngdoc           function
          * @name            getAllTargets
-         * @module          dashboard
          * @description     This function is used to retrieve the targets list from Back-End and
          *                  set the selectedTarget to a default value, that is the first target
          *                  on the list.
@@ -86,7 +84,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            updateCurrentState
-         * @module          dashboard
          * @description     This function is called when the "CURRENT STATE" is changed from the view (by the SELECT) to change the
          *                  view itself and showing correct states.
          *                  It allows to retrieve subsequent states from the current state (the changed one)
@@ -109,7 +106,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            updateTarget
-         * @module          dashboard
          * @description     This function is called when the target is changed from the view, or when the view is initialized
          *                  at the very start. It allows to retrieve:
          *
@@ -145,7 +141,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            prepareDashboard
-         * @module          dashboard
          * @description     This function prepares data to initialize the dashboard.
          *                  In particular, the ticket assigned to the logged user are
          *                  retrieved. Then, all tickets in states immediately following
@@ -192,7 +187,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            changeTicketState
-         * @module          dashboard
          * @description     This function is called as "onDrop" method, when a ticket is dropped on a column.
          *
          * @param event     library param (the event that brought about change)
@@ -209,7 +203,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            setTicketToChange
-         * @module          dashboard
          * @description     This function is colled as "onStart" method, when a ticket is being dragged
          *
          * @param event     library param (the event that brought about change)
@@ -224,7 +217,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            showImage
-         * @module          dashboard
          * @description     This function is used to show the attachment image of a ticket
          *
          * @param item      the image itself, formatted as a base64 object
@@ -242,7 +234,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            viewChangeStateModal
-         * @module          dashboard
          * @description     This is a function to set up a modal to complete the change of the state and the assignment.
          *
          * @param nextStateName     name of the nex state
@@ -296,7 +287,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            searchDuplicates
-         * @module          dashboard
          * @description     Search for duplicate tickets in the myTickets array
          *
          * @param array         array of tickets
@@ -318,7 +308,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc               function
          * @name                ttlColor
-         * @module              dashboard
          * @description         This function is used to verify if a TTL of a ticket is expired and return a string
          *                      that represents a color to indicate TTL level.
          *                      There are three levels:
@@ -347,7 +336,6 @@ angular.module('dashboard', [])
         /**
          * @ngdoc           function
          * @name            showTTLForm
-         * @module          dashboard
          * @description     This function set up a modal to show the status of a TTL related to a ticket
          *
          *  @param item         ticket
