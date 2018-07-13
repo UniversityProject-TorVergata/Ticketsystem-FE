@@ -151,7 +151,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     url: "/createTarget",
                     views: {
                         'content': {
-                            templateUrl: 'templates/Admin/target/createTarget.html',
+                            templateUrl: 'templates/Admin/target/create/createTarget.html',
                             controller: 'createTargetCtrl'
                         }
                     },
@@ -177,7 +177,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     url: "/listTarget",
                     views: {
                         'content': {
-                            templateUrl: 'templates/Admin/target/listTarget.html',
+                            templateUrl: 'templates/Admin/target/list/listTarget.html',
                             controller: 'listTargetCtrl'
                         }
                     },
@@ -190,7 +190,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     url: "/modifyTarget",
                     views: {
                         'content': {
-                            templateUrl: 'templates/Admin/target/modifyTarget.html',
+                            templateUrl: 'templates/Admin/target/update/modifyTarget.html',
                             controller: 'modifyTargetCtrl'
                         }
                     },
@@ -285,7 +285,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     url: "/createTeam",
                     views: {
                         'content': {
-                            templateUrl: 'templates/Team/createTeam.html',
+                            templateUrl: 'templates/Team/create/createTeam.html',
                             controller: 'createTeamCtrl'
                         }
                     },
@@ -315,7 +315,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     url: "/listTeam",
                     views: {
                         'content': {
-                            templateUrl: 'templates/Team/readTeam.html',
+                            templateUrl: 'templates/Team/list/readTeam.html',
                             controller: 'readTeamCtrl'
                         }
                     },
