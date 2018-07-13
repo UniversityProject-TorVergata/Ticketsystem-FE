@@ -2,14 +2,12 @@
 
 angular.module('ticketsystem.modifyTarget', ['ngRoute'])
 
-    .controller('modifyTargetCtrl', function ($scope, restService, httpService, $state, storageService, $modal, $log,
-                                            stateMachines, targetTypes) {
+    .controller('modifyTargetCtrl', function ($scope, restService, httpService, $state, storageService, $modal, $log, targetTypes) {
 
         var modTargetId;
 
         // Select values
         $scope.modtargetTypes = targetTypes;
-        $scope.modstateMachines = stateMachines;
 
         /**
          *  Function returns the position in the array of the value of the Target who needs to be modified.
@@ -48,7 +46,7 @@ angular.module('ticketsystem.modifyTarget', ['ngRoute'])
          *  @param modtags          New Target Tags
          *  @param modstateMachine  New State Machine
          */
-        $scope.putModifiedTarget = function(modtarget, modtargetType, modtags, modstateMachine){
+        $scope.putModifiedTarget = function(modtarget, modtargetType, modtags){
 
             // TODO rifare controlli
             if(angular.isUndefined(modtarget) ||
@@ -62,7 +60,6 @@ angular.module('ticketsystem.modifyTarget', ['ngRoute'])
             else {
 
                 modtarget.categories = [];
-                modtarget.stateMachineName = modstateMachine.name;
                 modtarget.targetType = modtargetType.name;
 
                 for(let i=0; i<modtags.length; i++){
@@ -84,35 +81,4 @@ angular.module('ticketsystem.modifyTarget', ['ngRoute'])
             }
         };
 
-        /**
-         *  Function show the available FSM.
-         */
-        $scope.viewStateMachines = function () {
-
-            var modalInstance;
-
-            modalInstance = $modal.open({
-                templateUrl: '/modal/modal-view-state-machine.html',
-                controller: ModalInstanceCtrl,
-                scope: $scope,
-                backdrop: 'static',
-            });
-
-            modalInstance.result.then(function () {
-
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
-            });
-        };
-
     });
-
-
-
-var ModalInstanceCtrl = function ($scope, $modalInstance) {
-
-    $scope.cancel = function () {
-        $modalInstance.dismiss('cancel');
-    };
-
-};
