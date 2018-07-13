@@ -76,8 +76,8 @@ var app = angular.module('ticketsystem', [
 app.run(function ($rootScope, $transitions) {
         $transitions.onStart({}, function (transition) {
             let profile
-            if (localStorage.getItem('userInformation'))
-                profile = JSON.parse(localStorage.getItem('userInformation'))['@type']
+            if (sessionStorage.getItem('userInformation'))
+                profile = JSON.parse(sessionStorage.getItem('userInformation'))['@type']
             if (transition.to().data.requiredLogin && profile && transition.to().data.access.indexOf('ALL') > -1) {
                 return true
             }
