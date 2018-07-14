@@ -358,27 +358,6 @@ angular.module('ticketsystem.router', ['ui.router'])
                         }
                     }
                 })
-                .state('secure.ticket', {
-                    url: "/Ticket",
-                    views: {
-                        'content': {
-                            templateUrl: 'templates/Ticket/create/createTicket.html',
-                            controller: 'CreateTicketCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: true,
-                        access: ['ALL']
-
-                    },
-                    resolve: {
-                        tags: function (model) {
-                            return model.getTags().then(function (tags) {
-                                return tags
-                            })
-                        }
-                    }
-                })
                 .state('secure.readTicket', {
                     url: '/readTicket',
                     views: {
@@ -389,7 +368,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     },
                     data: {
                         requiredLogin: true,
-                        access: ['ALL']
+                        access: ['Customer']
 
                     },
                     resolve: {
