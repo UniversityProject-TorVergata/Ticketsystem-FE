@@ -6,12 +6,12 @@
         <div class="form-group">
             <label>User Type:</label><br>
             <select name="@type"
-                    ng-model="type"
+                    ng-model="userType"
                     ng-options="userType as userType.name
                                 for
                                 userType in userTypes
                                 track by userType.id"
-                    ng-init="type = userTypes[0]">
+                    ng-init="userType = userTypes[0]">
             </select>
         </div>
         <div class="form-group">
@@ -45,7 +45,7 @@
         <br>
 
         <div class="form-group">
-        <button ng-click="creationUser(user, userType.selected)" class="btn btn-primary btn-lg btn-block">Register</button>
+        <button ng-click="creationUser(user, userType)" class="btn btn-primary btn-lg btn-block">Register</button>
         </div>
     </form>
 </div>

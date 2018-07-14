@@ -16,24 +16,25 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
          * @description     Function creates a new user in the database via an HTTP POST.
          *
          * @param user      user to create
-         * @param atype     type of the user
+         * @param userType     type of the user
          */
-        $scope.creationUser = function (user, atype) {
+        $scope.creationUser = function (user, userType) {
 
             if (angular.isUndefined(user) ||
-                angular.isUndefined(user.fiscal_code) ||
-                angular.isUndefined(user.name) ||
-                angular.isUndefined(user.surname) ||
-                angular.isUndefined(user.address) ||
-                angular.isUndefined(user.email) ||
-                angular.isUndefined(user.username) ||
-                angular.isUndefined(user.password)) {
+                user.fiscal_code === "" ||
+                user.name  === "" ||
+                user.surname  === "" ||
+                user.address === "" ||
+                user.email  === "" ||
+                user.username  === "" ||
+                user.password  === "" ) {
+
                 window.alert('Some fields are missing!')
             }
             else {
                 // Set date and user type
                 user.created_at = moment(Date.now()).format("DD/MM/YYYY");
-                user['@type'] = atype.name;
+                user['@type'] = userType.name;
 
                 //HTTP POST
                 httpService.post(restService.createUser, user)
