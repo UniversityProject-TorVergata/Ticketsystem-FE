@@ -63,7 +63,7 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
                         // TODO alert con si e no?
                         window.alert('Account Successfully Deleted!');
                         storageService.invalidateUser();
-                        $state.reload();
+                        $state.go("Login");
                     },
 
                     function (err) {
