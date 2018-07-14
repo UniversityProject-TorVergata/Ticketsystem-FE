@@ -33,7 +33,6 @@ angular.module('ticketsystem.createUser', ['ngRoute'])
             }
             else {
                 // Set date and user type
-                user.created_at = moment(Date.now()).format("DD/MM/YYYY");
                 user['@type'] = userType.name;
 
                 //HTTP POST
