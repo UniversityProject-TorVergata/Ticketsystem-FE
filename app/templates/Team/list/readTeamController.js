@@ -1,5 +1,4 @@
 'use strict';
-// TODO passare dati alla modal in altro modo...?
 /**
  *  The module manages the created team and allows to show their information and to delete them as well.
  */
@@ -13,11 +12,6 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
         //  Modal variables
         $scope.selectedMembers = [];
         $scope.selectedLeader = {};
-
-        // TODO serve ancora? ._.
-        $scope.control = function (item) {
-            console.log(item.id)
-        };
 
         /**
          * @ngdoc           funcxtion
@@ -81,5 +75,9 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
                 }, function error(response) {
                     $scope.errorResponse = "Error Status: " + response.statusText;
                 });
+        };
+
+        $scope.control = function (item) {
+            console.log(item.id)
         };
     });

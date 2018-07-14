@@ -55,13 +55,11 @@ angular.module('ticketsystem.restService', [])
             "assignTicket": CONNECTION.url + '/ticket/assignTicket',
 
             //  CRUD Registered User
-            //  TODO sono tutti uguali...
             "createUser": CONNECTION.url + '/registered_user',
             "getUser": CONNECTION.url + '/registered_user',
             "deleteUser": CONNECTION.url + '/registered_user',
             "updateUser": CONNECTION.url + '/registered_user',
 
-            //  TODO cancellabile?
             "createTarget": CONNECTION.url + '/target',
 
             //  Target

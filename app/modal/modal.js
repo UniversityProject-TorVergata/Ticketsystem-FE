@@ -200,7 +200,6 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
 
         //riduco i reload della pagina: reload solo quando
         //inserisco un commento o la textarea non è vuota
-        //TODO implementare meccanismo migliore
         if ($scope.newMessage.description) {
             $state.reload();
         }
@@ -212,7 +211,7 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
      *  @name sendNewTicketComment
      *  @description Modal to post new comment of the Ticket.
      */
-    // TODO tutto commentato?
+    //TODO Aggiungere success
     $scope.sendNewTicketComment = function (ticketID, msg) {
         msg['eventGenerator'] = JSON.parse(localStorage.getItem('userInformation'));
         httpService.post(restService.insertComment + '/' + ticketID, msg)
@@ -220,7 +219,7 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
                     //$route.reload();
                 },
                 function (err) {
-                    //window.alert("Error!")
+                    window.alert("Error!")
                 })
     };
 

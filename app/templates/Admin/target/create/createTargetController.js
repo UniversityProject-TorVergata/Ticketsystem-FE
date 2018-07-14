@@ -58,8 +58,8 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                 httpService.post(restService.createTarget, target)
                     .then(function (response) {
                             window.alert("Target created with success!");
-                            //  TODO reset field
-                            $state.reload();
+                            $scope.target = "";
+                            $scope.tags = [];
                             console.log(response);
                         },
                         function error(response) {

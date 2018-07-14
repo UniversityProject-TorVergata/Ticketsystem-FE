@@ -1,6 +1,5 @@
 'use strict';
 
-// TODO .then e err senza nulal dentro...
 var app = angular.module('ticketsystem.readTicket', ['ngRoute', 'ui.bootstrap']);
 app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpService, util, storageService) {
 
@@ -125,7 +124,6 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
         var temp = "0";
         httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + temp)
             .then(function (data) {
-                    //TODO Reset
                     $state.reload();
                 },
                 function (err) {
@@ -151,7 +149,6 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                     console.log(data);
                     httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + data.data.id)
                         .then(function (secondData) {
-                                //TODO Reset
                                 $state.reload();
                             },
                             function (err) {

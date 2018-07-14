@@ -34,7 +34,6 @@ angular.module('ticketsystem.modifyTarget', ['ngRoute'])
         $scope.initTargetModify = function () {
 
             var target = JSON.parse(storageService.get("productData"));
-            // TODO Serve?
             modTargetId = target.id;
             $scope.modtarget = angular.copy(target);
             $scope.modtags = target.categories;

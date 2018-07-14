@@ -60,7 +60,6 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
             //  HTTP DELETE
             httpService.delete(restService.deleteUser, user.id)
                 .then(function (response) {
-                        // TODO alert con si e no?
                         window.alert('Account Successfully Deleted!');
                         storageService.invalidateUser();
                         $state.go("Login");

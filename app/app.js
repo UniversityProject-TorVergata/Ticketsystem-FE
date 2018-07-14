@@ -84,7 +84,7 @@ app.run(function ($rootScope, $transitions) {
         })
     })
 ;
-// TODO
+// TODO cancellare?
 app.config(function(tagsInputConfigProvider) {
     tagsInputConfigProvider.setDefaults('tagsInput', {
         placeholder: 'Add category',
@@ -92,7 +92,7 @@ app.config(function(tagsInputConfigProvider) {
     });
 });
 
-// TODO
+// TODO cancellare?
 app.filter('propsFilter', function() {
     return function(items, props) {
         var out = [];

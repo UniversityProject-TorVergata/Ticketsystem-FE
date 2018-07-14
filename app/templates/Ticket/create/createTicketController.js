@@ -53,8 +53,10 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
                         window.alert("Ticket created");
                         console.log(data);
                         $scope.attachedFile = "";
-                        // TODO resetfield
-                        $state.reload();
+                        $scope.ticket = "";
+                        $scope.selectedTags = [];
+                        $scope.customerPriority = "";
+                        $scope.visibility = "";
                     },
                     function (err) {
                         window.alert("Error!")

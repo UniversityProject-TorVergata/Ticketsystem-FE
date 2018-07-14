@@ -1,4 +1,4 @@
-//  TODO gestire reject
+
 /**
  *  @ngdoc module
  *  @name  ticketsystem.modelService
@@ -274,7 +274,6 @@ angular.module('ticketsystem.modelService', [])
                         )
                     })
                 },
-                // TODO problemArea dovrebbero essere aggiunti da FE?
                 /**
                  *  @ngdoc  function
                  *  @name getArea

@@ -1,6 +1,4 @@
 'use strict';
-//  TODO Restituire l'errore se è già registrato.
-//  TODO clear field che è l ostesso per tutti i createUser
 /**
  *  This module mannages the creation of a new user.
  */
