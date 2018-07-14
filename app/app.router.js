@@ -34,9 +34,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     resolve: {
                         menu: function (menuService) {
                             let user = JSON.parse(localStorage.getItem('userInformation'))
-                            //console.log(user);
                             let profile = user['@type'];
-                            //console.log("User type: " + profile);
                             return menuService.getMenuByType(profile).then(function (response) {
                                 return response
                             })

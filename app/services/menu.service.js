@@ -1,6 +1,6 @@
 //  menu.service.js
 /**
- *  @ngdoc module
+ *  @ngdoc overview
  *  @name  ticketsystem.menuservice
  *  @description The module manages the sidebar menu.
  */
@@ -8,7 +8,6 @@ angular.module('ticketsystem.menuservice', [])
 
     /**
      *  @module ticketsystem.menuservice
-     *  @ngdoc  service
      *  @name   menuService
      *  @description    Service returns all the tabs of the sidebar menu on the logged user basis.
      */
@@ -17,7 +16,6 @@ angular.module('ticketsystem.menuservice', [])
 
             /**
              *  @module ticketsystem.menuservice
-             *  @ngdoc  function
              *  @name   getMenuByType
              *  @description    Function returns the list of tabs of the menu.
              *  @param @type  Logged user type
@@ -39,7 +37,6 @@ angular.module('ticketsystem.menuservice', [])
 
 /**
  *  @module ticketsystem.menuservice
- *  @ngdoc function
  *  @name createMenu
  *  @description Function returns the list of tabs who are visible to the logged user.
  *  @param menuList     List of tabs

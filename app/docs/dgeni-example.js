@@ -30,13 +30,7 @@ module.exports = new Package('dgeni-example', [
                 // When calculating the relative path to these files use this as the base path.
                 // So `src/foo/bar.js` will have relative path of `foo/bar.js`
                 basePath: './'
-            }, // All of our application files
-
-            // Our static Markdown documents
-            // We are specifying the path and telling Dgeni to use the ngdocFileReader
-            // to parse the Markdown files to HTMLs
-            { include: 'docs/content/**/*.md', basePath: 'docs/content', fileReader: 'ngdocFileReader' }
-
+            }
         ];
 
         // Add a folder to search for our own templates to use when rendering docs
