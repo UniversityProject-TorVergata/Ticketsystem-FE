@@ -26,7 +26,7 @@ angular.module('ticketsystem.storageService', [])
                  *  @returns {string | null}    user data if field is found, null otherwise
                  */
                 get: function (key) {
-                    return localStorage.getItem(key);
+                    return sessionStorage.getItem(key);
                 },
                 /**
                  *  @ngdoc function
@@ -36,7 +36,7 @@ angular.module('ticketsystem.storageService', [])
                  *  @param data     user data
                  */
                 save: function (key, data) {
-                    localStorage.setItem(key, data);
+                    sessionStorage.setItem(key, data);
                 },
                 /**
                  *  @ngdoc function
@@ -45,8 +45,8 @@ angular.module('ticketsystem.storageService', [])
                  *  @param user
                  */
                 setUser: function (user) {
-                    localStorage.setItem('userInformation',JSON.stringify(user));
-                    localStorage.setItem('logged',true);
+                    sessionStorage.setItem('userInformation',JSON.stringify(user));
+                    sessionStorage.setItem('logged',true);
                 },
                 /**
                  *  @ngdoc function
@@ -55,7 +55,7 @@ angular.module('ticketsystem.storageService', [])
                  *  @returns {any}  Complete user data
                  */
                 getUser: function () {
-                    return JSON.parse(localStorage.getItem('userInformation'));
+                    return JSON.parse(sessionStorage.getItem('userInformation'));
                 },
                 /**
                  *  @ngdoc function
@@ -64,8 +64,8 @@ angular.module('ticketsystem.storageService', [])
                  *  @returns {any}  Complete user data
                  */
                 invalidateUser: function () {
-                    localStorage.removeItem('userInformation')
-                    localStorage.removeItem('logged')
+                    sessionStorage.removeItem('userInformation')
+                    sessionStorage.removeItem('logged')
                 },
                 /**
                  *  @ngdoc function
@@ -74,7 +74,7 @@ angular.module('ticketsystem.storageService', [])
                  *  @returns {string | null}    User data if logged, null otherwise.
                  */
                 isLogged: function () {
-                    return localStorage.getItem('logged');
+                    return sessionStorage.getItem('logged');
                 }
 
             };
