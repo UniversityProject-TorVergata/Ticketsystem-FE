@@ -19,20 +19,6 @@ angular.module('ticketsystem.router', ['ui.router'])
                     }
                 })
 
-                .state('createCustomer', {
-                    url: "/createCustomer",
-                    views: {
-                        'public': {
-                            templateUrl: "templates/Customer/create/createCustomer.html",
-                            controller: 'createCustomerCtrl'
-                        }
-                    },
-                    data: {
-                        requiredLogin: false,
-                        access: ['']
-                    }
-                })
-
                 .state('secure', {
                     url: "/secure",
                     abstract: true,

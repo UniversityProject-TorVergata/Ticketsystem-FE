@@ -52,10 +52,6 @@ var app = angular.module('ticketsystem', [
     'ticketsystem.modifyTarget',
     'ticketsystem.createStateMachine',
 
-
-    // Customer
-    'ticketsystem.createCustomer',
-
     //Factories
     'ticketsystem.storageService',
 
