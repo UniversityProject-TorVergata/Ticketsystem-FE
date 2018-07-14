@@ -3,7 +3,7 @@
 angular.module('ticketsystem.createTarget', ['ngRoute'])
 
     .controller('createTargetCtrl', function ($scope, restService, httpService, $state, storageService, $modal, $log,
-                                              stateMachines, targetTypes, util) {
+                                              stateMachines, targetTypes) {
 
         //Select values
         $scope.stateMachineIMG = '';
@@ -20,7 +20,7 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
         $scope.changeStateMachine = function (stateMachine) {
 
             $scope.stateMachineIMG = stateMachine.base64Diagram;
-        }
+        };
 
         /**
          * @ngdoc               function
@@ -32,13 +32,13 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
          * @param targetType    target type (Product or Service)
          * @param stateMachine  Target's FSM
          */
-        $scope.creationTarget = function (target, tags, targetType, stateMachine, modstateMachine) {
+        $scope.creationTarget = function (target, tags, targetType, stateMachine) {
 
             if (angular.isUndefined(target) ||
                 target.name === "" ||
                 target.description === "" ||
                 target.version === "" ||
-                tags.length == 0) {
+                tags.length === 0) {
 
                 window.alert('It is necessary to fill all the fields!');
             }
