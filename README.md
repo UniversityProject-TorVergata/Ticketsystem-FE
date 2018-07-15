@@ -42,138 +42,235 @@ Now, browse to the navbar of your favorite browser at [`localhost:8000`][local-n
 ## Directory Layout
 
 ```
-//TODO DA CAMBAIRE QUANDO è FINITO
+├── LICENSE
+├── README.md
+└── app
+    ├── app.css
+    ├── app.js
+    ├── app.router.js
+    ├── components
+    │   └── version
+    │       ├── interpolate-filter.js
+    │       ├── interpolate-filter_test.js
+    │       ├── version-directive.js
+    │       ├── version-directive_test.js
+    │       ├── version.js
+    │       └── version_test.js
+    ├── css
+    │   └── userHome.css
+    ├── directives
+    │   └── custom-changes.directive.js
+    ├── dragdrop
+    │   ├── angular-dragdrop.min.js
+    │   └── dragdropController.js
+    ├── filters
+    │   └── string.filter.js
+    ├── index-async.html
+    ├── index.html
+    ├── mocks
+    │   ├── categories.json
+    │   ├── difficulty.json
+    │   ├── menuMock.json
+    │   ├── priority.json
+    │   ├── problemArea.json
+    │   ├── products.json
+    │   ├── source_types.json
+    │   ├── states.json
+    │   ├── tags.json
+    │   ├── targetTypes.json
+    │   ├── teams.json
+    │   ├── ticket_type.json
+    │   ├── userType.json
+    │   └── visibility.json
+    ├── modal
+    │   ├── assignment_modal.js
+    │   ├── modal-about-us.html
+    │   ├── modal-change-state.html
+    │   ├── modal-faq.html
+    │   ├── modal-form.html
+    │   ├── modal-info-team.html
+    │   ├── modal-info.html
+    │   ├── modal-message.html
+    │   ├── modal-privacy-policy.html
+    │   ├── modal-terms-of-use.html
+    │   ├── modal-ttl.html
+    │   ├── modal-view-state-machine.html
+    │   └── modal.js
+    ├── multiselect
+    │   ├── isteven-multi-select.css
+    │   └── isteven-multi-select.js
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   └── images
+    │       ├── avatar.png
+    │       └── ticketsystem_background.jpg
+    ├── services
+    │   ├── menu.service.js
+    │   ├── model.service.js
+    │   ├── rest.service.js
+    │   ├── storage.service.js
+    │   └── utils.service.js
+    └── templates
+        ├── Admin
+        │   ├── createStateMachine
+        │   │   ├── createStateMachineCtrl.js
+        │   │   └── stateMachine.html
+        │   ├── createUser
+        │   │   ├── createUser.html
+        │   │   └── createUserController.js
+        │   └── target
+        │       ├── create
+        │       │   ├── createTarget.html
+        │       │   └── createTargetController.js
+        │       ├── list
+        │       │   ├── listTarget.html
+        │       │   └── listTargetController.js
+        │       └── update
+        │           ├── modifyTarget.html
+        │           └── modifyTargetController.js
+        ├── Dashboard
+        │   ├── dashboard.html
+        │   └── dashboardController.js
+        ├── Team
+        │   ├── create
+        │   │   ├── createTeam.html
+        │   │   └── createTeamController.js
+        │   └── list
+        │       ├── readTeam.html
+        │       └── readTeamController.js
+        ├── Ticket
+        │   ├── create
+        │   │   ├── createTicket.html
+        │   │   └── createTicketController.js
+        │   └── list
+        │       ├── readTicket.html
+        │       └── readTicketController.js
+        └── common
+            ├── Login
+            │   ├── Login.html
+            │   └── Login.js
+            ├── accountInfo
+            │   ├── accountInfo.html
+            │   └── accountInfo.js
+            ├── home
+            │   ├── home.js
+            │   ├── homeAdmin.html
+MacBook-Pro-di-Alessio:ISSSR - Ticketsystem-FE Pelosaccio$ tree -v --charset utf-8
 .
 ├── LICENSE
 ├── README.md
-├── app
-│   ├── GruntFile.js
-│   ├── app.css
-│   ├── app.js
-│   ├── app.router.js
-│   ├── components
-│   │   └── version
-│   │       ├── interpolate-filter.js
-│   │       ├── interpolate-filter_test.js
-│   │       ├── version-directive.js
-│   │       ├── version-directive_test.js
-│   │       ├── version.js
-│   │       └── version_test.js
-│   ├── css
-│   │   ├── ui_select.css
-│   │   └── userHome.css
-│   ├── directives
-│   │   └── custom-changes.directive.js
-│   ├── docs
-│   │   ├── dgeni-example.js
-│   │   └── templates
-│   │       └── common.template.html
-│   ├── dragdrop
-│   │   ├── angular-dragdrop.min.js
-│   │   └── dragdropController.js
-│   ├── filters
-│   │   └── string.filter.js
-│   ├── index-async.html
-│   ├── index.html
-│   ├── mocks
-│   │   ├── categories.json
-│   │   ├── difficulty.json
-│   │   ├── menuMock.json
-│   │   ├── priority.json
-│   │   ├── problemArea.json
-│   │   ├── products.json
-│   │   ├── source_types.json
-│   │   ├── states.json
-│   │   ├── tags.json
-│   │   ├── targetTypes.json
-│   │   ├── teams.json
-│   │   ├── ticket_type.json
-│   │   ├── userType.json
-│   │   └── visibility.json
-│   ├── modal
-│   │   ├── assignment_modal.js
-│   │   ├── modal-change-state.html
-│   │   ├── modal-faq.html
-│   │   ├── modal-form.html
-│   │   ├── modal-info-team.html
-│   │   ├── modal-info.html
-│   │   ├── modal-message.html
-│   │   ├── modal-privacy-policy.html
-│   │   ├── modal-terms-of-use.html
-│   │   ├── modal-ttl.html
-│   │   ├── modal-view-state-machine.html
-│   │   ├── modal-who-are-we.html
-│   │   └── modal.js
-│   ├── multiselect
-│   │   ├── isteven-multi-select.css
-│   │   └── isteven-multi-select.js
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── public
-│   │   └── images
-│   │       ├── avatar.png
-│   │       ├── state_machine
-│   │       │   └── State_Machines.jpg
-│   │       └── ticketsystem_background.jpg
-│   ├── services
-│   │   ├── menu.service.js
-│   │   ├── model.service.js
-│   │   ├── rest.service.js
-│   │   ├── storage.service.js
-│   │   └── utils.service.js
-│   └── templates
-│       ├── Admin
-│       │   ├── createUser
-│       │   │   ├── createUser.html
-│       │   │   └── createUserController.js
-│       │   └── target
-│       │       ├── createTarget.html
-│       │       ├── createTargetController.js
-│       │       ├── listTarget.html
-│       │       ├── listTargetController.js
-│       │       ├── modifyTarget.html
-│       │       └── modifyTargetController.js
-│       ├── Customer
-│       │   └── create
-│       │       ├── createCustomer.html
-│       │       └── createCustomerController.js
-│       ├── Dashboard
-│       │   ├── dashboard.html
-│       │   └── dashboardController.js
-│       ├── Team
-│       │   ├── createTeam.html
-│       │   ├── createTeamController.js
-│       │   ├── readTeam.html
-│       │   └── readTeamController.js
-│       ├── Ticket
-│       │   ├── create
-│       │   │   ├── createTicket.html
-│       │   │   └── createTicketController.js
-│       │   └── list
-│       │       ├── readTicket.html
-│       │       └── readTicketController.js
-│       └── common
-│           ├── Login
-│           │   ├── Login.html
-│           │   └── Login.js
-│           ├── accountInfo
-│           │   ├── accountInfo.html
-│           │   └── accountInfo.js
-│           ├── home
-│           │   ├── home.js
-│           │   ├── homeAdmin.html
-│           │   ├── homeCustomer.html
-│           │   ├── homeTeamCoordinator.html
-│           │   ├── homeTeamLeader.html
-│           │   └── homeTeamMember.html
-│           └── sidebarMenu
-│               ├── sidebar.html
-│               └── sidebarController.js
-├── e2e-tests
-│   ├── protractor.conf.js
-│   └── scenarios.js
-├── karma.conf.js
-└── package-lock.json
+└── app
+    ├── app.css
+    ├── app.js
+    ├── app.router.js
+    ├── css
+    │   └── userHome.css
+    ├── directives
+    │   └── custom-changes.directive.js
+    ├── dragdrop
+    │   ├── angular-dragdrop.min.js
+    │   └── dragdropController.js
+    ├── filters
+    │   └── string.filter.js
+    ├── index-async.html
+    ├── index.html
+    ├── mocks
+    │   ├── categories.json
+    │   ├── difficulty.json
+    │   ├── menuMock.json
+    │   ├── priority.json
+    │   ├── problemArea.json
+    │   ├── products.json
+    │   ├── source_types.json
+    │   ├── states.json
+    │   ├── tags.json
+    │   ├── targetTypes.json
+    │   ├── teams.json
+    │   ├── ticket_type.json
+    │   ├── userType.json
+    │   └── visibility.json
+    ├── modal
+    │   ├── assignment_modal.js
+    │   ├── modal-about-us.html
+    │   ├── modal-change-state.html
+    │   ├── modal-faq.html
+    │   ├── modal-form.html
+    │   ├── modal-info-team.html
+    │   ├── modal-info.html
+    │   ├── modal-message.html
+    │   ├── modal-privacy-policy.html
+    │   ├── modal-terms-of-use.html
+    │   ├── modal-ttl.html
+    │   ├── modal-view-state-machine.html
+    │   └── modal.js
+    ├── multiselect
+    │   ├── isteven-multi-select.css
+    │   └── isteven-multi-select.js
+    ├── package-lock.json
+    ├── package.json
+    ├── public
+    │   └── images
+    │       ├── avatar.png
+    │       └── ticketsystem_background.jpg
+    ├── services
+    │   ├── menu.service.js
+    │   ├── model.service.js
+    │   ├── rest.service.js
+    │   ├── storage.service.js
+    │   └── utils.service.js
+    └── templates
+        ├── Admin
+        │   ├── createStateMachine
+        │   │   ├── createStateMachineCtrl.js
+        │   │   └── stateMachine.html
+        │   ├── createUser
+        │   │   ├── createUser.html
+        │   │   └── createUserController.js
+        │   └── target
+        │       ├── create
+        │       │   ├── createTarget.html
+        │       │   └── createTargetController.js
+        │       ├── list
+        │       │   ├── listTarget.html
+        │       │   └── listTargetController.js
+        │       └── update
+        │           ├── modifyTarget.html
+        │           └── modifyTargetController.js
+        ├── Dashboard
+        │   ├── dashboard.html
+        │   └── dashboardController.js
+        ├── Team
+        │   ├── create
+        │   │   ├── createTeam.html
+        │   │   └── createTeamController.js
+        │   └── list
+        │       ├── readTeam.html
+        │       └── readTeamController.js
+        ├── Ticket
+        │   ├── create
+        │   │   ├── createTicket.html
+        │   │   └── createTicketController.js
+        │   └── list
+        │       ├── readTicket.html
+        │       └── readTicketController.js
+        └── common
+            ├── Login
+            │   ├── Login.html
+            │   └── Login.js
+            ├── accountInfo
+            │   ├── accountInfo.html
+            │   └── accountInfo.js
+            ├── home
+            │   ├── home.js
+            │   ├── homeAdmin.html
+            │   ├── homeCustomer.html
+            │   ├── homeTeamCoordinator.html
+            │   ├── homeTeamLeader.html
+            │   └── homeTeamMember.html
+            └── sidebarMenu
+                ├── sidebar.html
+                └── sidebarController.js
 ```
 
 [local-navbar-url]: http://localhost:8000
