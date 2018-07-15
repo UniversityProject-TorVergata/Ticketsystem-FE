@@ -117,7 +117,7 @@ angular.module('dashboard', [])
          */
         $scope.updateTarget = function () {
             //Find the role of the logged user (i.e. "TeamMember" or "TeamLeader")
-            var role = JSON.parse(localStorage.getItem('userInformation'))['@type'];
+            var role = JSON.parse(sessionStorage.getItem('userInformation'))['@type'];
             //Retrieve all the states managed by the logged user (the role itself)
             httpService.get(restService.readTargets + "/getActualStates/" + $scope.selectedTarget.id + "/" + role)
                 .then(function (response) {
@@ -152,7 +152,7 @@ angular.module('dashboard', [])
             $scope.toChange = {};
 
             //Read all logged user's assigned tickets
-            httpService.get(restService.readMyAssignedTickets + '/' + JSON.parse(localStorage.getItem('userInformation')).id)
+            httpService.get(restService.readMyAssignedTickets + '/' + JSON.parse(sessionStorage.getItem('userInformation')).id)
                 .then(function (response) {
 
                     $scope.myTickets = response.data;

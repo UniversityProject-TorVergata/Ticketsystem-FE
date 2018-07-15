@@ -40,7 +40,7 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
 
             ticket.attachedFile = $scope.attachedFile;
             ticket.customerPriority = customerPriority.name;
-            ticket.openerUser = JSON.parse(localStorage.getItem('userInformation'));
+            ticket.openerUser = JSON.parse(sessionStorage.getItem('userInformation'));
             ticket.tags = setArrayField(selectedTags);
             ticket.timestamp = moment(Date.now()).format("DD/MM/YYYY");
             ticket.visibility = visibility.name;

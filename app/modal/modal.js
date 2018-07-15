@@ -213,7 +213,7 @@ var ModalInstanceCtrl = function ($state, $scope, $modalInstance, httpService, r
      */
     //TODO Aggiungere success
     $scope.sendNewTicketComment = function (ticketID, msg) {
-        msg['eventGenerator'] = JSON.parse(localStorage.getItem('userInformation'));
+        msg['eventGenerator'] = JSON.parse(sessionStorage.getItem('userInformation'));
         httpService.post(restService.insertComment + '/' + ticketID, msg)
             .then(function (data) {
                     //$route.reload();

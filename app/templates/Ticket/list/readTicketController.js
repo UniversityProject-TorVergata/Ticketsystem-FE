@@ -13,7 +13,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
      */
     $scope.readTicket = function () {
         //  HTTP GET
-        httpService.get(restService.readMyTickets + '/' + JSON.parse(localStorage.getItem('userInformation')).id)
+        httpService.get(restService.readMyTickets + '/' + JSON.parse(sessionStorage.getItem('userInformation')).id)
             .then(function (response) {
                 $scope.items = response.data;
             }, function error(response) {

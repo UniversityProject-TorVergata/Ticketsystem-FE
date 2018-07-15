@@ -33,7 +33,7 @@ angular.module('ticketsystem.router', ['ui.router'])
                     },
                     resolve: {
                         menu: function (menuService) {
-                            let user = JSON.parse(localStorage.getItem('userInformation'))
+                            let user = JSON.parse(sessionStorage.getItem('userInformation'))
                             let profile = user['@type'];
                             return menuService.getMenuByType(profile).then(function (response) {
                                 return response
