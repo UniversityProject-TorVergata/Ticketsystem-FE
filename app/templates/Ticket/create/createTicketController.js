@@ -2,8 +2,7 @@
 
 var app = angular.module('ticketsystem.createTicket', ['ngRoute', 'ui.bootstrap']);
 app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpService, util,
-                                             storageService, tags, priorities, visibilities,
-                                             activeTargets) {
+                                             storageService, tags, priorities, visibilities, activeTargets) {
     //  Select values
     $scope.tags = tags;
     $scope.targets = activeTargets;
@@ -45,13 +44,10 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
             ticket.timestamp = moment(Date.now()).format("DD/MM/YYYY");
             ticket.visibility = visibility.name;
 
-            console.log(ticket)
-
             //  HTTP POST
             httpService.post(restService.createTicket, ticket)
                 .then(function (data) {
-                        window.alert("Ticket created");
-                        console.log(data);
+                        window.alert("Ticket created with success!");
                         $scope.attachedFile = "";
                         $scope.ticket = "";
                         $scope.selectedTags = [];
@@ -59,7 +55,7 @@ app.controller('CreateTicketCtrl', function ($scope, $state, restService, httpSe
                         $scope.visibility = "";
                     },
                     function (err) {
-                        window.alert("Error!")
+                        window.alert("Error while creating Ticket!");
                         $scope.errorMessage = "error!"
                     })
         }

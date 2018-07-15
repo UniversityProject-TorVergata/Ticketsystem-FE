@@ -1,7 +1,7 @@
 'use strict';
 
 var app = angular.module('ticketsystem.readTicket', ['ngRoute', 'ui.bootstrap']);
-app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpService, util, storageService) {
+app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpService, util) {
 
     $scope.edit = [];
     $scope.editTicket = {};
@@ -9,7 +9,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
     /**
      * @ngdoc           function
      * @name            readTicket
-     * @description     Function reads all the tickets in the database via an HTTP GET and shows them in a table.
+     * @description     Function reads all the tickets of a Customer in the database via an HTTP GET and shows them in a table.
      */
     $scope.readTicket = function () {
         //  HTTP GET
@@ -45,16 +45,15 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
      * @ngdoc               function
      * @name                saveTicket
      * @description         Function saves a modified ticket via an HTTP PUT in the database and updates the view of the table.
-     *                      When a ticket is edited, then it changes its current state, accordint to the reference state machine
+     *                      When a ticket is edited, then it changes its current state, according to the reference state machine.
      *
-     *  @param item         selected item
+     *  @param ticket       selected ticket
      *  @param index        iterator offset
      */
     $scope.saveTicket = function (ticket, index) {
 
         httpService.get(restService.getTeamCoordinator)
             .then(function (response) {
-                console.log("il team coordinator è " + response.data.name);
 
                 //  Required ticket fields
                 let payload = {
@@ -81,7 +80,7 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                 //  HTTP PUT
                 httpService.put(restService.createTicket, ticket.id, payload)
                     .then(function (succResponse) {
-                            //console.log("STO DENTRO ALLA PUT");
+
                             let action = findAction("VALIDATION", ticket);
                             if (action == null) {
                                 action = findAction("DISPATCHING", ticket);
@@ -90,7 +89,6 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
                             //  change the ticket state
                             httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + response.data.id)
                                 .then(function (response) {
-                                        //console.log("Modify SUCCESS");
                                         $scope.items[index] = angular.copy(ticket);
                                         $scope.editTicket = {};
                                         $scope.edit = resetIndexes($scope.edit);
@@ -142,11 +140,10 @@ app.controller('ReadTicketCtrl', function ($scope, $state, restService, httpServ
 
         let action = findAction("REOPENED", ticket);
 
-        // Reopened state is always managed by the Team Coordinator
-
+        // Reopened state is always managed by the Team Coordinator.
         httpService.get(restService.getTeamCoordinator)
             .then(function (data) {
-                    console.log(data);
+
                     httpService.post(restService.changeTicketState + '/' + ticket.id + '/' + action + '/' + data.data.id)
                         .then(function (secondData) {
                                 $state.reload();

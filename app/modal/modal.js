@@ -23,10 +23,9 @@ app.controller("modalController", ['$scope', '$modal', '$log', function ($scope,
      *  @param item
      */
     $scope.showEditForm = function (item) {
-        $scope.message = "Show Form Button Clicked";
-        console.log($scope.message);
 
-        //  Save the item to modify it later
+        $scope.message = "Show Form Button Clicked";
+        //  Save the item to modify it later.
         $scope.formItem = item;
 
         var modalInstance = $modal.open({
@@ -55,11 +54,9 @@ app.controller("modalController", ['$scope', '$modal', '$log', function ($scope,
      *  @param item
      */
     $scope.showInfoForm = function (item) {
-        $scope.message = "Show Form Button Clicked";
-        console.log($scope.message);
-        $scope.formItem = item;
-        console.log(item);
 
+        $scope.message = "Show Form Button Clicked";
+        $scope.formItem = item;
 
         var modalInstance = $modal.open({
             templateUrl: '/modal/modal-info.html',

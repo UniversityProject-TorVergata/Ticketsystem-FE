@@ -60,7 +60,6 @@ angular.module('ticketsystem.createTarget', ['ngRoute'])
                             window.alert("Target created with success!");
                             $scope.target = "";
                             $scope.tags = [];
-                            console.log(response);
                         },
                         function error(response) {
                             window.alert("Error while creating Target!");

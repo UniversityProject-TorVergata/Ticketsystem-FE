@@ -2,9 +2,7 @@
 
 angular.module('ticketsystem.listTarget', ['ngRoute'])
 
-    .controller('listTargetCtrl', function ($scope, restService, httpService, $state, storageService, $modal, $log) {
-
-        var modTargetId;
+    .controller('listTargetCtrl', function ($scope, restService, httpService, $state, storageService) {
 
         /**
          * @ngdoc               function
@@ -15,7 +13,7 @@ angular.module('ticketsystem.listTarget', ['ngRoute'])
          */
         $scope.modifyTarget = function ($index) {
             //  Saved data for the modifytarget's view
-            storageService.save("productData", JSON.stringify($scope.items[$index]))
+            storageService.save("productData", JSON.stringify($scope.items[$index]));
             $state.go('secure.modifyTarget');
         };
 
@@ -57,7 +55,6 @@ angular.module('ticketsystem.listTarget', ['ngRoute'])
                 .then(function (response) {
                         $scope.items[index].targetState = "RETIRED";
                         window.alert('Target Retired Successfully!');
-                        console.log(response);
                     },
                     function error(response) {
                         window.alert("Error while Retiring Target!");
@@ -81,13 +78,12 @@ angular.module('ticketsystem.listTarget', ['ngRoute'])
             //Create a JSon Object for the http PUT
             var postData = {
                 "id": id,
-
             };
+
             httpService.put(restService.createTarget + "/rehab", id, postData)
                 .then(function (response) {
                         $scope.items[index].targetState = "ACTIVE";
                         window.alert('Target Activated Successfully!');
-                        console.log(response);
                     },
                     function error(response) {
                         window.alert("Error while Target Activation!");

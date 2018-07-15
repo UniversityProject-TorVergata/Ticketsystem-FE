@@ -47,7 +47,6 @@ angular.module('ticketsystem.modifyTarget', ['ngRoute'])
          * @param modtarget         New Target values
          * @param modtargetType     New Target Type
          * @param modtags           New Target Tags
-         * @param modstateMachine   New State Machine
          */
         $scope.putModifiedTarget = function (modtarget, modtargetType, modtags) {
 
@@ -74,7 +73,6 @@ angular.module('ticketsystem.modifyTarget', ['ngRoute'])
                             window.alert("Target modified with success!");
                             $scope.target = "";
                             $state.go('secure.listTarget');
-                            console.log(response);
                         },
                         function error(response) {
                             window.alert("Error while modifying Target");
