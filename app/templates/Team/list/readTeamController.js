@@ -14,8 +14,8 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
         $scope.selectedLeader = {};
 
         /**
-         * @ngdoc           funcxtion
-         * @name            reatTeams
+         * @ngdoc           function
+         * @name            readTeams
          * @description     Function reads all the teams in the database via an HTTP GET
          */
         $scope.readTeams = function () {
@@ -23,15 +23,15 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
             httpService.get(restService.getTeams)
                 .then(function (response) {
                     $scope.teamsList = response.data;
-                    console.log($scope.teamsList);
                 }, function error(response) {
                     $scope.errorResponse = "Error Status: " + response.statusText;
+                    console.log(response);
                 });
         };
 
         /**
          * @ngdoc           function
-         * @name            deleteteam
+         * @name            deleteTeam
          * @description     Function deletes a selected team via an HTTP DELETE and updates the view of the table.
          *
          * @param id        id number of the ticket to be deleted.
@@ -39,11 +39,13 @@ angular.module('ticketsystem.readTeam', ['ngRoute', 'ui.bootstrap'])
         $scope.deleteTeam = function (id) {
             httpService.delete(restService.createTeam, id)
                 .then(function (data) {
-                        window.alert("Team deleted")
+                        window.alert("Team deleted with success!");
                         $scope.readTeams();
                     },
                     function (err) {
-                        $scope.errorMessage = "error!"
+                        window.alert("Error while deleting team!");
+                        $scope.errorMessage = "error!";
+                        console.log(err);
                     })
         };
 

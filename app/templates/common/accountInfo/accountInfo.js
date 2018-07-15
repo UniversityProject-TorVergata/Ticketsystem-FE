@@ -35,9 +35,8 @@ angular.module('ticketsystem.accountInfo', ['ngRoute'])
                 // HTTP PUT
                 httpService.put(restService.updateUser, user.id, user)
                     .then(function (response) {
-                            console.log(response)
-                            window.alert('Account updated!');
-                            storageService.setUser(response.data)
+                            window.alert('Account updated with success!');
+                            storageService.setUser(response.data);
                             $state.reload();
                         },
 

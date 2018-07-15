@@ -179,8 +179,8 @@ angular.module('dashboard', [])
                         //Future use: when empty, show a message in the view
                         $scope.empty = true;
                     }
-                    console.log("my tickets", $scope.myTickets);
-                }, function error(response) {
+                },
+                    function error(response) {
                 });
         };
 
