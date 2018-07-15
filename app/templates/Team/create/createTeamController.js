@@ -32,13 +32,13 @@ angular.module('ticketsystem.createTeam', ['ngRoute', 'ui.bootstrap'])
                 //  HTTP POST
                 httpService.post(restService.createTeam, team)
                     .then(function (data) {
-                            window.alert("Team created!");
-                            console.log(data);
+                            window.alert("Team created with success!");
                             $state.reload();
                         },
                         function (err) {
-                            window.alert("Error!")
-                            $scope.errorMessage = "error!"
+                            window.alert("Error while creating team!");
+                            $scope.errorMessage = "error!";
+                            console.log(err);
                         });
             }
         };
