@@ -22,7 +22,7 @@
                     for
                     stateMachine in stateMachines
                     track by stateMachine.id"
-                    ng-init="stateMachine = stateMachines[0]"
+                    ng-init="stateMachine = stateMachines[0];changeStateMachine(stateMachine)"
                     ng-change="changeStateMachine(stateMachine)">
             </select>
             <button ng-click="viewStateMachines()" class="btn_state btn-xs">
